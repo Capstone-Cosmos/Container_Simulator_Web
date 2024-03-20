@@ -1,5 +1,6 @@
 package com.cosmos.container.controller;
 
+import com.cosmos.container.dto.ManagerDTO;
 import com.cosmos.container.dto.MemberDTO;
 import com.cosmos.container.service.SaveService;
 import lombok.RequiredArgsConstructor;
@@ -9,18 +10,19 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 public class SaveController {
-    private final SaveService memberService;
-
-    @GetMapping("/")
-    public String memberSaveForm() {
-        return "saveMember";
-    }
+    private final SaveService saveService;
 
     @PostMapping("/member/save")
-    public String save(@ModelAttribute MemberDTO memberDTO){
-        System.out.println("MemberController.save");
+    public String saveMember(@ModelAttribute MemberDTO memberDTO){
         System.out.println("memberDTO = " + memberDTO);
-        memberService.save(memberDTO);
-        return "saveMember";
+        saveService.saveMember(memberDTO);
+        return "index";
+    }
+
+    @PostMapping("/manager/save")
+    public String saveManager(@ModelAttribute ManagerDTO managerDTO){
+        System.out.println("memberDTO = " + managerDTO);
+        saveService.saveManager(managerDTO);
+        return "index";
     }
 }

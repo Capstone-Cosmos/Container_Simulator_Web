@@ -41,16 +41,4 @@ public class MemberEntity {
         memberEntity.setCompanyPresident(memberDTO.getCompanyPresident());
         return memberEntity;
     }
-
-    public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO){
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setId(memberDTO.getId());
-        memberEntity.setMemberId(memberDTO.getMemberId());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
-        memberEntity.setMemberAddress(memberDTO.getMemberAddress());
-        memberEntity.setCompanyName(memberDTO.getCompanyName());
-        memberEntity.setCompanyPresident(memberDTO.getCompanyPresident());
-        return memberEntity;
-    }
 }
