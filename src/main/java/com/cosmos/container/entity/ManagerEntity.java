@@ -33,6 +33,9 @@ public class ManagerEntity {
     @Column
     private String managerPosition;
 
+    @Column
+    private String role;
+
     public static ManagerEntity toMemberEntity(ManagerDTO managerDTO){
         ManagerEntity managerEntity = new ManagerEntity();
         managerEntity.setManagerId(managerDTO.getManagerId());

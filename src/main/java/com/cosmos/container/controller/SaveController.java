@@ -13,15 +13,13 @@ public class SaveController {
 
     @PostMapping("/member/save")
     public String saveMember(@RequestBody MemberDTO memberDTO){
-        System.out.println("memberDTO = " + memberDTO);
         saveService.saveMember(memberDTO);
-        return "index";
+        return "Ok";
     }
 
     @PostMapping("/manager/save")
     public String saveManager(@RequestBody ManagerDTO managerDTO){
-        System.out.println("memberDTO = " + managerDTO);
         saveService.saveManager(managerDTO);
-        return "index";
+        return "Ok";
     }
 }
