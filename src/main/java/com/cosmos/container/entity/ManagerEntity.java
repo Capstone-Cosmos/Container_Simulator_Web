@@ -44,6 +44,7 @@ public class ManagerEntity {
         managerEntity.setManagerName(managerDTO.getManagerName());
         managerEntity.setManagerDepart(managerDTO.getManagerDepart());
         managerEntity.setManagerPosition(managerDTO.getManagerPosition());
+        managerEntity.setRole("ROLE_MANAGER");
         return managerEntity;
     }
 }

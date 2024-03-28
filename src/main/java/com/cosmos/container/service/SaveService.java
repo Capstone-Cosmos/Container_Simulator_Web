@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
-
 @Service
 @RequiredArgsConstructor
 public class SaveService {
@@ -20,6 +18,37 @@ public class SaveService {
     private final ManagerRepository managerRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public String checkMemberId(String memberId){
+        boolean checked = memberRepository.existsByMemberId(memberId);
+        if(checked)
+            return "invalid";
+        else
+            return "valid";
+    }
+
+    public String checkMemberEmail(String memberEmail){
+        boolean checked = memberRepository.existsByMemberEmail(memberEmail);
+        if(checked)
+            return "invalid";
+        else
+            return "valid";
+    }
+
+    public String checkManagerId(String managerId){
+        boolean checked = managerRepository.existsByManagerId(managerId);
+        if(checked)
+            return "invalid";
+        else
+            return "valid";
+    }
+
+    public String checkManagerEmail(String managerEmail){
+        boolean checked = managerRepository.existsByManagerEmail(managerEmail);
+        if(checked)
+            return "invalid";
+        else
+            return "valid";
+    }
 
     public void saveMember(MemberDTO memberDTO) {
         // 1. dto -> entity 변환
