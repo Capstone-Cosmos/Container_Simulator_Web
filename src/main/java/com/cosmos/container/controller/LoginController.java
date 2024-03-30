@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
-
+    @GetMapping("/test")
+    public void test(){
+        System.out.println("Good Workding");
+    }
 }

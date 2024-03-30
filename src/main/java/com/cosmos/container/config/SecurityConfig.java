@@ -1,5 +1,7 @@
 package com.cosmos.container.config;
 
+import com.cosmos.container.jwt.JWTFilter;
+import com.cosmos.container.jwt.JWTUtil;
 import com.cosmos.container.jwt.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil;
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
         return configuration.getAuthenticationManager();
@@ -44,11 +47,15 @@ public class SecurityConfig {
                                 "/member/save", "/member/auth/email-check", "/member/auth/id-check",
                                 "/manager/save", "/manager/auth/id-check,", "/manager/auth/id-check")
                         .permitAll()
+                        .requestMatchers("/test").hasRole("MEMBER")
                         .anyRequest().authenticated()
                 );
 
+
+
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
         //Session config
         http
                 .sessionManagement((session)-> session
