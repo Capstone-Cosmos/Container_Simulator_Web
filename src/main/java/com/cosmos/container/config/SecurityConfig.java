@@ -71,9 +71,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth)->auth
                         .requestMatchers(
                                 "/member/save", "/member/auth/email-check", "/member/auth/id-check",
-                                "/manager/save", "/manager/auth/id-check,", "/manager/auth/id-check")
-                        .permitAll()
-                        .requestMatchers("/test").hasRole("MEMBER")
+                                "/manager/save", "/manager/auth/id-check,", "/manager/auth/id-check").permitAll()
+                        .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated()
                 );
 

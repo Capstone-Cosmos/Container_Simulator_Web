@@ -2,6 +2,7 @@ package com.cosmos.container.jwt;
 
 import com.cosmos.container.dto.CustomUserDetails;
 import com.cosmos.container.entity.MemberEntity;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @RequiredArgsConstructor
 public class JWTFilter extends OncePerRequestFilter {
@@ -21,45 +23,53 @@ public class JWTFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // access token load
+        String accessToken = request.getHeader("access");
 
-        // request에서 authorization 헤더를 찾음
-        String authorization= request.getHeader("Authorization");
-
-        // Authorization 헤더 검증
-        if (authorization == null || !authorization.startsWith("Bearer ")){
-            System.out.println("token null");
+        if(accessToken == null){
             filterChain.doFilter(request, response);
+            return;
+        }
+
+        try{
+            jwtUtil.isExpired(accessToken);
+        } catch (ExpiredJwtException e){
+            // response body
+            PrintWriter writer = response.getWriter();
+            writer.print("Access Token Expired");
+
+            // response status
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
             return;
         }
 
-        System.out.println("authorization now");
-        String token = authorization.split(" ")[1];
+        // Access Token 검증
+        String category = jwtUtil.getCategory(accessToken);
+        if(!category.equals("access")){
+            // response body
+            PrintWriter writer = response.getWriter();
+            writer.print("Invalid Token Expired");
 
-        // Token 소멸 시간 검증
-        if (jwtUtil.isExpired(token)){
-            System.out.println("Token expired");
-            filterChain.doFilter(request, response);
+            // response status
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
             return;
         }
 
-        // Token에서 username 및 role 획득
-        String username = jwtUtil.getUsername(token);
-        String role = jwtUtil.getRole(token);
+        // username, role load
+        String username = jwtUtil.getUsername(accessToken);
+        String role = jwtUtil.getRole(accessToken);
 
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberId(username);
-        memberEntity.setMemberPassword("temppassword");
         memberEntity.setRole(role);
 
         CustomUserDetails customUserDetails = new CustomUserDetails(memberEntity);
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
-
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);
-
     }
 }
