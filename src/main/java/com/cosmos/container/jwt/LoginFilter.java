@@ -1,5 +1,7 @@
 package com.cosmos.container.jwt;
 
+import com.cosmos.container.entity.RefreshEntity;
+import com.cosmos.container.repository.RefreshRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
+    private final RefreshRepository refreshRepository;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response){
@@ -46,10 +50,19 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtUtil.creatJwt("access", username, role, 600000L);
         String refresh = jwtUtil.creatJwt("refresh", username, role, 86400000L);
 
+        //Refresh Token 저장
+        addRefreshEntity(username, refresh, 86400000L);
+
         //response
         response.addHeader("access", access);
         response.addCookie(createCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed){
+        //Login 실패 시
+        response.setStatus(401);
     }
 
     private Cookie createCookie(String key, String value) {
@@ -61,9 +74,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         return cookie;
     }
 
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed){
-        //Login 실패 시
-        response.setStatus(401);
+    private void addRefreshEntity(String username, String refresh, Long expiredMs){
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+
+        RefreshEntity refreshEntity = new RefreshEntity();
+        refreshEntity.setUsername(username);
+        refreshEntity.setRefresh(refresh);
+        refreshEntity.setExpiration(date.toString());
+
+        refreshRepository.save(refreshEntity);
     }
 }
