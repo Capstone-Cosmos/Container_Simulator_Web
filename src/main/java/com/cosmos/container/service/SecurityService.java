@@ -46,7 +46,7 @@ public class SecurityService {
         // Check category and Refresh Repository
         String category = jwtUtil.getCategory(refreshToken);
         Boolean isExist = refreshRepository.existsByRefresh(refreshToken);
-        if(!category.equals("refresh") && !isExist){
+        if(!category.equals("refresh") || !isExist){
             return new ResponseEntity<>("Invalid Refresh Token", HttpStatus.BAD_REQUEST);
         }
 

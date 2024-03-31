@@ -3,6 +3,7 @@ package com.cosmos.container.config;
 import com.cosmos.container.jwt.JWTFilter;
 import com.cosmos.container.jwt.JWTUtil;
 import com.cosmos.container.jwt.LoginFilter;
+import com.cosmos.container.jwt.CustomLogoutFilter;
 import com.cosmos.container.repository.RefreshRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -43,7 +45,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        // cors 설정
+        // cors config
         http
                 .cors((cors) -> cors
                         .configurationSource(new CorsConfigurationSource() {
@@ -63,7 +65,6 @@ public class SecurityConfig {
                                 return configuration;
                             }
                         }));
-
         //csrf, form 로그인 방식, http basic 인증 방식 disable
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -73,17 +74,16 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth)->auth
                         .requestMatchers(
-                                "/member/save", "/member/auth/email-check", "/member/auth/id-check",
-                                "/manager/save", "/manager/auth/id-check,", "/manager/auth/id-check").permitAll()
+                                "/member/save", "/member/auth/**",
+                                "/manager/save", "/manager/auth/**").permitAll()
                         .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated()
                 );
-
-
-
+        //Filter config
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshRepository), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshRepository), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
         //Session config
         http
                 .sessionManagement((session)-> session
