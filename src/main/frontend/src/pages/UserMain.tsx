@@ -1,4 +1,5 @@
 import { useState, EventHandler, ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function UserMain(){
 	return (<div className="relative w-[1280px] h-[720px] bg-[#f1f3f5] overflow-hidden">
@@ -215,7 +216,7 @@ export default function UserMain(){
     <div className="absolute left-[6.25%] right-[89.14%] top-[75%] bottom-[9.03%] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#495057] whitespace-nowrap">주문내역</div>
     <div className="absolute left-0 right-0 top-0 bottom-[33.33%]">
       <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[solid] border-#e9ecef border border-[0_0_1px]"></div>
-      <div className="absolute left-[6.25%] right-[79.3%] top-[8.33%] bottom-[18.75%] text-[48px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] whitespace-nowrap">Cosmos</div>
+      <Link to={"/"} className="absolute left-[6.25%] right-[79.3%] top-[8.33%] bottom-[18.75%] text-[48px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] whitespace-nowrap">Cosmos</Link>
     </div>
     <div className="absolute left-[81.41%] right-[6.25%] top-[25.69%] bottom-[58.33%] flex flex-row items-center justify-start gap-[20px]">
       <div className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">전상언님</div>
