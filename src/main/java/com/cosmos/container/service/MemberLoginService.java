@@ -20,9 +20,5 @@ public class MemberLoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new CustomUserDetails(memberRepository.findByMemberId(username)
                 .orElseThrow(()-> new UsernameNotFoundException("Invalid")));
-//        MemberEntity userData = memberRepository.findByMemberId(username);
-//        if(userData != null)
-//            return new CustomUserDetails(userData);
-//        return null;
     }
 }

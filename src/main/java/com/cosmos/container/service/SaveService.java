@@ -18,36 +18,20 @@ public class SaveService {
     private final ManagerRepository managerRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String checkMemberId(String memberId){
-        boolean checked = memberRepository.existsByMemberId(memberId);
-        if(checked)
-            return "invalid";
-        else
-            return "valid";
+    public boolean checkMemberId(String memberId){
+        return memberRepository.existsByMemberId(memberId);
     }
 
-    public String checkMemberEmail(String memberEmail){
-        boolean checked = memberRepository.existsByMemberEmail(memberEmail);
-        if(checked)
-            return "invalid";
-        else
-            return "valid";
+    public boolean checkMemberEmail(String memberEmail){
+        return memberRepository.existsByMemberEmail(memberEmail);
     }
 
-    public String checkManagerId(String managerId){
-        boolean checked = managerRepository.existsByManagerId(managerId);
-        if(checked)
-            return "invalid";
-        else
-            return "valid";
+    public boolean checkManagerId(String managerId){
+        return managerRepository.existsByManagerId(managerId);
     }
 
-    public String checkManagerEmail(String managerEmail){
-        boolean checked = managerRepository.existsByManagerEmail(managerEmail);
-        if(checked)
-            return "invalid";
-        else
-            return "valid";
+    public boolean checkManagerEmail(String managerEmail){
+        return managerRepository.existsByManagerEmail(managerEmail);
     }
 
     public void saveMember(MemberDTO memberDTO) {

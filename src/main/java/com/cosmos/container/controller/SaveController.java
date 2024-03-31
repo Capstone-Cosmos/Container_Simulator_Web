@@ -12,22 +12,22 @@ public class SaveController {
     private final SaveService saveService;
 
     @GetMapping("/manager/auth/email-check")
-    public String checkManagerEmail(@RequestParam("managerEmail") String managerEmail){
+    public boolean checkManagerEmail(@RequestParam("managerEmail") String managerEmail){
         return saveService.checkManagerEmail(managerEmail);
     }
 
     @GetMapping("/manager/auth/id-check")
-    public String checkManagerId(@RequestParam("managerId") String managerId){
+    public boolean checkManagerId(@RequestParam("managerId") String managerId){
         return saveService.checkManagerId(managerId);
     }
 
     @GetMapping("/member/auth/email-check")
-    public String checkMemberEmail(@RequestParam("memberEmail") String memberEmail){
+    public boolean checkMemberEmail(@RequestParam("memberEmail") String memberEmail){
         return saveService.checkMemberEmail(memberEmail);
     }
 
     @GetMapping("/member/auth/id-check")
-    public String checkMemberId(@RequestParam("memberId") String memberId){
+    public boolean checkMemberId(@RequestParam("memberId") String memberId){
         return saveService.checkMemberId(memberId);
     }
 
