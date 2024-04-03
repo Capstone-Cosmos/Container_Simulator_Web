@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "app",
   "version": "0.1.0",
   "proxy": "http://localhost:8080",
   "private": true,
@@ -8,14 +8,17 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.83",
-    "@types/react": "^18.2.58",
-    "@types/react-dom": "^18.2.19",
-    "axios": "^1.6.7",
+    "@types/node": "^16.18.91",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
+    "axios": "^1.6.8",
+    "json-server": "^1.0.0-alpha.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "styled-component": "^2.8.0",
+    "styled-components": "^6.1.8",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -41,6 +44,15 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "msw": "^2.2.13",
+    "tailwindcss": "^3.4.1"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
     ]
   }
 }
