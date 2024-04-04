@@ -38,6 +38,7 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
+    //Password Hashing
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();

@@ -7,7 +7,6 @@ import Root from "./Root";
 import ErrorComponent from "./components/ErrorComponent";
 import Test from "./pages/Test";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,21 +23,15 @@ const router = createBrowserRouter([
       },
       {
         path: "member/join",
-        element: (
-         
-            <UserSignIn />
-          
-        ),
+        element: <UserSignIn />,
       },
       {
         path: "manager/join",
         element: <ManagerSingIn />,
-        children: [
-          {
-            path: "usermain",
-            element: <UserMain />,
-          },
-        ],
+      },
+      {
+        path: "usermain",
+        element: <UserMain />,
       },
     ],
   },

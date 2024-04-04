@@ -14,20 +14,23 @@ export default function UserSignIn(){
   const [companyName, onChangeCompanyName] = useInput('');
   const [companyPresident, onChangeCompanyPresident] = useInput('');
   
-  const [mismatchError, setMismatchError] = useState(false);
-  const [signUpError, setSignUpError] = useState('');
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
-
+  // ID 에러 문구
   const [idError, setIdError] = useState('');
+  // PW 에러 문구
   const [passwordError, setPasswordError] = useState('');
-  const [isIdCheck, setIsIdCheck] = useState(false); // 중복 검사를 했는지 안했는지
-  const [isIdAvailable, setIsIdAvailable] = useState(false); // 아이디 사용 가능한지 아닌지
-  const [isPasswordAvailable, setIsPasswordAvailable] = useState(false); // 아이디 사용 가능한지 아닌지
-
+  // 비밀번호 & 비밀번호확인 일치
+  const [mismatchError, setMismatchError] = useState(false);
+  // 중복검사 유무
+  const [isIdCheck, setIsIdCheck] = useState(false); 
+  // 아이디 사용가능 유무
+  const [isIdAvailable, setIsIdAvailable] = useState(false); 
+  // 비밀번호 사용가능 유무
+  const [isPasswordAvailable, setIsPasswordAvailable] = useState(false); 
 
   const onChangeMemberId = useCallback(
-    (e:any) => {
+    async (e:any) => {
       console.log(e.target.value);
+      console.log('good');
       setmemberId(e.target.value);
       const idRegex = /^[a-z\d]{5,10}$/;
       if (e.target.value === '') {
@@ -37,11 +40,9 @@ export default function UserSignIn(){
         setIdError('아이디는 5~10자의 영소문자, 숫자만 입력 가능합니다.');
         setIsIdAvailable(false);
       } else{
-        setIdError('사용 가능한 아이디입니다.');
-        setIsIdAvailable(true);
+        setIdError('아이디 중복확인을 해주세요');
+        setIsIdAvailable(false);
       }
-      // 여기서 서버랑 통신해서 중복검사
-
     },
     [memberId],
   );
@@ -73,26 +74,37 @@ export default function UserSignIn(){
     [memberPassword],
   );
 
-  const onSubmit = useCallback(
+  const idDuplicateCheck = 
+    async () => {
+      try {
+          const res = await axios.get('/member/auth/id-check', {
+            params:{"memberId":memberId}}
+          );
+          if (!res) {
+            setIdError('사용 가능한 아이디입니다.');
+            setIsIdCheck(true);
+            setIsIdAvailable(true);
+          } else {
+            setIdError('이미 사용중인 아이디입니다.');
+            setIsIdAvailable(false);
+          }
+          return ;
+      } catch(err) {
+          console.log("axios.get 실패! 이유는? ");
+          console.log(err);
+          return false;
+      }
+    }
+
+  const onSubmit = 
     (e:any) => {
       e.preventDefault();
-
-      if (!isIdAvailable) {
-        alert('아이디를 확인해주세요.');
-        return;
-      }
-      if (!isPasswordAvailable) {
-        alert('비밀번호를 확인해주세요.');
-        return;
-      }
-      if (mismatchError) {
-        alert('비밀번호가 다릅니다.');
-        return;
-      }
-      if (!mismatchError) {
-        console.log('서버로 회원가입하기');
-        setSignUpError('');
-        setSignUpSuccess(true);
+      console.log("submit");
+      if (!isIdAvailable || !isIdCheck) { alert('아이디를 확인해주세요.'); return; }
+      if (!isPasswordAvailable) { alert('비밀번호를 확인해주세요.'); return; }
+      if (mismatchError) { alert('비밀번호가 다릅니다.'); return; }
+      if (memberEmail == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
+      else {
         navigate("/usermain");
         axios
           .post('/member/save', {
@@ -105,39 +117,34 @@ export default function UserSignIn(){
           })
           .then((response) => {
             // 성공시
-            //console.log(response);
-            setSignUpSuccess(true);
+            console.log('axios.post 성공!');
+            console.log(response);
           })
           .catch((error) => {
             // 실패시
-            //console.log(error.response);
-            setSignUpError(error.response.data);
+            console.log('axios.post 실패! 이유는?');
+            console.log(error);
           })
           .finally(() => {});
       }
-    },
-    [memberId, memberPassword, memberPasswordCheck, memberEmail,  memberAddress, companyName, companyPresident],
-  );
+    }  
  
 	return (
     <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
-      <form onSubmit={onSubmit}>
-
       
-      {/* <div className="absolute -translate-x-1/2 left-1/2 top-0 w-screen h-[96px]">
-        
+      {/*상단바*/}
+      <div className="absolute -translate-x-1/2 left-1/2 top-0 w-screen h-[96px]">
+        {/*박스*/}
         <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[solid] border-#e9ecef border border-[0_0_1px]"></div>
-        
+        {/*로고글자*/}
         <Link to={"/"} className="absolute left-[6.25%] right-[79.3%] top-[8.33%] bottom-[18.75%] text-[48px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] whitespace-nowrap">Cosmos</Link>
-        
+        {/*우상단 버튼*/}
         <div className="absolute left-[82.5%] right-[6.25%] top-[38.54%] bottom-[37.5%] flex flex-row items-center justify-start gap-[20px]">
-          <Link to={"/login"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">로그인</Link>
+          <Link to={"/member/login"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">로그인</Link>
           <div className="w-[20px] h-0 shrink-0 border-[1px] border-solid border-[#ced4da]"></div>
           <Link to={"/"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">회원가입</Link>
         </div>
       </div>
- */}
-      
       
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
@@ -149,7 +156,7 @@ export default function UserSignIn(){
         <input type="text" id="memberId" name="memberId" value={memberId} onChange={onChangeMemberId} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
         <div className={ isIdAvailable ? "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#20c654] whitespace-nowrap" : "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#d93737] whitespace-nowrap"}>{(<div>{idError}</div>)}</div>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">아이디</div>
-        <div className="absolute left-[84.91%] right-[2.91%] top-[40.6%] bottom-[39.85%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] whitespace-nowrap">중복검사</div>
+        <button onClick={idDuplicateCheck} className="absolute left-[84.91%] right-[2.91%] top-[40.6%] bottom-[39.85%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] whitespace-nowrap">중복검사</button>
         {/*{!memberId && (<div>아이디를 입력해주세요.</div>)}*/}
       </div>
       
@@ -197,12 +204,11 @@ export default function UserSignIn(){
       </div>
 
       {/*하단 가입하기 버튼*/}
-      <button type="submit"  className="absolute -translate-x-1/2 left-1/2 top-[1416px] w-[360px] h-[65px]">
+      <button onClick={onSubmit}  className="absolute -translate-x-1/2 left-1/2 top-[1416px] w-[360px] h-[65px]">
         <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#e9ecef] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
         <div className="absolute left-[40.83%] right-[40.56%] top-[30.77%] bottom-[29.23%] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#868e96] whitespace-nowrap">가입하기</div>
       </button>
 
-      </form>
     </div>
   )
 }

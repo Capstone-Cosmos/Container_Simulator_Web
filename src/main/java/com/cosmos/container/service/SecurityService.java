@@ -63,7 +63,7 @@ public class SecurityService {
 
         //Response
         response.setHeader("access", newAccess);
-        response.addCookie(createCookie("refresh", newRefresh));
+        response.addCookie(createCookie("refreshToken", newRefresh));
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

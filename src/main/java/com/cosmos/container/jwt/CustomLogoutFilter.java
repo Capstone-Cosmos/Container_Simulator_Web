@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.GenericFilterBean;
-
 import java.io.IOException;
 
 @RequiredArgsConstructor
@@ -26,7 +25,6 @@ public class CustomLogoutFilter extends GenericFilterBean {
     }
 
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException{
-
         //Path & Method verify
         String requestUri = request.getRequestURI();
         String requestMethod = request.getMethod();
@@ -40,7 +38,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         Cookie[] cookies = request.getCookies();
 
         for(Cookie cookie:cookies){
-            if(cookie.getName().equals("refresh")){
+            if(cookie.getName().equals("refreshToken")){
                 refreshToken = cookie.getValue();
             }
         }
@@ -70,7 +68,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         refreshRepository.deleteByRefresh(refreshToken);
 
         //Refresh Token Cookie 0 value
-        Cookie cookie = new Cookie("refresh", null);
+        Cookie cookie = new Cookie("refreshToken", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
 
