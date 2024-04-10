@@ -5,7 +5,9 @@ import Login from "./pages/Login";
 import ManagerSingIn from "./pages/manager/ManagerSignIn";
 import Root from "./Root";
 import ErrorComponent from "./components/ErrorComponent";
-import Test from "./pages/Test";
+import ChoosePosition from "./pages/ChoosePosition";
+;
+
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorComponent />,
       },
       {
-        path: "test",
-        element: <Test />,
+        path: "chooseposition",
+        element: <ChoosePosition />,
       },
       {
         path: "member/join",

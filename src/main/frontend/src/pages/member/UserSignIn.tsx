@@ -153,9 +153,9 @@ export default function UserSignIn(){
       
       {/*아이디*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[296px] w-[550px] h-[133px]">
-        <input type="text" id="memberId" name="memberId" value={memberId} onChange={onChangeMemberId} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <input type="text" id="memberId" name="memberId" value={memberId} onChange={onChangeMemberId} placeholder="아이디"className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
         <div className={ isIdAvailable ? "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#20c654] whitespace-nowrap" : "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#d93737] whitespace-nowrap"}>{(<div>{idError}</div>)}</div>
-        <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">아이디</div>
+        <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap"></div>
         <button onClick={idDuplicateCheck} className="absolute left-[84.91%] right-[2.91%] top-[40.6%] bottom-[39.85%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] whitespace-nowrap">중복검사</button>
         {/*{!memberId && (<div>아이디를 입력해주세요.</div>)}*/}
       </div>
