@@ -9,12 +9,11 @@ export default function ChoosePosition() {
       <div>
         {/* 사용자 아이콘 */}
           <svg
-           className="h-52 w-52"
+           className="h-52 w-52 stroke-[#74b5dd]"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
           >
             <path
-              stroke="#74B5DD"
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="10"

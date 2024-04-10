@@ -13,7 +13,7 @@ function Header() {
         <div className="absolute left-[82.5%] right-[6.25%] top-[38.54%] bottom-[37.5%] flex flex-row items-center justify-start gap-[20px]">
           <Link to={"/"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">로그인</Link>
           <div className="w-[20px] h-0 shrink-0 border-[1px] border-solid border-[#ced4da]"></div>
-          <Link to={"/test"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">회원가입</Link>
+          <Link to={"/chooseposition"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">회원가입</Link>
         </div>
       </div>
     </header>
