@@ -6,7 +6,7 @@ export default function ChoosePosition() {
   return (
     <div>
       {/* 사용자회원가입 박스 */}
-      <div>
+      <div className="bg-">
         {/* 사용자 아이콘 */}
           <svg
            className="h-52 w-52 stroke-[#74b5dd]"
