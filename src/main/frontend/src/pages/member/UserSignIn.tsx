@@ -132,20 +132,6 @@ export default function UserSignIn(){
 	return (
     <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
       
-      {/*상단바*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-0 w-screen h-[96px]">
-        {/*박스*/}
-        <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[solid] border-#e9ecef border border-[0_0_1px]"></div>
-        {/*로고글자*/}
-        <Link to={"/"} className="absolute left-[6.25%] right-[79.3%] top-[8.33%] bottom-[18.75%] text-[48px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] whitespace-nowrap">Cosmos</Link>
-        {/*우상단 버튼*/}
-        <div className="absolute left-[82.5%] right-[6.25%] top-[38.54%] bottom-[37.5%] flex flex-row items-center justify-start gap-[20px]">
-          <Link to={"/member/login"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">로그인</Link>
-          <div className="w-[20px] h-0 shrink-0 border-[1px] border-solid border-[#ced4da]"></div>
-          <Link to={"/"} className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">회원가입</Link>
-        </div>
-      </div>
-      
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
       {/*cosmos사용자회원가입 부분*/}
