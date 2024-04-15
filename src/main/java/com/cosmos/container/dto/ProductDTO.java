@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 public class ProductDTO {
     private long id;
+    private String memberId;
     private String productName;
     private int quantity;
     private float height;
@@ -20,6 +21,7 @@ public class ProductDTO {
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
+        productDTO.setMemberId(productEntity.getMemberId());
         productDTO.setProductName(productEntity.getProductName());
         productDTO.setQuantity(productEntity.getQuantity());
         productDTO.setHeight(productEntity.getHeight());

@@ -14,6 +14,9 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column
+    private String MemberId;
+
     @Column(nullable = false)
     private String productName;
 
@@ -37,6 +40,7 @@ public class ProductEntity {
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
+        productEntity.setMemberId(productDTO.getMemberId());
         productEntity.setProductName(productDTO.getProductName());
         productEntity.setQuantity(productDTO.getQuantity());
         productEntity.setHeight(productDTO.getHeight());
