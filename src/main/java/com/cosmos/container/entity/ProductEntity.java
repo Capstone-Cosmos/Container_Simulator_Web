@@ -14,19 +14,19 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String MemberId;
+    @Column(nullable = false)
+    private String memberId;
 
     @Column(nullable = false)
     private String productName;
 
-    @Column
+    @Column(nullable = false)
     private int quantity;
 
-    @Column
+    @Column(nullable = false)
     private float height;
 
-    @Column
+    @Column(nullable = false)
     private float weight;
 
     @Column(nullable = false)
@@ -38,6 +38,12 @@ public class ProductEntity {
     @Column(nullable = false)
     private String finalAddress;
 
+    @Column
+    private String deliveryStatus;
+
+    @Column(columnDefinition = "varchar(10) default '승인대기'")
+    private String approvalStatus;
+
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
         productEntity.setMemberId(productDTO.getMemberId());
@@ -48,6 +54,8 @@ public class ProductEntity {
         productEntity.setDeadline(productDTO.getDeadline());
         productEntity.setFirstAddress(productDTO.getFirstAddress());
         productEntity.setFinalAddress(productDTO.getFinalAddress());
+        productEntity.setDeliveryStatus(productDTO.getDeliveryStatus());
+        productEntity.setApprovalStatus(productDTO.getApprovalStatus());
 
         return productEntity;
     }

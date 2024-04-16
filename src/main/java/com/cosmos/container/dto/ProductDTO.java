@@ -18,6 +18,8 @@ public class ProductDTO {
     private String deadline;
     private String firstAddress;
     private String finalAddress;
+    private String deliveryStatus;
+    private String approvalStatus;
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
@@ -29,6 +31,8 @@ public class ProductDTO {
         productDTO.setDeadline(productEntity.getDeadline());
         productDTO.setFirstAddress(productEntity.getFirstAddress());
         productDTO.setFinalAddress(productEntity.getFinalAddress());
+        productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
+        productDTO.setApprovalStatus(productEntity.getApprovalStatus());
 
         return productDTO;
     }

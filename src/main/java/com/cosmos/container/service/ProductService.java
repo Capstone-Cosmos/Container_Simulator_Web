@@ -3,6 +3,7 @@ package com.cosmos.container.service;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.entity.ProductEntity;
 import com.cosmos.container.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,13 @@ public class ProductService {
             }
         }
         return productDTOS;
+    }
+
+    @Transactional
+    public String deleteProduct(String username, List<Long> productIds) {
+        for(Long id : productIds) {
+            productRepository.deleteByMemberIdAndId(username, id);
+        }
+        return "OK";
     }
 }
