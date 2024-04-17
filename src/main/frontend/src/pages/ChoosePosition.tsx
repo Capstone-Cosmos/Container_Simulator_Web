@@ -5,18 +5,18 @@ import Login from "./Login";
 export default function ChoosePosition() {
   return (
     /* 백그라운드 */
-    <div className="flex items-center justify-center bg-slate-100 h-svh">
+    <div className="flex items-center justify-center bg-red-300 h-svh">
       {/* 박스 전체 2개 */}
-      <div className="flex text-4xl text-center text-[#74b5dd] font-sans font-bold gap-5 h-5/6 bg-gray-100 w-7/12">
+      <div className="flex text-4xl text-center text-[#74b5dd] font-sans font-bold gap-5 h-5/6 bg-purple-700 w-7/12">
         {/* 사용자회원가입 박스 */}
         <Link
           to="/member/join"
-          className="border-[#74B5DD] justify-center w-1/2 mt-16 text-center rounded columns h-4/5 bg-gray-100 place-content-center border-2 group hover:bg-[#74b5dd]"
+          className="border-[#74B5DD] justify-center w-1/2 mt-16 text-center rounded columns h-4/5 bg-slate-950 place-content-center border-2 group hover:bg-[#74b5dd]"
         >
           {/* 사용자 아이콘 */}
-          <div className="flex justify-center bg-gray-100 group-hover:bg-[#74b5dd]">
+          <div className="flex justify-center bg-pink-400 group-hover:bg-[#74b5dd]">
             <svg
-              className="h-64 w-64 stroke-[#74b5dd] bg-gray-100 item group-hover:stroke-[#F8F9FA] group-hover:bg-[#74b5dd]"
+              className="h-64 w-64 stroke-[#74b5dd] bg-orange-800 item group-hover:stroke-[#F8F9FA] group-hover:bg-[#74b5dd]"
               xmlns="http://www.w3.org/2000/svg "
               fill="none"
               viewBox="0 0 215 215"
@@ -31,19 +31,19 @@ export default function ChoosePosition() {
           </div>
 
           {/* 사용자 회원가입 */}
-          <div className="mt-20 mb-3 bg-gray-100 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">사용자</div>
-          <div className="bg-gray-100 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">회원가입</div>
+          <div className="mt-20 mb-3 bg-cyan-300 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">사용자</div>
+          <div className="bg-green-600 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">회원가입</div>
         </Link>
 
         {/* 담당자회원가입 박스 */}
         <Link
           to="/manager/join"
-          className="border-[#74B5DD] items-center justify-center w-1/2 mt-16 bg-gray-100 rounded h-4/5 place-content-center border-2 group hover:bg-[#74b5dd]"
+          className="border-[#74B5DD] items-center justify-center w-1/2 mt-16 bg-orange-300 rounded h-4/5 place-content-center border-2 group hover:bg-[#74b5dd]"
         >
           {/* 담당자 아이콘 */}
-          <div className="flex justify-center bg-gray-100 group-hover:bg-[#74b5dd] ">
+          <div className="flex justify-center bg-green-400 group-hover:bg-[#74b5dd] ">
             <svg
-              className="group-hover:stroke-[#F8F9FA] items-center justify-center w-64 h-64 bg-gray-100 group-hover:bg-[#74b5dd] stroke-[#74B5DD]"
+              className="group-hover:stroke-[#F8F9FA] items-center justify-center w-64 h-64 bg-yellow-400 group-hover:bg-[#74b5dd] stroke-[#74B5DD]"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 215 215"
@@ -72,8 +72,8 @@ export default function ChoosePosition() {
           </div>
 
           {/* 담장자 회원가입 */}
-          <div className="mt-20 mb-3 bg-gray-100 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">담당자</div>
-          <div className="bg-gray-100 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">회원가입</div>
+          <div className="mt-20 mb-3 bg-cyan-300 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">담당자</div>
+          <div className="bg-green-600 group-hover:bg-[#74b5dd] group-hover:text-[#F8F9FA]">회원가입</div>
         </Link>
       </div>
     </div>

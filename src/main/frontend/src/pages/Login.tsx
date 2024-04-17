@@ -94,6 +94,15 @@ export default function Login() {
             로그인
           </div>
         </button>
+
+        <div className="absolute -translate-x-1/2 left-[300px] top-[120px] w-[290px] h-[576px] bg-[#f8f9fa] rounded-[4px]">
+          <Link
+            to={"/boxpage"}
+            className="absolute -translate-x-1/2 left-1/2 hover:text-[#74b5dd] top-[44%] text-[40px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center whitespace-nowrap"
+          >
+          3D Test Page
+          </Link>
+        </div>
       </form>
     </div>
   );

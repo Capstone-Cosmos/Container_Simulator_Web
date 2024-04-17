@@ -7,6 +7,7 @@ import App from "./App";
 import ErrorComponent from "./components/ErrorComponent";
 import ChoosePosition from "./pages/ChoosePosition";
 import New from "./New";
+import BoxPage from "./pages/BoxPage";
 
 
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "usermain",
         element: <UserMain />,
+      },
+      {
+        path: "boxpage",
+        element: <BoxPage />,
       },
     ],
   },
