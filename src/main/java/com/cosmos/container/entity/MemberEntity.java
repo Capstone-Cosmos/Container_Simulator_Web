@@ -3,15 +3,13 @@ package com.cosmos.container.entity;
 import com.cosmos.container.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "member_table")
-public class MemberEntity {
+public class MemberEntity extends BaseEntity {
 
     @Id// pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment

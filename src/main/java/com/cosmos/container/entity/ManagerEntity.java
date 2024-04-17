@@ -1,7 +1,6 @@
 package com.cosmos.container.entity;
 
 import com.cosmos.container.dto.ManagerDTO;
-import com.cosmos.container.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "manager_table")
-public class ManagerEntity {
+public class ManagerEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -3,9 +3,7 @@ package com.cosmos.container.dto;
 import com.cosmos.container.entity.ProductEntity;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -36,7 +34,7 @@ public class ProductDTO {
         productDTO.setDeadline(productEntity.getDeadline());
         productDTO.setFirstAddress(productEntity.getFirstAddress());
         productDTO.setFinalAddress(productEntity.getFinalAddress());
-        productDTO.setOrderTime(productEntity.getOrderTime());
+        productDTO.setOrderTime(productEntity.getCreateTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus());
         return productDTO;

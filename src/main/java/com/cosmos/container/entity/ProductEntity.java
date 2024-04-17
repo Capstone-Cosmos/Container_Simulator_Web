@@ -4,7 +4,7 @@ import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "product_table")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -41,10 +41,6 @@ public class ProductEntity {
     @Column(nullable = false)
     private String finalAddress;
 
-    @UpdateTimestamp
-    @Column
-    private LocalDateTime orderTime;
-
     @Column
     private String deliveryStatus;
 
@@ -61,7 +57,6 @@ public class ProductEntity {
         productEntity.setDeadline(productDTO.getDeadline());
         productEntity.setFirstAddress(productDTO.getFirstAddress());
         productEntity.setFinalAddress(productDTO.getFinalAddress());
-        productEntity.setOrderTime(productDTO.getOrderTime());
         productEntity.setDeliveryStatus(productDTO.getDeliveryStatus());
         productEntity.setApprovalStatus(productDTO.getApprovalStatus());
         return productEntity;
