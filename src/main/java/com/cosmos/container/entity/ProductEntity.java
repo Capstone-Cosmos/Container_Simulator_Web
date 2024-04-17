@@ -4,6 +4,9 @@ import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -38,10 +41,14 @@ public class ProductEntity {
     @Column(nullable = false)
     private String finalAddress;
 
+    @UpdateTimestamp
+    @Column
+    private LocalDateTime orderTime;
+
     @Column
     private String deliveryStatus;
 
-    @Column(columnDefinition = "varchar(10) default '승인대기'")
+    @Column
     private String approvalStatus;
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
@@ -54,9 +61,9 @@ public class ProductEntity {
         productEntity.setDeadline(productDTO.getDeadline());
         productEntity.setFirstAddress(productDTO.getFirstAddress());
         productEntity.setFinalAddress(productDTO.getFinalAddress());
+        productEntity.setOrderTime(productDTO.getOrderTime());
         productEntity.setDeliveryStatus(productDTO.getDeliveryStatus());
         productEntity.setApprovalStatus(productDTO.getApprovalStatus());
-
         return productEntity;
     }
 }

@@ -3,6 +3,10 @@ package com.cosmos.container.dto;
 import com.cosmos.container.entity.ProductEntity;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,8 +22,9 @@ public class ProductDTO {
     private String deadline;
     private String firstAddress;
     private String finalAddress;
+    private LocalDateTime orderTime;
     private String deliveryStatus;
-    private String approvalStatus;
+    private String approvalStatus = "승인대기";
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
@@ -31,9 +36,9 @@ public class ProductDTO {
         productDTO.setDeadline(productEntity.getDeadline());
         productDTO.setFirstAddress(productEntity.getFirstAddress());
         productDTO.setFinalAddress(productEntity.getFinalAddress());
+        productDTO.setOrderTime(productEntity.getOrderTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus());
-
         return productDTO;
     }
 }
