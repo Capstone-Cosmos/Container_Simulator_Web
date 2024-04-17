@@ -74,7 +74,7 @@ export default function Login() {
         {/*하단부*/}
         <div className="absolute -translate-x-1/2 left-1/2 top-[614px] flex flex-row items-center justify-start gap-[20px]">
           <div className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap hover">
-            아직 회원이 아니신가요?!
+            아직 회원이 아니신가요?
           </div>
           <Link
             to={"/chooseposition"}
