@@ -1,7 +1,6 @@
 package com.cosmos.container.service;
 
 import com.cosmos.container.dto.CustomUserDetails;
-import com.cosmos.container.entity.MemberEntity;
 import com.cosmos.container.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

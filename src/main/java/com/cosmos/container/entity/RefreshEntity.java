@@ -7,6 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "refresh_table")
 public class RefreshEntity {
 
     @Id
