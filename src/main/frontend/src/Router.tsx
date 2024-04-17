@@ -3,14 +3,17 @@ import UserSignIn from "./pages/member/UserSignIn";
 import UserMain from "./pages/member/UserMain";
 import Login from "./pages/Login";
 import ManagerSingIn from "./pages/manager/ManagerSignIn";
-import Root from "./Root";
+import App from "./App";
 import ErrorComponent from "./components/ErrorComponent";
-import Test from "./pages/Test";
+import ChoosePosition from "./pages/ChoosePosition";
+import New from "./New";
+
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <App />,
     children: [
       {
         path: "",
@@ -18,8 +21,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorComponent />,
       },
       {
-        path: "test",
-        element: <Test />,
+        path: "chooseposition",
+        element: <ChoosePosition />,
       },
       {
         path: "member/join",
@@ -35,6 +38,11 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/new",
+    element: <New />,
+  }
+  
 ]);
 
 export default router;
