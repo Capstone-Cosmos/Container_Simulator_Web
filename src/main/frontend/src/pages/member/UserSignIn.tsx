@@ -135,7 +135,7 @@ export default function UserSignIn(){
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
       {/*cosmos사용자회원가입 부분*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[174px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap"><span className="text-[34px]">Cosmos<br/></span><span className="text-[24px]">사용자 회원가입.</span></div>
+      <div className="absolute -translate-x-1/2 left-1/2 top-[174px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap"><span className="text-[34px]">Cosmos<br/></span><span className="text-[24px]">사용자 회원가입..</span></div>
       
       {/*아이디*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[296px] w-[550px] h-[133px]">
