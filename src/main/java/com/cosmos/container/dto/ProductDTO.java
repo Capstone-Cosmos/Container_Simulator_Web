@@ -26,6 +26,7 @@ public class ProductDTO {
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(productEntity.getId());
         productDTO.setMemberId(productEntity.getMemberId());
         productDTO.setProductName(productEntity.getProductName());
         productDTO.setQuantity(productEntity.getQuantity());
