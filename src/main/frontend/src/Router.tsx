@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import UserSignIn from "./pages/member/UserSignIn";
-import UserMain from "./pages/member/UserMain";
+
 import Login from "./pages/Login";
 import ManagerSingIn from "./pages/manager/ManagerSignIn";
 import App from "./App";
 import ErrorComponent from "./components/ErrorComponent";
 import ChoosePosition from "./pages/ChoosePosition";
 import New from "./New";
+import UserMain from './pages/member/UserMain';
 
 
 
@@ -32,15 +33,17 @@ const router = createBrowserRouter([
         path: "manager/join",
         element: <ManagerSingIn />,
       },
-      {
-        path: "usermain",
-        element: <UserMain />,
-      },
     ],
   },
   {
     path: "/new",
     element: <New />,
+    children : [
+      {
+        path: "usermain",
+        element: <UserMain />,
+      },
+    ]
   }
   
 ]);

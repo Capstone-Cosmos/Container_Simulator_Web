@@ -3,339 +3,601 @@ import { Link } from "react-router-dom";
 
 export default function UserMain() {
   return (
-    <div className="relative w-[1280px] h-[720px] bg-[#f1f3f5] overflow-hidden">
-      <div className="absolute left-[80px] top-[228px] w-[1120px] h-[472px] bg-[#f8f9fa] rounded-[4px]"></div>
-      <div className="absolute left-[80px] top-[228px] flex flex-row items-start justify-start rounded-tl-[4px] rounded-tr-[4px] rounded-br-0 rounded-bl-0 overflow-hidden">
-        <div className="relative w-[43px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[43px] h-[54px] bg-[#74b5dd]"></div>
-          <div className="absolute left-[11px] top-[17px] w-[20px] h-[20px]">
-            <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-          </div>
-        </div>
-        <div className="relative w-[60px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[60px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[13px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            번호
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[31px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            상품명
-          </div>
-        </div>
-        <div className="relative w-[90px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[90px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[11px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            주문개수
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[58px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            주문일자
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[42px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            출고마감시간
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[15px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            1차 배송지
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[12px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            최종 배송지
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[22px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            배송현황
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[54px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[54px] bg-[#74b5dd] border-[solid] border-#f8f9fa border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[22px] top-[14px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">
-            승인현황
+    <div>
+      <div className="overflow-x-auto">
+        <table className="table hover:table-auto table-lg">
+          <thead>
+            <tr>
+              <input
+                type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-sm"
+              />
+              <th>번호</th>
+              <th>Job</th>
+              <th>company</th>
+              <th>location</th>
+              <th>Last Login</th>
+              <th>Favorite Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <input
+                type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-sm"
+              />
+              <th>1</th>
+              <td>Cy Ganderton</td>
+              <td>Quality Control Specialist</td>
+              <td>Littel, Schaden and Vandervort</td>
+              <td>Canada</td>
+              <td>12/16/2020</td>
+              <td>Blue</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Job</th>
+              <th>company</th>
+              <th>location</th>
+              <th>Last Login</th>
+              <th>Favorite Color</th>
+            </tr>
+          </tfoot>
+        </table>
+        {/* ------------------------------------------------------------- */}
+      </div>
+{/* 마크 디자인 */}
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="p-6 px-0 overflow-scroll">
+          <table className="w-full text-left table-auto min-w-max">
+            <thead>
+              <tr>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    Transaction
+                  </p>
+                </th>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    Amount
+                  </p>
+                </th>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    Date
+                  </p>
+                </th>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    Status
+                  </p>
+                </th>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                    Account
+                  </p>
+                </th>
+                <th className="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://docs.material-tailwind.com/img/logos/logo-spotify.svg"
+                      alt="Spotify"
+                      className="inline-block relative object-center !rounded-full w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                    />
+                    <p className="block font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
+                      Spotify
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    $2,500
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    Wed 3:00pm
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
+                      <span className="">paid</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 p-1 border rounded-md h-9 border-blue-gray-50">
+                      <img
+                        src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
+                        alt="visa"
+                        className="inline-block relative object-center !rounded-none rounded-md h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal capitalize text-blue-gray-900">
+                        visa
+                      </p>
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                        06/2026
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <button
+                    className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    type="button"
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        className="w-4 h-4"
+                      >
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://docs.material-tailwind.com/img/logos/logo-amazon.svg"
+                      alt="Amazon"
+                      className="inline-block relative object-center !rounded-full w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                    />
+                    <p className="block font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
+                      Amazon
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    $5,000
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    Wed 1:00pm
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
+                      <span className="">paid</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 p-1 border rounded-md h-9 border-blue-gray-50">
+                      <img
+                        src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
+                        alt="master-card"
+                        className="inline-block relative object-center !rounded-none rounded-md h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal capitalize text-blue-gray-900">
+                        master card
+                      </p>
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                        06/2026
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <button
+                    className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    type="button"
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        className="w-4 h-4"
+                      >
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://docs.material-tailwind.com/img/logos/logo-pinterest.svg"
+                      alt="Pinterest"
+                      className="inline-block relative object-center !rounded-full w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                    />
+                    <p className="block font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
+                      Pinterest
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    $3,400
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    Mon 7:40pm
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-amber-500/20 text-amber-900 ">
+                      <span className="">pending</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 p-1 border rounded-md h-9 border-blue-gray-50">
+                      <img
+                        src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
+                        alt="master-card"
+                        className="inline-block relative object-center !rounded-none rounded-md h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal capitalize text-blue-gray-900">
+                        master card
+                        {/* <!-- -->
+                <!-- -->1234 */}
+                      </p>
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                        06/2026
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <button
+                    className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    type="button"
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        className="w-4 h-4"
+                      >
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://docs.material-tailwind.com/img/logos/logo-google.svg"
+                      alt="Google"
+                      className="inline-block relative object-center !rounded-full w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                    />
+                    <p className="block font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
+                      Google
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    $1,000
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    Wed 5:00pm
+                  </p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
+                      <span className="">paid</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 p-1 border rounded-md h-9 border-blue-gray-50">
+                      <img
+                        src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
+                        alt="visa"
+                        className="inline-block relative object-center !rounded-none rounded-md h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal capitalize text-blue-gray-900">
+                        visa
+                        {/*   <!-- -->
+                <!-- -->1234 */}
+                      </p>
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                        06/2026
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <button
+                    className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    type="button"
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        className="w-4 h-4"
+                      >
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td className="p-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://docs.material-tailwind.com/img/logos/logo-netflix.svg"
+                      alt="netflix"
+                      className="inline-block relative object-center !rounded-full w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                    />
+                    <p className="block font-sans text-sm antialiased font-bold leading-normal text-blue-gray-900">
+                      netflix
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    $14,000
+                  </p>
+                </td>
+                <td className="p-4">
+                  <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    Wed 3:30am
+                  </p>
+                </td>
+                <td className="p-4">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-red-500/20">
+                      <span className="">cancelled</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 p-1 border rounded-md h-9 border-blue-gray-50">
+                      <img
+                        src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
+                        alt="visa"
+                        className="inline-block relative object-center !rounded-none rounded-md h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal capitalize text-blue-gray-900">
+                        visa
+                        {/* <!-- -->
+                <!-- -->1234 */}
+                      </p>
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                        06/2026
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="p-4">
+                  <button
+                    className="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    type="button"
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        className="w-4 h-4"
+                      >
+                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="w-full px-4 pt-5 mx-auto mb-8 ">
+            <div className="py-1 text-sm text-gray-700">
+              Made with{" "}
+              <a
+                className="font-semibold text-gray-700"
+                href="https://www.material-tailwind.com/?ref=tailwindcomponents"
+                target="_blank"
+              >
+                Material Tailwind
+              </a>{" "}
+              by{" "}
+              <a
+                href="https://www.creative-tim.com?ref=tailwindcomponents"
+                className="font-semibold text-gray-700"
+                target="_blank"
+              >
+                {" "}
+                Creative Tim
+              </a>
+              .
+            </div>
           </div>
         </div>
       </div>
-      <div className="absolute left-[80px] top-[282px] flex flex-row items-start justify-start border-[solid] border-#dee2e6 border border-[0_0_1px] overflow-hidden">
-        <div className="relative w-[43px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[43px] h-[47px] bg-[#f8f9fa]"></div>
-          <div className="absolute left-[11px] top-[14px] w-[20px] h-[20px]">
-            <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-          </div>
-        </div>
-        <div className="relative w-[60px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[60px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            1
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[33px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            삼다수
-          </div>
-        </div>
-        <div className="relative w-[90px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[90px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[26px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            1000
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[35px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-20 18:33
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[36px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-21 18:00
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[34px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            인청항
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            대구 시청
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[52px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            -
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[26px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#008736] text-center whitespace-nowrap">
-            승인대기
-          </div>
-        </div>
-      </div>
-      <div className="absolute left-[80px] top-[329px] flex flex-row items-start justify-start border-[solid] border-#dee2e6 border border-[0_0_1px] overflow-hidden">
-        <div className="relative w-[43px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[43px] h-[47px] bg-[#f8f9fa]"></div>
-          <div className="absolute left-[11px] top-[14px] w-[20px] h-[20px]">
-            <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-          </div>
-        </div>
-        <div className="relative w-[60px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[60px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            2
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[33px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            삼다수
-          </div>
-        </div>
-        <div className="relative w-[90px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[90px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[30px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            250
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[35px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-18 14:29
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[36px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-21 18:00
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[34px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            부산항
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            대구 시청
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[52px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            -
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[40px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#d7260d] text-center whitespace-nowrap">
-            반려
-          </div>
-        </div>
-      </div>
-      <div className="absolute left-[80px] top-[377px] flex flex-row items-start justify-start border-[solid] border-#dee2e6 border border-[0_0_1px] overflow-hidden">
-        <div className="relative w-[43px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[43px] h-[47px] bg-[#f8f9fa]"></div>
-          <div className="absolute left-[11px] top-[14px] w-[20px] h-[20px]">
-            <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-          </div>
-        </div>
-        <div className="relative w-[60px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[60px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            3
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[33px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            삼다수
-          </div>
-        </div>
-        <div className="relative w-[90px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[90px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[30px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            500
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[35px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-15 07:43
-          </div>
-        </div>
-        <div className="relative w-[184px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[184px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[35px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            23-11-21-18:00
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[34px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            인청항
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[25px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            대구 시청
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[26px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] text-center whitespace-nowrap">
-            배송대기
-          </div>
-        </div>
-        <div className="relative w-[112px] h-[47px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[112px] h-[47px] bg-[#f8f9fa] border-[solid] border-#dee2e6 border border-[0_0_0_1px]"></div>
-          <div className="absolute left-[40px] top-[12px] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] text-center whitespace-nowrap">
-            승인
-          </div>
-        </div>
-      </div>
-      <div className="absolute -translate-x-1/2 left-1/2 top-[646px] flex flex-row items-center justify-start gap-[48px]">
-        <div className="relative w-[14px] h-[14px] shrink-0">
-          <img
-            className="absolute left-0 top-0"
-            width="14"
-            height="14"
-            src="vuesax/linear/arrow-leftI43_387;1_7948.png"
-          ></img>
-        </div>
-        <div className="text-[14px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] text-center whitespace-nowrap">
-          1
-        </div>
-        <div className="relative w-[14px] h-[14px] shrink-0">
-          <img
-            className="absolute left-0 top-0"
-            width="14"
-            height="14"
-            src="vuesax/linear/arrow-rightI43_389;1_7981.png"
-          ></img>
-        </div>
-      </div>
-      <div className="absolute left-[80px] top-[164px] w-[170px] h-[44px] flex">
-        <div className="absolute left-0 top-0 w-[170px] h-[44px] bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-        <div className="absolute left-[9.41%] right-[61.18%] top-[20.45%] bottom-[20.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#181b1e] whitespace-nowrap">
-          번호순
-        </div>
-        <div className="absolute left-[76.47%] right-[9.41%] top-[22.73%] bottom-[22.73%]">
-          <img
-            className="absolute left-0 top-0"
-            width="24"
-            height="24"
-            src="vuesax/linear/arrow-downI43_393;1_8014.png"
-          ></img>
-        </div>
-      </div>
-      <div className="absolute left-[840px] top-[164px] w-[170px] h-[44px] flex">
-        <div className="absolute left-0 top-0 w-[170px] h-[44px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-        <div className="absolute left-[30%] right-[30.59%] top-[20.45%] bottom-[20.45%] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center whitespace-nowrap">
-          등록취소
-        </div>
-      </div>
-      <div className="absolute left-[1030px] top-[164px] w-[170px] h-[44px] flex">
-        <div className="absolute left-0 top-0 w-[170px] h-[44px] bg-[#74b5dd] rounded-[4px]"></div>
-        <div className="absolute left-[30%] right-[30.59%] top-[20.45%] bottom-[20.45%] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] text-center whitespace-nowrap">
-          상품등록
-        </div>
-      </div>
-      <div className="absolute left-[270px] top-[164px] w-[550px] h-[44px] flex">
-        <div className="absolute left-0 top-0 w-[550px] h-[44px] bg-[#f8f9fa] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-        <div className="absolute left-[16px] top-[10px] w-[24px] h-[24px]">
-          <img
-            className="absolute left-0 top-0"
-            width="24"
-            height="24"
-            src="vuesax/linear/search-normalI43_402;1_18199.png"
-          ></img>
-        </div>
-        <div className="absolute left-[10.18%] right-[76.91%] top-[20.45%] bottom-[20.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-          상품 검색
-        </div>
-      </div>
-      <div className="absolute -translate-x-1/2 left-1/2 top-0 w-[1280px] h-[144px]">
-        <div className="absolute left-0 right-0 top-[66.67%] bottom-0 bg-[#f8f9fa] border-[solid] border-#e9ecef border border-[0_0_1px]"></div>
-        <div className="absolute left-[6.25%] right-[89.14%] top-[75%] bottom-[9.03%] text-[16px] font-['Noto_Sans_KR'] font-medium text-[#495057] whitespace-nowrap">
-          주문내역
-        </div>
-        <div className="absolute left-0 right-0 top-0 bottom-[33.33%]">
-          <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#f8f9fa] border-[solid] border-#e9ecef border border-[0_0_1px]"></div>
-          <Link
-            to={"/"}
-            className="absolute left-[6.25%] right-[79.3%] top-[8.33%] bottom-[18.75%] text-[48px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] whitespace-nowrap"
-          >
-            Cosmos
-          </Link>
-        </div>
-        <div className="absolute left-[81.41%] right-[6.25%] top-[25.69%] bottom-[58.33%] flex flex-row items-center justify-start gap-[20px]">
-          <div className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">
-            전상언님
-          </div>
-          <div className="w-[20px] h-0 shrink-0 border-[1px] border-solid border-[#ced4da]"></div>
-          <div className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#74b5dd] text-center whitespace-nowrap">
-            로그아웃
-          </div>
+      {/* -----------------보라 검정 테이블------------- */}
+      <div className="container p-2 mx-auto sm:p-4 800 table-lg">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-xs">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+              <col className="w-24" />
+            </colgroup>
+            <thead className="bg-sky-300 ">
+              <tr className="text-center">
+                <th className="p-3">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    className="bg-white checkbox checkbox-md"
+                  />
+                </th>
+                <th className="p-3">Client</th>
+                <th className="p-3">Issued</th>
+                <th className="p-3">Due</th>
+                <th className="p-3 text-right">Amount</th>
+                <th className="p-3">Status</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              <tr className="border-b border-opacity-20 y-300 ">
+                <td className="p-3">
+                <input
+                    type="checkbox"
+                    defaultChecked
+                    className="bg-white checkbox checkbox-md"
+                  />
+                </td>
+                <td className="p-3">
+                  <p>Microsoft Corporation</p>
+                </td>
+                <td className="p-3">
+                  <p>14 Jan 2022</p>
+                  <p className="">Friday</p>
+                </td>
+                <td className="p-3">
+                  <p>01 Feb 2022</p>
+                  <p className="">Tuesday</p>
+                </td>
+                <td className="p-3 text-right">
+                  <p>$15,792</p>
+                </td>
+                <td className="p-3">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-red-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-red-500/20">
+                      <span className="">cancelled</span>
+                    </div>
+                  </div>
+                </td>
+                
+              </tr>
+              <tr className="border-b border-opacity-20 y-300 ">
+                <td className="p-3">
+                  <p>97412378923</p>
+                </td>
+                <td className="p-3">
+                  <p>Tesla Inc.</p>
+                </td>
+                <td className="p-3">
+                  <p>14 Jan 2022</p>
+                  <p className="">Friday</p>
+                </td>
+                <td className="p-3">
+                  <p>01 Feb 2022</p>
+                  <p className="">Tuesday</p>
+                </td>
+                <td className="p-3 text-right">
+                  <p>$275</p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
+                      <span className="">paid</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr className="border-b border-opacity-20 y-300 ">
+                <td className="p-3">
+                  <p>97412378923</p>
+                </td>
+                <td className="p-3">
+                  <p>Coca Cola co.</p>
+                </td>
+                <td className="p-3">
+                  <p>14 Jan 2022</p>
+                  <p className="">Friday</p>
+                </td>
+                <td className="p-3">
+                  <p>01 Feb 2022</p>
+                  <p className="">Tuesday</p>
+                </td>
+                <td className="p-3 text-right">
+                  <p>$8,950,500</p>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50">
+                  <div className="w-max">
+                    <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-amber-500/20 text-amber-900 ">
+                      <span className="">pending</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr className="border-b border-opacity-20 y-300 ">
+                <td className="p-3">
+                  <p>97412378923</p>
+                </td>
+                <td className="p-3">
+                  <p>Nvidia Corporation</p>
+                </td>
+                <td className="p-3">
+                  <p>14 Jan 2022</p>
+                  <p className="">Friday</p>
+                </td>
+                <td className="p-3">
+                  <p>01 Feb 2022</p>
+                  <p className="">Tuesday</p>
+                </td>
+                <td className="p-3 text-right">
+                  <p>$98,218</p>
+                </td>
+                <td className="p-3 text-right">
+                  <span className="px-3 py-1 font-semibold rounded-md ">
+                    <span>Pending</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

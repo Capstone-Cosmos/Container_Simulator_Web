@@ -3,7 +3,7 @@ import Navigator from './components/navigator';
 
 function New() {
     return (
-        <div >
+        <div className="h-screen bg-slate-100">
             <Navigator />
             <Outlet />
         </div>
