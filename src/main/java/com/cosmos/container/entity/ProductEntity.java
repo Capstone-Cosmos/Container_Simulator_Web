@@ -33,7 +33,7 @@ public class ProductEntity extends BaseEntity{
     private float weight;
 
     @Column(nullable = false)
-    private String deadline;
+    private LocalDateTime deadline;
 
     @Column(nullable = false)
     private String firstAddress;

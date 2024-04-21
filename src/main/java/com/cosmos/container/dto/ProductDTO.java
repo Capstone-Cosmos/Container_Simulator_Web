@@ -17,7 +17,7 @@ public class ProductDTO {
     private int quantity;
     private float height;
     private float weight;
-    private String deadline;
+    private LocalDateTime deadline;
     private String firstAddress;
     private String finalAddress;
     private LocalDateTime orderTime;
