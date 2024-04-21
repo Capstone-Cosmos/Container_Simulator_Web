@@ -8,6 +8,7 @@ import ErrorComponent from "./components/ErrorComponent";
 import ChoosePosition from "./pages/ChoosePosition";
 import New from "./New";
 import UserMain from './pages/member/UserMain';
+import UploadPd from "./pages/member/UploadPd";
 
 
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "usermain",
         element: <UserMain />,
       },
+      {
+        path: "uploadpd",
+        element: <UploadPd />,
+      }
     ]
   }
   
