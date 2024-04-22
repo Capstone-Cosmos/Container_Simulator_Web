@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/member/product")
+@RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -25,7 +25,6 @@ public class ProductController {
 
     @GetMapping("/posts")
     public List<ProductDTO> getProducts(@AuthenticationPrincipal UserDetails userDetails){
-        System.out.println(userDetails.getUsername());
         return productService.getProducts(userDetails.getUsername());
     }
 
@@ -33,5 +32,17 @@ public class ProductController {
     public String deleteProduct(@RequestBody Map<String, List<Long>> requestBody, @AuthenticationPrincipal UserDetails userDetails){
         List<Long> productIds = requestBody.get("productIds");
         return productService.deleteProduct(userDetails.getUsername(), productIds);
+    }
+
+    @PatchMapping("/accept")
+    public String acceptProduct(@RequestParam("id") Long id){
+        productService.acceptProduct(id);
+        return "OK";
+    }
+
+    @PatchMapping("/reject")
+    public String rejectProduct(@RequestParam("id") Long id){
+        productService.rejectProduct(id);
+        return "OK";
     }
 }

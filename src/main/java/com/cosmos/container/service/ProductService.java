@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +39,19 @@ public class ProductService {
             productRepository.deleteByMemberIdAndId(username, id);
         }
         return "OK";
+    }
+
+    public void acceptProduct(Long id) {
+        ProductEntity productEntity = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        productEntity.setApprovalStatus("승인");
+        productRepository.save(productEntity);
+    }
+
+    public void rejectProduct(Long id) {
+        ProductEntity productEntity = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        productEntity.setApprovalStatus("반려");
+        productRepository.save(productEntity);
     }
 }
