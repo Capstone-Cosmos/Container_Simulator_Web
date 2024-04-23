@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +54,23 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setApprovalStatus("반려");
         productRepository.save(productEntity);
+    }
+
+    public List<ProductDTO> getWaitingProducts() {
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatus("승인대기");
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for(ProductEntity productEntity : productEntities) {
+            productDTOS.add(ProductDTO.toProductDTO(productEntity));
+        }
+        return productDTOS;
+    }
+
+    public List<ProductDTO> getDecidedProducts() {
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusIn(Arrays.asList("승인", "반려"));
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for(ProductEntity productEntity : productEntities) {
+            productDTOS.add(ProductDTO.toProductDTO(productEntity));
+        }
+        return productDTOS;
     }
 }

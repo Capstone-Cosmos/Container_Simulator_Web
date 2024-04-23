@@ -1,7 +1,6 @@
 package com.cosmos.container.controller;
 
 import com.cosmos.container.dto.ProductDTO;
-import com.cosmos.container.jwt.JWTUtil;
 import com.cosmos.container.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,7 +22,17 @@ public class ProductController {
         return productService.saveProduct(productDTO);
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/manager/wait")
+    public List<ProductDTO> getWaitingProducts(){
+        return productService.getWaitingProducts();
+    }
+
+    @GetMapping("/manager/decided")
+    public List<ProductDTO> getDecidedProducts(){
+        return productService.getDecidedProducts();
+    }
+
+    @GetMapping("/member/posts")
     public List<ProductDTO> getProducts(@AuthenticationPrincipal UserDetails userDetails){
         return productService.getProducts(userDetails.getUsername());
     }
