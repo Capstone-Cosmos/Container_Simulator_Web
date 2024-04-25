@@ -22,14 +22,22 @@ public class ProductController {
         return productService.saveProduct(productDTO);
     }
 
+    @PatchMapping("/assign")
+    public String assignProduct(@RequestParam("id") long id,
+                                @RequestParam("containerId") long containerId,
+                                @AuthenticationPrincipal UserDetails userDetails){
+        productService.assignProduct(id, containerId, userDetails.getUsername());
+        return "Ok";
+    }
+
     @GetMapping("/manager/wait")
     public List<ProductDTO> getWaitingProducts(){
         return productService.getWaitingProducts();
     }
 
     @GetMapping("/manager/decided")
-    public List<ProductDTO> getDecidedProducts(){
-        return productService.getDecidedProducts();
+    public List<ProductDTO> getDecidedProducts(@AuthenticationPrincipal UserDetails userDetails){
+        return productService.getDecidedProducts(userDetails.getUsername());
     }
 
     @GetMapping("/member/posts")
@@ -44,14 +52,14 @@ public class ProductController {
     }
 
     @PatchMapping("/accept")
-    public String acceptProduct(@RequestParam("id") Long id){
-        productService.acceptProduct(id);
+    public String acceptProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+        productService.acceptProduct(id, userDetails.getUsername());
         return "OK";
     }
 
     @PatchMapping("/reject")
-    public String rejectProduct(@RequestParam("id") Long id){
-        productService.rejectProduct(id);
+    public String rejectProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+        productService.rejectProduct(id, userDetails.getUsername());
         return "OK";
     }
 

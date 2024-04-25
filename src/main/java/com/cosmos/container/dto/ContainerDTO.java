@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 public class ContainerDTO {
-
+    private long id;
     private String managerId;
     private int weight;
     private int max_weight;
@@ -19,6 +19,7 @@ public class ContainerDTO {
 
     public static ContainerDTO toContainerDTO(ContainerEntity containerEntity) {
         ContainerDTO containerDTO = new ContainerDTO();
+        containerDTO.setId(containerEntity.getId());
         containerDTO.setManagerId(containerEntity.getManagerId());
         containerDTO.setWeight(containerEntity.getWeight());
         containerDTO.setMax_weight(containerEntity.getMax_weight());

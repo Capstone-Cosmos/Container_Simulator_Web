@@ -45,6 +45,12 @@ public class ProductEntity extends BaseEntity{
     @Column
     private String approvalStatus;
 
+    @Column
+    private long containerId;
+
+    @Column
+    private String managerId;
+
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
         productEntity.setMemberId(productDTO.getMemberId());

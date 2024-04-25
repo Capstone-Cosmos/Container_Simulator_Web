@@ -8,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +22,10 @@ public class ProductService {
     }
 
     public List<ProductDTO> getProducts(String username) {
-        List<ProductEntity> productEntities = productRepository.findAll();
+        List<ProductEntity> productEntities = productRepository.findByMemberId(username);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
-            if(username.equals(productEntity.getMemberId())){
-                productDTOS.add(ProductDTO.toProductDTO(productEntity));
-            }
+            productDTOS.add(ProductDTO.toProductDTO(productEntity));
         }
         return productDTOS;
     }
@@ -42,17 +38,19 @@ public class ProductService {
         return "OK";
     }
 
-    public void acceptProduct(Long id) {
+    public void acceptProduct(Long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setApprovalStatus("승인");
+        productEntity.setManagerId(username);
         productRepository.save(productEntity);
     }
 
-    public void rejectProduct(Long id) {
+    public void rejectProduct(Long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setApprovalStatus("반려");
+        productEntity.setManagerId(username);
         productRepository.save(productEntity);
     }
 
@@ -72,12 +70,20 @@ public class ProductService {
         return productDTOS;
     }
 
-    public List<ProductDTO> getDecidedProducts() {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatus("승인");
+    public List<ProductDTO> getDecidedProducts(String username) {
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerId("승인", username);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));
         }
         return productDTOS;
+    }
+
+    public void assignProduct(long id, long containerId, String username) {
+        ProductEntity productEntity =  productRepository.findByidAndManagerId(id, username)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
+        productEntity.setContainerId(containerId);
+        productEntity.setManagerId(username);
+        productRepository.save(productEntity);
     }
 }

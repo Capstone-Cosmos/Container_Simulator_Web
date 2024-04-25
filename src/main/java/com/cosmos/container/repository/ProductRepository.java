@@ -10,6 +10,9 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     Optional<ProductEntity> findByid(Long id);
+    Optional<ProductEntity> findByidAndManagerId(Long id, String username);
+    List<ProductEntity> findByMemberId(String memberId);
     List<ProductEntity> findByApprovalStatus(String approvalStatus);
+    List<ProductEntity> findByApprovalStatusAndManagerId(String approvalStatus, String managerId);
     void deleteByMemberIdAndId(String memberId, Long id);
 }
