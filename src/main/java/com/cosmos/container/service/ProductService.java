@@ -56,6 +56,13 @@ public class ProductService {
         productRepository.save(productEntity);
     }
 
+    public void cancelProduct(Long id) {
+        ProductEntity productEntity =  productRepository.findByid(id)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
+        productEntity.setApprovalStatus("승인대기");
+        productRepository.save(productEntity);
+    }
+
     public List<ProductDTO> getWaitingProducts() {
         List<ProductEntity> productEntities = productRepository.findByApprovalStatus("승인대기");
         List<ProductDTO> productDTOS = new ArrayList<>();
@@ -66,7 +73,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> getDecidedProducts() {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatusIn(Arrays.asList("승인", "반려"));
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatus("승인");
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));

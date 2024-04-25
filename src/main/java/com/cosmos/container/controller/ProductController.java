@@ -54,4 +54,10 @@ public class ProductController {
         productService.rejectProduct(id);
         return "OK";
     }
+
+    @PatchMapping("/cancel")
+    public String cancelProduct(@RequestParam("id") Long id){
+        productService.cancelProduct(id);
+        return "OK";
+    }
 }

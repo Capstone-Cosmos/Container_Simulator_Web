@@ -11,6 +11,5 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     Optional<ProductEntity> findByid(Long id);
     List<ProductEntity> findByApprovalStatus(String approvalStatus);
-    List<ProductEntity> findByApprovalStatusIn(List<String> list);
     void deleteByMemberIdAndId(String memberId, Long id);
 }
