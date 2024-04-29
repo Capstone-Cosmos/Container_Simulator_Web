@@ -12,39 +12,28 @@ import lombok.Setter;
 public class MemberEntity extends BaseEntity {
 
     @Id// pk 지정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-    private Long id;
-
-    @Column(unique = true)
+    @Column(nullable = false)
     private String memberId;
 
-    @Column
-    private String memberPassword;
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String memberEmail;
 
-    @Column
+    @Column(nullable = false)
     private String memberAddress;
 
-    @Column
+    @Column(nullable = false)
     private String companyName;
 
-    @Column
+    @Column(nullable = false)
     private String companyPresident;
-
-    @Column
-    private String role;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberId(memberDTO.getMemberId());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         memberEntity.setCompanyName(memberDTO.getCompanyName());
         memberEntity.setCompanyPresident(memberDTO.getCompanyPresident());
-        memberEntity.setRole("ROLE_MEMBER");
         return memberEntity;
     }
 }

@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class MemberDTO {
-    private Long id;
     private String memberId;
     private String memberPassword;
     private String memberEmail;
@@ -19,8 +18,6 @@ public class MemberDTO {
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity){
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberId(memberEntity.getMemberId());
-        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setMemberAddress(memberEntity.getMemberAddress());
         memberDTO.setCompanyName(memberEntity.getCompanyName());

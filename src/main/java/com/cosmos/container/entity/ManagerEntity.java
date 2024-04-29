@@ -11,39 +11,28 @@ import lombok.Setter;
 @Table(name = "manager_table")
 public class ManagerEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
+    @Column(nullable = false)
     private String managerId;
 
-    @Column
-    private String managerPassword;
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String managerEmail;
 
-    @Column
+    @Column(nullable = false)
     private String managerName;
 
-    @Column
+    @Column(nullable = false)
     private String managerDepart;
 
-    @Column
+    @Column(nullable = false)
     private String managerPosition;
-
-    @Column
-    private String role;
 
     public static ManagerEntity toMemberEntity(ManagerDTO managerDTO){
         ManagerEntity managerEntity = new ManagerEntity();
         managerEntity.setManagerId(managerDTO.getManagerId());
-        managerEntity.setManagerPassword(managerDTO.getManagerPassword());
         managerEntity.setManagerEmail(managerDTO.getManagerEmail());
         managerEntity.setManagerName(managerDTO.getManagerName());
         managerEntity.setManagerDepart(managerDTO.getManagerDepart());
         managerEntity.setManagerPosition(managerDTO.getManagerPosition());
-        managerEntity.setRole("ROLE_MANAGER");
         return managerEntity;
     }
 }

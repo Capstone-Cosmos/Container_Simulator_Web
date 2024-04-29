@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class ManagerDTO {
-    private long id;
     private String managerId;
     private String managerPassword;
     private String managerEmail;
@@ -20,8 +19,6 @@ public class ManagerDTO {
 
     public static ManagerDTO toManagerDTO(ManagerEntity managerEntity) {
         ManagerDTO managerDTO = new ManagerDTO();
-        managerDTO.setManagerId(managerEntity.getManagerId());
-        managerDTO.setManagerPassword(managerEntity.getManagerPassword());
         managerDTO.setManagerEmail(managerEntity.getManagerEmail());
         managerDTO.setManagerName(managerEntity.getManagerName());
         managerDTO.setManagerDepart(managerEntity.getManagerDepart());
