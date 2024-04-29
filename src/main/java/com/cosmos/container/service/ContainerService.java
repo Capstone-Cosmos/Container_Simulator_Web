@@ -14,8 +14,9 @@ import java.util.List;
 public class ContainerService {
     private final ContainerRepository containerRepository;
 
-    public String saveContainer(ContainerDTO containerDTO) {
+    public String saveContainer(ContainerDTO containerDTO, String username) {
         ContainerEntity containerEntity = ContainerEntity.toContainerEntity(containerDTO);
+        containerEntity.setManagerId(username);
         containerRepository.save(containerEntity);
         return containerDTO.toString();
     }

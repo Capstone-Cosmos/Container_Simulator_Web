@@ -43,7 +43,7 @@ public class ProductEntity extends BaseEntity{
     private String deliveryStatus;
 
     @Column
-    private String approvalStatus;
+    private String approvalStatus = "승인대기";
 
     @Column
     private long containerId;
@@ -53,7 +53,6 @@ public class ProductEntity extends BaseEntity{
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
-        productEntity.setMemberId(productDTO.getMemberId());
         productEntity.setProductName(productDTO.getProductName());
         productEntity.setQuantity(productDTO.getQuantity());
         productEntity.setHeight(productDTO.getHeight());

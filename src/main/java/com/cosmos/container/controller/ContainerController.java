@@ -17,12 +17,12 @@ public class ContainerController {
 
     @PostMapping("/save")
     public String saveContainer(@RequestBody ContainerDTO containerDTO, @AuthenticationPrincipal UserDetails userDetails){
-        containerDTO.setManagerId(userDetails.getUsername());
-        return containerService.saveContainer(containerDTO);
+        return containerService.saveContainer(containerDTO, userDetails.getUsername());
     }
 
     @GetMapping("/posts")
     public List<ContainerDTO> getContainers(@AuthenticationPrincipal UserDetails userDetails){
         return containerService.getContainers(userDetails.getUsername());
     }
+
 }

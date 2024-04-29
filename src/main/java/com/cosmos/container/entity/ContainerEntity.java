@@ -31,7 +31,7 @@ public class ContainerEntity {
 
     public static ContainerEntity toContainerEntity(ContainerDTO containerDTO) {
         ContainerEntity containerEntity = new ContainerEntity();
-        containerEntity.setManagerId(containerDTO.getManagerId());
+        containerEntity.setId(containerDTO.getId());
         containerEntity.setWeight(containerDTO.getWeight());
         containerEntity.setDeadline(containerDTO.getDeadline());
         containerEntity.setMax_weight(containerDTO.getMax_weight());

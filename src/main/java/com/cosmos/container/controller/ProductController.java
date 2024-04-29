@@ -18,8 +18,7 @@ public class ProductController {
 
     @PostMapping("/save")
     public String saveProduct(@RequestBody ProductDTO productDTO, @AuthenticationPrincipal UserDetails userDetails){
-        productDTO.setMemberId(userDetails.getUsername());
-        return productService.saveProduct(productDTO);
+        return productService.saveProduct(productDTO, userDetails.getUsername());
     }
 
     @PatchMapping("/assign")

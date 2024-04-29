@@ -15,8 +15,9 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public String saveProduct(ProductDTO productDTO) {
+    public String saveProduct(ProductDTO productDTO, String username) {
         ProductEntity productEntity = ProductEntity.toProductEntity(productDTO);
+        productEntity.setMemberId(username);
         productRepository.save(productEntity);
         return productDTO.toString();
     }
