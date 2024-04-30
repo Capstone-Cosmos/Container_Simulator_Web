@@ -25,4 +25,10 @@ public class ContainerController {
         return containerService.getContainers(userDetails.getUsername());
     }
 
+    @DeleteMapping("/delete")
+    public String deleteContainer(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+        containerService.deleteContainer(id, userDetails.getUsername());
+        return "OK";
+    }
+
 }

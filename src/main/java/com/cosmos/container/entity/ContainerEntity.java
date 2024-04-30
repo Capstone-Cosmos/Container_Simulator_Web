@@ -17,7 +17,7 @@ public class ContainerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String managerId;
 
     @Column(nullable = false)

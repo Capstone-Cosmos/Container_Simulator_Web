@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ContainerRepository extends JpaRepository<ContainerEntity, Long> {
     List<ContainerEntity> findByManagerId(String managerId);
+
+    void deleteByManagerIdAndId(String managerId, Long id);
 }

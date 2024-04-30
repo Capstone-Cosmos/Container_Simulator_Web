@@ -3,6 +3,7 @@ package com.cosmos.container.service;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.entity.ContainerEntity;
 import com.cosmos.container.repository.ContainerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,8 @@ public class ContainerService {
         return containerDTOS;
     }
 
+    @Transactional
+    public void deleteContainer(Long id, String username) {
+        containerRepository.deleteByManagerIdAndId(username, id);
+    }
 }
