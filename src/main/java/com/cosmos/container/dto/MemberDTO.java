@@ -9,16 +9,15 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class MemberDTO {
-    private String memberId;
-    private String memberPassword;
-    private String memberEmail;
+    private String id;
+    private String password;
+    private String email;
     private String memberAddress;
     private String companyName;
     private String companyPresident;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity){
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setMemberAddress(memberEntity.getMemberAddress());
         memberDTO.setCompanyName(memberEntity.getCompanyName());
         memberDTO.setCompanyPresident(memberEntity.getCompanyPresident());

@@ -13,10 +13,7 @@ public class MemberEntity extends BaseEntity {
 
     @Id// pk 지정
     @Column(nullable = false)
-    private String memberId;
-
-    @Column(unique = true, nullable = false)
-    private String memberEmail;
+    private String id;
 
     @Column(nullable = false)
     private String memberAddress;
@@ -29,8 +26,7 @@ public class MemberEntity extends BaseEntity {
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setMemberId(memberDTO.getMemberId());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setId(memberDTO.getId());
         memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         memberEntity.setCompanyName(memberDTO.getCompanyName());
         memberEntity.setCompanyPresident(memberDTO.getCompanyPresident());

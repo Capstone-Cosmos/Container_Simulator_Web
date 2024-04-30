@@ -20,13 +20,17 @@ public class UserInfoEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @Column(nullable = false)
     private String role;
 
-    public static UserInfoEntity toUserInfoEntity(String userName, String password, String role) {
+    public static UserInfoEntity toUserInfoEntity(String userName, String password, String email, String role) {
         UserInfoEntity userInfoEntity = new UserInfoEntity();
         userInfoEntity.username = userName;
         userInfoEntity.password = password;
+        userInfoEntity.email = email;
         userInfoEntity.role = role;
         return userInfoEntity;
     }

@@ -13,6 +13,7 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
 
     private final UserInfoEntity userInfoEntity;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 

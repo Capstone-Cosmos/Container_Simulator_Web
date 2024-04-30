@@ -12,10 +12,7 @@ import lombok.Setter;
 public class ManagerEntity extends BaseEntity {
     @Id
     @Column(nullable = false)
-    private String managerId;
-
-    @Column(unique = true, nullable = false)
-    private String managerEmail;
+    private String id;
 
     @Column(nullable = false)
     private String managerName;
@@ -28,8 +25,7 @@ public class ManagerEntity extends BaseEntity {
 
     public static ManagerEntity toMemberEntity(ManagerDTO managerDTO){
         ManagerEntity managerEntity = new ManagerEntity();
-        managerEntity.setManagerId(managerDTO.getManagerId());
-        managerEntity.setManagerEmail(managerDTO.getManagerEmail());
+        managerEntity.setId(managerDTO.getId());
         managerEntity.setManagerName(managerDTO.getManagerName());
         managerEntity.setManagerDepart(managerDTO.getManagerDepart());
         managerEntity.setManagerPosition(managerDTO.getManagerPosition());
