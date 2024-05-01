@@ -1,4 +1,4 @@
-import React, { useState, EventHandler, ReactNode } from "react";
+import React, { useState, EventHandler, ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 
@@ -8,18 +8,23 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import axios from "axios";
+import { access } from "fs";
+import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 
-type Person = {
+interface Person {
+  isCheck: boolean;
   index: number;
   Name: string;
   count: number;
   orderDate: string;
   shipAddr: string;
   status: string;
-};
+}
 //person 데이터를 ts를 이용해 만듬
 const defaultData: Person[] = [
   {
+    isCheck: false,
     index: 1,
     Name: "linsley",
     count: 24,
@@ -28,6 +33,7 @@ const defaultData: Person[] = [
     status: "승인",
   },
   {
+    isCheck: false,
     index: 2,
     Name: "miller",
     count: 40,
@@ -36,6 +42,7 @@ const defaultData: Person[] = [
     status: "대기",
   },
   {
+    isCheck: false,
     index: 2,
     Name: "dirte",
     count: 45,
@@ -83,10 +90,22 @@ const columns = [
     footer: (info) => "배송지",
   }),
 ];
-//
+
 export default function UserMain() {
-  const [data, _setData] = React.useState(() => [...defaultData]);
+  let [data, _setData] = React.useState(() => [...defaultData]);
+  const [refeach, set] = useState(false);
   const rerender = React.useReducer(() => ({}), {})[1];
+
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/product/save");
+      const data = response.data.map((data: Person) => ({
+        ...data,
+        isChecked: false,
+      }));
+      _setData(data);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -104,24 +123,51 @@ export default function UserMain() {
             className="input input-bordered md:w-auto"
           />
         </div>
-        
-          <Link to="/new/uploadpd">
-            <button className="bg-white btn btn-outline ">상품등록</button>
-          </Link>
-        
+
+        <Link to="/new/uploadpd">
+          <button className="bg-white btn btn-outline ">상품등록</button>
+        </Link>
+
         <div className="">
-          <button className="bg-white btn btn-outline ">등록취소</button>
+          <button
+            className="bg-white btn btn-outline"
+            onClick={() => {
+              //
+              const checkItem = data
+                .filter((data => data.isCheck === true))
+                .map((data) => data.index);
+
+                //
+                (async () => {
+                  const response = await CreateAxiosInstance().post("/product/save");
+                  const data = response.data.map((data: Person) => ({
+                    ...data,
+                  }));
+                  _setData(data);
+                  window.location.reload;
+                })();
+
+              
+            }}
+          >
+            등록취소
+          </button>
         </div>
       </div>
       <table className="min-w-full overflow-x-auto table-lg">
         <thead className="bg-sky-300 ">
-          {table.getHeaderGroups().map((headerGroup) => (
+          {table.getHeaderGroups().map((headerGroup, index) => (
             <tr className="" key={headerGroup.id}>
               <th className="p-3">
                 <input
                   type="checkbox"
                   defaultChecked
                   className="bg-white checkbox checkbox-md"
+                  onClick={() => {
+                    const newData = [...data];
+                    newData[index].isCheck = !newData[index].isCheck;
+                    _setData(newData);
+                  }}
                 />
               </th>
               {headerGroup.headers.map((header) => (

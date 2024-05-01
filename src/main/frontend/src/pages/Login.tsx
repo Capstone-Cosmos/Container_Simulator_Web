@@ -2,6 +2,7 @@ import React, { useState, EventHandler, ReactNode, useCallback } from "react";
 import axios from "axios";
 import useInput from "../useInput";
 import { Link, useNavigate } from "react-router-dom";
+import { CreateAxiosInstance } from "../shared/axios/createAxiosInstance";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,12 +17,20 @@ export default function Login() {
     
     try {
       //아이디와 비번 서버에 보내기
-      const response =  await axios.post("/login", null, {
-        params: {
-          username: memberId,
-          password: memberPassword,
-        },
-      });
+      // const response =  await axios.post("/login", null, {
+      //   params: {
+      //     username: memberId,
+      //     password: memberPassword,
+      //   },
+      // });
+      const response = await CreateAxiosInstance().post(
+        "/login",null, {
+          params: {
+                username: memberId,
+                password: memberPassword,
+              },
+        }
+      )
        //위 post에 대한 응답으로 토큰 수령
       if (response.status === 200 ){
         localStorage.setItem("accessToken", response.headers.access);
