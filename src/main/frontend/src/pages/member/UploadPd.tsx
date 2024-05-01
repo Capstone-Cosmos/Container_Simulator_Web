@@ -130,7 +130,7 @@ export default function UploadPd() {
         </div>
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
-            type="date"
+            type="datetime-local"
             id="deadline"
             name="deadline"
             onChange={setDealine}

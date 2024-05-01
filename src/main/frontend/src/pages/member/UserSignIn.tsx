@@ -6,10 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function UserSignIn(){
   const navigate = useNavigate();
   // 아이디 / 비밀번호 / 비밀번호확인 / 이메일 / 주소 / 업체명 / 대표명
-  const [memberId, ,setmemberId] = useInput('');
-  const [memberPassword, ,setmemberPassword] = useInput('');
+  const [id, ,setmemberId] = useInput('');
+  const [password, ,setmemberPassword] = useInput('');
   const [memberPasswordCheck, ,setmemberPasswordCheck] = useInput('');
-  const [memberEmail, onChangeMemberEmail] = useInput('');
+  const [email, onChangeMemberEmail] = useInput('');
   const [memberAddress,onChangeMemberAddress] = useInput('');
   const [companyName, onChangeCompanyName] = useInput('');
   const [companyPresident, onChangeCompanyPresident] = useInput('');
@@ -44,7 +44,7 @@ export default function UserSignIn(){
         setIsIdAvailable(false);
       }
     },
-    [memberId],
+    [id],
   );
 
   const onChangememberPassword = useCallback(
@@ -69,16 +69,16 @@ export default function UserSignIn(){
   const onChangememberPasswordCheck = useCallback(
     (e:any) => {
       setmemberPasswordCheck(e.target.value);
-      setMismatchError(e.target.value !== memberPassword);
+      setMismatchError(e.target.value !== password);
     },
-    [memberPassword],
+    [password],
   );
 
   const idDuplicateCheck = 
     async () => {
       try {
-          const res = await axios.get('/member/auth/id-check', {
-            params:{"memberId":memberId}}
+          const res = await axios.get('/check/id', {
+            params:{"id":id}}
           );
           console.log(res.data);
           if (!res.data) {
@@ -104,14 +104,14 @@ export default function UserSignIn(){
       if (!isIdAvailable || !isIdCheck) { alert('아이디를 확인해주세요.'); return; }
       if (!isPasswordAvailable) { alert('비밀번호를 확인해주세요.'); return; }
       if (mismatchError) { alert('비밀번호가 다릅니다.'); return; }
-      if (memberEmail == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
+      if (email == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
       else {
-        navigate("/usermain");
+        navigate("/new/usermain");
         axios
-          .post('/member/save', {
-            memberId,
-            memberPassword,
-            memberEmail,
+          .post('/save/member', {
+            id,
+            password,
+            email,
             memberAddress,
             companyName,
             companyPresident
@@ -140,7 +140,7 @@ export default function UserSignIn(){
       
       {/*아이디*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[296px] w-[550px] h-[133px]">
-        <input type="text" id="memberId" name="memberId" value={memberId} onChange={onChangeMemberId} placeholder="아이디"className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <input type="text" id="memberId" name="memberId" value={id} onChange={onChangeMemberId} placeholder="아이디"className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
         <div className={ isIdAvailable ? "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#20c654] whitespace-nowrap" : "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#d93737] whitespace-nowrap"}>{(<div>{idError}</div>)}</div>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap"></div>
         <button onClick={idDuplicateCheck} className="absolute left-[84.91%] right-[2.91%] top-[40.6%] bottom-[39.85%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] whitespace-nowrap">중복검사</button>
@@ -149,7 +149,7 @@ export default function UserSignIn(){
       
       {/*비밀번호*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px]">
-        <input type="password" id="memberPassword" name="memberPassword" value={memberPassword} onChange={onChangememberPassword} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <input type="password" id="memberPassword" name="memberPassword" value={password} onChange={onChangememberPassword} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
         <div className="absolute left-0 right-[24.36%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#d93737] whitespace-nowrap">{(<div>{passwordError}</div>)}</div>
         <div className="absolute left-0 right-[87.82%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">비밀번호</div>
       </div>
@@ -162,7 +162,7 @@ export default function UserSignIn(){
 
       {/*이메일*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[815px] w-[550px] h-[133px] flex">
-        <input type="email" id="memberEmail" name="memberEmail" value={memberEmail} onChange={onChangeMemberEmail} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <input type="email" id="memberEmail" name="memberEmail" value={email} onChange={onChangeMemberEmail} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[73.74%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">이메일</div>
       </div>
 

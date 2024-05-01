@@ -7,7 +7,7 @@ export const CreateAxiosInstance= (options?: AxiosRequestConfig) => {
         baseURL: API_BASE_URL,
         ...options,
         headers:{
-            access:accessToken
+            "access":accessToken
           }
     });
     return axiosInstance;
