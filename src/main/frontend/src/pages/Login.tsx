@@ -23,7 +23,7 @@ export default function Login() {
       //     password: memberPassword,
       //   },
       // });
-      const response = await CreateAxiosInstance().post(
+      const response = await axios.post(
         "/login",null, {
           params: {
                 username: memberId,

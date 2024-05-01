@@ -153,23 +153,23 @@ export default function UserMain() {
         <div className="">
           <button
             className="bg-white btn btn-outline"
-            onClick={() => {
-              //
-              // const checkItem = data
-              //   .filter((data) => data.isCheck === true)
-              //   .map((data) => data.id);
+            // onClick={() => {
+              
+            //   const checkItem = data
+            //     .filter((data) => data.isCheck === true)
+            //     .map((data) => data.id);
 
-              // (async () => {
-              //   const response = await CreateAxiosInstance().post(
-              //     "/product/delete"
-              //   );
-              //   const data = response.data.map((data: Person) => ({
-              //     ...data,
-              //   }));
-              //   _setData(data);
-              //   window.location.reload;
-              // })();
-            }}
+            //   (async () => {
+            //     const response = await CreateAxiosInstance().post(
+            //       "/product/delete"
+            //     );
+            //     const data = response.data.map((data: Person) => ({
+            //       ...data,
+            //     }));
+            //     _setData(data);
+            //     window.location.reload;
+            //   })();
+            // }}
           >
             등록취소
           </button>
@@ -184,11 +184,11 @@ export default function UserMain() {
                   type="checkbox"
                   defaultChecked
                   className="bg-white checkbox checkbox-md"
-                  onClick={() => {
-                    const newData = [...data];
-                    newData[index].isCheck = !newData[index].isCheck;
-                    _setData(newData);
-                  }}
+                  // onClick={() => {
+                  //   const newData = [...data];
+                  //   newData[index].isCheck = !newData[index].isCheck;
+                  //   _setData(newData);
+                  // }}
                 />
               </th>
               {headerGroup.headers.map((header) => (
@@ -212,11 +212,11 @@ export default function UserMain() {
                   type="checkbox"
                   defaultChecked
                   className="bg-white checkbox checkbox-md"
-                  onClick={() => {
-                    const newData = [...data];
-                    newData[index].isCheck = !newData[index].isCheck;
-                    _setData(newData);
-                  }}
+                  // onClick={() => {
+                  //   const newData = [...data];
+                  //   newData[index].isCheck = !newData[index].isCheck;
+                  //   _setData(newData);
+                  // }}
                 />
               </td>
               {row.getVisibleCells().map((cell) => (
