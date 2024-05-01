@@ -80,7 +80,8 @@ export default function UserSignIn(){
           const res = await axios.get('/member/auth/id-check', {
             params:{"memberId":memberId}}
           );
-          if (!res) {
+          console.log(res.data);
+          if (!res.data) {
             setIdError('사용 가능한 아이디입니다.');
             setIsIdCheck(true);
             setIsIdAvailable(true);

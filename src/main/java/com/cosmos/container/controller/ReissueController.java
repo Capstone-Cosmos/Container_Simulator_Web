@@ -1,6 +1,5 @@
 package com.cosmos.container.controller;
 
-import com.cosmos.container.jwt.JWTUtil;
 import com.cosmos.container.service.SecurityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

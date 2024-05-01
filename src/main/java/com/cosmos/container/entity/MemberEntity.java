@@ -3,50 +3,33 @@ package com.cosmos.container.entity;
 import com.cosmos.container.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "member_table")
-public class MemberEntity {
+public class MemberEntity extends BaseEntity {
 
     @Id// pk 지정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-    private Long id;
+    @Column(nullable = false)
+    private String id;
 
-    @Column(unique = true)
-    private String memberId;
-
-    @Column
-    private String memberPassword;
-
-    @Column(unique = true)
-    private String memberEmail;
-
-    @Column
+    @Column(nullable = false)
     private String memberAddress;
 
-    @Column
+    @Column(nullable = false)
     private String companyName;
 
-    @Column
+    @Column(nullable = false)
     private String companyPresident;
-
-    @Column
-    private String role;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setMemberId(memberDTO.getMemberId());
-        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
-        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setId(memberDTO.getId());
         memberEntity.setMemberAddress(memberDTO.getMemberAddress());
         memberEntity.setCompanyName(memberDTO.getCompanyName());
         memberEntity.setCompanyPresident(memberDTO.getCompanyPresident());
-        memberEntity.setRole("ROLE_MEMBER");
         return memberEntity;
     }
 }

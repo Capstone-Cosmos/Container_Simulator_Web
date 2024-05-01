@@ -4,15 +4,13 @@ import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "product_table")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -33,7 +31,7 @@ public class ProductEntity {
     private float weight;
 
     @Column(nullable = false)
-    private String deadline;
+    private LocalDateTime deadline;
 
     @Column(nullable = false)
     private String firstAddress;
@@ -41,19 +39,20 @@ public class ProductEntity {
     @Column(nullable = false)
     private String finalAddress;
 
-    @UpdateTimestamp
-    @Column
-    private LocalDateTime orderTime;
-
     @Column
     private String deliveryStatus;
 
     @Column
-    private String approvalStatus;
+    private String approvalStatus = "승인대기";
+
+    @Column
+    private long containerId;
+
+    @Column
+    private String managerId;
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
-        productEntity.setMemberId(productDTO.getMemberId());
         productEntity.setProductName(productDTO.getProductName());
         productEntity.setQuantity(productDTO.getQuantity());
         productEntity.setHeight(productDTO.getHeight());
@@ -61,7 +60,6 @@ public class ProductEntity {
         productEntity.setDeadline(productDTO.getDeadline());
         productEntity.setFirstAddress(productDTO.getFirstAddress());
         productEntity.setFinalAddress(productDTO.getFinalAddress());
-        productEntity.setOrderTime(productDTO.getOrderTime());
         productEntity.setDeliveryStatus(productDTO.getDeliveryStatus());
         productEntity.setApprovalStatus(productDTO.getApprovalStatus());
         return productEntity;

@@ -3,9 +3,7 @@ package com.cosmos.container.dto;
 import com.cosmos.container.entity.ProductEntity;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -14,21 +12,20 @@ import java.time.LocalTime;
 @ToString
 public class ProductDTO {
     private long id;
-    private String memberId;
     private String productName;
     private int quantity;
     private float height;
     private float weight;
-    private String deadline;
+    private LocalDateTime deadline;
     private String firstAddress;
     private String finalAddress;
     private LocalDateTime orderTime;
     private String deliveryStatus;
-    private String approvalStatus = "승인대기";
+    private String approvalStatus;
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setMemberId(productEntity.getMemberId());
+        productDTO.setId(productEntity.getId());
         productDTO.setProductName(productEntity.getProductName());
         productDTO.setQuantity(productEntity.getQuantity());
         productDTO.setHeight(productEntity.getHeight());
@@ -36,7 +33,7 @@ public class ProductDTO {
         productDTO.setDeadline(productEntity.getDeadline());
         productDTO.setFirstAddress(productEntity.getFirstAddress());
         productDTO.setFinalAddress(productEntity.getFinalAddress());
-        productDTO.setOrderTime(productEntity.getOrderTime());
+        productDTO.setOrderTime(productEntity.getCreateTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus());
         return productDTO;
