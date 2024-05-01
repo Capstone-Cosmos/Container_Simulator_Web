@@ -96,16 +96,16 @@ export default function UserMain() {
   const [refeach, set] = useState(false);
   const rerender = React.useReducer(() => ({}), {})[1];
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/product/save");
-      const data = response.data.map((data: Person) => ({
-        ...data,
-        isChecked: false,
-      }));
-      _setData(data);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/product/save");
+  //     const data = response.data.map((data: Person) => ({
+  //       ...data,
+  //       isChecked: false,
+  //     }));
+  //     _setData(data);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -138,14 +138,14 @@ export default function UserMain() {
                 .map((data) => data.index);
 
                 //
-                (async () => {
-                  const response = await CreateAxiosInstance().post("/product/save");
-                  const data = response.data.map((data: Person) => ({
-                    ...data,
-                  }));
-                  _setData(data);
-                  window.location.reload;
-                })();
+                // (async () => {
+                //   const response = await CreateAxiosInstance().post("/product/save");
+                //   const data = response.data.map((data: Person) => ({
+                //     ...data,
+                //   }));
+                //   _setData(data);
+                //   window.location.reload;
+                // })();
 
               
             }}

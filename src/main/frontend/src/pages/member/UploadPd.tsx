@@ -2,40 +2,41 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../../useInput";
 import { useCallback, useState } from "react";
 import axios from "axios";
+import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 
 export default function UploadPd() {
   const navigate = useNavigate();
   // 상품명 / 수량 / 높이 / 무게 / 출고마감시간 / 1차배송지 / 최종배송지
   const [productName, setpdName] = useInput("");
   const [quantity, setquantity] = useInput("");
-  const [weight, setweight] = useInput("");
   const [height, setHeight] = useInput("");
-  const [deliveyDeadline, setDealine] = useInput("2024-05-22");
-  const [firstDest, setfirstDest] = useInput("");
-  const [finalDest, setfinalDest] = useInput("");
+  const [weight, setweight] = useInput("");
+  const [deadline, setDealine] = useInput("2024-05-22");
+  const [firstAddress, setfirstDest] = useInput("");
+  const [finalAddress, setfinalAddress] = useInput("");
 
   const onSubmit = (e: any) => {
     e.preventDefault();
     console.log("submit");
     if (
       weight == "" ||
-      deliveyDeadline == "" ||
-      firstDest == "" ||
-      finalDest == ""
+      deadline == "" ||
+      firstAddress == "" ||
+      finalAddress == ""
     ) {
       alert("모든 정보를 입력해주세요.");
       return;
     } else {
       navigate("/new/usermain");
-      axios
-        .post("/member/save", {
+      CreateAxiosInstance()
+        .post("/product/save", {
           productName,
           quantity,
           height,
           weight,
-          deliveyDeadline,
-          firstDest,
-          finalDest,
+          deadline,
+          firstAddress,
+          finalAddress,
         })
         .then((response) => {
           // 성공시
@@ -70,12 +71,13 @@ export default function UploadPd() {
           type="text"
           id="productName"
           name="productName"
-          value={productName}
           onChange={setpdName}
           placeholder="상품명"
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
-        <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">상품명</div>
+        <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
+          상품명
+        </div>
 
         {/*{!productName && (<div>상품명를 입력해주세요.</div>)}*/}
       </div>
@@ -83,10 +85,10 @@ export default function UploadPd() {
       {/*수량*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px]">
         <input
-          type="text"
+          type="number"
           id="quantity"
           name="quantity"
-          
+          onChange={setquantity}
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[87.82%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
@@ -99,6 +101,7 @@ export default function UploadPd() {
           type="text"
           id="height"
           name="height"
+          onChange={setHeight}
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
@@ -112,7 +115,7 @@ export default function UploadPd() {
           type="text"
           id="weight"
           name="weight"
-          value={weight}
+          onChange={setweight}
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[73.74%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
@@ -128,9 +131,9 @@ export default function UploadPd() {
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
             type="date"
-            id="deliveyDeadline"
-            name="deliveyDeadline"
-            value={deliveyDeadline}
+            id="deadline"
+            name="deadline"
+            onChange={setDealine}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>
         </div>
@@ -144,9 +147,9 @@ export default function UploadPd() {
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
             type="text"
-            id="firstDest"
-            name="firstDest"
-            value={firstDest}
+            id="firstAddress"
+            name="firstAddress"
+            onChange={setfirstDest}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>
         </div>
@@ -160,9 +163,9 @@ export default function UploadPd() {
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
             type="text"
-            id="finalDest"
-            name="finalDest"
-            value={finalDest}
+            id="finalAddress"
+            name="finalAddress"
+            onChange={setfinalAddress}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>
         </div>
