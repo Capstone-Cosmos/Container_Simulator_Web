@@ -13,71 +13,77 @@ import { access } from "fs";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 
 interface Person {
-  isCheck: boolean;
-  index: number;
-  Name: string;
-  count: number;
-  orderDate: string;
-  shipAddr: string;
-  status: string;
+  id: number;
+  memberId: string;
+  productName: string;
+  quantity: number;
+  height: number;
+  weight: number;
+  deadline: string;
+  firstAddress: string;
+  finalAddress: string;
+  orderTime: Date;
+  deliveryStatus: null;
+  approvalStatus: string;
+  isCheck:boolean;
 }
-//person 데이터를 ts를 이용해 만듬
-const defaultData: Person[] = [
-  {
-    isCheck: false,
-    index: 1,
-    Name: "linsley",
-    count: 24,
-    orderDate: "23-11-20 18:33",
-    shipAddr: "파주시",
-    status: "승인",
-  },
-  {
-    isCheck: false,
-    index: 2,
-    Name: "miller",
-    count: 40,
-    orderDate: "23-11-30 13:33",
-    shipAddr: "서울",
-    status: "대기",
-  },
-  {
-    isCheck: false,
-    index: 2,
-    Name: "dirte",
-    count: 45,
-    orderDate: "24-10-20 14:23",
-    shipAddr: "광명",
-    status: "반려",
-  },
-];
+// //person 데이터를 ts를 이용해 만듬
+// const defaultData: Person[] = [
+//   {
+//     isCheck: false,
+//     index: 1,
+//     Name: "linsley",
+//     count: 24,
+//     orderDate: "23-11-20 18:33",
+//     shipAddr: "파주시",
+//     status: "승인",
+//   },
+//   {
+//     isCheck: false,
+//     index: 2,
+//     Name: "miller",
+//     count: 40,
+//     orderDate: "23-11-30 13:33",
+//     shipAddr: "서울",
+//     status: "대기",
+//   },
+//   {
+//     isCheck: false,
+//     index: 2,
+//     Name: "dirte",
+//     count: 45,
+//     orderDate: "24-10-20 14:23",
+//     shipAddr: "광명",
+//     status: "반려",
+//   },
+// ];
 //Person 타입을 data에 적용한다.
 const columnHelper = createColumnHelper<Person>();
 //열이라는 필터를 적용하기 위해 accessor 쓴다. 이를 사용하기 위해 columnHelper를 생성하고 Person 타입을 붙인다.
 
 const columns = [
-  columnHelper.accessor("index", {
-    header: () => "번호",
-    cell: (info) => info.getValue(),
-    footer: (info) => "번호",
-  }),
-  columnHelper.accessor((row) => row.Name, {
-    id: "Name",
+  columnHelper.accessor("productName", {
     header: () => "상품명",
-    cell: (info) => <i>{info.getValue()}</i>,
+    cell: (info) => info.getValue(),
     footer: (info) => "상품명",
   }),
-  columnHelper.accessor("count", {
-    header: () => "주문개수",
+  columnHelper.accessor((row) => row.quantity, {
+    id: "quantity",
+    header: () => "수량",
+    cell: (info) => <i>{info.getValue()}</i>,
+    footer: (info) => "수량",
+  }),
+  columnHelper.accessor("height", {
+    header: () => "높이",
     cell: (info) => info.getValue(),
-    footer: (info) => "주문개수",
+    footer: (info) => "높이",
   }),
-  columnHelper.accessor("orderDate", {
-    header: () => <span>주문일자</span>,
-    footer: (info) => "주문일자",
+  columnHelper.accessor("weight", {
+    header: () => <span>무게</span>,
+    footer: (info) => "무게",
   }),
-  columnHelper.accessor("status", {
-    header: "상태",
+  columnHelper.accessor("deadline", {
+    header: "출항마감날짜",
     cell: (info) => (
       <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
         {info.getValue()}
@@ -85,27 +91,43 @@ const columns = [
     ),
     footer: (info) => "상태",
   }),
-  columnHelper.accessor("shipAddr", {
-    header: "배송지",
-    footer: (info) => "배송지",
+  columnHelper.accessor("firstAddress", {
+    header: "처음배송지",
+    footer: (info) => "처음배송지",
+  }),
+  columnHelper.accessor("finalAddress", {
+    header: "최종배송지",
+    footer: (info) => "최종배송지",
+  }),
+  columnHelper.accessor("orderTime", {
+    header: "주문시간",
+    footer: (info) => "주문시간",
+  }),
+  columnHelper.accessor("deliveryStatus", {
+    header: "출고상태",
+    footer: (info) => "출고상태",
+  }),
+  columnHelper.accessor("approvalStatus", {
+    header: "주문상태",
+    footer: (info) => "주문상태",
   }),
 ];
 
 export default function UserMain() {
-  let [data, _setData] = React.useState(() => [...defaultData]);
-  const [refeach, set] = useState(false);
+  let [data, _setData] = React.useState(() => []);
+  const [refeach, setfetch] = useState(false);
   const rerender = React.useReducer(() => ({}), {})[1];
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/product/save");
-  //     const data = response.data.map((data: Person) => ({
-  //       ...data,
-  //       isChecked: false,
-  //     }));
-  //     _setData(data);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/product/member/posts");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+        isCheck: false,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -131,24 +153,23 @@ export default function UserMain() {
         <div className="">
           <button
             className="bg-white btn btn-outline"
-            onClick={() => {
-              //
-              const checkItem = data
-                .filter((data => data.isCheck === true))
-                .map((data) => data.index);
-
-                //
-                // (async () => {
-                //   const response = await CreateAxiosInstance().post("/product/save");
-                //   const data = response.data.map((data: Person) => ({
-                //     ...data,
-                //   }));
-                //   _setData(data);
-                //   window.location.reload;
-                // })();
-
+            // onClick={() => {
               
-            }}
+            //   const checkItem = data
+            //     .filter((data) => data.isCheck === true)
+            //     .map((data) => data.id);
+
+            //   (async () => {
+            //     const response = await CreateAxiosInstance().post(
+            //       "/product/delete"
+            //     );
+            //     const data = response.data.map((data: Person) => ({
+            //       ...data,
+            //     }));
+            //     _setData(data);
+            //     window.location.reload;
+            //   })();
+            // }}
           >
             등록취소
           </button>
@@ -163,11 +184,11 @@ export default function UserMain() {
                   type="checkbox"
                   defaultChecked
                   className="bg-white checkbox checkbox-md"
-                  onClick={() => {
-                    const newData = [...data];
-                    newData[index].isCheck = !newData[index].isCheck;
-                    _setData(newData);
-                  }}
+                  // onClick={() => {
+                  //   const newData = [...data];
+                  //   newData[index].isCheck = !newData[index].isCheck;
+                  //   _setData(newData);
+                  // }}
                 />
               </th>
               {headerGroup.headers.map((header) => (
@@ -184,13 +205,18 @@ export default function UserMain() {
           ))}
         </thead>
         <tbody className="text-center">
-          {table.getRowModel().rows.map((row) => (
+          {table.getRowModel().rows.map((row, index) => (
             <tr key={row.id}>
               <td className="p-3">
                 <input
                   type="checkbox"
                   defaultChecked
                   className="bg-white checkbox checkbox-md"
+                  // onClick={() => {
+                  //   const newData = [...data];
+                  //   newData[index].isCheck = !newData[index].isCheck;
+                  //   _setData(newData);
+                  // }}
                 />
               </td>
               {row.getVisibleCells().map((cell) => (
