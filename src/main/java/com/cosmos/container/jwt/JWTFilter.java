@@ -2,6 +2,7 @@ package com.cosmos.container.jwt;
 
 import com.cosmos.container.dto.CustomUserDetails;
 import com.cosmos.container.entity.MemberEntity;
+import com.cosmos.container.entity.UserInfoEntity;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -61,11 +62,11 @@ public class JWTFilter extends OncePerRequestFilter {
         String username = jwtUtil.getUsername(accessToken);
         String role = jwtUtil.getRole(accessToken);
 
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setMemberId(username);
-        memberEntity.setRole(role);
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.setUsername(username);
+        userInfoEntity.setRole(role);
 
-        CustomUserDetails customUserDetails = new CustomUserDetails(memberEntity);
+        CustomUserDetails customUserDetails = new CustomUserDetails(userInfoEntity);
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authToken);

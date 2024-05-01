@@ -11,33 +11,23 @@ import org.springframework.web.bind.annotation.*;
 public class SaveController {
     private final SaveService saveService;
 
-    @GetMapping("/manager/auth/email-check")
-    public boolean checkManagerEmail(@RequestParam("managerEmail") String managerEmail){
-        return saveService.checkManagerEmail(managerEmail);
+    @GetMapping("/check/email")
+    public boolean checkEmail(@RequestParam("email") String email){
+        return saveService.checkEmail(email);
     }
 
-    @GetMapping("/manager/auth/id-check")
-    public boolean checkManagerId(@RequestParam("managerId") String managerId){
-        return saveService.checkManagerId(managerId);
+    @GetMapping("/check/id")
+    public boolean checkId(@RequestParam("id") String id){
+        return saveService.checkId(id);
     }
 
-    @GetMapping("/member/auth/email-check")
-    public boolean checkMemberEmail(@RequestParam("memberEmail") String memberEmail){
-        return saveService.checkMemberEmail(memberEmail);
-    }
-
-    @GetMapping("/member/auth/id-check")
-    public boolean checkMemberId(@RequestParam("memberId") String memberId){
-        return saveService.checkMemberId(memberId);
-    }
-
-    @PostMapping("/member/save")
+    @PostMapping("/save/member")
     public String saveMember(@RequestBody MemberDTO memberDTO){
         saveService.saveMember(memberDTO);
         return "Ok";
     }
 
-    @PostMapping("/manager/save")
+    @PostMapping("/save/manager")
     public String saveManager(@RequestBody ManagerDTO managerDTO){
         saveService.saveManager(managerDTO);
         return "Ok";
