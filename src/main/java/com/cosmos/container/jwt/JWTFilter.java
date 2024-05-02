@@ -1,5 +1,6 @@
 package com.cosmos.container.jwt;
 
+import com.cosmos.container.constant.Role;
 import com.cosmos.container.dto.CustomUserDetails;
 import com.cosmos.container.entity.MemberEntity;
 import com.cosmos.container.entity.UserInfoEntity;
@@ -64,7 +65,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         UserInfoEntity userInfoEntity = new UserInfoEntity();
         userInfoEntity.setUsername(username);
-        userInfoEntity.setRole(role);
+        userInfoEntity.setRole(Role.valueOf(role));
 
         CustomUserDetails customUserDetails = new CustomUserDetails(userInfoEntity);
 

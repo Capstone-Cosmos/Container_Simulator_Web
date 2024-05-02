@@ -1,5 +1,6 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.Role;
 import com.cosmos.container.dto.ManagerDTO;
 import com.cosmos.container.dto.MemberDTO;
 import com.cosmos.container.entity.ManagerEntity;
@@ -31,7 +32,7 @@ public class SaveService {
 
     public void saveMember(MemberDTO memberDTO) {
         UserInfoEntity userInfoEntity = UserInfoEntity.toUserInfoEntity(
-                memberDTO.getId(), bCryptPasswordEncoder.encode(memberDTO.getPassword()), memberDTO.getEmail(), "ROLE_MEMBER");
+                memberDTO.getId(), bCryptPasswordEncoder.encode(memberDTO.getPassword()), memberDTO.getEmail(), Role.ROLE_MEMBER);
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         userInfoRepository.save(userInfoEntity);
         memberRepository.save(memberEntity);
@@ -39,7 +40,7 @@ public class SaveService {
 
     public void saveManager(ManagerDTO managerDTO){
         UserInfoEntity userInfoEntity = UserInfoEntity.toUserInfoEntity(
-                managerDTO.getId(), bCryptPasswordEncoder.encode(managerDTO.getPassword()), managerDTO.getEmail(), "ROLE_MANAGER");
+                managerDTO.getId(), bCryptPasswordEncoder.encode(managerDTO.getPassword()), managerDTO.getEmail(), Role.ROLE_MANAGER);
         ManagerEntity managerEntity = ManagerEntity.toMemberEntity(managerDTO);
         userInfoRepository.save(userInfoEntity);
         managerRepository.save(managerEntity);
