@@ -19,6 +19,9 @@ export default function UploadPd() {
     e.preventDefault();
     console.log("submit");
     if (
+      productName == ""||
+      quantity == ""||
+      height == ""||
       weight == "" ||
       deadline == "" ||
       firstAddress == "" ||
