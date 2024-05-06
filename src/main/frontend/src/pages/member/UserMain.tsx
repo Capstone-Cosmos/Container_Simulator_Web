@@ -25,7 +25,7 @@ interface Person {
   orderTime: Date;
   deliveryStatus: null;
   approvalStatus: string;
-  isCheck:boolean;
+  isCheck: boolean;
 }
 // //person 데이터를 ts를 이용해 만듬
 // const defaultData: Person[] = [
@@ -73,23 +73,9 @@ const columns = [
     cell: (info) => <i>{info.getValue()}</i>,
     footer: (info) => "수량",
   }),
-  columnHelper.accessor("height", {
-    header: () => "높이",
-    cell: (info) => info.getValue(),
-    footer: (info) => "높이",
-  }),
-  columnHelper.accessor("weight", {
-    header: () => <span>무게</span>,
-    footer: (info) => "무게",
-  }),
-  columnHelper.accessor("deadline", {
-    header: "출항마감날짜",
-    cell: (info) => (
-      <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
-        {info.getValue()}
-      </div>
-    ),
-    footer: (info) => "상태",
+  columnHelper.accessor("orderTime", {
+    header: "주문시간",
+    footer: (info) => "주문시간",
   }),
   columnHelper.accessor("firstAddress", {
     header: "처음배송지",
@@ -99,35 +85,37 @@ const columns = [
     header: "최종배송지",
     footer: (info) => "최종배송지",
   }),
-  columnHelper.accessor("orderTime", {
-    header: "주문시간",
-    footer: (info) => "주문시간",
-  }),
   columnHelper.accessor("deliveryStatus", {
-    header: "출고상태",
-    footer: (info) => "출고상태",
+    header: "배송현황",
+    footer: (info) => "배송현황",
   }),
   columnHelper.accessor("approvalStatus", {
-    header: "주문상태",
-    footer: (info) => "주문상태",
+    header: "승인현황",
+    cell: (info) => (
+      <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
+        {info.getValue()}
+      </div>
+    ),
+    footer: (info) => "승인현황",
   }),
 ];
 
 export default function UserMain() {
   let [data, _setData] = React.useState(() => []);
   const [refeach, setfetch] = useState(false);
-  const rerender = React.useReducer(() => ({}), {})[1];
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/product/member/posts");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-        isCheck: false,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/product/member/posts");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //       isCheck: false,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -139,11 +127,11 @@ export default function UserMain() {
     <div className="container p-2 mx-auto sm:p-4 800 ">
       <div className="flex justify-center gap-3 p-5">
         <div className=" form-control">
-          <input
+          {/* <input
             type="text"
             placeholder="Search"
             className="input input-bordered md:w-auto"
-          />
+          /> */}
         </div>
 
         <Link to="/new/uploadpd">
@@ -154,7 +142,7 @@ export default function UserMain() {
           <button
             className="bg-white btn btn-outline"
             // onClick={() => {
-              
+
             //   const checkItem = data
             //     .filter((data) => data.isCheck === true)
             //     .map((data) => data.id);
@@ -227,7 +215,7 @@ export default function UserMain() {
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        {/* <tfoot>
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
@@ -242,12 +230,8 @@ export default function UserMain() {
               ))}
             </tr>
           ))}
-        </tfoot>
+        </tfoot> */}
       </table>
-      <div className="h-4" />
-      <button onClick={() => rerender()} className="p-2 border">
-        Rerender
-      </button>
     </div>
   );
 }

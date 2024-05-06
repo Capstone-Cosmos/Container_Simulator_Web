@@ -7,7 +7,7 @@ import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 export default function UploadPd() {
   const navigate = useNavigate();
   // 상품명 / 수량 / 높이 / 무게 / 출고마감시간 / 1차배송지 / 최종배송지
-  const [productName, setpdName] = useInput("");
+  const [productName , setpdName] = useInput("");
   const [quantity, setquantity] = useInput("");
   const [height, setHeight] = useInput("");
   const [weight, setweight] = useInput("");
@@ -19,13 +19,13 @@ export default function UploadPd() {
     e.preventDefault();
     console.log("submit");
     if (
-      productName == ""||
-      quantity == ""||
-      height == ""||
-      weight == "" ||
-      deadline == "" ||
-      firstAddress == "" ||
-      finalAddress == ""
+      productName === ""||
+      quantity === ""||
+      height === ""||
+      weight === "" ||
+      deadline === "" ||
+      firstAddress === "" ||
+      finalAddress === ""
     ) {
       alert("모든 정보를 입력해주세요.");
       return;
