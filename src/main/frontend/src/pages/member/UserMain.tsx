@@ -1,237 +1,241 @@
-import React, { useState, EventHandler, ReactNode, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { HTMLAttributes, HTMLProps } from "react";
 import ReactDOM from "react-dom/client";
 
+import { makeData, Person } from "./makeData";
+
 import {
-  createColumnHelper,
+  Column,
+  ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  Table,
   useReactTable,
 } from "@tanstack/react-table";
-import axios from "axios";
-import { access } from "fs";
-import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
-
-interface Person {
-  id: number;
-  memberId: string;
-  productName: string;
-  quantity: number;
-  height: number;
-  weight: number;
-  deadline: string;
-  firstAddress: string;
-  finalAddress: string;
-  orderTime: Date;
-  deliveryStatus: null;
-  approvalStatus: string;
-  isCheck: boolean;
-}
-// //person 데이터를 ts를 이용해 만듬
-// const defaultData: Person[] = [
-//   {
-//     isCheck: false,
-//     index: 1,
-//     Name: "linsley",
-//     count: 24,
-//     orderDate: "23-11-20 18:33",
-//     shipAddr: "파주시",
-//     status: "승인",
-//   },
-//   {
-//     isCheck: false,
-//     index: 2,
-//     Name: "miller",
-//     count: 40,
-//     orderDate: "23-11-30 13:33",
-//     shipAddr: "서울",
-//     status: "대기",
-//   },
-//   {
-//     isCheck: false,
-//     index: 2,
-//     Name: "dirte",
-//     count: 45,
-//     orderDate: "24-10-20 14:23",
-//     shipAddr: "광명",
-//     status: "반려",
-//   },
-// ];
-//Person 타입을 data에 적용한다.
-const columnHelper = createColumnHelper<Person>();
-//열이라는 필터를 적용하기 위해 accessor 쓴다. 이를 사용하기 위해 columnHelper를 생성하고 Person 타입을 붙인다.
-
-const columns = [
-  columnHelper.accessor("productName", {
-    header: () => "상품명",
-    cell: (info) => info.getValue(),
-    footer: (info) => "상품명",
-  }),
-  columnHelper.accessor((row) => row.quantity, {
-    id: "quantity",
-    header: () => "수량",
-    cell: (info) => <i>{info.getValue()}</i>,
-    footer: (info) => "수량",
-  }),
-  columnHelper.accessor("orderTime", {
-    header: "주문시간",
-    footer: (info) => "주문시간",
-  }),
-  columnHelper.accessor("firstAddress", {
-    header: "처음배송지",
-    footer: (info) => "처음배송지",
-  }),
-  columnHelper.accessor("finalAddress", {
-    header: "최종배송지",
-    footer: (info) => "최종배송지",
-  }),
-  columnHelper.accessor("deliveryStatus", {
-    header: "배송현황",
-    footer: (info) => "배송현황",
-  }),
-  columnHelper.accessor("approvalStatus", {
-    header: "승인현황",
-    cell: (info) => (
-      <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md opacity-100 select-none whitespace-nowrap bg-green-500/20">
-        {info.getValue()}
-      </div>
-    ),
-    footer: (info) => "승인현황",
-  }),
-];
 
 export default function UserMain() {
-  let [data, _setData] = React.useState(() => []);
-  const [refeach, setfetch] = useState(false);
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [globalFilter, setGlobalFilter] = React.useState("");
 
-  //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
+  const columns = React.useMemo<ColumnDef<Person>[]>(
+    () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <IndeterminateCheckbox
+            {...{
+              checked: table.getIsAllRowsSelected(),
+              indeterminate: table.getIsSomeRowsSelected(),
+              onChange: table.getToggleAllRowsSelectedHandler(),
+            }}
+          />
+        ),
+        cell: ({ row }) => (
+          <div className="px-1">
+            <IndeterminateCheckbox
+              {...{
+                checked: row.getIsSelected(),
+                disabled: !row.getCanSelect(),
+                indeterminate: row.getIsSomeSelected(),
+                onChange: row.getToggleSelectedHandler(),
+              }}
+            />
+          </div>
+        ),
+      },
+      {
+        id: "index",
+        header: "index",
+        cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
+      },
+      {
+        header: "Name",
+        footer: (props) => props.column.id,
+        columns: [
+          {
+            accessorKey: "firstName",
+            cell: (info) => info.getValue(),
+            footer: (props) => props.column.id,
+          },
+          {
+            accessorFn: (row) => row.lastName,
+            id: "lastName",
+            cell: (info) => info.getValue(),
+            header: () => <span>Last Name</span>,
+            footer: (props) => props.column.id,
+          },
+        ],
+      },
+      {
+        header: "Info",
+        footer: (props) => props.column.id,
+        columns: [
+          {
+            accessorKey: "age",
+            header: () => "Age",
+            footer: (props) => props.column.id,
+          },
+          {
+            header: "More Info",
+            columns: [
+              {
+                accessorKey: "visits",
+                header: () => <span>Visits</span>,
+                footer: (props) => props.column.id,
+              },
+              {
+                accessorKey: "status",
+                header: "Status",
+                footer: (props) => props.column.id,
+              },
+              {
+                accessorKey: "progress",
+                header: "Profile Progress",
+                footer: (props) => props.column.id,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    []
+  );
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/product/member/posts");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //       isCheck: false,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  const [data, setData] = React.useState(() => makeData(100000));
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      rowSelection,
+    },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    debugTable: true,
   });
 
+  // table.getState().rowSelection 객체에서 숫자만 추출하여 배열로 만듭니다.
+  const delteSelection = table.getState().rowSelection;
+  const selectedRows = Object.keys(delteSelection)
+    .filter((key) => !isNaN(Number(key))) // 숫자인 키만 필터링합니다.
+    .map(Number); // 각 키를 숫자로 변환하여 배열로 만듭니다.
+
+  const selectedHeaderGroup = table.getHeaderGroups()[2];
   return (
-    <div className="container p-2 mx-auto sm:p-4 800 ">
-      <div className="flex justify-center gap-3 p-5">
-        <div className=" form-control">
-          {/* <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered md:w-auto"
-          /> */}
-        </div>
-
-        <Link to="/new/uploadpd">
-          <button className="bg-white btn btn-outline ">상품등록</button>
-        </Link>
-
-        <div className="">
-          <button
-            className="bg-white btn btn-outline"
-            // onClick={() => {
-
-            //   const checkItem = data
-            //     .filter((data) => data.isCheck === true)
-            //     .map((data) => data.id);
-
-            //   (async () => {
-            //     const response = await CreateAxiosInstance().post(
-            //       "/product/delete"
-            //     );
-            //     const data = response.data.map((data: Person) => ({
-            //       ...data,
-            //     }));
-            //     _setData(data);
-            //     window.location.reload;
-            //   })();
-            // }}
-          >
-            등록취소
-          </button>
-        </div>
+    <div className="p-2">
+      <div>
+        <tr key={selectedHeaderGroup.id}>
+        <Filter column={selectedHeaderGroup.headers[2].column} table={table} />
+        </tr>
       </div>
-      <table className="min-w-full overflow-x-auto table-lg">
-        <thead className="bg-sky-300 ">
-          {table.getHeaderGroups().map((headerGroup, index) => (
-            <tr className="" key={headerGroup.id}>
-              <th className="p-3">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  className="bg-white checkbox checkbox-md"
-                  // onClick={() => {
-                  //   const newData = [...data];
-                  //   newData[index].isCheck = !newData[index].isCheck;
-                  //   _setData(newData);
-                  // }}
-                />
-              </th>
-              {headerGroup.headers.map((header) => (
-                <th className="text-xl" key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
+      <div className="h-2" />
+      <table>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder ? null : (
+                      <>
+                        {/* 헤더 텍스트 부분 */}
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                        {header.column.getCanFilter() ? (
+                          <div>
+                            <Filter column={header.column} table={table} />
+                          </div>
+                        ) : null}
+                      </>
+                    )}
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>
-        <tbody className="text-center">
-          {table.getRowModel().rows.map((row, index) => (
-            <tr key={row.id}>
-              <td className="p-3">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  className="bg-white checkbox checkbox-md"
-                  // onClick={() => {
-                  //   const newData = [...data];
-                  //   newData[index].isCheck = !newData[index].isCheck;
-                  //   _setData(newData);
-                  // }}
-                />
-              </td>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        {/* <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
+        <tbody>
+          {table.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
                       )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot> */}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td className="p-1">
+              <IndeterminateCheckbox
+                {...{
+                  checked: table.getIsAllPageRowsSelected(),
+                  indeterminate: table.getIsSomePageRowsSelected(),
+                  onChange: table.getToggleAllPageRowsSelectedHandler(),
+                }}
+              />
+            </td>
+          </tr>
+        </tfoot>
       </table>
+
+      <div>{selectedRows}</div>
     </div>
+  );
+}
+
+function Filter({
+  column,
+  table,
+}: {
+  column: Column<any, any>;
+  table: Table<any>;
+}) {
+  return (
+    <input
+      type="text"
+      value={(column.getFilterValue() ?? "") as string}
+      onChange={(e) => column.setFilterValue(e.target.value)}
+      placeholder={`Search...`}
+      className="border rounded shadow w-36"
+    />
+  );
+}
+
+function IndeterminateCheckbox({
+  indeterminate,
+  className = "",
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = React.useRef<HTMLInputElement>(null!);
+
+  React.useEffect(() => {
+    if (typeof indeterminate === "boolean") {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+  }, [ref, indeterminate]);
+
+  return (
+    <input
+      type="checkbox"
+      ref={ref}
+      className={className + " cursor-pointer"}
+      {...rest}
+    />
   );
 }

@@ -7,8 +7,9 @@ import App from "./App";
 import ErrorComponent from "./components/ErrorComponent";
 import ChoosePosition from "./pages/ChoosePosition";
 import New from "./New";
-import UserMain from './pages/member/UserMain';
+
 import UploadPd from "./pages/member/UploadPd";
+import UserMain from "./pages/member/UserMain";
 
 
 
