@@ -13,6 +13,10 @@ import {
   Table,
   useReactTable,
 } from "@tanstack/react-table";
+import axios from "axios";
+import { access } from "fs";
+import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
+
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -61,7 +65,6 @@ export default function UserMain() {
         header: () => <span>Last Name</span>,
         footer: (props) => props.column.id,
       },
-
       {
         accessorKey: "age",
         header: () => "Age",
@@ -112,6 +115,7 @@ export default function UserMain() {
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
   console.log(selectedHeaderGroup);
+  //console.dir 해볼것
   return (
     <div className="p-2">
       <div>
@@ -137,11 +141,7 @@ export default function UserMain() {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                        {header.column.getCanFilter() ? (
-                          <div>
-                            <Filter column={header.column} table={table} />
-                          </div>
-                        ) : null}
+                        
                       </>
                     )}
                   </th>
