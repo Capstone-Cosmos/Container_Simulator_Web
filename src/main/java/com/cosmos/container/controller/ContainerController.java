@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/container")
+@RequestMapping("/containers")
 @RequiredArgsConstructor
 public class ContainerController {
     private final ContainerService containerService;
 
-    @PostMapping("/save")
+    @PostMapping()
     public String saveContainer(@RequestBody ContainerDTO containerDTO, @AuthenticationPrincipal UserDetails userDetails){
         return containerService.saveContainer(containerDTO, userDetails.getUsername());
     }
 
-    @GetMapping("/posts")
+    @GetMapping()
     public List<ContainerDTO> getContainers(@AuthenticationPrincipal UserDetails userDetails){
         return containerService.getContainers(userDetails.getUsername());
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     public String deleteContainer(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
         containerService.deleteContainer(id, userDetails.getUsername());
         return "OK";
