@@ -1,11 +1,10 @@
 import React, { HTMLAttributes, HTMLProps } from "react";
 import ReactDOM from "react-dom/client";
 
-import { makeData, Person } from "./makeData";
-
 import {
   Column,
   ColumnDef,
+  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -17,11 +16,70 @@ import axios from "axios";
 import { access } from "fs";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 
+interface Person {
+  id: number;
+  memberId: string;
+  productName: string;
+  quantity: number;
+  height: number;
+  weight: number;
+  deadline: string;
+  firstAddress: string;
+  finalAddress: string;
+  orderTime: string;
+  deliveryStatus: null;
+  approvalStatus: string;
+}
+
+const defaultData: Person[] = [
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "새벽5시에시킴",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "새벽5시에시킴",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
+  
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "새벽5시에시킴",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
+];
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
-  const [globalFilter, setGlobalFilter] = React.useState("");
-
+  const columnHelper = createColumnHelper<Person>();
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
@@ -50,47 +108,42 @@ export default function UserMain() {
       },
       {
         id: "index",
-        header: "index",
+        header: "번호",
         cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
       },
       {
-        accessorKey: "firstName",
-        cell: (info) => info.getValue(),
-        footer: (props) => props.column.id,
+        accessorKey: "productName",
+        header: () => "제품명",
       },
       {
-        accessorFn: (row) => row.lastName,
-        id: "lastName",
-        cell: (info) => info.getValue(),
-        header: () => <span>Last Name</span>,
-        footer: (props) => props.column.id,
+        accessorKey: "quantity",
+        header: () => "수량",
       },
       {
-        accessorKey: "age",
-        header: () => "Age",
-        footer: (props) => props.column.id,
-      },
-
-      {
-        accessorKey: "visits",
-        header: () => <span>Visits</span>,
-        footer: (props) => props.column.id,
+        accessorKey: "orderTime",
+        header: () => "주문시간",
       },
       {
-        accessorKey: "status",
-        header: "Status",
-        footer: (props) => props.column.id,
+        accessorKey: "firstAddress",
+        header: () => "처음배송지",
       },
       {
-        accessorKey: "progress",
-        header: "Profile Progress",
-        footer: (props) => props.column.id,
+        accessorKey: "finalAddress",
+        header: () => "최종배송지",
+      },
+      {
+        accessorKey: "deliveryStatus",
+        header: () => "배송현황",
+      },
+      {
+        accessorKey: "approvalStatus",
+        header: () => "승인현황",
       },
     ],
     []
   );
 
-  const [data, setData] = React.useState(() => makeData(100000));
+  const [data, _setData] = React.useState(() => [...defaultData]);
 
   const table = useReactTable({
     data,
@@ -141,7 +194,6 @@ export default function UserMain() {
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                        
                       </>
                     )}
                   </th>
