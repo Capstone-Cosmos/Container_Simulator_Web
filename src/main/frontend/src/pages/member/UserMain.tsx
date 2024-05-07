@@ -110,7 +110,8 @@ export default function UserMain() {
     .filter((key) => !isNaN(Number(key))) // 숫자인 키만 필터링합니다.
     .map(Number); // 각 키를 숫자로 변환하여 배열로 만듭니다.
 
-  const selectedHeaderGroup = table.getHeaderGroups()[2];
+  const selectedHeaderGroup = table.getHeaderGroups()[0];
+  console.log(selectedHeaderGroup);
   return (
     <div className="p-2">
       <div>
