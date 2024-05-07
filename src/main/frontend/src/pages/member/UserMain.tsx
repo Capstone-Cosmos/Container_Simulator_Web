@@ -1,10 +1,9 @@
-import React, { HTMLAttributes, HTMLProps } from "react";
+import React, { HTMLAttributes, HTMLProps, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
 import {
   Column,
   ColumnDef,
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -15,6 +14,7 @@ import {
 import axios from "axios";
 import { access } from "fs";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
+import { Link } from "react-router-dom";
 
 interface Person {
   id: number;
@@ -60,7 +60,7 @@ const defaultData: Person[] = [
     deliveryStatus: null,
     approvalStatus: "승인완료",
   },
-  
+
   {
     id: 3,
     memberId: "test1",
@@ -79,7 +79,7 @@ const defaultData: Person[] = [
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
-  const columnHelper = createColumnHelper<Person>();
+
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
@@ -144,6 +144,18 @@ export default function UserMain() {
   );
 
   const [data, _setData] = React.useState(() => [...defaultData]);
+  const [refeach, setfetch] = useState(false);
+  //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/product/member/posts");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -170,23 +182,57 @@ export default function UserMain() {
   console.log(selectedHeaderGroup);
   //console.dir 해볼것
   return (
-    <div className="p-2">
-      <div>
-        <tr key={selectedHeaderGroup.id}>
-          <Filter
-            column={selectedHeaderGroup.headers[2].column}
-            table={table}
-          />
-        </tr>
+    <div className="container p-2 mx-auto sm:p-4 800 ">
+      {/* 서치바 등록취소 버튼 */}
+      <div className="flex justify-center gap-3 p-5">
+        <div>
+          <tr key={selectedHeaderGroup.id}>
+            <Filter
+              column={selectedHeaderGroup.headers[2].column}
+              table={table}
+            />
+          </tr>
+        </div>
+
+        <Link to="/new/uploadpd">
+          <button className="bg-white btn btn-outline ">상품등록</button>
+        </Link>
+
+        <div className="">
+          <button
+            className="bg-white btn btn-outline"
+            // onClick={() => {
+
+            //   const checkItem = data
+            //     .filter((data) => data.isCheck === true)
+            //     .map((data) => data.id);
+
+            //   (async () => {
+            //     const response = await CreateAxiosInstance().post(
+            //       "/product/delete"
+            //     );
+            //     const data = response.data.map((data: Person) => ({
+            //       ...data,
+            //     }));
+            //     _setData(data);
+            //     window.location.reload;
+            //   })();
+            // }}
+          >
+            등록취소
+          </button>
+        </div>
+        
       </div>
+
       <div className="h-2" />
-      <table>
-        <thead>
+      <table className="min-w-full overflow-x-auto table-lg">
+        <thead className="bg-sky-300 ">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <th key={header.id} colSpan={header.colSpan}>
+                  <th className="text-xl" key={header.id} colSpan={header.colSpan}>
                     {header.isPlaceholder ? null : (
                       <>
                         {/* 헤더 텍스트 부분 */}
@@ -202,7 +248,7 @@ export default function UserMain() {
             </tr>
           ))}
         </thead>
-        <tbody>
+        <tbody className="text-center">
           {table.getRowModel().rows.map((row) => {
             return (
               <tr key={row.id}>
@@ -221,17 +267,7 @@ export default function UserMain() {
           })}
         </tbody>
         <tfoot>
-          <tr>
-            <td className="p-1">
-              <IndeterminateCheckbox
-                {...{
-                  checked: table.getIsAllPageRowsSelected(),
-                  indeterminate: table.getIsSomePageRowsSelected(),
-                  onChange: table.getToggleAllPageRowsSelectedHandler(),
-                }}
-              />
-            </td>
-          </tr>
+          
         </tfoot>
       </table>
 
@@ -260,7 +296,7 @@ function Filter({
 
 function IndeterminateCheckbox({
   indeterminate,
-  className = "",
+  className = "bg-white checkbox checkbox-md",
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
   const ref = React.useRef<HTMLInputElement>(null!);
