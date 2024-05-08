@@ -1,5 +1,6 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.ApprovalStatus;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.entity.ProductEntity;
 import com.cosmos.container.repository.ProductRepository;
@@ -42,7 +43,7 @@ public class ProductService {
     public void acceptProduct(Long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setApprovalStatus("승인");
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_ACCEPT);
         productEntity.setManagerId(username);
         productRepository.save(productEntity);
     }
@@ -50,7 +51,7 @@ public class ProductService {
     public void rejectProduct(Long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setApprovalStatus("반려");
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_REJECT);
         productEntity.setManagerId(username);
         productRepository.save(productEntity);
     }
@@ -58,12 +59,13 @@ public class ProductService {
     public void cancelProduct(Long id) {
         ProductEntity productEntity =  productRepository.findByid(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
-        productEntity.setApprovalStatus("승인대기");
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_WAITING);
+        productEntity.setManagerId(null);
         productRepository.save(productEntity);
     }
 
     public List<ProductDTO> getWaitingProducts() {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatus("승인대기");
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatus(ApprovalStatus.STATUS_WAITING);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));
@@ -72,7 +74,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> getDecidedProducts(String username) {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerId("승인", username);
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerId(ApprovalStatus.STATUS_ACCEPT, username);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));

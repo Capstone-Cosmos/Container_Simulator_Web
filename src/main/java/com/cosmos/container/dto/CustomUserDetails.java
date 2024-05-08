@@ -1,6 +1,5 @@
 package com.cosmos.container.dto;
 
-import com.cosmos.container.entity.MemberEntity;
 import com.cosmos.container.entity.UserInfoEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +20,7 @@ public class CustomUserDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return userInfoEntity.getRole();
+                return userInfoEntity.getRole().value();
             }
         });
 

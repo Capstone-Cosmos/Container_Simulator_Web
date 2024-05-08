@@ -11,35 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
-    @PostMapping("/save")
+    @PostMapping()
     public String saveProduct(@RequestBody ProductDTO productDTO, @AuthenticationPrincipal UserDetails userDetails){
         return productService.saveProduct(productDTO, userDetails.getUsername());
     }
 
-    @PatchMapping("/assign")
-    public String assignProduct(@RequestParam("id") long id,
-                                @RequestParam("containerId") long containerId,
-                                @AuthenticationPrincipal UserDetails userDetails){
-        productService.assignProduct(id, containerId, userDetails.getUsername());
-        return "Ok";
-    }
-
-    @GetMapping("/manager/wait")
-    public List<ProductDTO> getWaitingProducts(){
-        return productService.getWaitingProducts();
-    }
-
-    @GetMapping("/manager/decided")
-    public List<ProductDTO> getDecidedProducts(@AuthenticationPrincipal UserDetails userDetails){
-        return productService.getDecidedProducts(userDetails.getUsername());
-    }
-
-    @GetMapping("/member/posts")
+    @GetMapping()
     public List<ProductDTO> getProducts(@AuthenticationPrincipal UserDetails userDetails){
         return productService.getProducts(userDetails.getUsername());
     }
@@ -48,6 +30,24 @@ public class ProductController {
     public String deleteProduct(@RequestBody Map<String, List<Long>> requestBody, @AuthenticationPrincipal UserDetails userDetails){
         List<Long> productIds = requestBody.get("productIds");
         return productService.deleteProduct(userDetails.getUsername(), productIds);
+    }
+
+    @GetMapping("/wait")
+    public List<ProductDTO> getWaitingProducts(){
+        return productService.getWaitingProducts();
+    }
+
+    @GetMapping("/decide")
+    public List<ProductDTO> getDecidedProducts(@AuthenticationPrincipal UserDetails userDetails){
+        return productService.getDecidedProducts(userDetails.getUsername());
+    }
+
+    @PatchMapping("/assign")
+    public String assignProduct(@RequestParam("id") long id,
+                                @RequestParam("containerId") long containerId,
+                                @AuthenticationPrincipal UserDetails userDetails){
+        productService.assignProduct(id, containerId, userDetails.getUsername());
+        return "Ok";
     }
 
     @PatchMapping("/accept")
