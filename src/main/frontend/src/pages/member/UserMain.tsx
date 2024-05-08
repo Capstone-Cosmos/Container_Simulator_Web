@@ -25,7 +25,7 @@ interface Person {
   deadline: string;
   firstAddress: string;
   finalAddress: string;
-  orderTime: string;
+  orderTime: Date;
   deliveryStatus: null;
   approvalStatus: string;
 }
