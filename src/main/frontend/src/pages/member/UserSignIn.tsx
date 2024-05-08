@@ -77,7 +77,7 @@ export default function UserSignIn(){
   const idDuplicateCheck = 
     async () => {
       try {
-          const res = await axios.get('/check/id', {
+          const res = await axios.get('/ids', {
             params:{"id":id}}
           );
           console.log(res.data);
@@ -108,7 +108,7 @@ export default function UserSignIn(){
       else {
         navigate("/new/usermain");
         axios
-          .post('/save/member', {
+          .post('/members', {
             id,
             password,
             email,

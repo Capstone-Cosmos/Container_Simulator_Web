@@ -11,8 +11,7 @@ import {
   Table,
   useReactTable,
 } from "@tanstack/react-table";
-import axios from "axios";
-import { access } from "fs";
+
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link } from "react-router-dom";
 
@@ -142,30 +141,34 @@ export default function UserMain() {
     ],
     []
   );
+  
 
-  const [data, _setData] = React.useState(() => [...defaultData]);
+
+  // const [data, _setData] = React.useState(() => [...defaultData]);
+  
+  const [data, _setData] = React.useState(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
+  
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -216,19 +219,19 @@ export default function UserMain() {
 
         <div
           className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-          // onClick={() => {
+          onClick={() => {
 
-          //   (async () => {
-          //     const response = await CreateAxiosInstance().post(
-          //       "/products/delete", selectedDataIndex
-          //     );
-          //     const data = response.data.map((data: Person) => ({
-          //       ...data,
-          //     }));
-          //     _setData(data);
-          //     _setfetch(refeach => !refeach);
-          //   })();
-          // }}
+            (async () => {
+              const response = await CreateAxiosInstance().post(
+                "/products/delete", selectedDataIndex
+              );
+              const data = response.data.map((data: Person) => ({
+                ...data,
+              }));
+              _setData(data);
+              _setfetch(refeach => !refeach);
+            })();
+          }}
         >
           등록취소
         </div>
