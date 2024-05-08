@@ -108,7 +108,7 @@ export default function ManagerSingIn() {
       else {
         navigate("/usermain");
         axios
-          .post('/manager/save', {
+          .post('/managers', {
             managerId,
             managerPassword,
             managerEmail,

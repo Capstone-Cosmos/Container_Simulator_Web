@@ -149,7 +149,17 @@ export default function UserMain() {
 
   // useEffect(() => {
   //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/product/member/posts");
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
   //     const list = response.data.map((list: Person) => ({
   //       ...list,
   //     }));
@@ -210,7 +220,7 @@ export default function UserMain() {
 
           //   (async () => {
           //     const response = await CreateAxiosInstance().post(
-          //       "/product/delete", selectedDataIndex
+          //       "/products/delete", selectedDataIndex
           //     );
           //     const data = response.data.map((data: Person) => ({
           //       ...data,

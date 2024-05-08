@@ -32,7 +32,7 @@ export default function UploadPd() {
     } else {
       navigate("/new/usermain");
       CreateAxiosInstance()
-        .post("/product/save", {
+        .post("/products", {
           productName,
           quantity,
           height,
