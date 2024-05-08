@@ -1,5 +1,6 @@
 package com.cosmos.container.entity;
 
+import com.cosmos.container.constant.ApprovalStatus;
 import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -42,8 +43,9 @@ public class ProductEntity extends BaseEntity{
     @Column
     private String deliveryStatus;
 
-    @Column
-    private String approvalStatus = "승인대기";
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ApprovalStatus approvalStatus = ApprovalStatus.STATUS_WAITING;
 
     @Column
     private long containerId;
@@ -60,8 +62,6 @@ public class ProductEntity extends BaseEntity{
         productEntity.setDeadline(productDTO.getDeadline());
         productEntity.setFirstAddress(productDTO.getFirstAddress());
         productEntity.setFinalAddress(productDTO.getFinalAddress());
-        productEntity.setDeliveryStatus(productDTO.getDeliveryStatus());
-        productEntity.setApprovalStatus(productDTO.getApprovalStatus());
         return productEntity;
     }
 }

@@ -35,7 +35,7 @@ public class ProductDTO {
         productDTO.setFinalAddress(productEntity.getFinalAddress());
         productDTO.setOrderTime(productEntity.getCreateTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
-        productDTO.setApprovalStatus(productEntity.getApprovalStatus());
+        productDTO.setApprovalStatus(productEntity.getApprovalStatus().getStatus());
         return productDTO;
     }
 }
