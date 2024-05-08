@@ -10,6 +10,8 @@ import New from "./New";
 
 import UploadPd from "./pages/member/UploadPd";
 import UserMain from "./pages/member/UserMain";
+import ApprWait from './pages/manager/ApprWait';
+
 
 
 
@@ -48,10 +50,13 @@ const router = createBrowserRouter([
       {
         path: "uploadpd",
         element: <UploadPd />,
+      },
+      {
+        path: "apprWait",
+        element: <ApprWait />,
       }
     ]
-  }
-  
+  }, 
 ]);
 
 export default router;

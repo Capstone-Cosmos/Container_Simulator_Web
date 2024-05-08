@@ -76,7 +76,7 @@ interface Person {
 //   },
 // ];
 
-export default function UserMain() {
+export default function ApprWait() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const columns = React.useMemo<ColumnDef<Person>[]>(
@@ -160,15 +160,15 @@ export default function UserMain() {
   //   })();
   // }, []);
   
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+//   useEffect(() => {
+//     (async () => {
+//       const response = await CreateAxiosInstance().get("/products");
+//       const list = response.data.map((list: Person) => ({
+//         ...list,
+//       }));
+//       _setData(list);
+//     })();
+//   }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -198,8 +198,30 @@ export default function UserMain() {
   const selectedHeaderGroup = table.getHeaderGroups()[0];
 
   return (
-    <div className="container p-2 mx-auto font-sans bg-slate-100 sm:p-4">
-      {/* 서치바 등록취소 버튼 */}
+    <div className="container items-center p-2 mx-auto font-sans bg-slate-100 sm:p-4">
+      {/* 메뉴바 */}
+      <div className="pl-32 border-t-2 shadow-sm navbar bg-base-100">
+        <Link to={"/new/usermain"} className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white">
+        주문내역
+      </Link>
+      </div>
+      {/* 승인대기 */}
+      <div className="flex gap-12">
+      <Link
+          to="/new/apprWait"
+          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+        >
+          승인대기리스트
+        </Link>
+        {/* 승인완료 */}
+        <Link
+          to="/new/uploadpd"
+          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+        >
+          승인완료리스트
+        </Link>
+      </div>
+      
       <div className="flex items-center justify-center gap-3 p-5">
         <div className="w-9/12">
           <tr className="w-full" key={selectedHeaderGroup.id}>
@@ -209,14 +231,15 @@ export default function UserMain() {
             />
           </tr>
         </div>
-
+        
+        {/* 승인 */}
         <Link
           to="/new/uploadpd"
           className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
         >
           상품등록
         </Link>
-
+        {/* 취소 */}
         <div
           className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
           // onClick={() => {
