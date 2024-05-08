@@ -144,7 +144,7 @@ export default function UserMain() {
   );
 
   const [data, _setData] = React.useState(() => [...defaultData]);
-  const [refeach, setfetch] = useState(false);
+  const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
   // useEffect(() => {
@@ -173,20 +173,23 @@ export default function UserMain() {
   });
 
   // table.getState().rowSelection 객체에서 숫자만 추출하여 배열로 만듭니다.
-  const delteSelection = table.getState().rowSelection;
-  const selectedRows = Object.keys(delteSelection)
-    .filter((key) => !isNaN(Number(key))) // 숫자인 키만 필터링합니다.
-    .map(Number); // 각 키를 숫자로 변환하여 배열로 만듭니다.
+
+  const deleteSelection = table.getState().rowSelection;
+  const selectedRows = Object.keys(deleteSelection);
+  const selectedRowsIds = selectedRows.map((row) => parseInt(row));
+  const selectedData = selectedRowsIds.map((id) => data[id]);
+  const selectedDataIndex = selectedData.map((id) => id.id);
+  console.log(selectedDataIndex);
+  // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-  console.log(selectedHeaderGroup);
-  //console.dir 해볼것
+
   return (
-    <div className="container p-2 mx-auto sm:p-4 800 ">
+    <div className="container p-2 mx-auto font-sans bg-slate-100 sm:p-4">
       {/* 서치바 등록취소 버튼 */}
-      <div className="flex justify-center gap-3 p-5">
-        <div>
-          <tr key={selectedHeaderGroup.id}>
+      <div className="flex items-center justify-center gap-3 p-5">
+        <div className="w-9/12">
+          <tr className="w-full" key={selectedHeaderGroup.id}>
             <Filter
               column={selectedHeaderGroup.headers[2].column}
               table={table}
@@ -194,45 +197,45 @@ export default function UserMain() {
           </tr>
         </div>
 
-        <Link to="/new/uploadpd">
-          <button className="bg-white btn btn-outline ">상품등록</button>
+        <Link
+          to="/new/uploadpd"
+          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+        >
+          상품등록
         </Link>
 
-        <div className="">
-          <button
-            className="bg-white btn btn-outline"
-            // onClick={() => {
+        <div
+          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
+          // onClick={() => {
 
-            //   const checkItem = data
-            //     .filter((data) => data.isCheck === true)
-            //     .map((data) => data.id);
-
-            //   (async () => {
-            //     const response = await CreateAxiosInstance().post(
-            //       "/product/delete"
-            //     );
-            //     const data = response.data.map((data: Person) => ({
-            //       ...data,
-            //     }));
-            //     _setData(data);
-            //     window.location.reload;
-            //   })();
-            // }}
-          >
-            등록취소
-          </button>
+          //   (async () => {
+          //     const response = await CreateAxiosInstance().post(
+          //       "/product/delete", selectedDataIndex
+          //     );
+          //     const data = response.data.map((data: Person) => ({
+          //       ...data,
+          //     }));
+          //     _setData(data);
+          //     _setfetch(refeach => !refeach);
+          //   })();
+          // }}
+        >
+          등록취소
         </div>
-        
       </div>
 
       <div className="h-2" />
-      <table className="min-w-full overflow-x-auto table-lg">
-        <thead className="bg-sky-300 ">
+      <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+        <thead className="bg-[#74B5DD] text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <th className="text-xl" key={header.id} colSpan={header.colSpan}>
+                  <th
+                    className="font-sans text-xl"
+                    key={header.id}
+                    colSpan={header.colSpan}
+                  >
                     {header.isPlaceholder ? null : (
                       <>
                         {/* 헤더 텍스트 부분 */}
@@ -266,12 +269,8 @@ export default function UserMain() {
             );
           })}
         </tbody>
-        <tfoot>
-          
-        </tfoot>
+        <tfoot></tfoot>
       </table>
-
-      <div>{selectedRows}</div>
     </div>
   );
 }
@@ -284,13 +283,27 @@ function Filter({
   table: Table<any>;
 }) {
   return (
-    <input
-      type="text"
-      value={(column.getFilterValue() ?? "") as string}
-      onChange={(e) => column.setFilterValue(e.target.value)}
-      placeholder={`Search...`}
-      className="border rounded shadow w-36"
-    />
+    <div className="flex items-center w-full gap-2 focus:border-sky-300 input input-bordered">
+      <input
+        type="text"
+        value={(column.getFilterValue() ?? "") as string}
+        onChange={(e) => column.setFilterValue(e.target.value)}
+        className="w-full rounded"
+        placeholder={`Search...`}
+      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        className="w-4 h-4 opacity-70"
+      >
+        <path
+          fillRule="evenodd"
+          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </div>
   );
 }
 

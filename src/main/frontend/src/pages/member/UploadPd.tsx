@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useInput from "../../useInput";
 import { useCallback, useState } from "react";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 export default function UploadPd() {
   const navigate = useNavigate();
   // 상품명 / 수량 / 높이 / 무게 / 출고마감시간 / 1차배송지 / 최종배송지
-  const [productName , setpdName] = useInput("");
+  const [productName, setpdName] = useInput("");
   const [quantity, setquantity] = useInput("");
   const [height, setHeight] = useInput("");
   const [weight, setweight] = useInput("");
@@ -19,9 +19,9 @@ export default function UploadPd() {
     e.preventDefault();
     console.log("submit");
     if (
-      productName === ""||
-      quantity === ""||
-      height === ""||
+      productName === "" ||
+      quantity === "" ||
+      height === "" ||
       weight === "" ||
       deadline === "" ||
       firstAddress === "" ||
@@ -55,8 +55,18 @@ export default function UploadPd() {
     }
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
+      <div className="pl-32 border-t-2 shadow-sm navbar bg-base-100">
+        <Link to={"/new/usermain"} className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white">
+        주문내역
+      </Link>
+      </div>
+      
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
       {/*cosmos사용자회원가입 부분*/}
@@ -75,7 +85,6 @@ export default function UploadPd() {
           id="productName"
           name="productName"
           onChange={setpdName}
-          placeholder="상품명"
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
@@ -174,16 +183,22 @@ export default function UploadPd() {
         </div>
       </div>
 
-      {/*하단 가입하기 버튼*/}
-      <button
-        onClick={onSubmit}
-        className="absolute -translate-x-1/2 left-1/2 top-[1416px] w-[360px] h-[65px]"
-      >
-        <div className="absolute left-0 right-0 top-0 bottom-0 bg-[#e9ecef] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"></div>
-        <div className="absolute left-[40.83%] right-[40.56%] top-[30.77%] bottom-[29.23%] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#868e96] whitespace-nowrap">
-          가입하기
-        </div>
-      </button>
+      {/*하단 등록 버튼*/}
+      <div className="absolute flex justify-center -translate-x-1/2 left-1/2 top-[1416px] gap-4">
+        <button
+          onClick={goBack}
+          className="w-[220px] h-[65px] font-['Noto_Sans_KR'] bg-white font-bold text-xl text-cb border-2 border-cb rounded-md hover:bg-cb hover:text-white"
+        >
+          취소하기
+        </button>
+
+        <button
+          onClick={onSubmit}
+          className="w-[220px] h-[65px] font-['Noto_Sans_KR'] bg-white font-bold text-xl text-cb border-2 border-cb rounded-md hover:bg-cb hover:text-white"
+        >
+          등록하기
+        </button>
+      </div>
     </div>
   );
 }
