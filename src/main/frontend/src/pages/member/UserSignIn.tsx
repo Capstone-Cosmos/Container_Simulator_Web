@@ -106,7 +106,7 @@ export default function UserSignIn(){
       if (mismatchError) { alert('비밀번호가 다릅니다.'); return; }
       if (email == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
       else {
-        navigate("/new/usermain");
+        navigate("/");
         axios
           .post('/members', {
             id,

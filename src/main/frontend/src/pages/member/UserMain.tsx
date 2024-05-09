@@ -30,51 +30,51 @@ interface Person {
   approvalStatus: string;
 }
 
-const defaultData: Person[] = [
-  {
-    id: 2,
-    memberId: "test1",
-    productName: "백산수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "새벽5시에시킴",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
-  },
-  {
-    id: 1,
-    memberId: "test1",
-    productName: "삼다수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "새벽5시에시킴",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
-  },
-
-  {
-    id: 3,
-    memberId: "test1",
-    productName: "아리수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "새벽5시에시킴",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
-  },
-];
+// const defaultData: Person[] = [
+//   {
+//     id: 2,
+//     memberId: "test1",
+//     productName: "백산수",
+//     quantity: 200,
+//     height: 30,
+//     weight: 30,
+//     deadline: "24년 5월",
+//     firstAddress: "파주",
+//     finalAddress: "논산",
+//     orderTime: "새벽5시에시킴",
+//     deliveryStatus: null,
+//     approvalStatus: "승인완료",
+//   },
+//   {
+//     id: 1,
+//     memberId: "test1",
+//     productName: "삼다수",
+//     quantity: 200,
+//     height: 30,
+//     weight: 30,
+//     deadline: "24년 5월",
+//     firstAddress: "파주",
+//     finalAddress: "논산",
+//     orderTime: "새벽5시에시킴",
+//     deliveryStatus: null,
+//     approvalStatus: "승인완료",
+//   },
+//
+//   {
+//     id: 3,
+//     memberId: "test1",
+//     productName: "아리수",
+//     quantity: 200,
+//     height: 30,
+//     weight: 30,
+//     deadline: "24년 5월",
+//     firstAddress: "파주",
+//     finalAddress: "논산",
+//     orderTime: "새벽5시에시킴",
+//     deliveryStatus: null,
+//     approvalStatus: "승인완료",
+//   },
+// ];
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -191,8 +191,8 @@ export default function UserMain() {
   const selectedRows = Object.keys(deleteSelection);
   const selectedRowsIds = selectedRows.map((row) => parseInt(row));
   const selectedData = selectedRowsIds.map((id) => data[id]);
-  const selectedDataIndex = selectedData.map((id) => id.id);
-  console.log(selectedDataIndex);
+  // const selectedDataIndex = selectedData.map((id) => id.id);
+  // console.log(selectedDataIndex);
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
@@ -219,19 +219,19 @@ export default function UserMain() {
 
         <div
           className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-          onClick={() => {
-
-            (async () => {
-              const response = await CreateAxiosInstance().post(
-                "/products/delete", selectedDataIndex
-              );
-              const data = response.data.map((data: Person) => ({
-                ...data,
-              }));
-              _setData(data);
-              _setfetch(refeach => !refeach);
-            })();
-          }}
+          // onClick={() => {
+          //
+          //   (async () => {
+          //     const response = await CreateAxiosInstance().post(
+          //       "/products/delete", selectedDataIndex
+          //     );
+          //     const data = response.data.map((data: Person) => ({
+          //       ...data,
+          //     }));
+          //     _setData(data);
+          //     _setfetch(refeach => !refeach);
+          //   })();
+          // }}
         >
           등록취소
         </div>
