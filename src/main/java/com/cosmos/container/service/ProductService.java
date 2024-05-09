@@ -16,11 +16,10 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public String saveProduct(ProductDTO productDTO, String username) {
+    public void saveProduct(ProductDTO productDTO, String username) {
         ProductEntity productEntity = ProductEntity.toProductEntity(productDTO);
         productEntity.setMemberId(username);
         productRepository.save(productEntity);
-        return productDTO.toString();
     }
 
     public List<ProductDTO> getProducts(String username) {
@@ -33,11 +32,10 @@ public class ProductService {
     }
 
     @Transactional
-    public String deleteProduct(String username, List<Long> productIds) {
+    public void deleteProduct(String username, List<Long> productIds) {
         for(Long id : productIds) {
             productRepository.deleteByMemberIdAndId(username, id);
         }
-        return "OK";
     }
 
     public void acceptProduct(Long id, String username) {
@@ -86,7 +84,6 @@ public class ProductService {
         ProductEntity productEntity =  productRepository.findByidAndManagerId(id, username)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setContainerId(containerId);
-        productEntity.setManagerId(username);
         productRepository.save(productEntity);
     }
 }

@@ -10,6 +10,8 @@ import com.cosmos.container.repository.ManagerRepository;
 import com.cosmos.container.repository.MemberRepository;
 import com.cosmos.container.repository.UserInfoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +24,18 @@ public class SaveService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public boolean checkId(String username){
-        return userInfoRepository.existsByUsername(username);
+    public ResponseEntity<?> checkId(String username){
+        if(userInfoRepository.existsByUsername(username)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND);
     }
 
-    public boolean checkEmail(String email){
-        return userInfoRepository.existsByEmail(email);
+    public ResponseEntity<?> checkEmail(String email){
+        if(userInfoRepository.existsByEmail(email))
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     public void saveMember(MemberDTO memberDTO) {
