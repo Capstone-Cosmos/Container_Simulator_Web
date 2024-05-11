@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 
 interface Person {
   id: number;
-  memberId: string;
   productName: string;
   quantity: number;
   height: number;
@@ -25,118 +24,61 @@ interface Person {
   deadline: string;
   firstAddress: string;
   finalAddress: string;
-  orderTime: Date;
+  orderTime: string;
   deliveryStatus: null;
   approvalStatus: string;
 }
 
-// const defaultData: Person[] = [
-//   {
-//     id: 2,
-//     memberId: "test1",
-//     productName: "백산수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: 2010-02-20,
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
-//   {
-//     id: 1,
-//     memberId: "test1",
-//     productName: "삼다수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: "새벽5시에시킴",
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
-
-//   {
-//     id: 3,
-//     memberId: "test1",
-//     productName: "아리수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: "새벽5시에시킴",
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
-// ];
+const defaultData: Person[] = [
+  {
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+];
 
 export default function ApprWait() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
-      {
-        id: "select",
-        header: ({ table }) => (
-          <IndeterminateCheckbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler(),
-            }}
-          />
-        ),
-        cell: ({ row }) => (
-          <div className="px-1">
-            <IndeterminateCheckbox
-              {...{
-                checked: row.getIsSelected(),
-                disabled: !row.getCanSelect(),
-                indeterminate: row.getIsSomeSelected(),
-                onChange: row.getToggleSelectedHandler(),
-              }}
-            />
-          </div>
-        ),
-      },
-      {
-        id: "index",
-        header: "번호",
-        cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
-      },
+      
       {
         accessorKey: "productName",
         header: () => "제품명",
-      },
-      {
-        accessorKey: "quantity",
-        header: () => "수량",
       },
       {
         accessorKey: "orderTime",
         header: () => "주문시간",
       },
       {
-        accessorKey: "firstAddress",
-        header: () => "처음배송지",
+        accessorKey: "deadline",
+        header: () => "마감날짜",
       },
       {
-        accessorKey: "finalAddress",
-        header: () => "최종배송지",
-      },
-      {
-        accessorKey: "deliveryStatus",
-        header: () => "배송현황",
-      },
-      {
-        accessorKey: "approvalStatus",
-        header: () => "승인현황",
+        accessorKey: "quantity",
+        header: () => "수량",
       },
     ],
     []
@@ -144,7 +86,7 @@ export default function ApprWait() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState(() => []);
+  const [data, _setData] = React.useState(() => defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -194,72 +136,61 @@ export default function ApprWait() {
   // // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-
+  const approve = async(rowId:string) => {
+    console.log(rowId);
+    const idSelect = data[parseInt(rowId)].id;
+    const response = await CreateAxiosInstance().patch("/products/accept", {id : idSelect});
+    if(response.status === 204) {
+      const newData : Person[] = await CreateAxiosInstance().get("/product");
+      _setData(newData);
+      _setfetch((refeach) => !refeach);
+         
+    }
+  }
+  const reject = async(rowId:string) => {
+    console.log(rowId);
+    const idSelect = data[parseInt(rowId)].id;
+    const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
+    if(response.status === 204) {
+      const newData : Person[] = await CreateAxiosInstance().get("/product");
+      _setData(newData);
+      _setfetch((refeach) => !refeach);
+         
+    }
+  }
   return (
     <div className="items-center font-sans bg-slate-100">
       {/* 메뉴바 */}
-      <div className="pl-32 border-t-2 shadow-sm navbar bg-base-100">
+      <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/usermain"}
-          className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white"
+          to={"/new/apprwait"}
+          className="w-40 text-xl text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
-          주문내역
+          품목리스트
+        </Link>
+        <Link
+          to={"/new/containerList"}
+          className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
+        >
+          컨테이너리스트
         </Link>
       </div>
       {/* 승인대기 */}
-      <div className="container">
+      <div className="container px-16 pt-5">
         <div className="flex gap-12">
           <Link
             to="/new/apprWait"
-            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+            className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
           >
             승인대기리스트
           </Link>
           {/* 승인완료 */}
           <Link
-            to="/new/uploadpd"
-            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+            to="/new/apprComplete"
+            className="w-2/12 p-3 text-xl font-thin text-center text-gray-400 bg-white border-2 border-gray-400 rounded-lg hover:bg-cb hover:text-white hover:border-cb"
           >
             승인완료리스트
           </Link>
-        </div>
-
-        <div className="flex items-center justify-center gap-3 p-5">
-          <div className="w-9/12">
-            <tr className="w-full" key={selectedHeaderGroup.id}>
-              <Filter
-                column={selectedHeaderGroup.headers[2].column}
-                table={table}
-              />
-            </tr>
-          </div>
-
-          {/* 승인 */}
-          <Link
-            to="/new/uploadpd"
-            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
-          >
-            상품등록
-          </Link>
-          {/* 취소 */}
-          <div
-            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-            // onClick={() => {
-
-            //   (async () => {
-            //     const response = await CreateAxiosInstance().post(
-            //       "/products/delete", selectedDataIndex
-            //     );
-            //     const data = response.data.map((data: Person) => ({
-            //       ...data,
-            //     }));
-            //     _setData(data);
-            //     _setfetch(refeach => !refeach);
-            //   })();
-            // }}
-          >
-            등록취소
-          </div>
         </div>
 
         <div className="h-2" />
@@ -286,6 +217,7 @@ export default function ApprWait() {
                     </th>
                   );
                 })}
+                <th className="font-sans text-xl">승인/반려</th>
               </tr>
             ))}
           </thead>
@@ -303,6 +235,21 @@ export default function ApprWait() {
                       </td>
                     );
                   })}
+                  <td className="flex items-center justify-center gap-12">
+                    <button
+                      onClick={() => approve(row.id)}
+                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg px-14 text-appr hover:bg-appr hover:text-white border-appr"
+                    >
+                      승인
+                    </button>
+                    {/* 승인완료 */}
+                    <button
+                      onClick={() => reject(row.id)}
+                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
+                    >
+                      삭제
+                    </button>
+                  </td>
                 </tr>
               );
             })}
@@ -314,57 +261,3 @@ export default function ApprWait() {
   );
 }
 
-function Filter({
-  column,
-  table,
-}: {
-  column: Column<any, any>;
-  table: Table<any>;
-}) {
-  return (
-    <div className="flex items-center w-full gap-2 focus:border-sky-300 input input-bordered">
-      <input
-        type="text"
-        value={(column.getFilterValue() ?? "") as string}
-        onChange={(e) => column.setFilterValue(e.target.value)}
-        className="w-full rounded"
-        placeholder={`Search...`}
-      />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        className="w-4 h-4 opacity-70"
-      >
-        <path
-          fillRule="evenodd"
-          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-          clipRule="evenodd"
-        />
-      </svg>
-    </div>
-  );
-}
-
-function IndeterminateCheckbox({
-  indeterminate,
-  className = "bg-white checkbox checkbox-md",
-  ...rest
-}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
-
-  React.useEffect(() => {
-    if (typeof indeterminate === "boolean") {
-      ref.current.indeterminate = !rest.checked && indeterminate;
-    }
-  }, [ref, indeterminate]);
-
-  return (
-    <input
-      type="checkbox"
-      ref={ref}
-      className={className + " cursor-pointer"}
-      {...rest}
-    />
-  );
-}

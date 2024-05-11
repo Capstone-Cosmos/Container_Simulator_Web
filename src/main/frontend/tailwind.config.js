@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       colors: {
         'cb': "#74B5DD",
-        "bgc" : "#DEE2E6"
+        "bgc" : "#DEE2E6",
+        'appr':"#3563E9",
+        'reg':"#D7260D",
       },
     },
   },
