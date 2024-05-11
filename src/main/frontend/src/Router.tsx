@@ -11,6 +11,8 @@ import New from "./New";
 import UploadPd from "./pages/member/UploadPd";
 import UserMain from "./pages/member/UserMain";
 import ApprWait from './pages/manager/ApprWait';
+import ApprComplete from "./pages/manager/ApprComplete";
+import ContainerList from "./pages/manager/containerList";
 
 
 
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
       {
         path: "apprWait",
         element: <ApprWait />,
+      },
+      {
+        path: "apprComplete",
+        element: <ApprComplete />,
+      },
+      {
+        path: "container",
+        element: <ContainerList />,
       }
     ]
   }, 
