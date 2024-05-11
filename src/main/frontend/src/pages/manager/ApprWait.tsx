@@ -86,13 +86,13 @@ export default function ApprWait() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
   useEffect(() => {
     (async () => {
-      const response = await CreateAxiosInstance().get("/products");
+      const response = await CreateAxiosInstance().get("/products/wait");
       const list = response.data.map((list: Person) => ({
         ...list,
       }));
@@ -102,7 +102,7 @@ export default function ApprWait() {
 
     useEffect(() => {
       (async () => {
-        const response = await CreateAxiosInstance().get("/products");
+        const response = await CreateAxiosInstance().get("/products/wait");
         const list = response.data.map((list: Person) => ({
           ...list,
         }));
@@ -132,7 +132,7 @@ export default function ApprWait() {
     console.log(idSelect);
     const response = await CreateAxiosInstance().patch("/products/accept", {id : idSelect});
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/product");
+      const newData : Person[] = await CreateAxiosInstance().get("/product/wait");
       _setData(newData);
       _setfetch((refeach) => !refeach);
          
@@ -144,7 +144,7 @@ export default function ApprWait() {
     console.log(idSelect);
     const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/product");
+      const newData : Person[] = await CreateAxiosInstance().get("/product/wait");
       _setData(newData);
       _setfetch((refeach) => !refeach);
          
@@ -186,7 +186,7 @@ export default function ApprWait() {
         </div>
 
         <div className="h-2" />
-        <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+        <table className="min-w-full overflow-x-auto font-sans bg-white rounded-lg table-lg">
           <thead className="bg-[#74B5DD] text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -239,7 +239,7 @@ export default function ApprWait() {
                       onClick={() => reject(row.id)}
                       className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
                     >
-                      삭제
+                      반려
                     </button>
                   </td>
                 </tr>

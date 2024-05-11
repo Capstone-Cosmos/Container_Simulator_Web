@@ -92,7 +92,7 @@ export default function ApprComplete() {
 
   useEffect(() => {
     (async () => {
-      const response = await CreateAxiosInstance().get("/products");
+      const response = await CreateAxiosInstance().get("/products/decide");
       const list = response.data.map((list: Person) => ({
         ...list,
       }));
@@ -102,7 +102,7 @@ export default function ApprComplete() {
 
     useEffect(() => {
       (async () => {
-        const response = await CreateAxiosInstance().get("/products");
+        const response = await CreateAxiosInstance().get("/products/decide");
         const list = response.data.map((list: Person) => ({
           ...list,
         }));
@@ -133,7 +133,7 @@ export default function ApprComplete() {
     console.log(idSelect);
     const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/product");
+      const newData : Person[] = await CreateAxiosInstance().get("/product/decide");
       _setData(newData);
       _setfetch((refeach) => !refeach);
          
@@ -223,7 +223,7 @@ export default function ApprComplete() {
                       onClick={() => cancel(row.id)}
                       className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
                     >
-                      삭제
+                      취소
                     </button>
                   </td>
                 </tr>
