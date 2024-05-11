@@ -77,7 +77,7 @@ export default function UserSignIn(){
   const idDuplicateCheck = 
     async () => {
       try {
-          const res = await axios.get('/ids', {
+          const res = await axios.get('/check/id', {
             params:{"id":id}}
           );
           console.log(res.data);
@@ -106,9 +106,9 @@ export default function UserSignIn(){
       if (mismatchError) { alert('비밀번호가 다릅니다.'); return; }
       if (email == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
       else {
-        navigate("/new/usermain");
+        navigate("/");
         axios
-          .post('/members', {
+          .post('/save/member', {
             id,
             password,
             email,

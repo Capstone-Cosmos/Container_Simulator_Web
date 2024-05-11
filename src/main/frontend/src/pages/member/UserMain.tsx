@@ -25,56 +25,56 @@ interface Person {
   deadline: string;
   firstAddress: string;
   finalAddress: string;
-  orderTime: Date;
+  orderTime: string;
   deliveryStatus: null;
   approvalStatus: string;
 }
 
-// const defaultData: Person[] = [
-//   {
-//     id: 2,
-//     memberId: "test1",
-//     productName: "백산수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: 2010-02-20,
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
-//   {
-//     id: 1,
-//     memberId: "test1",
-//     productName: "삼다수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: "새벽5시에시킴",
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
+const defaultData: Person[] = [
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "양",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "새벽5시에시킴",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
 
-//   {
-//     id: 3,
-//     memberId: "test1",
-//     productName: "아리수",
-//     quantity: 200,
-//     height: 30,
-//     weight: 30,
-//     deadline: "24년 5월",
-//     firstAddress: "파주",
-//     finalAddress: "논산",
-//     orderTime: "새벽5시에시킴",
-//     deliveryStatus: null,
-//     approvalStatus: "승인완료",
-//   },
-// ];
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: "24년 5월",
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: "새벽5시에시킴",
+    deliveryStatus: null,
+    approvalStatus: "승인완료",
+  },
+];
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -141,12 +141,10 @@ export default function UserMain() {
     ],
     []
   );
-  
-
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
-  
-  const [data, _setData] = React.useState(() => []);
+
+  const [data, _setData] = React.useState(() => defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -159,16 +157,16 @@ export default function UserMain() {
   //     _setData(list);
   //   })();
   // }, []);
-  
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -187,13 +185,13 @@ export default function UserMain() {
 
   // table.getState().rowSelection 객체에서 숫자만 추출하여 배열로 만듭니다.
 
-  // const deleteSelection = table.getState().rowSelection;
-  // const selectedRows = Object.keys(deleteSelection);
-  // const selectedRowsIds = selectedRows.map((row) => parseInt(row));
-  // const selectedData = selectedRowsIds.map((id) => data[id]);
-  // const selectedDataIndex = selectedData.map((id) => id.id);
-  // console.log(selectedDataIndex);
-  // // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
+  const deleteIndexInfo = table.getState().rowSelection;
+  const deleteIndex = Object.keys(deleteIndexInfo).map((row) => parseInt(row));
+  const deleteIdList = deleteIndex
+    .map((id) => data[id])
+    .map((dataIndex) => dataIndex.id);
+  console.log(deleteIdList);
+  // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
 
@@ -220,16 +218,16 @@ export default function UserMain() {
         <div
           className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
           // onClick={() => {
-
           //   (async () => {
           //     const response = await CreateAxiosInstance().post(
-          //       "/products/delete", selectedDataIndex
+          //       "/products/delete",
+          //       { productIds: deleteIdList }
           //     );
           //     const data = response.data.map((data: Person) => ({
           //       ...data,
           //     }));
           //     _setData(data);
-          //     _setfetch(refeach => !refeach);
+          //     _setfetch((refeach) => !refeach);
           //   })();
           // }}
         >
