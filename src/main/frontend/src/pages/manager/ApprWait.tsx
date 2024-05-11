@@ -141,11 +141,9 @@ export default function ApprWait() {
     ],
     []
   );
-  
-
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
-  
+
   const [data, _setData] = React.useState(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
@@ -159,16 +157,16 @@ export default function ApprWait() {
   //     _setData(list);
   //   })();
   // }, []);
-  
-//   useEffect(() => {
-//     (async () => {
-//       const response = await CreateAxiosInstance().get("/products");
-//       const list = response.data.map((list: Person) => ({
-//         ...list,
-//       }));
-//       _setData(list);
-//     })();
-//   }, [refeach]);
+
+  //   useEffect(() => {
+  //     (async () => {
+  //       const response = await CreateAxiosInstance().get("/products");
+  //       const list = response.data.map((list: Person) => ({
+  //         ...list,
+  //       }));
+  //       _setData(list);
+  //     })();
+  //   }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -198,115 +196,120 @@ export default function ApprWait() {
   const selectedHeaderGroup = table.getHeaderGroups()[0];
 
   return (
-    <div className="container items-center p-2 mx-auto font-sans bg-slate-100 sm:p-4">
+    <div className="items-center font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-32 border-t-2 shadow-sm navbar bg-base-100">
-        <Link to={"/new/usermain"} className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white">
-        주문내역
-      </Link>
+        <Link
+          to={"/new/usermain"}
+          className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white"
+        >
+          주문내역
+        </Link>
       </div>
       {/* 승인대기 */}
-      <div className="flex gap-12">
-      <Link
-          to="/new/apprWait"
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
-        >
-          승인대기리스트
-        </Link>
-        {/* 승인완료 */}
-        <Link
-          to="/new/uploadpd"
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
-        >
-          승인완료리스트
-        </Link>
-      </div>
-      
-      <div className="flex items-center justify-center gap-3 p-5">
-        <div className="w-9/12">
-          <tr className="w-full" key={selectedHeaderGroup.id}>
-            <Filter
-              column={selectedHeaderGroup.headers[2].column}
-              table={table}
-            />
-          </tr>
+      <div className="container">
+        <div className="flex gap-12">
+          <Link
+            to="/new/apprWait"
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+          >
+            승인대기리스트
+          </Link>
+          {/* 승인완료 */}
+          <Link
+            to="/new/uploadpd"
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+          >
+            승인완료리스트
+          </Link>
         </div>
-        
-        {/* 승인 */}
-        <Link
-          to="/new/uploadpd"
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
-        >
-          상품등록
-        </Link>
-        {/* 취소 */}
-        <div
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-          // onClick={() => {
 
-          //   (async () => {
-          //     const response = await CreateAxiosInstance().post(
-          //       "/products/delete", selectedDataIndex
-          //     );
-          //     const data = response.data.map((data: Person) => ({
-          //       ...data,
-          //     }));
-          //     _setData(data);
-          //     _setfetch(refeach => !refeach);
-          //   })();
-          // }}
-        >
-          등록취소
-        </div>
-      </div>
-
-      <div className="h-2" />
-      <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
-        <thead className="bg-[#74B5DD] text-white">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    className="font-sans text-xl"
-                    key={header.id}
-                    colSpan={header.colSpan}
-                  >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {/* 헤더 텍스트 부분 */}
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </>
-                    )}
-                  </th>
-                );
-              })}
+        <div className="flex items-center justify-center gap-3 p-5">
+          <div className="w-9/12">
+            <tr className="w-full" key={selectedHeaderGroup.id}>
+              <Filter
+                column={selectedHeaderGroup.headers[2].column}
+                table={table}
+              />
             </tr>
-          ))}
-        </thead>
-        <tbody className="text-center">
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+          </div>
+
+          {/* 승인 */}
+          <Link
+            to="/new/uploadpd"
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+          >
+            상품등록
+          </Link>
+          {/* 취소 */}
+          <div
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
+            // onClick={() => {
+
+            //   (async () => {
+            //     const response = await CreateAxiosInstance().post(
+            //       "/products/delete", selectedDataIndex
+            //     );
+            //     const data = response.data.map((data: Person) => ({
+            //       ...data,
+            //     }));
+            //     _setData(data);
+            //     _setfetch(refeach => !refeach);
+            //   })();
+            // }}
+          >
+            등록취소
+          </div>
+        </div>
+
+        <div className="h-2" />
+        <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+          <thead className="bg-[#74B5DD] text-white">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                    <th
+                      className="font-sans text-xl"
+                      key={header.id}
+                      colSpan={header.colSpan}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {/* 헤더 텍스트 부분 */}
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </>
                       )}
-                    </td>
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-        <tfoot></tfoot>
-      </table>
+            ))}
+          </thead>
+          <tbody className="text-center">
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
     </div>
   );
 }
