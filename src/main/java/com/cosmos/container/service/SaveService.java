@@ -24,18 +24,12 @@ public class SaveService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public ResponseEntity<?> checkId(String username){
-        if(userInfoRepository.existsByUsername(username)){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND);
+    public boolean checkId(String username){
+        return userInfoRepository.existsByUsername(username);
     }
 
-    public ResponseEntity<?> checkEmail(String email){
-        if(userInfoRepository.existsByEmail(email))
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public boolean checkEmail(String email){
+        return userInfoRepository.existsByEmail(email);
     }
 
     public void saveMember(MemberDTO memberDTO) {

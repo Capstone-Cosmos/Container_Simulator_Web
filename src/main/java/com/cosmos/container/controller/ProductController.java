@@ -46,14 +46,6 @@ public class ProductController {
         return productService.getDecidedProducts(userDetails.getUsername());
     }
 
-    @PatchMapping("/assign")
-    public ResponseEntity<?> assignProduct(@RequestParam("productId") long productId,
-                                @RequestParam("containerId") long containerId,
-                                @AuthenticationPrincipal UserDetails userDetails){
-        productService.assignProduct(productId, containerId, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
     @PatchMapping("/accept")
     public ResponseEntity<?> acceptProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
         productService.acceptProduct(id, userDetails.getUsername());

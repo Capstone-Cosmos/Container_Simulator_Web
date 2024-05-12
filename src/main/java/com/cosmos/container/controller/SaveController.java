@@ -14,12 +14,12 @@ public class SaveController {
     private final SaveService saveService;
 
     @GetMapping("/emails")
-    public ResponseEntity<?> checkEmail(@RequestParam("email") String email){
+    public boolean checkEmail(@RequestParam("email") String email){
         return saveService.checkEmail(email);
     }
 
     @GetMapping("/ids")
-    public ResponseEntity<?> checkId(@RequestParam("id") String id){
+    public boolean checkId(@RequestParam("id") String id){
         return saveService.checkId(id);
     }
 

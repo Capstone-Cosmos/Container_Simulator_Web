@@ -72,18 +72,11 @@ public class ProductService {
     }
 
     public List<ProductDTO> getDecidedProducts(String username) {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerId(ApprovalStatus.STATUS_ACCEPT, username);
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndContainerId(ApprovalStatus.STATUS_ACCEPT, username, 0L);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));
         }
         return productDTOS;
-    }
-
-    public void assignProduct(long id, long containerId, String username) {
-        ProductEntity productEntity =  productRepository.findByidAndManagerId(id, username)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
-        productEntity.setContainerId(containerId);
-        productRepository.save(productEntity);
     }
 }
