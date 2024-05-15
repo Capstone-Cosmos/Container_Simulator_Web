@@ -166,7 +166,7 @@ export default function UserMain() {
       }));
       _setData(list);
     })();
-  // }, [refeach]);
+  }, [refeach]);
 
   const table = useReactTable({
     data,
