@@ -3,6 +3,8 @@ package com.cosmos.container.controller;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,9 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping()
-    public String saveProduct(@RequestBody ProductDTO productDTO, @AuthenticationPrincipal UserDetails userDetails){
-        return productService.saveProduct(productDTO, userDetails.getUsername());
+    public ResponseEntity<?> saveProduct(@RequestBody ProductDTO productDTO, @AuthenticationPrincipal UserDetails userDetails){
+        productService.saveProduct(productDTO, userDetails.getUsername());
+        return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
     }
 
     @GetMapping()
@@ -27,9 +30,10 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
-    public String deleteProduct(@RequestBody Map<String, List<Long>> requestBody, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> deleteProduct(@RequestBody Map<String, List<Long>> requestBody, @AuthenticationPrincipal UserDetails userDetails){
         List<Long> productIds = requestBody.get("productIds");
-        return productService.deleteProduct(userDetails.getUsername(), productIds);
+        productService.deleteProduct(userDetails.getUsername(), productIds);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/wait")
@@ -42,29 +46,21 @@ public class ProductController {
         return productService.getDecidedProducts(userDetails.getUsername());
     }
 
-    @PatchMapping("/assign")
-    public String assignProduct(@RequestParam("id") long id,
-                                @RequestParam("containerId") long containerId,
-                                @AuthenticationPrincipal UserDetails userDetails){
-        productService.assignProduct(id, containerId, userDetails.getUsername());
-        return "Ok";
-    }
-
     @PatchMapping("/accept")
-    public String acceptProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> acceptProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
         productService.acceptProduct(id, userDetails.getUsername());
-        return "OK";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping("/reject")
-    public String rejectProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> rejectProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
         productService.rejectProduct(id, userDetails.getUsername());
-        return "OK";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping("/cancel")
-    public String cancelProduct(@RequestParam("id") Long id){
+    public ResponseEntity<?> cancelProduct(@RequestParam("id") Long id){
         productService.cancelProduct(id);
-        return "OK";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
