@@ -1,7 +1,7 @@
-import React, { useState, EventHandler, ReactNode, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import axios from 'axios';
 import useInput from '../../useInput';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserSignIn(){
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function UserSignIn(){
   const [id, ,setmemberId] = useInput('');
   const [password, ,setmemberPassword] = useInput('');
   const [memberPasswordCheck, ,setmemberPasswordCheck] = useInput('');
-  const [email, onChangeMemberEmail] = useInput('');
+  const [email, ,setEmail] = useInput("");
   const [memberAddress,onChangeMemberAddress] = useInput('');
   const [companyName, onChangeCompanyName] = useInput('');
   const [companyPresident, onChangeCompanyPresident] = useInput('');
@@ -18,19 +18,23 @@ export default function UserSignIn(){
   const [idError, setIdError] = useState('');
   // PW 에러 문구
   const [passwordError, setPasswordError] = useState('');
+  // EMAIL 에러 문구
+  const [emailError, setEmailError] = useState('');
   // 비밀번호 & 비밀번호확인 일치
   const [mismatchError, setMismatchError] = useState(false);
   // 중복검사 유무
   const [isIdCheck, setIsIdCheck] = useState(false); 
   // 아이디 사용가능 유무
-  const [isIdAvailable, setIsIdAvailable] = useState(false); 
+  const [isIdAvailable, setIsIdAvailable] = useState(false);
+  // 이메일 중복검사 유무
+  const [isEmailCheck, setIsEmailCheck] = useState(false); 
+  // 이메일 사용가능 유무
+  const [isEmailAvailable, setIsEmailAvailable] = useState(false);   
   // 비밀번호 사용가능 유무
   const [isPasswordAvailable, setIsPasswordAvailable] = useState(false); 
 
   const onChangeMemberId = useCallback(
     async (e:any) => {
-      console.log(e.target.value);
-      console.log('good');
       setmemberId(e.target.value);
       const idRegex = /^[a-z\d]{5,10}$/;
       if (e.target.value === '') {
@@ -45,6 +49,21 @@ export default function UserSignIn(){
       }
     },
     [id],
+  );
+
+  const onChangeEmail = useCallback(
+    async (e:any) => {
+      setEmail(e.target.value);
+      if (e.target.value === '') {
+        setEmailError('이메일을 입력해주세요.');
+        setIsEmailAvailable(false);
+      } 
+      else{
+        setEmailError('이메일 중복확인을 해주세요');
+        setIsEmailAvailable(false);
+      }
+    },
+    [email],
   );
 
   const onChangememberPassword = useCallback(
@@ -77,7 +96,7 @@ export default function UserSignIn(){
   const idDuplicateCheck = 
     async () => {
       try {
-          const res = await axios.get('/check/id', {
+          const res = await axios.get('/ids', {
             params:{"id":id}}
           );
           console.log(res.data);
@@ -96,19 +115,39 @@ export default function UserSignIn(){
           return false;
       }
     }
+  const emailDuplicateCheck = 
+    async () => {
+      try {
+          const res = await axios.get('/emails', {
+            params:{"email":email}}
+          );
+          if (!res) {
+            setEmailError('사용 가능한 이메일입니다.');
+            setIsEmailCheck(true);
+            setIsEmailAvailable(true);
+          } else {
+            setEmailError('이미 사용중인 이메일입니다.');
+            setIsEmailAvailable(false);
+          }
+          return ;
+      } catch(err) {
+          console.log("axios.get 실패! 이유는? ");
+          console.log(err);
+          return false;
+      }
+    }
 
   const onSubmit = 
     (e:any) => {
       e.preventDefault();
-      console.log("submit");
       if (!isIdAvailable || !isIdCheck) { alert('아이디를 확인해주세요.'); return; }
+      if (!isEmailAvailable || !isEmailCheck) { alert('이메일을 확인해주세요.'); return; }
       if (!isPasswordAvailable) { alert('비밀번호를 확인해주세요.'); return; }
       if (mismatchError) { alert('비밀번호가 다릅니다.'); return; }
       if (email == '' || memberAddress == '' || companyName == '' || companyPresident == ''){ alert('모든 정보를 입력해주세요.'); return; }
       else {
-        navigate("/");
         axios
-          .post('/save/member', {
+          .post('/members', {
             id,
             password,
             email,
@@ -120,6 +159,8 @@ export default function UserSignIn(){
             // 성공시
             console.log('axios.post 성공!');
             console.log(response);
+            alert("성공");
+            navigate("/");
           })
           .catch((error) => {
             // 실패시
@@ -162,7 +203,10 @@ export default function UserSignIn(){
 
       {/*이메일*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[815px] w-[550px] h-[133px] flex">
-        <input type="email" id="memberEmail" name="memberEmail" value={email} onChange={onChangeMemberEmail} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <input type="email" id="email" name="email" value={email} onChange={onChangeEmail} className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"></input>
+        <div className={ isEmailAvailable ? "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#20c654] whitespace-nowrap" : "absolute left-0 right-[50.91%] top-[80.45%] bottom-0 text-[18px] font-['Noto_Sans_KR'] font-medium text-[#d93737] whitespace-nowrap"}>{(<div>{emailError}</div>)}</div>
+        <div className="absolute left-0 right-[90.91%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap"></div>
+        <button onClick={emailDuplicateCheck} className="absolute left-[84.91%] right-[2.91%] top-[40.6%] bottom-[39.85%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#3563e9] whitespace-nowrap">중복검사</button>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[73.74%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">이메일</div>
       </div>
 
