@@ -13,6 +13,8 @@ import UserMain from "./pages/member/UserMain";
 import ApprWait from './pages/manager/ApprWait';
 import ApprComplete from "./pages/manager/ApprComplete";
 import ContainerList from "./pages/manager/containerList";
+import ContainerUpload from './pages/manager/containerUpload';
+import PdinContainer from "./pages/manager/pdInContainer";
 
 
 
@@ -62,8 +64,16 @@ const router = createBrowserRouter([
         element: <ApprComplete />,
       },
       {
-        path: "container",
+        path: "containerList",
         element: <ContainerList />,
+      },
+      {
+        path: "containerUpload",
+        element: <ContainerUpload />,
+      },
+      {
+        path: "pdincontainer",
+        element: <PdinContainer />,
       }
     ]
   }, 

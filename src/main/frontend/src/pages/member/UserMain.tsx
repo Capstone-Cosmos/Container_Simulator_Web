@@ -144,29 +144,29 @@ export default function UserMain() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -194,7 +194,7 @@ export default function UserMain() {
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-
+  console.log(selectedHeaderGroup.headers[2]);
   return (
     <div className="container p-2 mx-auto font-sans bg-slate-100 sm:p-4">
       {/* 서치바 등록취소 버튼 */}

@@ -69,13 +69,10 @@ export default function UploadPd() {
       
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
-      {/*cosmos사용자회원가입 부분*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[174px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap">
-        <span className="text-[34px]">
-          사용자
-          <br />
+      <div className="absolute -translate-x-1/2 left-1/2 top-[120px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap w-[740px] bg-cb h-11 items-center flex justify-center">
+        <span className="text-[30px] text-white">
+          상품등록
         </span>
-        <span className="text-[24px]">상품등록</span>
       </div>
 
       {/*상품명*/}

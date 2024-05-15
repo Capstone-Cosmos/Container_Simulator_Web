@@ -16,63 +16,24 @@ import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link } from "react-router-dom";
 
 interface Person {
-  id: number;
-  memberId: string;
-  productName: string;
-  quantity: number;
-  height: number;
+  id: string;
   weight: number;
+  max_weight: number;
   deadline: string;
-  firstAddress: string;
-  finalAddress: string;
-  orderTime: string;
-  deliveryStatus: null;
-  approvalStatus: string;
 }
 
 const defaultData: Person[] = [
   {
-    id: 2,
-    memberId: "test1",
-    productName: "백산수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "양",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
+    id: "10",
+    weight: 5000,
+    max_weight: 8000,
+    deadline: "2024-04-23T18:00:00",
   },
   {
-    id: 1,
-    memberId: "test1",
-    productName: "삼다수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "새벽5시에시킴",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
-  },
-
-  {
-    id: 3,
-    memberId: "test1",
-    productName: "아리수",
-    quantity: 200,
-    height: 30,
-    weight: 30,
-    deadline: "24년 5월",
-    firstAddress: "파주",
-    finalAddress: "논산",
-    orderTime: "새벽5시에시킴",
-    deliveryStatus: null,
-    approvalStatus: "승인완료",
+    id: "20",
+    weight: 3000,
+    max_weight: 4000,
+    deadline: "2022-04-04:00:00",
   },
 ];
 
@@ -111,62 +72,50 @@ export default function ContainerList() {
         cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
       },
       {
-        accessorKey: "productName",
-        header: () => "제품명",
+        accessorKey: "id",
+        header: () => "컨테이너 ID",
       },
       {
-        accessorKey: "quantity",
-        header: () => "수량",
+        accessorKey: "weight",
+        header: () => "현 재고량",
       },
       {
-        accessorKey: "orderTime",
-        header: () => "주문시간",
+        accessorKey: "max_weight",
+        header: () => "최대용량",
       },
       {
-        accessorKey: "firstAddress",
-        header: () => "처음배송지",
-      },
-      {
-        accessorKey: "finalAddress",
-        header: () => "최종배송지",
-      },
-      {
-        accessorKey: "deliveryStatus",
-        header: () => "배송현황",
-      },
-      {
-        accessorKey: "approvalStatus",
-        header: () => "승인현황",
+        accessorKey: "deadline",
+        header: () => "마감일",
       },
     ],
     []
   );
 
-  // const [data, _setData] = React.useState(() => [...defaultData]);
+  const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -194,96 +143,120 @@ export default function ContainerList() {
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-
+  console.log(selectedHeaderGroup.headers[5]);
   return (
-    <div className="container p-2 mx-auto font-sans bg-slate-100 sm:p-4">
-      {/* 서치바 등록취소 버튼 */}
-      <div className="flex items-center justify-center gap-3 p-5">
-        <div className="w-9/12">
-          <tr className="w-full" key={selectedHeaderGroup.id}>
-            <Filter
-              column={selectedHeaderGroup.headers[2].column}
-              table={table}
-            />
-          </tr>
-        </div>
-
+    <div className="flex flex-col items-center justify-center mx-auto font-sans bg-slate-100">
+      <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to="/new/uploadpd"
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+          to={"/new/apprwait"}
+          className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
-          상품등록
+          품목리스트
         </Link>
-
-        <div
-          className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-          onClick={() => {
-            (async () => {
-              const response = await CreateAxiosInstance().post(
-                "/products/delete",
-                { productIds: deleteIdList }
-              );
-              if (response.status === 204) {
-                const newData: Person[] = await CreateAxiosInstance().get(
-                  "/product"
-                );
-                _setData(newData);
-                _setfetch((refeach) => !refeach);
-              }
-            })();
-          }}
+        <Link
+          to={"/new/containerList"}
+          className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
-          등록취소
-        </div>
+          컨테이너리스트
+        </Link>
       </div>
-
-      <div className="h-2" />
-      <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
-        <thead className="bg-[#74B5DD] text-white">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <th
-                    className="font-sans text-xl"
-                    key={header.id}
-                    colSpan={header.colSpan}
-                  >
-                    {header.isPlaceholder ? null : (
-                      <>
-                        {/* 헤더 텍스트 부분 */}
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </>
-                    )}
-                  </th>
-                );
-              })}
+      <div className="container px-16 pt-5">
+        {/* 서치바 등록취소 버튼 */}
+        <div className="flex items-center justify-center gap-3 p-5">
+          <div className="w-9/12">
+            <tr className="w-full" key={selectedHeaderGroup.id}>
+              <Filter
+                column={selectedHeaderGroup.headers[2].column}
+                table={table}
+              />
             </tr>
-          ))}
-        </thead>
-        <tbody className="text-center">
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+          </div>
+
+          <Link
+            to="/new/containerUpload"
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
+          >
+            컨테이너 등록
+          </Link>
+
+          <div
+            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
+            onClick={() => {
+              (async () => {
+                const response = await CreateAxiosInstance().post(
+                  "/products/delete",
+                  { productIds: deleteIdList }
+                );
+                if (response.status === 204) {
+                  const newData: Person[] = await CreateAxiosInstance().get(
+                    "/product"
+                  );
+                  _setData(newData);
+                  _setfetch((refeach) => !refeach);
+                }
+              })();
+            }}
+          >
+            컨테이너 삭제
+          </div>
+        </div>
+
+        <div className="h-2" />
+        <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+          <thead className="bg-[#74B5DD] text-white">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
+                    <th
+                      className="font-sans text-xl"
+                      key={header.id}
+                      colSpan={header.colSpan}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {/* 헤더 텍스트 부분 */}
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </>
                       )}
-                    </td>
+                    </th>
                   );
                 })}
+                <th className="font-sans text-xl">컨테이너 관리</th>
               </tr>
-            );
-          })}
-        </tbody>
-        <tfoot></tfoot>
-      </table>
+            ))}
+          </thead>
+          <tbody className="text-center">
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    );
+                  })}
+                  <td className="flex items-center justify-center gap-12">
+                    {/* 승인완료 */}
+                    <Link to={"/new/pdincontainer"} className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
+                    >
+                      관리
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
     </div>
   );
 }
@@ -298,8 +271,8 @@ function Filter({
   return (
     <div className="flex items-center w-full gap-2 focus:border-sky-300 input input-bordered">
       <input
-        type="text"
-        value={(column.getFilterValue() ?? "") as string}
+        type="number"
+        value={(column.getFilterValue() ?? "") as number}
         onChange={(e) => column.setFilterValue(e.target.value)}
         className="w-full rounded"
         placeholder={`Search...`}

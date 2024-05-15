@@ -56,14 +56,91 @@ const defaultData: Person[] = [
     deliveryStatus: null,
     approvalStatus: "승인",
   },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
 ];
 
-export default function ApprComplete() {
+export default function PdinContainer() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
-      
       {
         accessorKey: "productName",
         header: () => "제품명",
@@ -125,58 +202,104 @@ export default function ApprComplete() {
     debugTable: true,
   });
 
-  
-  
-  const cancel = async(rowId:string) => {
+  const cancel = async (rowId: string) => {
     console.log(rowId);
     const idSelect = data[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
-    if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/product/decide");
+    const response = await CreateAxiosInstance().patch("/products/cancel", {
+      id: idSelect,
+    });
+    if (response.status === 204) {
+      const newData: Person[] = await CreateAxiosInstance().get(
+        "/product/decide"
+      );
       _setData(newData);
       _setfetch((refeach) => !refeach);
-         
     }
-  }
+  };
   return (
-    <div className="items-center font-sans bg-slate-100">
+    <div className="items-center h-screen font-sans bg-slate-700">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
           to={"/new/apprwait"}
-          className="w-40 text-xl text-cb btn btn-ghost hover:bg-cb hover:text-white"
+          className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           품목리스트
         </Link>
         <Link
           to={"/new/containerList"}
-          className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
+          className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
           컨테이너리스트
         </Link>
       </div>
-      {/* 승인대기 */}
-      <div className="container px-16 pt-5">
-        <div className="flex gap-12">
-          <Link
-            to="/new/apprWait"
-            className="w-2/12 p-3 text-xl font-thin text-center text-gray-400 bg-white border-2 border-gray-400 rounded-lg hover:bg-cb hover:text-white hover:border-cb"
-          >
-            승인대기리스트
-          </Link>
-          {/* 승인완료 */}
-          <Link
-            to="/new/apprComplete"
-            className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
-          >
-            승인완료리스트
-          </Link>
+      {/* 메뉴바 아래부분 */}
+      <div className="items-center justify-center px-16 pt-5">
+        {/* 시뮬레이션 ui */}
+        <div className="">
+          <div className="bg-black">d d d</div>
+          {/* 컨테이너 들어가기 전 데이터 */}
+          <table className="overflow-x-auto font-sans bg-white table-sm">
+            <thead className="bg-[#74B5DD] text-white">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <th
+                        className="font-sans text-xl"
+                        key={header.id}
+                        colSpan={header.colSpan}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <>
+                            {/* 헤더 텍스트 부분 */}
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </>
+                        )}
+                      </th>
+                    );
+                  })}
+                  <th className="font-sans text-xl">승인 취소</th>
+                </tr>
+              ))}
+            </thead>
+            <tbody className="text-center">
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                    <td className="flex items-center justify-center gap-12">
+                      {/* 승인완료 */}
+                      <button
+                        onClick={() => cancel(row.id)}
+                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
+                      >
+                        취소
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot></tfoot>
+          </table>
         </div>
-
-        <div className="h-2" />
-        <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
-          <thead className="bg-[#74B5DD] text-white">
+        {/* 컨테이너 실은 후 데이터 */}
+        <table className="overflow-x-auto font-sans bg-white table-sm max-h-14">
+          <thead className="text-white bg-gre">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -217,11 +340,10 @@ export default function ApprComplete() {
                     );
                   })}
                   <td className="flex items-center justify-center gap-12">
-                    
                     {/* 승인완료 */}
                     <button
                       onClick={() => cancel(row.id)}
-                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
+                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
                     >
                       취소
                     </button>
@@ -236,4 +358,3 @@ export default function ApprComplete() {
     </div>
   );
 }
-

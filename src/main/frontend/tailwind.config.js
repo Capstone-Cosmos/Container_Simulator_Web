@@ -10,6 +10,7 @@ module.exports = {
         "bgc" : "#DEE2E6",
         'appr':"#3563E9",
         'reg':"#D7260D",
+        'gre':"#008736",
       },
     },
   },
