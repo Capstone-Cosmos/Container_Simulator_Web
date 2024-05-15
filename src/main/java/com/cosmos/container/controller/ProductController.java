@@ -47,19 +47,19 @@ public class ProductController {
     }
 
     @PatchMapping("/accept")
-    public ResponseEntity<?> acceptProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> acceptProduct(@RequestParam("id") long id, @AuthenticationPrincipal UserDetails userDetails){
         productService.acceptProduct(id, userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping("/reject")
-    public ResponseEntity<?> rejectProduct(@RequestParam("id") Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<?> rejectProduct(@RequestParam("id") long id, @AuthenticationPrincipal UserDetails userDetails){
         productService.rejectProduct(id, userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PatchMapping("/cancel")
-    public ResponseEntity<?> cancelProduct(@RequestParam("id") Long id){
+    public ResponseEntity<?> cancelProduct(@RequestParam("id") long id){
         productService.cancelProduct(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

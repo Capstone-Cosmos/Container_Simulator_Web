@@ -33,12 +33,12 @@ public class ProductService {
 
     @Transactional
     public void deleteProduct(String username, List<Long> productIds) {
-        for(Long id : productIds) {
+        for(long id : productIds) {
             productRepository.deleteByMemberIdAndId(username, id);
         }
     }
 
-    public void acceptProduct(Long id, String username) {
+    public void acceptProduct(long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setApprovalStatus(ApprovalStatus.STATUS_ACCEPT);
@@ -46,7 +46,7 @@ public class ProductService {
         productRepository.save(productEntity);
     }
 
-    public void rejectProduct(Long id, String username) {
+    public void rejectProduct(long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setApprovalStatus(ApprovalStatus.STATUS_REJECT);
@@ -54,7 +54,7 @@ public class ProductService {
         productRepository.save(productEntity);
     }
 
-    public void cancelProduct(Long id) {
+    public void cancelProduct(long id) {
         ProductEntity productEntity =  productRepository.findByid(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setApprovalStatus(ApprovalStatus.STATUS_WAITING);
