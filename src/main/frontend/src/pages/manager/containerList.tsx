@@ -99,7 +99,7 @@ export default function ContainerList() {
 
   useEffect(() => {
     (async () => {
-      const response = await CreateAxiosInstance().get("/products");
+      const response = await CreateAxiosInstance().get("/containers");
       const list = response.data.map((list: Person) => ({
         ...list,
       }));
@@ -109,7 +109,7 @@ export default function ContainerList() {
 
   useEffect(() => {
     (async () => {
-      const response = await CreateAxiosInstance().get("/products");
+      const response = await CreateAxiosInstance().get("/containers");
       const list = response.data.map((list: Person) => ({
         ...list,
       }));
@@ -184,12 +184,12 @@ export default function ContainerList() {
             onClick={() => {
               (async () => {
                 const response = await CreateAxiosInstance().post(
-                  "/products/delete",
+                  "/containers",
                   { productIds: deleteIdList }
                 );
                 if (response.status === 204) {
                   const newData: Person[] = await CreateAxiosInstance().get(
-                    "/product"
+                    "/containers"
                   );
                   _setData(newData);
                   _setfetch((refeach) => !refeach);

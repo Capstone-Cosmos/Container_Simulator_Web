@@ -19,7 +19,7 @@ export default function ContainerUpload() {
       alert("모든 정보를 입력해주세요.");
       return;
     } else {
-      navigate("/new/usermain");
+      navigate("/new/containerList");
       CreateAxiosInstance()
         .post("/containers", {
           weight,
