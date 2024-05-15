@@ -130,22 +130,25 @@ export default function ApprWait() {
     console.log(rowId);
     const idSelect = data[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/accept", null, {params: {id : idSelect},});
+    const response = await CreateAxiosInstance().patch("/products/accept", {id : idSelect});
+    console.log(response);
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/products/wait");
+      const newData : Person[] = await CreateAxiosInstance().get("/product/wait");
       _setData(newData);
       _setfetch((refeach) => !refeach);
+         
     }
   }
   const reject = async(rowId:string) => {
     console.log(rowId);
     const idSelect = data[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/reject",null, {params: {id : idSelect},});
+    const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/products/wait");
+      const newData : Person[] = await CreateAxiosInstance().get("/product/wait");
       _setData(newData);
       _setfetch((refeach) => !refeach);
+         
     }
   }
   return (
