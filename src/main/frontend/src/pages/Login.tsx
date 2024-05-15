@@ -9,34 +9,23 @@ export default function Login() {
   const [memberId, onChangeMemberId] = useInput("");
   const [memberPassword, onChangememberPassword] = useInput("");
 
-  interface data {
-
-  }
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    
+
     try {
       //아이디와 비번 서버에 보내기
-      // const response =  await axios.post("/login", null, {
-      //   params: {
-      //     username: memberId,
-      //     password: memberPassword,
-      //   },
-      // });
-      const response = await axios.post(
-        "/login",null, {
-          params: {
-                username: memberId,
-                password: memberPassword,
-              },
-        }
-      )
-       //위 post에 대한 응답으로 토큰 수령
-      if (response.status === 200 ){
+      const response = await axios.post("/login", null, {
+        params: {
+          username: memberId,
+          password: memberPassword,
+        },
+      });
+      //위 post에 대한 응답으로 토큰 수령
+      if (response.status === 200) {
         localStorage.setItem("accessToken", response.headers.access);
       }
       //받은 토큰을 로컬 스토리지에 저장
-      
+
       navigate("/new/usermain");
     } catch (error) {
       console.log(error, "error");
