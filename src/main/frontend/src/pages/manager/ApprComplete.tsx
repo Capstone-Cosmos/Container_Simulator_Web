@@ -131,9 +131,9 @@ export default function ApprComplete() {
     console.log(rowId);
     const idSelect = data[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/cancel", {id : idSelect});
+    const response = await CreateAxiosInstance().patch("/products/cancel", null, {params: {id : idSelect},});
     if(response.status === 204) {
-      const newData : Person[] = await CreateAxiosInstance().get("/product/decide");
+      const newData : Person[] = await CreateAxiosInstance().get("/products/decide");
       _setData(newData);
       _setfetch((refeach) => !refeach);
          

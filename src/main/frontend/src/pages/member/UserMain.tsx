@@ -108,7 +108,7 @@ export default function UserMain() {
         {
           id: "index",
           header: "번호",
-          cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
+          cell: ({ row }) => <div>{row.id ? parseInt(row.id) + 1 : null}</div>,
         },
         {
           accessorKey: "productName",
@@ -144,7 +144,7 @@ export default function UserMain() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(defaultData);
+  const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -224,10 +224,11 @@ export default function UserMain() {
                       { productIds: deleteIdList }
                   );
                   if (response.status === 204) {
-                    const newData: Person[] = await CreateAxiosInstance().get(
-                        "/product"
-                    );
-                    _setData(newData);
+                    // const newData: Person[] = await CreateAxiosInstance().get(
+                    //     "/products"
+                    // );
+                    // _setData(newData);
+                    // console.log("Debugging1");
                     _setfetch((refeach) => !refeach);
                   }
                 })();
