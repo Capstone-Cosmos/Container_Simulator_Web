@@ -35,6 +35,11 @@ public class ContainerService {
 
     @Transactional
     public void deleteContainer(Long id, String username) {
+        List<ProductEntity> productEntities = productRepository.findByContainerId(id);
+        for (ProductEntity productEntity : productEntities) {
+            productEntity.setContainerId(0);
+        }
+        productRepository.saveAll(productEntities);
         containerRepository.deleteByManagerIdAndId(username, id);
     }
 
@@ -51,13 +56,21 @@ public class ContainerService {
         ProductEntity productEntity =  productRepository.findByidAndManagerId(productId, username)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setContainerId(containerId);
+        ContainerEntity containerEntity = containerRepository.findById(containerId)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
+        containerEntity.setWeight(containerEntity.getWeight() + productEntity.getWeight());
         productRepository.save(productEntity);
+        containerRepository.save(containerEntity);
     }
 
     public void cancelProduct(long containerId, long productId, String username) {
         ProductEntity productEntity =  productRepository.findByidAndContainerIdAndManagerId(productId, containerId, username)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setContainerId(0);
+        ContainerEntity containerEntity = containerRepository.findById(containerId)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
+        containerEntity.setWeight(containerEntity.getWeight() - productEntity.getWeight());
         productRepository.save(productEntity);
+        containerRepository.save(containerEntity);
     }
 }

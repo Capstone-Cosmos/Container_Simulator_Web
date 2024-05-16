@@ -25,7 +25,7 @@ public class ContainerEntity extends BaseEntity {
     private String containerName;
 
     @Column(nullable = false)
-    private int weight = 0;
+    private float weight = 0;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

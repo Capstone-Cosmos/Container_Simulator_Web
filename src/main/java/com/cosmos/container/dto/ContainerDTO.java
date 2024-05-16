@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ContainerDTO {
     private long id;
     private String containerName;
-    private int weight;
+    private float weight;
     private ContainerType containerType;
     private LocalDateTime deadline;
     private String startingPoint;
