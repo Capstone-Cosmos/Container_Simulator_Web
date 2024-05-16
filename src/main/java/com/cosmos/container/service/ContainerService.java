@@ -29,8 +29,7 @@ public class ContainerService {
     }
 
     public void saveContainer(ContainerDTO containerDTO, String username) {
-        ContainerEntity containerEntity = ContainerEntity.toContainerEntity(containerDTO);
-        containerEntity.setManagerId(username);
+        ContainerEntity containerEntity = ContainerEntity.toContainerEntity(containerDTO, username);
         containerRepository.save(containerEntity);
     }
 
