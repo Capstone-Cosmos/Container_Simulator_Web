@@ -142,6 +142,9 @@ export default function UserMain() {
       []
   );
 
+  const resetSelection = () => {
+      table.toggleAllRowsSelected(false);
+  };
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
   const [data, _setData] = React.useState<Person[]>(() => []);
@@ -190,11 +193,11 @@ export default function UserMain() {
   const deleteIdList = deleteIndex
       .map((id) => data[id])
       .map((dataIndex) => dataIndex.id);
-  console.log(deleteIdList);
+  // console.log(deleteIdList);
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-  console.log(selectedHeaderGroup.headers[2]);
+  // console.log(selectedHeaderGroup.headers[2]);
   return (
       <div className="container p-2 mx-auto font-sans bg-slate-100 sm:p-4">
         {/* 서치바 등록취소 버튼 */}
@@ -229,6 +232,7 @@ export default function UserMain() {
                     // );
                     // _setData(newData);
                     // console.log("Debugging1");
+                    resetSelection();
                     _setfetch((refeach) => !refeach);
                   }
                 })();
