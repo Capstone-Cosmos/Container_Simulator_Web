@@ -90,25 +90,25 @@ export default function ApprWait() {
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products/wait");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products/wait");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-    useEffect(() => {
-      (async () => {
-        const response = await CreateAxiosInstance().get("/products/wait");
-        const list = response.data.map((list: Person) => ({
-          ...list,
-        }));
-        _setData(list);
-      })();
-    }, [refeach]);
+    // useEffect(() => {
+    //   (async () => {
+    //     const response = await CreateAxiosInstance().get("/products/wait");
+    //     const list = response.data.map((list: Person) => ({
+    //       ...list,
+    //     }));
+    //     _setData(list);
+    //   })();
+    // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -149,7 +149,7 @@ export default function ApprWait() {
     }
   }
   return (
-    <div className="items-center font-sans bg-slate-100">
+    <div className="flex flex-col items-center justify-center font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
@@ -166,8 +166,8 @@ export default function ApprWait() {
         </Link>
       </div>
       {/* 승인대기 */}
-      <div className="container px-16 pt-5">
-        <div className="flex gap-12">
+      <div className="container items-center px-16 pt-5">
+        <div className="flex items-center gap-12">
           <Link
             to="/new/apprWait"
             className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
