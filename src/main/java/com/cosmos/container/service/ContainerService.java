@@ -1,5 +1,6 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.entity.ContainerEntity;
@@ -38,6 +39,7 @@ public class ContainerService {
         List<ProductEntity> productEntities = productRepository.findByContainerId(id);
         for (ProductEntity productEntity : productEntities) {
             productEntity.setContainerId(0);
+            productEntity.setPalletType(null);
         }
         productRepository.saveAll(productEntities);
         containerRepository.deleteByManagerIdAndId(username, id);
@@ -52,10 +54,11 @@ public class ContainerService {
         return productDTOS;
     }
 
-    public void assignProduct(long containerId, long productId, String username) {
+    public void assignProduct(long containerId, long productId, PalletType palletType, String username) {
         ProductEntity productEntity =  productRepository.findByidAndManagerId(productId, username)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setContainerId(containerId);
+        productEntity.setPalletType(palletType);
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
         containerEntity.setWeight(containerEntity.getWeight() + productEntity.getWeight());
@@ -67,6 +70,7 @@ public class ContainerService {
         ProductEntity productEntity =  productRepository.findByidAndContainerIdAndManagerId(productId, containerId, username)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setContainerId(0);
+        productEntity.setPalletType(null);
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
         containerEntity.setWeight(containerEntity.getWeight() - productEntity.getWeight());

@@ -1,5 +1,6 @@
 package com.cosmos.container.controller;
 
+import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.service.ContainerService;
@@ -43,8 +44,9 @@ public class ContainerController {
     @PatchMapping("/{container-id}/add")
     public ResponseEntity<?> assignProduct(@PathVariable("container-id") long containerId,
                                            @RequestParam("productId") long productId,
+                                           @RequestParam("palletType") PalletType palletType,
                                            @AuthenticationPrincipal UserDetails userDetails){
-        containerService.assignProduct(containerId, productId, userDetails.getUsername());
+        containerService.assignProduct(containerId, productId, palletType, userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

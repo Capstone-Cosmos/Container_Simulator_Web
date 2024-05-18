@@ -1,5 +1,6 @@
 package com.cosmos.container.dto;
 
+import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.entity.ProductEntity;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class ProductDTO {
     private LocalDateTime orderTime;
     private String deliveryStatus;
     private String approvalStatus;
+    private PalletType palletType;
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
@@ -36,6 +38,7 @@ public class ProductDTO {
         productDTO.setOrderTime(productEntity.getCreateTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus().getStatus());
+        productDTO.setPalletType(productEntity.getPalletType());
         return productDTO;
     }
 }

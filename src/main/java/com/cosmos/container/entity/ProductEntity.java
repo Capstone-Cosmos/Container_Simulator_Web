@@ -1,6 +1,7 @@
 package com.cosmos.container.entity;
 
 import com.cosmos.container.constant.ApprovalStatus;
+import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,6 +19,9 @@ public class ProductEntity extends BaseEntity{
 
     @Column(nullable = false)
     private String memberId;
+
+    @Column
+    private String managerId;
 
     @Column(nullable = false)
     private String productName;
@@ -48,10 +52,11 @@ public class ProductEntity extends BaseEntity{
     private ApprovalStatus approvalStatus = ApprovalStatus.STATUS_WAITING;
 
     @Column
-    private long containerId;
+    private PalletType palletType;
 
     @Column
-    private String managerId;
+    private long containerId;
+
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
