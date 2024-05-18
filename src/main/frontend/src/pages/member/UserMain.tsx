@@ -266,7 +266,7 @@ export default function UserMain() {
           ))}
           </thead>
           <tbody className="text-center">
-          {table.getRowModel().rows.map((row) => {
+          {table?.getRowModel().rows.map((row) => {
             return (
                 <tr key={row.id}>
                   {row.getVisibleCells().map((cell) => {
