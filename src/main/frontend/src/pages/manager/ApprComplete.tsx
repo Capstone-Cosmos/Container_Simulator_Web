@@ -140,7 +140,7 @@ export default function ApprComplete() {
     }
   }
   return (
-    <div className="items-center font-sans bg-slate-100">
+    <div className="flex flex-col items-center font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
