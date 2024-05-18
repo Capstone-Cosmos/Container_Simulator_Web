@@ -4,8 +4,10 @@ import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.entity.ContainerEntity;
+import com.cosmos.container.entity.PalletEntity;
 import com.cosmos.container.entity.ProductEntity;
 import com.cosmos.container.repository.ContainerRepository;
+import com.cosmos.container.repository.PalletRepository;
 import com.cosmos.container.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ContainerService {
     private final ContainerRepository containerRepository;
     private final ProductRepository productRepository;
+    private final PalletRepository palletRepository;
 
     public List<ContainerDTO> getContainers(String username) {
         List<ContainerEntity> containerEntities = containerRepository.findByManagerId(username);
@@ -36,45 +39,14 @@ public class ContainerService {
 
     @Transactional
     public void deleteContainer(Long id, String username) {
-        List<ProductEntity> productEntities = productRepository.findByContainerId(id);
-        for (ProductEntity productEntity : productEntities) {
-            productEntity.setContainerId(0);
-            productEntity.setPalletType(null);
+        List<PalletEntity> palletEntities = palletRepository.findByContainerId(id);
+        for (PalletEntity palletEntity : palletEntities) {
+            ProductEntity productEntity = productRepository.findByPalletId(palletEntity.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+            productEntity.setPalletId(null);
+            productRepository.save(productEntity);
+            palletRepository.delete(palletEntity);
         }
-        productRepository.saveAll(productEntities);
         containerRepository.deleteByManagerIdAndId(username, id);
-    }
-
-    public List<ProductDTO> getProducts(Long containerId) {
-        List<ProductEntity> productEntities = productRepository.findByContainerId(containerId);
-        List<ProductDTO> productDTOS = new ArrayList<>();
-        for (ProductEntity productEntity : productEntities) {
-            productDTOS.add(ProductDTO.toProductDTO(productEntity));
-        }
-        return productDTOS;
-    }
-
-    public void assignProduct(long containerId, long productId, PalletType palletType, String username) {
-        ProductEntity productEntity =  productRepository.findByidAndManagerId(productId, username)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
-        productEntity.setContainerId(containerId);
-        productEntity.setPalletType(palletType);
-        ContainerEntity containerEntity = containerRepository.findById(containerId)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
-        containerEntity.setWeight(containerEntity.getWeight() + productEntity.getWeight());
-        productRepository.save(productEntity);
-        containerRepository.save(containerEntity);
-    }
-
-    public void cancelProduct(long containerId, long productId, String username) {
-        ProductEntity productEntity =  productRepository.findByidAndContainerIdAndManagerId(productId, containerId, username)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
-        productEntity.setContainerId(0);
-        productEntity.setPalletType(null);
-        ContainerEntity containerEntity = containerRepository.findById(containerId)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
-        containerEntity.setWeight(containerEntity.getWeight() - productEntity.getWeight());
-        productRepository.save(productEntity);
-        containerRepository.save(containerEntity);
     }
 }

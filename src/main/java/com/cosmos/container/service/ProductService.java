@@ -72,7 +72,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> getDecidedProducts(String username) {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndContainerId(ApprovalStatus.STATUS_ACCEPT, username, 0L);
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndPalletId(ApprovalStatus.STATUS_ACCEPT, username, null);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));

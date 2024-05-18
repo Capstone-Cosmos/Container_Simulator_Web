@@ -1,7 +1,6 @@
 package com.cosmos.container.entity;
 
 import com.cosmos.container.constant.ApprovalStatus;
-import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -51,12 +50,8 @@ public class ProductEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus = ApprovalStatus.STATUS_WAITING;
 
-    @Column
-    private PalletType palletType;
-
-    @Column
-    private long containerId;
-
+    @Column(unique = true)
+    private Long palletId;
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();
