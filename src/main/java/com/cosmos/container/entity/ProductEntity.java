@@ -50,8 +50,8 @@ public class ProductEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus = ApprovalStatus.STATUS_WAITING;
 
-    @Column(unique = true)
-    private Long palletId;
+    @Column(nullable = false)
+    private boolean assigned = false;
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
         ProductEntity productEntity = new ProductEntity();

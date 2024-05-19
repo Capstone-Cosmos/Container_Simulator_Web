@@ -55,7 +55,7 @@ public class ProductService {
     }
 
     public void cancelProduct(long id) {
-        ProductEntity productEntity =  productRepository.findByid(id)
+        ProductEntity productEntity =  productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
         productEntity.setApprovalStatus(ApprovalStatus.STATUS_WAITING);
         productEntity.setManagerId(null);
@@ -72,7 +72,7 @@ public class ProductService {
     }
 
     public List<ProductDTO> getDecidedProducts(String username) {
-        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndPalletId(ApprovalStatus.STATUS_ACCEPT, username, null);
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndAssigned(ApprovalStatus.STATUS_ACCEPT, username, false);
         List<ProductDTO> productDTOS = new ArrayList<>();
         for(ProductEntity productEntity : productEntities) {
             productDTOS.add(ProductDTO.toProductDTO(productEntity));

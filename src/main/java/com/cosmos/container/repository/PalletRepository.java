@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PalletRepository extends JpaRepository<PalletEntity, Long> {
-    Optional<PalletEntity> findByProductId(Long productId);
     List<PalletEntity> findByContainerId(Long containerId);
 }

@@ -38,33 +38,40 @@ public class PalletService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         float height = productEntity.getHeight() + 0.15f;
         float weight = getWeight(palletType, productEntity);
-        palletEntity.setProductId(productId);
+        palletEntity.setId(productId);
         palletEntity.setContainerId(containerId);
         palletEntity.setPalletType(palletType);
         palletEntity.setHeight(height);
         palletEntity.setWeight(weight);
-        palletRepository.save(palletEntity);
-        palletEntity = palletRepository.findByProductId(productId)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setPalletId(palletEntity.getId());
+        productEntity.setAssigned(true);
         containerEntity.setWeight(containerEntity.getWeight() + weight);
+        palletRepository.save(palletEntity);
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
         return PalletDTO.toPalletDTO(palletEntity);
     }
 
     public void cancelPallet(Long palletId) {
-        ProductEntity productEntity = productRepository.findByPalletId(palletId)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setPalletId(null);
         PalletEntity palletEntity = palletRepository.findById(palletId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        ProductEntity productEntity = productRepository.findById(palletEntity.getId())
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        productEntity.setAssigned(false);
         ContainerEntity containerEntity = containerRepository.findById(palletEntity.getContainerId())
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         containerEntity.setWeight(containerEntity.getWeight() - palletEntity.getWeight());
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
         palletRepository.deleteById(palletId);
+    }
+
+    public void saveLocation(PalletDTO palletDTO) {
+        PalletEntity palletEntity = palletRepository.findById(palletDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        palletEntity.setX(palletDTO.getX());
+        palletEntity.setY(palletDTO.getY());
+        palletEntity.setZ(palletDTO.getZ());
+        palletRepository.save(palletEntity);
     }
 
     private float getWeight(PalletType palletType, ProductEntity productEntity) {

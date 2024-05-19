@@ -41,9 +41,9 @@ public class ContainerService {
     public void deleteContainer(Long id, String username) {
         List<PalletEntity> palletEntities = palletRepository.findByContainerId(id);
         for (PalletEntity palletEntity : palletEntities) {
-            ProductEntity productEntity = productRepository.findByPalletId(palletEntity.getId())
+            ProductEntity productEntity = productRepository.findById(palletEntity.getId())
                     .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-            productEntity.setPalletId(null);
+            productEntity.setAssigned(false);
             productRepository.save(productEntity);
             palletRepository.delete(palletEntity);
         }

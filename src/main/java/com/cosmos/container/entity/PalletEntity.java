@@ -13,11 +13,7 @@ import lombok.Setter;
 public class PalletEntity extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(nullable = false, unique = true)
-    private long productId;
 
     @Column(nullable = false)
     private long containerId;
@@ -26,10 +22,10 @@ public class PalletEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PalletType palletType;
 
-    @Column
+    @Column(nullable = false)
     private float height;
 
-    @Column
+    @Column(nullable = false)
     private float weight;
 
     @Column
@@ -43,7 +39,7 @@ public class PalletEntity extends BaseEntity {
 
     public static PalletEntity toPalletEntity(PalletDTO palletDTO){
         PalletEntity palletEntity = new PalletEntity();
-        palletEntity.setProductId(palletDTO.getProductId());
+        palletEntity.setId(palletDTO.getId());
         palletEntity.setContainerId(palletDTO.getContainerId());
         palletEntity.setPalletType(palletDTO.getPalletType());
         palletEntity.setHeight(palletDTO.getHeight());

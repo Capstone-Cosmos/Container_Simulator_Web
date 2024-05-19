@@ -34,4 +34,10 @@ public class PalletController {
         palletService.cancelPallet(palletId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @PatchMapping()
+    public ResponseEntity<?> saveLocation(@RequestBody PalletDTO palletDTO){
+        palletService.saveLocation(palletDTO);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

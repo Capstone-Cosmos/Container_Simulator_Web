@@ -13,7 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PalletDTO {
     private long id;
-    private long productId;
     private long containerId;
     private PalletType palletType;
     private float height;
@@ -25,7 +24,6 @@ public class PalletDTO {
     public static PalletDTO toPalletDTO(PalletEntity palletEntity){
         PalletDTO palletDTO = new PalletDTO();
         palletDTO.setId(palletEntity.getId());
-        palletDTO.setProductId(palletEntity.getProductId());
         palletDTO.setContainerId(palletEntity.getContainerId());
         palletDTO.setPalletType(palletEntity.getPalletType());
         palletDTO.setHeight(palletEntity.getHeight());
