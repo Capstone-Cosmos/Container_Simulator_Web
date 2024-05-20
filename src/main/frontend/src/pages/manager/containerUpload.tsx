@@ -10,10 +10,20 @@ export default function ContainerUpload() {
   // 현재무게 / 최대 적재 용적 / 마감시간 /destination / startingPoint /deadline / containerType /weight / containerName /
   const [containerName, setContainerName] = useInput("");
   const [weight, setWeight] = useInput("");
-  const [containerType, setContainerType] = useInput("");
+  const [containerType, setContainerType] = useInput<string>("");
   const [deadline, setDeadline] = useInput("");
   const [staringPoint, setStartingPoint] = useInput("");
   const [destination, setDestination] = useInput("");
+
+  const twentyDry = useCallback(
+    async (e:any) => {
+      if (e.target.name === '20FT DRY'){
+        console.log('20FT DRY');
+        setContainerType(e.target.name);
+      }
+    },
+    [],
+  )
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -52,6 +62,7 @@ export default function ContainerUpload() {
         .finally(() => {});
     }
   };
+
 
   const goBack = () => {
     navigate("/new/containerList");
@@ -111,13 +122,11 @@ export default function ContainerUpload() {
       </div>
       {/*컨테이너 종류*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[642px] w-[550px] h-[133px]">
-        <input
-          type="text"
-          id="height"
-          name="height"
-          onChange={setContainerType}
-          className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
-        ></input>
+        <button onClick = {twentyDry} className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb"
+        name='20FT DRY'>20FT DRY</button>
+        <button className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb">40FT DRY</button>
+        <button className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb">40FT HQ</button>
+
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           컨테이너 종류
         </div>
@@ -140,7 +149,7 @@ export default function ContainerUpload() {
       {/*출발지*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[954px] w-[549px] h-[133px] flex">
         <div className="absolute left-0 right-[93.81%] top-0 bottom-[86.24%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-        출발지
+          출발지
         </div>
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
@@ -168,7 +177,6 @@ export default function ContainerUpload() {
           ></input>
         </div>
       </div>
-
 
       {/*하단 등록 버튼*/}
       <div className="absolute flex justify-center -translate-x-1/2 left-1/2 top-[1270px] gap-4">
