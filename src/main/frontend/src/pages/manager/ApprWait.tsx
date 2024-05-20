@@ -149,7 +149,7 @@ export default function ApprWait() {
     }
   }
   return (
-    <div className="flex flex-col items-center justify-center font-sans bg-slate-100">
+    <div className="flex flex-col items-center justify-center w-full h-full font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
@@ -167,7 +167,7 @@ export default function ApprWait() {
       </div>
       {/* 승인대기 */}
       <div className="container items-center px-16 pt-5">
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-12 p-2">
           <Link
             to="/new/apprWait"
             className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
@@ -184,7 +184,8 @@ export default function ApprWait() {
         </div>
 
         <div className="h-2" />
-        <table className="min-w-full overflow-x-auto font-sans bg-white rounded-lg table-lg">
+        <div className="h-[800px] bg-white overflow-hidden rounded-lg">
+         <table className="min-w-full overflow-x-auto font-sans bg-white rounded-lg table-lg ">
           <thead className="bg-[#74B5DD] text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -245,7 +246,9 @@ export default function ApprWait() {
             })}
           </tbody>
           <tfoot></tfoot>
-        </table>
+        </table> 
+        </div>
+        
       </div>
     </div>
   );

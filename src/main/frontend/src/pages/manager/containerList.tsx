@@ -164,7 +164,7 @@ export default function ContainerList() {
   const selectedHeaderGroup = table.getHeaderGroups()[0];
   console.log(selectedHeaderGroup.headers[5]);
   return (
-    <div className="flex flex-col items-center justify-center mx-auto font-sans bg-slate-100">
+    <div className="flex flex-col items-center justify-center h-full mx-auto font-sans bg-slate-100">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
           to={"/new/apprwait"}
@@ -222,62 +222,64 @@ export default function ContainerList() {
         </div>
 
         <div className="h-2" />
-        <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
-          <thead className="bg-[#74B5DD] text-white">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <th
-                      className="font-sans text-xl"
-                      key={header.id}
-                      colSpan={header.colSpan}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <>
-                          {/* 헤더 텍스트 부분 */}
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </>
-                      )}
-                    </th>
-                  );
-                })}
-                <th className="font-sans text-xl">컨테이너 관리</th>
-              </tr>
-            ))}
-          </thead>
-          <tbody className="text-center">
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
+        <div className="h-[800px] bg-white overflow-hidden rounded-lg">
+          <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+            <thead className="bg-[#74B5DD] text-white">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
                     return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                      <th
+                        className="font-sans text-xl"
+                        key={header.id}
+                        colSpan={header.colSpan}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <>
+                            {/* 헤더 텍스트 부분 */}
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </>
                         )}
-                      </td>
+                      </th>
                     );
                   })}
-                  <td className="flex items-center justify-center gap-12">
-                    {/* 승인완료 */}
-                    <Link
-                      to={"/new/pdincontainer"}
-                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
-                    >
-                      관리
-                    </Link>
-                  </td>
+                  <th className="font-sans text-xl">컨테이너 관리</th>
                 </tr>
-              );
-            })}
-          </tbody>
-          <tfoot></tfoot>
-        </table>
+              ))}
+            </thead>
+            <tbody className="text-center">
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                    <td className="flex items-center justify-center gap-12">
+                      {/* 승인완료 */}
+                      <Link
+                        to={"/new/pdincontainer"}
+                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
+                      >
+                        관리
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
       </div>
     </div>
   );

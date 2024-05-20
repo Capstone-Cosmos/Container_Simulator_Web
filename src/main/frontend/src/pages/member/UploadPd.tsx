@@ -61,18 +61,25 @@ export default function UploadPd() {
 
   return (
     <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
-      <div className="pl-32 border-t-2 shadow-sm navbar bg-base-100">
-        <Link to={"/new/usermain"} className="w-56 text-xl text-gray-600 btn btn-ghost hover:bg-cb hover:text-white">
-        주문내역
-      </Link>
+      <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
+        <Link
+          to={"/new/usermain"}
+          className="text-xl font-thin text-gray-600 w-44 btn btn-ghost hover:bg-cb hover:text-white"
+        >
+          주문내역
+        </Link>
+        <Link
+          to={"/new/usermain"}
+          className="text-xl text-cb w-44 btn btn-ghost hover:bg-cb hover:text-white"
+        >
+          상품등록하기
+        </Link>
       </div>
-      
+
       {/*가운데 틀*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap w-[740px] bg-cb h-11 items-center flex justify-center">
-        <span className="text-[30px] text-white">
-          상품등록
-        </span>
+        <span className="text-[30px] text-white">상품등록</span>
       </div>
 
       {/*상품명*/}

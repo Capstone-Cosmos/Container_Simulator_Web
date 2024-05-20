@@ -28,11 +28,116 @@ interface Person {
   deliveryStatus: null;
   approvalStatus: string;
 }
-
+const defData2: Person[] = [
+  {
+    id: 5,
+    productName: "오렌지 하차",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: "2024-04-21T18:00:00",
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: "2024-04-24T16:25:19.024496",
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+];
 const defaultData: Person[] = [
   {
     id: 5,
-    productName: "키위주스",
+    productName: "키위주스 적재",
     quantity: 500,
     height: 5.0,
     weight: 43.0,
@@ -163,33 +268,45 @@ export default function PdinContainer() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [loadingData, _setLoading] = React.useState<Person[]>(defaultData);
   const [unloadingData, _setUnloading] = React.useState<Person[]>(defData2);
+  const [loadingData, _setLoading] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
   // useEffect(() => {
   //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products/decide");
-  //     const list = response.data.map((list: Person) => ({
+  //     const loadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const loadList = loadResponse.data.map((list: Person) => ({
   //       ...list,
   //     }));
-  //     _setData(list);
+  //     const unloadList = unloadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setLoading(loadList);
+  //     _setUnloading(unloadList);
   //   })();
   // }, []);
 
   // useEffect(() => {
   //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products/decide");
-  //     const list = response.data.map((list: Person) => ({
+  //     const loadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const unloadResponse = await CreateAxiosInstance().get(
+  //       "/products/decide"
+  //     );
+  //     const loadList = loadResponse.data.map((list: Person) => ({
   //       ...list,
   //     }));
-  //     _setData(list);
+  //     const unloadList = unloadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setLoading(loadList);
+  //     _setUnloading(unloadList);
   //   })();
   // }, [refeach]);
 
-  const table = useReactTable({
-    data,
+  const unloadingTable = useReactTable({
+    data: unloadingData,
     columns,
     state: {
       rowSelection,
@@ -203,6 +320,20 @@ export default function PdinContainer() {
     debugTable: true,
   });
 
+  const loadingTable = useReactTable({
+    data: loadingData,
+    columns,
+    state: {
+      rowSelection,
+    },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    debugTable: true,
+  });
   const loading = async (rowId: string) => {
     console.log(rowId);
     const idSelect = loadingData[parseInt(rowId)].id;
@@ -234,7 +365,7 @@ export default function PdinContainer() {
       _setfetch((refeach) => !refeach);
     }
   };
-  
+
   return (
     <div className="items-center h-full font-sans bg-slate-100">
       {/* 메뉴바 */}
@@ -265,7 +396,7 @@ export default function PdinContainer() {
             <div className="bg-white h-[300px] ">
               <table className="w-full overflow-auto font-sans bg-white ">
                 <thead className="bg-[#74B5DD] text-white">
-                  {table.getHeaderGroups().map((headerGroup) => (
+                  {unloadingTable.getHeaderGroups().map((headerGroup) => (
                     <tr key={headerGroup.id}>
                       {headerGroup.headers.map((header) => {
                         return (
@@ -291,7 +422,7 @@ export default function PdinContainer() {
                   ))}
                 </thead>
                 <tbody className="text-center">
-                  {table.getRowModel().rows.map((row) => {
+                  {unloadingTable.getRowModel().rows.map((row) => {
                     return (
                       <tr key={row.id}>
                         {row.getVisibleCells().map((cell) => {
@@ -330,7 +461,7 @@ export default function PdinContainer() {
           <div className="w-full h-[700px] bg-white">
             <table className="w-full font-sans bg-white table-sm">
               <thead className="text-white bg-gre">
-                {table.getHeaderGroups().map((headerGroup) => (
+                {loadingTable.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       return (
@@ -356,7 +487,7 @@ export default function PdinContainer() {
                 ))}
               </thead>
               <tbody className="text-center">
-                {table.getRowModel().rows.map((row) => {
+                {loadingTable.getRowModel().rows.map((row) => {
                   return (
                     <tr key={row.id}>
                       {row.getVisibleCells().map((cell) => {
