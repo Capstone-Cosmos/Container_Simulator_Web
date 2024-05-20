@@ -16,24 +16,33 @@ import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link } from "react-router-dom";
 
 interface Person {
-  id: string;
+  id: number;
+  containerName: string;
   weight: number;
-  max_weight: number;
+  containerType: string;
   deadline: string;
+  startingPoint: string;
+  destination: string;
 }
 
 const defaultData: Person[] = [
   {
-    id: "10",
-    weight: 5000,
-    max_weight: 8000,
-    deadline: "2024-04-23T18:00:00",
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: "20년 1월",
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
   },
   {
-    id: "20",
-    weight: 3000,
-    max_weight: 4000,
-    deadline: "2022-04-04:00:00",
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: "20년 3월",
+    startingPoint: "소레포구항",
+    destination: "LA",
   },
 ];
 
@@ -72,20 +81,28 @@ export default function ContainerList() {
         cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
       },
       {
-        accessorKey: "id",
-        header: () => "컨테이너 ID",
+        accessorKey: "containerName",
+        header: () => "컨테이너 이름",
       },
       {
         accessorKey: "weight",
-        header: () => "현 재고량",
+        header: () => "적재현황(kg)",
       },
       {
-        accessorKey: "max_weight",
-        header: () => "최대용량",
+        accessorKey: "containerType",
+        header: () => "컨테이너 종류",
       },
       {
         accessorKey: "deadline",
         header: () => "마감일",
+      },
+      {
+        accessorKey: "startingPoint",
+        header: () => "출발지",
+      },
+      {
+        accessorKey: "destination",
+        header: () => "도착지",
       },
     ],
     []
@@ -131,7 +148,9 @@ export default function ContainerList() {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
-
+  const resetSelection = () => {
+    table.toggleAllRowsSelected(false);
+  };
   // table.getState().rowSelection 객체에서 숫자만 추출하여 배열로 만듭니다.
 
   const deleteIndexInfo = table.getState().rowSelection;
@@ -192,6 +211,7 @@ export default function ContainerList() {
                     "/containers"
                   );
                   _setData(newData);
+                  resetSelection();
                   _setfetch((refeach) => !refeach);
                 }
               })();
@@ -245,7 +265,9 @@ export default function ContainerList() {
                   })}
                   <td className="flex items-center justify-center gap-12">
                     {/* 승인완료 */}
-                    <Link to={"/new/pdincontainer"} className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
+                    <Link
+                      to={"/new/pdincontainer"}
+                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
                     >
                       관리
                     </Link>
