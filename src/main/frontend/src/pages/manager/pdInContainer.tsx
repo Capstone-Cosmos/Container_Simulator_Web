@@ -163,7 +163,8 @@ export default function PdinContainer() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(defaultData);
+  const [loadingData, _setLoading] = React.useState<Person[]>(defaultData);
+  const [unloadingData, _setUnloading] = React.useState<Person[]>(defData2);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -177,15 +178,15 @@ export default function PdinContainer() {
   //   })();
   // }, []);
 
-    // useEffect(() => {
-    //   (async () => {
-    //     const response = await CreateAxiosInstance().get("/products/decide");
-    //     const list = response.data.map((list: Person) => ({
-    //       ...list,
-    //     }));
-    //     _setData(list);
-    //   })();
-    // }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products/decide");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -202,23 +203,40 @@ export default function PdinContainer() {
     debugTable: true,
   });
 
-  const cancel = async (rowId: string) => {
+  const loading = async (rowId: string) => {
     console.log(rowId);
-    const idSelect = data[parseInt(rowId)].id;
+    const idSelect = loadingData[parseInt(rowId)].id;
     console.log(idSelect);
     const response = await CreateAxiosInstance().patch("/products/cancel", {
       id: idSelect,
     });
     if (response.status === 204) {
-      const newData: Person[] = await CreateAxiosInstance().get(
+      const newLoadingData: Person[] = await CreateAxiosInstance().get(
         "/product/decide"
       );
-      _setData(newData);
+      _setLoading(newLoadingData);
       _setfetch((refeach) => !refeach);
     }
   };
+
+  const unLoading = async (rowId: string) => {
+    console.log(rowId);
+    const idSelect = loadingData[parseInt(rowId)].id;
+    console.log(idSelect);
+    const response = await CreateAxiosInstance().patch("/products/cancel", {
+      id: idSelect,
+    });
+    if (response.status === 204) {
+      const newUnloadingData: Person[] = await CreateAxiosInstance().get(
+        "/product/decide"
+      );
+      _setUnloading(newUnloadingData);
+      _setfetch((refeach) => !refeach);
+    }
+  };
+  
   return (
-    <div className="items-center h-screen font-sans bg-slate-700">
+    <div className="items-center h-full font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
@@ -235,125 +253,139 @@ export default function PdinContainer() {
         </Link>
       </div>
       {/* 메뉴바 아래부분 */}
-      <div className="items-center justify-center px-16 pt-5">
+      <div className="flex flex-row items-center justify-center gap-4 px-16 pt-5 pb-6">
         {/* 시뮬레이션 ui */}
-        <div className="">
-          <div className="bg-black">d d d</div>
+        <div className="flex flex-col gap-4 min-w-[60%]">
+          <div className="w-full bg-black h-[400px]">d d d</div>
           {/* 컨테이너 들어가기 전 데이터 */}
-          <table className="overflow-x-auto font-sans bg-white table-sm">
-            <thead className="bg-[#74B5DD] text-white">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <th
-                        className="font-sans text-xl"
-                        key={header.id}
-                        colSpan={header.colSpan}
-                      >
-                        {header.isPlaceholder ? null : (
-                          <>
-                            {/* 헤더 텍스트 부분 */}
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
+          <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
+            <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
+              적재대기리스트
+            </div>
+            <div className="bg-white h-[300px] ">
+              <table className="w-full overflow-auto font-sans bg-white ">
+                <thead className="bg-[#74B5DD] text-white">
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => {
+                        return (
+                          <th
+                            className="font-sans "
+                            key={header.id}
+                            colSpan={header.colSpan}
+                          >
+                            {header.isPlaceholder ? null : (
+                              <>
+                                {/* 헤더 텍스트 부분 */}
+                                {flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                              </>
                             )}
-                          </>
-                        )}
-                      </th>
+                          </th>
+                        );
+                      })}
+                      <th className="font-sans ">적재</th>
+                    </tr>
+                  ))}
+                </thead>
+                <tbody className="text-center">
+                  {table.getRowModel().rows.map((row) => {
+                    return (
+                      <tr key={row.id}>
+                        {row.getVisibleCells().map((cell) => {
+                          return (
+                            <td key={cell.id}>
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                            </td>
+                          );
+                        })}
+                        <td className="flex items-center justify-center gap-12">
+                          {/* 승인완료 */}
+                          <button
+                            onClick={() => loading(row.id)}
+                            className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
+                          >
+                            적재
+                          </button>
+                        </td>
+                      </tr>
                     );
                   })}
-                  <th className="font-sans text-xl">승인 취소</th>
-                </tr>
-              ))}
-            </thead>
-            <tbody className="text-center">
-              {table.getRowModel().rows.map((row) => {
-                return (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => {
-                      return (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      );
-                    })}
-                    <td className="flex items-center justify-center gap-12">
-                      {/* 승인완료 */}
-                      <button
-                        onClick={() => cancel(row.id)}
-                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
-                      >
-                        취소
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-            <tfoot></tfoot>
-          </table>
+                </tbody>
+                <tfoot></tfoot>
+              </table>
+            </div>
+          </div>
         </div>
         {/* 컨테이너 실은 후 데이터 */}
-        <table className="overflow-x-auto font-sans bg-white table-sm max-h-14">
-          <thead className="text-white bg-gre">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <th
-                      className="font-sans text-xl"
-                      key={header.id}
-                      colSpan={header.colSpan}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <>
-                          {/* 헤더 텍스트 부분 */}
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+        <div className="max-h-full overflow-auto min-w-[40%] rounded-md">
+          <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-gre">
+            컨테이너에 적재된 품목
+          </div>
+          <div className="w-full h-[700px] bg-white">
+            <table className="w-full font-sans bg-white table-sm">
+              <thead className="text-white bg-gre">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <th
+                          className="font-sans"
+                          key={header.id}
+                          colSpan={header.colSpan}
+                        >
+                          {header.isPlaceholder ? null : (
+                            <>
+                              {/* 헤더 텍스트 부분 */}
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                            </>
                           )}
-                        </>
-                      )}
-                    </th>
+                        </th>
+                      );
+                    })}
+                    <th className="font-sans">하차</th>
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="text-center">
+                {table.getRowModel().rows.map((row) => {
+                  return (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <td key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        );
+                      })}
+                      <td className="flex items-center justify-center gap-12">
+                        {/* 승인완료 */}
+                        <button
+                          onClick={() => unLoading(row.id)}
+                          className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg "
+                        >
+                          하차
+                        </button>
+                      </td>
+                    </tr>
                   );
                 })}
-                <th className="font-sans text-xl">승인 취소</th>
-              </tr>
-            ))}
-          </thead>
-          <tbody className="text-center">
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                  <td className="flex items-center justify-center gap-12">
-                    {/* 승인완료 */}
-                    <button
-                      onClick={() => cancel(row.id)}
-                      className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
-                    >
-                      취소
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-          <tfoot></tfoot>
-        </table>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

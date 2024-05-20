@@ -293,7 +293,7 @@ function Filter({
   return (
     <div className="flex items-center w-full gap-2 focus:border-sky-300 input input-bordered">
       <input
-        type="number"
+        type="string"
         value={(column.getFilterValue() ?? "") as number}
         onChange={(e) => column.setFilterValue(e.target.value)}
         className="w-full rounded"
