@@ -53,8 +53,15 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         //Refresh Token 저장
         addRefreshEntity(username, refresh, 86400000L);
 
+        String navigate;
+        if(role.equals("ROLE_MEMBER")) {
+            navigate = "member";
+        } else{
+            navigate = "manager";
+        }
         //response
         response.addHeader("access", access);
+        response.addHeader("navigate", navigate);
         response.addCookie(createCookie("refreshToken", refresh));
         response.setStatus(HttpStatus.OK.value());
     }
