@@ -20,7 +20,7 @@ interface Person {
   containerName: string;
   weight: number;
   containerType: string;
-  deadline: string;
+  deadline: Date;
   startingPoint: string;
   destination: string;
 }
@@ -31,7 +31,7 @@ const defaultData: Person[] = [
     containerName: "바나나적재칸",
     weight: 300,
     containerType: "20FT DRY",
-    deadline: "20년 1월",
+    deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
   },
@@ -40,7 +40,7 @@ const defaultData: Person[] = [
     containerName: "소고기적재칸",
     weight: 500,
     containerType: "40FT DRY",
-    deadline: "20년 3월",
+    deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
   },

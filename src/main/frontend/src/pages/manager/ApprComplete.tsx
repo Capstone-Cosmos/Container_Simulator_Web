@@ -21,10 +21,10 @@ interface Person {
   quantity: number;
   height: number;
   weight: number;
-  deadline: string;
+  deadline: Date;
   firstAddress: string;
   finalAddress: string;
-  orderTime: string;
+  orderTime: Date;
   deliveryStatus: null;
   approvalStatus: string;
 }
@@ -36,10 +36,10 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인대기",
   },
@@ -49,10 +49,10 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },

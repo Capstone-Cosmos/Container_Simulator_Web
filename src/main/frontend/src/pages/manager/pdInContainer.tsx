@@ -21,24 +21,36 @@ interface Person {
   quantity: number;
   height: number;
   weight: number;
-  deadline: string;
+  deadline: Date;
   firstAddress: string;
   finalAddress: string;
-  orderTime: string;
+  orderTime: Date;
   deliveryStatus: null;
   approvalStatus: string;
 }
-const defData2: Person[] = [
+interface Loading {
+  id: number;
+  containerId: number;
+  productName: string;
+  weight: number;
+  palletType: string;
+  height: number;
+  deadline: Date;
+  x: number;
+  y: number;
+  z: number;
+}
+const unloadingDefaultData: Person[] = [
   {
     id: 5,
-    productName: "오렌지 하차",
+    productName: "오렌지 취소",
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인대기",
   },
@@ -48,10 +60,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -61,10 +73,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -74,10 +86,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -87,10 +99,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -100,10 +112,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -113,10 +125,10 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
@@ -126,156 +138,182 @@ const defData2: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
+    deadline: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
+    orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
     approvalStatus: "승인",
   },
 ];
-const defaultData: Person[] = [
+const loadingDefaultData: Loading[] = [
   {
-    id: 5,
-    productName: "키위주스 적재",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인대기",
+    id: 2,
+    containerId: 1,
+    productName: "바나나",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
   },
   {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
   },
   {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: "2024-04-21T18:00:00",
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: "2024-04-24T16:25:19.024496",
-    deliveryStatus: null,
-    approvalStatus: "승인",
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
+  },{
+    id: 7,
+    containerId: 2,
+    productName: "고구마",
+    weight: 83.0,
+    palletType: "PALLET_TYPE_11A",
+    height: 5.15,
+    deadline: new Date("2024-04-21T18:00:00"),
+    x: 3.14,
+    y: 6.23,
+    z: 18.13,
   },
 ];
 
 export default function PdinContainer() {
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns = React.useMemo<ColumnDef<Person>[]>(
+  const unloadingColumns = React.useMemo<ColumnDef<Person>[]>(
+    () => [
+      {
+        id: 'index',
+        header: () => "번호",
+        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
+      },
+      {
+        accessorKey: "productName",
+        header: () => "제품명",
+      },
+      {
+        accessorKey: "weight",
+        header: () => "무게",
+      },
+      {
+        accessorKey: "quantity",
+        header: () => "개수",
+      },
+      {
+        accessorKey: "deadline",
+        header: () => "마감날짜",
+      },
+    ],
+    []
+  );
+
+  const loadingColumns = React.useMemo<ColumnDef<Loading>[]>(
     () => [
       {
         accessorKey: "productName",
         header: () => "제품명",
       },
       {
-        accessorKey: "orderTime",
-        header: () => "주문시간",
+        accessorKey: "weight",
+        header: () => "무게",
       },
+      {
+        accessorKey: "palletType",
+        header: () => "팔레트 종류",
+      },
+     
       {
         accessorKey: "deadline",
         header: () => "마감날짜",
       },
-      {
-        accessorKey: "quantity",
-        header: () => "수량",
-      },
     ],
     []
   );
+  // const [data, _setData] = React.useState(() => [...loadingData]);
 
-  // const [data, _setData] = React.useState(() => [...defaultData]);
-
-  const [unloadingData, _setUnloading] = React.useState<Person[]>(defData2);
-  const [loadingData, _setLoading] = React.useState<Person[]>(defaultData);
+  const [unloadingData, _setUnloading] =
+    React.useState<Person[]>(unloadingDefaultData);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
   // useEffect(() => {
   //   (async () => {
-  //     const loadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData.containerId}`);
   //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
   //     const loadList = loadResponse.data.map((list: Person) => ({
   //       ...list,
@@ -290,10 +328,8 @@ export default function PdinContainer() {
 
   // useEffect(() => {
   //   (async () => {
-  //     const loadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const unloadResponse = await CreateAxiosInstance().get(
-  //       "/products/decide"
-  //     );
+  //      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData.containerId}`);
+  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
   //     const loadList = loadResponse.data.map((list: Person) => ({
   //       ...list,
   //     }));
@@ -307,7 +343,7 @@ export default function PdinContainer() {
 
   const unloadingTable = useReactTable({
     data: unloadingData,
-    columns,
+    columns: unloadingColumns,
     state: {
       rowSelection,
     },
@@ -322,7 +358,7 @@ export default function PdinContainer() {
 
   const loadingTable = useReactTable({
     data: loadingData,
-    columns,
+    columns: loadingColumns,
     state: {
       rowSelection,
     },
@@ -334,18 +370,15 @@ export default function PdinContainer() {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
+
   const loading = async (rowId: string) => {
     console.log(rowId);
     const idSelect = loadingData[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/cancel", {
+    const response = await CreateAxiosInstance().patch(`/pallets`, {
       id: idSelect,
     });
     if (response.status === 204) {
-      const newLoadingData: Person[] = await CreateAxiosInstance().get(
-        "/product/decide"
-      );
-      _setLoading(newLoadingData);
       _setfetch((refeach) => !refeach);
     }
   };
@@ -354,14 +387,10 @@ export default function PdinContainer() {
     console.log(rowId);
     const idSelect = loadingData[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch("/products/cancel", {
+    const response = await CreateAxiosInstance().patch(`pallets/${idSelect}`, {
       id: idSelect,
     });
     if (response.status === 204) {
-      const newUnloadingData: Person[] = await CreateAxiosInstance().get(
-        "/product/decide"
-      );
-      _setUnloading(newUnloadingData);
       _setfetch((refeach) => !refeach);
     }
   };
@@ -388,7 +417,7 @@ export default function PdinContainer() {
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
           <div className="w-full bg-black h-[400px]">d d d</div>
-          {/* 컨테이너 들어가기 전 데이터 */}
+          {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
             <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
               적재대기리스트
@@ -417,7 +446,7 @@ export default function PdinContainer() {
                           </th>
                         );
                       })}
-                      <th className="font-sans ">적재</th>
+                      <th className="font-sans ">등록</th>
                     </tr>
                   ))}
                 </thead>
@@ -441,7 +470,7 @@ export default function PdinContainer() {
                             onClick={() => loading(row.id)}
                             className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
                           >
-                            적재
+                            등록
                           </button>
                         </td>
                       </tr>
@@ -482,7 +511,7 @@ export default function PdinContainer() {
                         </th>
                       );
                     })}
-                    <th className="font-sans">하차</th>
+                    <th className="font-sans">취소</th>
                   </tr>
                 ))}
               </thead>
@@ -506,7 +535,7 @@ export default function PdinContainer() {
                           onClick={() => unLoading(row.id)}
                           className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg "
                         >
-                          하차
+                          취소
                         </button>
                       </td>
                     </tr>

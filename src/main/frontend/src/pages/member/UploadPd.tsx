@@ -149,6 +149,7 @@ export default function UploadPd() {
             type="datetime-local"
             id="deadline"
             name="deadline"
+            value="2024-06-12T19:30"
             onChange={setDealine}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>

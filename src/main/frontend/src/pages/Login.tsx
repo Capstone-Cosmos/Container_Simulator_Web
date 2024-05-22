@@ -3,6 +3,7 @@ import axios from "axios";
 import useInput from "../useInput";
 import { Link, useNavigate } from "react-router-dom";
 import { CreateAxiosInstance } from "../shared/axios/createAxiosInstance";
+import Header from "./../components/Header";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,10 +24,13 @@ export default function Login() {
       //위 post에 대한 응답으로 토큰 수령
       if (response.status === 200) {
         localStorage.setItem("accessToken", response.headers.access);
+        if (response.headers.navigate === "member") {
+          navigate("/new/usermain");
+        } else {
+          navigate("/new/apprWait");
+        }
       }
       //받은 토큰을 로컬 스토리지에 저장
-
-      navigate("/new/usermain");
     } catch (error) {
       console.log(error, "error");
     }
