@@ -16,6 +16,9 @@ public class PalletEntity extends BaseEntity {
     private long id;
 
     @Column(nullable = false)
+    private String palletName;
+
+    @Column(nullable = false)
     private long containerId;
 
     @Column(nullable = false)

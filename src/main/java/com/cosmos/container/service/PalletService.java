@@ -39,6 +39,7 @@ public class PalletService {
         float height = productEntity.getHeight() + 0.15f;
         float weight = getWeight(palletType, productEntity);
         palletEntity.setId(productId);
+        palletEntity.setPalletName(productEntity.getProductName());
         palletEntity.setContainerId(containerId);
         palletEntity.setPalletType(palletType);
         palletEntity.setHeight(height);
