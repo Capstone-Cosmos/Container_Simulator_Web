@@ -108,15 +108,21 @@ export default function ContainerUpload() {
       <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px] font-semibold text-xl text-[#325558] ">
         <button
           onClick={clickType}
-          className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white"
+          className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
           name="20FT DRY"
         >
           20FT DRY
         </button>
-        <button className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white">
+        <button
+          onClick={clickType}
+          className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
+        >
           40FT DRY
         </button>
-        <button className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white">
+        <button
+          onClick={clickType}
+          className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white checked:text-white"
+        >
           40FT HQ
         </button>
 
