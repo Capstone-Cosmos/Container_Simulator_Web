@@ -52,30 +52,6 @@ export default function ContainerList() {
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
-        id: "select",
-        header: ({ table }) => (
-          <IndeterminateCheckbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler(),
-            }}
-          />
-        ),
-        cell: ({ row }) => (
-          <div className="px-1">
-            <IndeterminateCheckbox
-              {...{
-                checked: row.getIsSelected(),
-                disabled: !row.getCanSelect(),
-                indeterminate: row.getIsSomeSelected(),
-                onChange: row.getToggleSelectedHandler(),
-              }}
-            />
-          </div>
-        ),
-      },
-      {
         id: "index",
         header: "번호",
         cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
@@ -108,31 +84,31 @@ export default function ContainerList() {
     []
   );
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
 
   // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -148,10 +124,18 @@ export default function ContainerList() {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
-  const resetSelection = () => {
-    table.toggleAllRowsSelected(false);
+
+  const deleteContainer = async (rowId: string) => {
+    console.log(rowId);
+    const idSelect = data[parseInt(rowId)].id;
+    console.log(idSelect);
+    const response = await CreateAxiosInstance().delete("/containers", {
+      params: { id: idSelect },
+    });
+    if (response.status === 204) {
+      _setfetch((refeach) => !refeach);
+    }
   };
-  // table.getState().rowSelection 객체에서 숫자만 추출하여 배열로 만듭니다.
 
   const deleteIndexInfo = table.getState().rowSelection;
   const deleteIndex = Object.keys(deleteIndexInfo).map((row) => parseInt(row));
@@ -197,28 +181,6 @@ export default function ContainerList() {
           >
             컨테이너 등록
           </Link>
-
-          <div
-            className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
-            onClick={() => {
-              (async () => {
-                const response = await CreateAxiosInstance().post(
-                  "/containers",
-                  { productIds: deleteIdList }
-                );
-                if (response.status === 204) {
-                  const newData: Person[] = await CreateAxiosInstance().get(
-                    "/containers"
-                  );
-                  _setData(newData);
-                  resetSelection();
-                  _setfetch((refeach) => !refeach);
-                }
-              })();
-            }}
-          >
-            컨테이너 삭제
-          </div>
         </div>
 
         <div className="h-2" />
@@ -247,6 +209,7 @@ export default function ContainerList() {
                     );
                   })}
                   <th className="font-sans text-xl">컨테이너 관리</th>
+                  <th className="font-sans text-xl">컨테이너 삭제</th>
                 </tr>
               ))}
             </thead>
@@ -264,14 +227,19 @@ export default function ContainerList() {
                         </td>
                       );
                     })}
-                    <td className="flex items-center justify-center gap-12">
+                    <td className="">
                       {/* 승인완료 */}
                       <Link
                         to={"/new/pdincontainer"}
-                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-14"
+                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre"
                       >
                         관리
                       </Link>
+                    </td>
+                    <td>
+                      <button className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg ">
+                        삭제
+                      </button>
                     </td>
                   </tr>
                 );
@@ -314,28 +282,5 @@ function Filter({
         />
       </svg>
     </div>
-  );
-}
-
-function IndeterminateCheckbox({
-  indeterminate,
-  className = "bg-white checkbox checkbox-md",
-  ...rest
-}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
-
-  React.useEffect(() => {
-    if (typeof indeterminate === "boolean") {
-      ref.current.indeterminate = !rest.checked && indeterminate;
-    }
-  }, [ref, indeterminate]);
-
-  return (
-    <input
-      type="checkbox"
-      ref={ref}
-      className={className + " cursor-pointer"}
-      {...rest}
-    />
   );
 }
