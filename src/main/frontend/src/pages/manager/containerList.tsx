@@ -13,7 +13,8 @@ import {
 } from "@tanstack/react-table";
 
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+
 
 interface Person {
   id: number;
@@ -90,25 +91,25 @@ export default function ContainerList() {
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/containers");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/containers");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/containers");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/containers");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -124,6 +125,7 @@ export default function ContainerList() {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
+  
 
   const deleteContainer = async (rowId: string) => {
     console.log(rowId);
@@ -163,6 +165,7 @@ export default function ContainerList() {
           컨테이너리스트
         </Link>
       </div>
+
       <div className="container px-16 pt-5">
         {/* 서치바 등록취소 버튼 */}
         <div className="flex items-center justify-center gap-3 p-5">
@@ -217,6 +220,9 @@ export default function ContainerList() {
               {table.getRowModel().rows.map((row) => {
                 return (
                   <tr key={row.id}>
+                    {/* <button onClick={()=>{console.dir(row.id)}}>
+                      확인용
+                    </button> */}
                     {row.getVisibleCells().map((cell) => {
                       return (
                         <td key={cell.id}>
@@ -230,14 +236,14 @@ export default function ContainerList() {
                     <td className="">
                       {/* 승인완료 */}
                       <Link
-                        to={"/new/pdincontainer"}
+                        to={`./${data[parseInt(row.id)].id}`}
                         className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre"
                       >
                         관리
                       </Link>
                     </td>
                     <td>
-                      <button className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg ">
+                      <button onClick={() => deleteContainer(row.id)} className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg ">
                         삭제
                       </button>
                     </td>
