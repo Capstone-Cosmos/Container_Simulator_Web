@@ -75,10 +75,10 @@ public class SecurityConfig {
         //경로별 인가
         http
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers(
-                                "/ids", "/emails", "/members", "/managers",
-                                "/products/**", "/containers/**").permitAll()
-                        .requestMatchers("/reissue").permitAll()
+                        .requestMatchers("/products/wait", "/products/decide", "/products/accept",
+                                "/products/reject", "/products/cancel", "/pallets/**", "containers").hasRole("MANAGER")
+                        .requestMatchers("/products", "/products/delete").hasRole("MEMBER")
+                        .requestMatchers("/emails", "/ids", "/members", "/managers", "/reissue").permitAll()
                         .anyRequest().authenticated()
                 );
         //Filter config
