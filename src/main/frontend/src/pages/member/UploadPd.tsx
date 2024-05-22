@@ -11,7 +11,7 @@ export default function UploadPd() {
   const [quantity, setquantity] = useInput("");
   const [height, setHeight] = useInput("");
   const [weight, setweight] = useInput("");
-  const [deadline, setDealine] = useInput("2024-05-22");
+  const [deadline, setDealine] = useInput("2024-06-12T19:30");
   const [firstAddress, setfirstDest] = useInput("");
   const [finalAddress, setfinalAddress] = useInput("");
 
@@ -108,7 +108,7 @@ export default function UploadPd() {
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[87.82%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-          수량
+          수량(개)
         </div>
       </div>
       {/*높이*/}
@@ -121,7 +121,7 @@ export default function UploadPd() {
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-          높이
+          높이(m)
         </div>
       </div>
 
@@ -135,7 +135,7 @@ export default function UploadPd() {
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
         <div className="absolute left-0 right-[90.91%] top-0 bottom-[73.74%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-          무게
+          무게(kg)
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export default function UploadPd() {
             type="datetime-local"
             id="deadline"
             name="deadline"
-            value="2024-06-12T19:30"
+            value={deadline}
             onChange={setDealine}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>

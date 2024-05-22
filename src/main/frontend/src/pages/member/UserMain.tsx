@@ -260,8 +260,8 @@ export default function UserMain() {
         </div>
             {/* 표 */}
         <div className="h-2" />
-        <div className="overflow-hidden rounded-lg">
-          <table className="min-w-full overflow-x-auto font-sans bg-white table-lg h-[800px] ">
+        <div className="overflow-hidden rounded-lg h-[800px] bg-white">
+          <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
           <thead className="bg-[#74B5DD] text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>

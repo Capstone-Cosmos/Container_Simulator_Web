@@ -313,7 +313,7 @@ export default function PdinContainer() {
 
   useEffect(() => {
     (async () => {
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData}`);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData[0].containerId}`);
       const unloadResponse = await CreateAxiosInstance().get("/products/decide");
       const loadList = loadResponse.data.map((list: Person) => ({
         ...list,
@@ -328,7 +328,7 @@ export default function PdinContainer() {
 
   useEffect(() => {
     (async () => {
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData[0].id}`);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData[0].containerId}`);
       const unloadResponse = await CreateAxiosInstance().get("/products/decide");
       const loadList = loadResponse.data.map((list: Person) => ({
         ...list,

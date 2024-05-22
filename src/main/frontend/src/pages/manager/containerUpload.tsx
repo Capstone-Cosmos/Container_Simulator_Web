@@ -10,15 +10,15 @@ export default function ContainerUpload() {
   // 현재무게 / 최대 적재 용적 / 마감시간 /destination / startingPoint /deadline / containerType /weight / containerName /
   const [containerName, setContainerName] = useInput("");
   const [containerType, setContainerType] = useState("");
-  const [deadline, setDeadline] = useInput("");
-  const [staringPoint, setStartingPoint] = useInput("");
+  const [deadline, setDeadline] = useInput("2024-06-12T19:30:00");
+  const [startingPoint, setStartingPoint] = useInput("");
   const [destination, setDestination] = useInput("");
 
   const clickType = useCallback(async (e: any) => {
     if (e.target.name === "20FT DRY") {
-      console.log("20FT DRY");
-      setContainerType("CONTAINER_TYPE_20FT_DR");
+      setContainerType("CONTAINER_TYPE_20FT_DRY");
     } else if (e.target.name === "40FT DRY") {
+      console.log("40FT DRY");
       setContainerType("CONTAINER_TYPE_40FT_DRY");
     } else if (e.target.name === "40FT HQ") {
       setContainerType("CONTAINER_TYPE_40FT_HQ");
@@ -32,7 +32,7 @@ export default function ContainerUpload() {
       containerName === "" ||
       containerType === "" ||
       deadline === "" ||
-      staringPoint === "" ||
+      startingPoint === "" ||
       destination === ""
     ) {
       alert("모든 정보를 입력해주세요.");
@@ -44,7 +44,7 @@ export default function ContainerUpload() {
           containerName,
           containerType,
           deadline,
-          staringPoint,
+          startingPoint,
           destination,
         })
         .then((response) => {
@@ -92,8 +92,8 @@ export default function ContainerUpload() {
       <div className="absolute -translate-x-1/2 left-1/2 top-[296px] w-[550px] h-[133px]">
         <input
           type="text"
-          id="productName"
-          name="productName"
+          id="containerName"
+          name="containerName"
           onChange={setContainerName}
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
@@ -116,12 +116,14 @@ export default function ContainerUpload() {
         <button
           onClick={clickType}
           className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
+          name="40FT DRY"
         >
           40FT DRY
         </button>
         <button
           onClick={clickType}
           className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white checked:text-white"
+          name="40FT HQ"
         >
           40FT HQ
         </button>
@@ -134,9 +136,10 @@ export default function ContainerUpload() {
       {/*마감일*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[642px] w-[550px] h-[133px] flex">
         <input
-          type="text"
-          id="weight"
-          name="weight"
+          type="datetime-local"
+          id="deadline"
+          name="deadline"
+          value={deadline}
           onChange={setDeadline}
           className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
         ></input>
@@ -152,10 +155,9 @@ export default function ContainerUpload() {
         </div>
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
-            type="datetime-local"
-            id="deadline"
-            name="deadline"
-            value="2024-06-12T19:30"
+            type="text"
+            id="startingPoint"
+            name="startingPoint"
             onChange={setStartingPoint}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>
@@ -170,8 +172,8 @@ export default function ContainerUpload() {
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
             type="text"
-            id="firstAddress"
-            name="firstAddress"
+            id="destination"
+            name="destination"
             onChange={setDestination}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>
