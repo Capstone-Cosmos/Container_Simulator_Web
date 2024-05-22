@@ -64,6 +64,11 @@ export default function ApprComplete() {
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
+        id: 'index',
+        header: () => "번호",
+        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
+      },
+      {
         accessorKey: "productName",
         header: () => "제품명",
       },
