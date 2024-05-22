@@ -9,15 +9,19 @@ export default function ContainerUpload() {
   const navigate = useNavigate();
   // 현재무게 / 최대 적재 용적 / 마감시간 /destination / startingPoint /deadline / containerType /weight / containerName /
   const [containerName, setContainerName] = useInput("");
-  const [containerType, setContainerType] = useInput<string>("");
+  const [containerType, setContainerType] = useState("");
   const [deadline, setDeadline] = useInput("");
   const [staringPoint, setStartingPoint] = useInput("");
   const [destination, setDestination] = useInput("");
 
-  const twentyDry = useCallback(async (e: any) => {
+  const clickType = useCallback(async (e: any) => {
     if (e.target.name === "20FT DRY") {
       console.log("20FT DRY");
-      setContainerType(e.target.name);
+      setContainerType("CONTAINER_TYPE_20FT_DR");
+    } else if (e.target.name === "40FT DRY") {
+      setContainerType("CONTAINER_TYPE_40FT_DRY");
+    } else if (e.target.name === "40FT HQ") {
+      setContainerType("CONTAINER_TYPE_40FT_HQ");
     }
   }, []);
 
@@ -101,18 +105,18 @@ export default function ContainerUpload() {
       </div>
 
       {/*컨테이너 종류*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px]">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px] font-semibold text-xl text-[#325558] ">
         <button
-          onClick={twentyDry}
-          className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb"
+          onClick={clickType}
+          className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white"
           name="20FT DRY"
         >
           20FT DRY
         </button>
-        <button className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb">
+        <button className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white">
           40FT DRY
         </button>
-        <button className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb">
+        <button className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white">
           40FT HQ
         </button>
 
@@ -145,6 +149,7 @@ export default function ContainerUpload() {
             type="datetime-local"
             id="deadline"
             name="deadline"
+            value="2024-06-12T19:30"
             onChange={setStartingPoint}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>

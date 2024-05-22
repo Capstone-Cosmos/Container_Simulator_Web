@@ -31,7 +31,7 @@ interface Person {
 interface Loading {
   id: number;
   containerId: number;
-  productName: string;
+  palletName: string;
   weight: number;
   palletType: string;
   height: number;
@@ -150,7 +150,7 @@ const loadingDefaultData: Loading[] = [
   {
     id: 2,
     containerId: 1,
-    productName: "바나나",
+    palletName: "바나나",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -162,7 +162,7 @@ const loadingDefaultData: Loading[] = [
   {
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -174,7 +174,7 @@ const loadingDefaultData: Loading[] = [
   {
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -185,7 +185,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -196,7 +196,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -207,7 +207,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -218,7 +218,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -229,7 +229,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -240,7 +240,7 @@ const loadingDefaultData: Loading[] = [
   },{
     id: 7,
     containerId: 2,
-    productName: "고구마",
+    palletName: "고구마",
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
@@ -306,40 +306,40 @@ export default function PdinContainer() {
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(unloadingDefaultData);
-  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
+    React.useState<Person[]>(()=>[]);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData.containerId}`);
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     _setUnloading(unloadList);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData}`);
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      _setUnloading(unloadList);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData.containerId}`);
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     _setUnloading(unloadList);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${loadingData[0].id}`);
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      _setUnloading(unloadList);
+    })();
+  }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
