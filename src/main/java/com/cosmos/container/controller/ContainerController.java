@@ -35,27 +35,4 @@ public class ContainerController {
         containerService.deleteContainer(id, userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-    @GetMapping("/{container-id}")
-    public List<ProductDTO> getProducts(@PathVariable("container-id") Long containerId){
-        return containerService.getProducts(containerId);
-    }
-
-    @PatchMapping("/{container-id}/add")
-    public ResponseEntity<?> assignProduct(@PathVariable("container-id") long containerId,
-                                           @RequestParam("productId") long productId,
-                                           @RequestParam("palletType") PalletType palletType,
-                                           @AuthenticationPrincipal UserDetails userDetails){
-        containerService.assignProduct(containerId, productId, palletType, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @PatchMapping("/{container-id}/cancel")
-    public ResponseEntity<?> cancelProduct(@PathVariable("container-id") long containerId,
-                                           @RequestParam("productId") long productId,
-                                           @AuthenticationPrincipal UserDetails userDetails){
-        containerService.cancelProduct(containerId, productId, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
 }

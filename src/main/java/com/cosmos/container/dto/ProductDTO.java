@@ -38,7 +38,6 @@ public class ProductDTO {
         productDTO.setOrderTime(productEntity.getCreateTime());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus().getStatus());
-        productDTO.setPalletType(productEntity.getPalletType());
         return productDTO;
     }
 }
