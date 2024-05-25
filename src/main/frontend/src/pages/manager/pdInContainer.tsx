@@ -254,8 +254,8 @@ const loadingDefaultData: Loading[] = [
 
 export default function PdinContainer() {
   const [rowSelection, setRowSelection] = React.useState({});
-  const {urlcontainerId} = useParams();
-  console.log(urlcontainerId);
+  const {urlContainerId} = useParams();
+  console.log(urlContainerId);
   const unloadingColumns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
@@ -282,7 +282,6 @@ export default function PdinContainer() {
     ],
     []
   );
-
   const loadingColumns = React.useMemo<ColumnDef<Loading>[]>(
     () => [
       {
@@ -310,40 +309,40 @@ export default function PdinContainer() {
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(unloadingDefaultData);
+    React.useState<Person[]>(()=>[]);
   const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     _setUnloading(unloadList);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      _setUnloading(unloadList);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     _setUnloading(unloadList);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      _setUnloading(unloadList);
+    })();
+  }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
@@ -462,7 +461,7 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <PalletModal urlcontainerId={urlcontainerId} productId={unloadingData[parseInt(row.id)].id} />
+                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} />
                         </td>
                       </tr>
                     );

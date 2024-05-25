@@ -94,25 +94,25 @@ export default function ApprComplete() {
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products/decide");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products/decide");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products/decide");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products/decide");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -133,18 +133,18 @@ export default function ApprComplete() {
     console.log(rowId);
     const idSelect = data[parseInt(rowId)].id;
     console.log(idSelect);
-    // const response = await CreateAxiosInstance().patch(
-    //   "/products/cancel",
-    //   null,
-    //   { params: { id: idSelect } }
-    // );
-    // if (response.status === 204) {
-    //   const newData: Person[] = await CreateAxiosInstance().get(
-    //     "/products/decide"
-    //   );
-    //   _setData(newData);
-    //   _setfetch((refeach) => !refeach);
-    // }
+    const response = await CreateAxiosInstance().patch(
+      "/products/cancel",
+      null,
+      { params: { id: idSelect } }
+    );
+    if (response.status === 204) {
+      const newData: Person[] = await CreateAxiosInstance().get(
+        "/products/decide"
+      );
+      _setData(newData);
+      _setfetch((refeach) => !refeach);
+    }
   };
   return (
     <div className="flex flex-col items-center w-full font-sans bg-slate-100">

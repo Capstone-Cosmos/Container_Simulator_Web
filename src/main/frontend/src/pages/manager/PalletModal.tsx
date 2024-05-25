@@ -1,8 +1,10 @@
 
 import { useState } from "react";
 import Modal from "react-modal";
-export default function PalletModal({urlcontainerId, productId}:any) {
+import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
+export default function PalletModal({urlContainerId, productId}:any) {
     const [isOpen, setIsOpen]=useState(false);
+    const [palletType, setPalletType]=useState('');
     const openModal = () => {
         setIsOpen(true);
     };
@@ -22,10 +24,28 @@ export default function PalletModal({urlcontainerId, productId}:any) {
             padding: "0px",
         },
     };
-    console.log("containerId: " + urlcontainerId + " productId: " + productId);
-    const addPallet = () => {
-        
+    
+    console.log("containerId: " + urlContainerId + " productId: " + productId);
+    const addPallet = async(e : any) => {
+        console.log('a');
+        e.preventDefault();
+        console.log(e);
+        try{
+            const response = await CreateAxiosInstance().post("/pallets", null, {
+                params: {
+                    productId,
+                    containerId : urlContainerId,
+                    palletType : e,
+                }
+            })
+        }
+        catch (error) {
+            console.log(error, "error");
+        }
+        closeModal();
+        window.location.reload();
     }
+    
     return (
         <div>
             <button className="p-2 px-4 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr" onClick={openModal}> 등록 </button>
@@ -74,7 +94,7 @@ export default function PalletModal({urlcontainerId, productId}:any) {
                     </div>
                     <div className="absolute left-[645px] top-[133px] w-[54px] h-[30px] flex">
                         <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center bg-reg" onClick={addPallet}>추가</button>
+                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center bg-reg" onClick={()=> addPallet('PALLET_TYPE_11A')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[385px] w-[707px] h-[68px] flex flex-col items-start justify-start pt-0 pr-[20px] pb-0 pl-[14px] bg-[#fff] overflow-hidden">
                         <div className="self-stretch flex-1 flex flex-row items-center justify-center gap-[10px]">
