@@ -412,7 +412,7 @@ export default function PdinContainer() {
       <div className="flex flex-row items-center justify-center gap-4 px-16 pt-5 pb-6">
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
-          <div className="w-full bg-black h-[400px]">d d d</div>
+          <div className="w-full bg-black h-[400px]">d d </div>
           {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
             <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
