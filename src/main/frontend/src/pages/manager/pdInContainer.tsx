@@ -316,31 +316,31 @@ export default function PdinContainer() {
 
   useEffect(() => {
     (async () => {
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
       const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-      const loadList = loadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
       const unloadList = unloadResponse.data.map((list: Person) => ({
         ...list,
       }));
-      _setLoading(loadList);
       _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
       const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-      const loadList = loadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
       const unloadList = unloadResponse.data.map((list: Person) => ({
         ...list,
       }));
-      _setLoading(loadList);
       _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
     })();
   }, [refeach]);
 

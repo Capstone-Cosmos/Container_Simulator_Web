@@ -68,7 +68,7 @@ const router = createBrowserRouter([
         element: <ContainerList />,
       },
       {
-        path: "containerlist/:urlcontainerId",
+        path: "containerlist/:urlContainerId",
         element: <PdinContainer />,
       },
       {

@@ -28,7 +28,6 @@ export default function PalletModal({urlContainerId, productId}:any) {
     console.log("containerId: " + urlContainerId + " productId: " + productId);
     const addPallet = async(e : any) => {
         console.log('a');
-        e.preventDefault();
         console.log(e);
         try{
             const response = await CreateAxiosInstance().post("/pallets", null, {
