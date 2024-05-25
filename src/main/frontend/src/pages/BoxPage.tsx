@@ -134,10 +134,10 @@ export default function BoxPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between ">
+    <main className="flex flex-col items-center justify-between min-h-screen ">
       <div style={{ width: "55.1vw", height: "47vh" }}>
         
-      <div className='bg-white'>   
+      {/* <div className='bg-white'>   
         <input
           name="length"
           value={state.length}
@@ -166,7 +166,7 @@ export default function BoxPage() {
             onRemove(targetBoxId); // 선택한 해당요소 id값을 전달
          }}}>삭제하기</button>
   
-      <button className='bg-white' onClick={onSave}>저장하기</button>
+      <button className='bg-white' onClick={onSave}>저장하기</button> */}
 
 
         <Canvas
