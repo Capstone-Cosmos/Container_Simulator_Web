@@ -14,6 +14,7 @@ import {
 
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link, useParams } from "react-router-dom";
+import PalletModal from "./PalletModal";
 
 interface Person {
   id: number;
@@ -252,9 +253,9 @@ const loadingDefaultData: Loading[] = [
 ];
 
 export default function PdinContainer() {
-  const {urlContainerId} = useParams();
   const [rowSelection, setRowSelection] = React.useState({});
-
+  const {urlcontainerId} = useParams();
+  console.log(urlcontainerId);
   const unloadingColumns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
@@ -285,7 +286,12 @@ export default function PdinContainer() {
   const loadingColumns = React.useMemo<ColumnDef<Loading>[]>(
     () => [
       {
-        accessorKey: "productName",
+        id: "index",
+        header: () => "번호",
+        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
+      },
+      {
+        accessorKey: "palletName",
         header: () => "제품명",
       },
       {
@@ -297,10 +303,7 @@ export default function PdinContainer() {
         header: () => "팔레트 종류",
       },
      
-      {
-        accessorKey: "deadline",
-        header: () => "마감날짜",
-      },
+
     ],
     []
   );
@@ -376,12 +379,6 @@ export default function PdinContainer() {
     console.log(rowId);
     const idSelect = loadingData[parseInt(rowId)].id;
     console.log(idSelect);
-    const response = await CreateAxiosInstance().patch(`/pallets`, {
-      id: idSelect,
-    });
-    if (response.status === 204) {
-      _setfetch((refeach) => !refeach);
-    }
   };
   const unLoading = async (rowId: string) => {
     console.log(rowId);
@@ -429,7 +426,7 @@ export default function PdinContainer() {
                       {headerGroup.headers.map((header) => {
                         return (
                           <th
-                            className="font-sans "
+                            className="font-sans text-[16px]"
                             key={header.id}
                             colSpan={header.colSpan}
                           >
@@ -445,7 +442,7 @@ export default function PdinContainer() {
                           </th>
                         );
                       })}
-                      <th className="font-sans ">등록</th>
+                      <th className="font-sans text-[16px]">등록</th>
                     </tr>
                   ))}
                 </thead>
@@ -455,7 +452,7 @@ export default function PdinContainer() {
                       <tr key={row.id}>
                         {row.getVisibleCells().map((cell) => {
                           return (
-                            <td key={cell.id}>
+                            <td className="font-bold" key={cell.id}>
                               {flexRender(
                                 cell.column.columnDef.cell,
                                 cell.getContext()
@@ -465,12 +462,7 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <button
-                            onClick={() => loading(row.id)}
-                            className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
-                          >
-                            등록
-                          </button>
+                          <PalletModal urlcontainerId={urlcontainerId} productId={unloadingData[parseInt(row.id)].id} />
                         </td>
                       </tr>
                     );
