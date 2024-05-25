@@ -92,8 +92,7 @@ export default function PalletModal({urlContainerId, productId}:any) {
                         </div>
                     </div>
                     <div className="absolute left-[645px] top-[133px] w-[54px] h-[30px] flex">
-                        <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center bg-reg" onClick={()=> addPallet('PALLET_TYPE_11A')}>추가</button>
+                        <button className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[6px] hover:bg-cb hover:text-white text-cb text-[14px] font-bold bg-red-400" onClick={()=> addPallet('PALLET_TYPE_11A')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[385px] w-[707px] h-[68px] flex flex-col items-start justify-start pt-0 pr-[20px] pb-0 pl-[14px] bg-[#fff] overflow-hidden">
                         <div className="self-stretch flex-1 flex flex-row items-center justify-center gap-[10px]">
@@ -115,8 +114,7 @@ export default function PalletModal({urlContainerId, productId}:any) {
                         </div>
                     </div>
                     <div className="absolute left-[645px] top-[405px] w-[54px] h-[30px] flex">
-                        <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center">추가</button>
+                        <button className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[6px] hover:bg-cb hover:text-white text-[14px] font-bold bg-orange-500 text-cb" onClick={()=> addPallet('PALLET_TYPE_15A')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[453px] w-[707px] h-0 border-[2px] border-solid border-[#eee]"></div>
                     <div className="absolute left-[27px] top-[317px] w-[707px] h-[68px] flex flex-col items-start justify-start pt-0 pr-[20px] pb-0 pl-[14px] bg-[#fff] overflow-hidden">
@@ -139,8 +137,7 @@ export default function PalletModal({urlContainerId, productId}:any) {
                         </div>
                     </div>
                     <div className="absolute left-[645px] top-[337px] w-[54px] h-[30px] flex">
-                        <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center">추가</button>
+                        <button className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[6px] hover:bg-cb hover:text-white text-cb text-[14px] font-bold bg-yellow-300" onClick={()=> addPallet('PALLET_TYPE_13B')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[385px] w-[707px] h-0 border-[2px] border-solid border-[#eee]"></div>
                     <div className="absolute left-[27px] top-[249px] w-[707px] h-[68px] flex flex-col items-start justify-start pt-0 pr-[20px] pb-0 pl-[14px] bg-[#fff] overflow-hidden">
@@ -163,8 +160,7 @@ export default function PalletModal({urlContainerId, productId}:any) {
                         </div>
                     </div>
                     <div className="absolute left-[645px] top-[269px] w-[54px] h-[30px] flex">
-                        <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center">추가</button>
+                        <button className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[6px] hover:bg-cb hover:text-white text-cb text-[14px] font-bold bg-slate-500" onClick={()=> addPallet('PALLET_TYPE_11B')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[317px] w-[707px] h-0 border-[2px] border-solid border-[#eee]"></div>
                     <div className="absolute left-[27px] top-[181px] w-[707px] h-[68px] flex flex-col items-start justify-start pt-0 pr-[20px] pb-0 pl-[14px] bg-[#fff] overflow-hidden">
@@ -187,8 +183,7 @@ export default function PalletModal({urlContainerId, productId}:any) {
                         </div>
                     </div>
                     <div className="absolute left-[645px] top-[201px] w-[54px] h-[30px] flex">
-                        <div className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[4px]"></div>
-                        <button className="absolute left-[14.06%] right-[12.41%] top-[17.86%] bottom-[21.43%] text-[12px] font-['Noto_Sans_KR'] font-bold text-[#74b5dd] text-center">추가</button>
+                        <button className="absolute left-0 top-0 w-[54px] h-[30px] bg-[#f8f9fa] border-[1px] border-solid border-[#74b5dd] rounded-[6px] hover:bg-cb hover:text-white text-cb text-[14px] font-bold bg-blue-500" onClick={()=> addPallet('PALLET_TYPE_12A')}>추가</button>
                     </div>
                     <div className="absolute left-[27px] top-[249px] w-[707px] h-0 border-[2px] border-solid border-[#eee]"></div>
                     <div className="absolute left-[27px] top-[181px] w-[707px] h-0 border-[2px] border-solid border-[#eee]"></div>

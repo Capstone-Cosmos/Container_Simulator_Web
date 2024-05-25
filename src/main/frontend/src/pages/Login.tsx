@@ -55,7 +55,7 @@ export default function Login() {
             name="memberId"
             value={memberId}
             onChange={onChangeMemberId}
-            placeholder="아이디"
+            placeholder="  아이디"
             className="absolute left-0 top-0 w-[550px] h-[65px] bg-[#f1f3f5] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"
           ></input>
         </div>
@@ -68,7 +68,7 @@ export default function Login() {
             name="memberPassword"
             value={memberPassword}
             onChange={onChangememberPassword}
-            placeholder="비밀번호"
+            placeholder="  비밀번호"
             className="absolute left-0 top-0 w-[550px] h-[65px] bg-[#f1f3f5] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"
           ></input>
         </div>
