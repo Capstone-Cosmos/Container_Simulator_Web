@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, HTMLProps, useEffect, useState } from "react";
+import React, {HTMLAttributes, HTMLProps, useEffect, useRef, useState} from "react";
 import ReactDOM from "react-dom/client";
 
 import {
@@ -254,6 +254,22 @@ const loadingDefaultData: Loading[] = [
 ];
 
 export default function PdinContainer() {
+  const childRef:any = useRef(null);
+
+  // BoxPage의 handleSubmit을 받아와서 PalletModal에 전달
+  const addToBoxList = (palletId:any) => { // 박스 추가
+    childRef.current?.handleSubmit(palletId);
+  }
+
+  const deleteAtBoxList = (palletId:any) => { // 박스 삭제
+    childRef.current?.handleDelete(palletId);
+  }
+
+  const loadingBoxList = () => { // 박스 삭제
+    childRef.current?.getBoxList();
+  }
+
+
   const [rowSelection, setRowSelection] = React.useState({});
   const {urlContainerId} = useParams();
   console.log(urlContainerId);
@@ -310,40 +326,41 @@ export default function PdinContainer() {
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(unloadingDefaultData);
+    React.useState<Person[]>(()=>[]);
   const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [refeach, _setfetch] = useState(false);
+
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      loadingBoxList()
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //   })();
-  // }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+    })();
+  }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
@@ -388,8 +405,14 @@ export default function PdinContainer() {
     });
     if (response.status === 204) {
       _setfetch((refeach) => !refeach);
+      deleteAtBoxList(idSelect)
     }
+
   };
+
+  const reverseRefeach = () => {
+    _setfetch((refeach) => !refeach);
+  }
 
   return (
     <div className="items-center h-full font-sans bg-slate-100">
@@ -412,7 +435,7 @@ export default function PdinContainer() {
       <div className="flex flex-row items-center justify-center gap-4 px-16 pt-5 pb-6">
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
-          <div className="w-full bg-black h-[400px]"><BoxPage/></div>
+          <div className="w-full bg-gray-200 h-[400px]"><BoxPage loadingData={loadingData} ref={childRef}/></div>
           {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
             <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
@@ -462,7 +485,7 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} />
+                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} addToBoxList={addToBoxList} reverseRefeach={reverseRefeach}/>
                         </td>
                       </tr>
                     );

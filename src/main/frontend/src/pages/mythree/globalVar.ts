@@ -9,14 +9,14 @@ function getRandomboxColor(){
   
 const globalVar= {
     defaultData : [
-        {
-          id: 0,
-          position: [0,0,0],
-          length: 1,
-          width: 1,
-          height: 1,
-          boxColor: getRandomboxColor(),
-        },
+        // {
+        //   id: 0,
+        //   position: [0,0,0],
+        //   length: 1,
+        //   width: 1,
+        //   height: 1,
+        //   boxColor: getRandomboxColor(),
+        // },
         {
           id: 1,
           position: [2,0,2],
