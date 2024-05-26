@@ -271,8 +271,8 @@ export default function PdinContainer() {
 
 
   const [rowSelection, setRowSelection] = React.useState({});
-  const {urlcontainerId} = useParams();
-  console.log(urlcontainerId);
+  const {urlContainerId} = useParams();
+  console.log(urlContainerId);
   const unloadingColumns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
