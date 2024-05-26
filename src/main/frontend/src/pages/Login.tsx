@@ -56,7 +56,7 @@ export default function Login() {
             value={memberId}
             onChange={onChangeMemberId}
             placeholder="  아이디"
-            className="absolute left-0 top-0 w-[550px] h-[65px] bg-[#f1f3f5] border-[1px] border-solid border-[#dee2e6] rounded-[4px]"
+            className="absolute left-0 top-0 w-[550px] h-[65px] bg-[#f1f3f5] border-[1px] border-solid border-[#dee2e6] rounded-[4px] focus:ring-cb focus:outline-none focus:ring-1"
           ></input>
         </div>
 
