@@ -11,7 +11,7 @@ export default function BoxList({boxList, handlerBoxList}:any){
           <RigidBody type="fixed" colliders="hull">
           <mesh castShadow receiveShadow position={[0, -1, 0]}>
             <boxGeometry args={[100, 1, 100]} />
-            <meshStandardMaterial color="white" />
+            <meshStandardMaterial transparent opacity={0}color="white" />
           </mesh>
           </RigidBody>
   

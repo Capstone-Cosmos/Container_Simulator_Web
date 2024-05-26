@@ -8,6 +8,7 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  Row,
   Table,
   useReactTable,
 } from "@tanstack/react-table";
@@ -43,7 +44,7 @@ const defaultData: Person[] = [
     finalAddress: "논산",
     orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
-    approvalStatus: "승인완료",
+    approvalStatus: "반려",
   },
   {
     id: 1,
@@ -57,7 +58,7 @@ const defaultData: Person[] = [
     finalAddress: "논산",
     orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
-    approvalStatus: "승인완료",
+    approvalStatus: "승인",
   },
 
   {
@@ -72,7 +73,7 @@ const defaultData: Person[] = [
     finalAddress: "논산",
     orderTime: new Date("2024-04-21T18:00:00"),
     deliveryStatus: null,
-    approvalStatus: "승인완료",
+    approvalStatus: "승인대기",
   },
 ];
 
@@ -121,6 +122,7 @@ export default function UserMain() {
       {
         accessorKey: "orderTime",
         header: () => "주문시간",
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "firstAddress",
@@ -137,17 +139,41 @@ export default function UserMain() {
       {
         accessorKey: "approvalStatus",
         header: () => "승인현황",
+        cell: ({ row }) => <div>{approvalCss(row)}</div>,
       },
     ],
     []
   );
+
+  const approvalCss = (row: any) => {
+    if (row.original.approvalStatus === "승인대기") {
+      return <div className="text-gre">승인대기</div>;
+    } else if (row.original.approvalStatus === "승인") {
+      return <div className="text-appr">승인</div>;
+    } else if (row.original.approvalStatus === "반려") {
+      return <div className="text-reg">반려</div>;
+    }
+  };
+
+  const customTime = (row: any) => {
+    const oriDate = new Date(row.original.orderTime);
+
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
+    const seconds = String(oriDate.getSeconds()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
 
   const resetSelection = () => {
     table.toggleAllRowsSelected(false);
   };
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -258,57 +284,56 @@ export default function UserMain() {
             등록취소
           </div>
         </div>
-            {/* 표 */}
+        {/* 표 */}
         <div className="h-2" />
         <div className="overflow-hidden rounded-lg h-[800px] bg-white">
           <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
-          <thead className="bg-[#74B5DD] text-white">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <th
-                      className="font-sans text-xl"
-                      key={header.id}
-                      colSpan={header.colSpan}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <>
-                          {/* 헤더 텍스트 부분 */}
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="text-center">
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
+            <thead className="bg-[#74B5DD] text-white">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
                     return (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                      <th
+                        className="font-sans text-xl"
+                        key={header.id}
+                        colSpan={header.colSpan}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <>
+                            {/* 헤더 텍스트 부분 */}
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </>
                         )}
-                      </td>
+                      </th>
                     );
                   })}
                 </tr>
-              );
-            })}
-          </tbody>
-          <tfoot></tfoot>
-        </table>
+              ))}
+            </thead>
+            <tbody className="text-center">
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot></tfoot>
+          </table>
         </div>
-        
       </div>
     </div>
   );
