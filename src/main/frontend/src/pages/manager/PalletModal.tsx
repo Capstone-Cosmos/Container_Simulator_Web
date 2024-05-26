@@ -1,7 +1,9 @@
 
 import { useState } from "react";
 import Modal from "react-modal";
-export default function PalletModal({urlcontainerId, productId}:any) {
+import BoxPage from "../BoxPage";
+
+export default function PalletModal({urlcontainerId, productId, addToBoxList}:any) {
     const [isOpen, setIsOpen]=useState(false);
     const openModal = () => {
         setIsOpen(true);
@@ -24,7 +26,8 @@ export default function PalletModal({urlcontainerId, productId}:any) {
     };
     console.log("containerId: " + urlcontainerId + " productId: " + productId);
     const addPallet = () => {
-        
+        addToBoxList()
+        console.log("dd");
     }
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, HTMLProps, useEffect, useState } from "react";
+import React, { HTMLAttributes, HTMLProps, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 
 import {
@@ -254,6 +254,18 @@ const loadingDefaultData: Loading[] = [
 ];
 
 export default function PdinContainer() {
+
+  const childRef:any = useRef(null);
+
+  // BoxPage의 handleSubmit을 받아와서 PalletModal에 전달
+  const addToBoxList = () => { // 박스 추가
+    childRef.current?.handleSubmit();
+  }
+
+  const deleteAtBoxList = () => { // 박스 삭제 
+    childRef.current?.handleDelete();
+}
+
   const [rowSelection, setRowSelection] = React.useState({});
   const {urlcontainerId} = useParams();
   console.log(urlcontainerId);
@@ -262,7 +274,7 @@ export default function PdinContainer() {
       {
         id: 'index',
         header: () => "번호",
-        cell: ({row}:any) => <div>{parseInt(row.id) + 1}</div>
+        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
       },
       {
         accessorKey: "productName",
@@ -396,6 +408,7 @@ export default function PdinContainer() {
     <div className="items-center h-full font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
+        <button onClick={deleteAtBoxList}>삭제</button>
         <Link
           to={"/new/apprwait"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
@@ -413,7 +426,7 @@ export default function PdinContainer() {
       <div className="flex flex-row items-center justify-center gap-4 px-16 pt-5 pb-6">
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
-          <div className="w-full bg-black h-[400px]"><BoxPage/></div>
+          <div className="w-full bg-sky-50 h-[400px]"><BoxPage ref={childRef}/></div>
           {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
             <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
@@ -463,7 +476,7 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <PalletModal urlcontainerId={urlcontainerId} productId={unloadingData[parseInt(row.id)].id} />
+                          <PalletModal urlcontainerId={urlcontainerId} productId={unloadingData[parseInt(row.id)].id} addToBoxList={addToBoxList} />
                         </td>
                       </tr>
                     );

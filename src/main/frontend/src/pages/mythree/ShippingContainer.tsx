@@ -27,7 +27,7 @@ export default function ShippingContainer(props:any) {
         material={materials.Material}
         rotation={[-Math.PI / 2, Math.PI / 2, 0]}
         scale={100}>
-        
+        <meshStandardMaterial transparent opacity={opacity} wireframe={wireframe} color={'#757575'}/>
         </mesh>
       </RigidBody>
     </group>
