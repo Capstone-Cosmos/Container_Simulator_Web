@@ -79,6 +79,7 @@ const defaultData: Person[] = [
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
+  
 
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
@@ -175,6 +176,20 @@ export default function UserMain() {
 
   const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<Person | null>(null);
+  const handleRowClick = (row: Person) => {
+    setSelectedRow(row);
+    // 모달 열기 등의 작업을 수행할 수 있습니다.
+  };
+
+  const handleSaveChanges = (updatedData: Person) => {
+    // 수정된 데이터를 원본 데이터 배열에서 찾아 업데이트합니다.
+    const newData = data.map((item) =>
+      item.id === updatedData.id ? updatedData : item
+    );
+    _setData(newData);
+    // 모달 닫기 등의 작업을 수행할 수 있습니다.
+  };
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
   // useEffect(() => {
