@@ -1,5 +1,6 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.ContainerType;
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.dto.ProductDTO;
@@ -42,11 +43,17 @@ public class ContainerService {
         List<PalletEntity> palletEntities = palletRepository.findByContainerId(id);
         for (PalletEntity palletEntity : palletEntities) {
             ProductEntity productEntity = productRepository.findById(palletEntity.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+                    .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너 입니다"));
             productEntity.setAssigned(false);
             productRepository.save(productEntity);
             palletRepository.delete(palletEntity);
         }
         containerRepository.deleteByManagerIdAndId(username, id);
+    }
+
+    public ContainerType getContainerType(Long containerId) {
+        ContainerEntity containerEntity = containerRepository.findById(containerId)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 컨테이너입니다"));
+        return containerEntity.getContainerType();
     }
 }

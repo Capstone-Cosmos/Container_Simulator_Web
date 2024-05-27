@@ -15,7 +15,7 @@ public class PalletDTO {
     private long id;
     private String palletName;
     private long containerId;
-    private PalletType palletType;
+    private String palletType;
     private float height;
     private float weight;
     private float x;
@@ -27,7 +27,7 @@ public class PalletDTO {
         palletDTO.setId(palletEntity.getId());
         palletDTO.setPalletName(palletEntity.getPalletName());
         palletDTO.setContainerId(palletEntity.getContainerId());
-        palletDTO.setPalletType(palletEntity.getPalletType());
+        palletDTO.setPalletType(palletEntity.getPalletType().getType());
         palletDTO.setHeight(palletEntity.getHeight());
         palletDTO.setWeight(palletEntity.getWeight());
         palletDTO.setX(palletEntity.getX());

@@ -1,5 +1,6 @@
 package com.cosmos.container.controller;
 
+import com.cosmos.container.constant.ContainerType;
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.ContainerDTO;
 import com.cosmos.container.dto.ProductDTO;
@@ -28,6 +29,11 @@ public class ContainerController {
     @GetMapping()
     public List<ContainerDTO> getContainers(@AuthenticationPrincipal UserDetails userDetails){
         return containerService.getContainers(userDetails.getUsername());
+    }
+
+    @GetMapping("/{container-id}")
+    public ContainerType getContainerType(@PathVariable("container-id") Long containerId){
+        return containerService.getContainerType(containerId);
     }
 
     @DeleteMapping()

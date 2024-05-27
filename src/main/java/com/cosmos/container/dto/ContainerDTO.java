@@ -15,7 +15,7 @@ public class ContainerDTO {
     private long id;
     private String containerName;
     private float weight;
-    private ContainerType containerType;
+    private String containerType;
     private LocalDateTime deadline;
     private String startingPoint;
     private String destination;
@@ -25,7 +25,7 @@ public class ContainerDTO {
         containerDTO.setId(containerEntity.getId());
         containerDTO.setContainerName(containerEntity.getContainerName());
         containerDTO.setWeight(containerEntity.getWeight());
-        containerDTO.setContainerType(containerEntity.getContainerType());
+        containerDTO.setContainerType(containerEntity.getContainerType().getType());
         containerDTO.setDeadline(containerEntity.getDeadline());
         containerDTO.setStartingPoint(containerEntity.getStartingPoint());
         containerDTO.setDestination(containerEntity.getDestination());

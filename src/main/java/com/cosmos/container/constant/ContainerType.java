@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum ContainerType {
-    CONTAINER_TYPE_20FT_DRY("1TEU"),
-    CONTAINER_TYPE_40FT_DRY("1FEU"),
-    CONTAINER_TYPE_40FT_HQ("1FEU_HQ");
+    CONTAINER_TYPE_20FT_DRY("20FT_DRY"),
+    CONTAINER_TYPE_40FT_DRY("40FT_DRY"),
+    CONTAINER_TYPE_40FT_HQ("40FT_HQ");
 
     private final String type;
 

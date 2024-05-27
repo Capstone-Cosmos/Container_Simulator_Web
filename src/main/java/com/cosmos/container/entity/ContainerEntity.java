@@ -46,7 +46,7 @@ public class ContainerEntity extends BaseEntity {
         containerEntity.setManagerId(username);
         containerEntity.setContainerName(containerDTO.getContainerName());
         containerEntity.setWeight(containerDTO.getWeight());
-        containerEntity.setContainerType(containerDTO.getContainerType());
+        containerEntity.setContainerType(ContainerType.valueOf(containerDTO.getContainerType()));
         containerEntity.setDeadline(containerDTO.getDeadline());
         containerEntity.setStartingPoint(containerDTO.getStartingPoint());
         containerEntity.setDestination(containerDTO.getDestination());

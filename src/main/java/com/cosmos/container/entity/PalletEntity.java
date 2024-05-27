@@ -44,7 +44,7 @@ public class PalletEntity extends BaseEntity {
         PalletEntity palletEntity = new PalletEntity();
         palletEntity.setId(palletDTO.getId());
         palletEntity.setContainerId(palletDTO.getContainerId());
-        palletEntity.setPalletType(palletDTO.getPalletType());
+        palletEntity.setPalletType(PalletType.valueOf(palletDTO.getPalletType()));
         palletEntity.setHeight(palletDTO.getHeight());
         palletEntity.setWeight(palletDTO.getWeight());
         palletEntity.setX(palletDTO.getX());
