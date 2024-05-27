@@ -34,7 +34,8 @@ public class ContainerService {
     }
 
     public void saveContainer(ContainerDTO containerDTO, String username) {
-        ContainerEntity containerEntity = ContainerEntity.toContainerEntity(containerDTO, username);
+        ContainerEntity containerEntity = new ContainerEntity();
+        containerEntity.initContainer(containerDTO, username);
         containerRepository.save(containerEntity);
     }
 

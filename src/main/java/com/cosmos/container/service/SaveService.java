@@ -33,17 +33,19 @@ public class SaveService {
     }
 
     public void saveMember(MemberDTO memberDTO) {
-        UserInfoEntity userInfoEntity = UserInfoEntity.toUserInfoEntity(
-                memberDTO.getId(), bCryptPasswordEncoder.encode(memberDTO.getPassword()), memberDTO.getEmail(), Role.ROLE_MEMBER);
-        MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.initUserInfoEntity(memberDTO.getId(), bCryptPasswordEncoder.encode(memberDTO.getPassword()), memberDTO.getEmail(), Role.ROLE_MEMBER);
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.initMemberEntity(memberDTO);
         userInfoRepository.save(userInfoEntity);
         memberRepository.save(memberEntity);
     }
 
     public void saveManager(ManagerDTO managerDTO){
-        UserInfoEntity userInfoEntity = UserInfoEntity.toUserInfoEntity(
-                managerDTO.getId(), bCryptPasswordEncoder.encode(managerDTO.getPassword()), managerDTO.getEmail(), Role.ROLE_MANAGER);
-        ManagerEntity managerEntity = ManagerEntity.toMemberEntity(managerDTO);
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.initUserInfoEntity(managerDTO.getId(), bCryptPasswordEncoder.encode(managerDTO.getPassword()), managerDTO.getEmail(), Role.ROLE_MANAGER);
+        ManagerEntity managerEntity = new ManagerEntity();
+        managerEntity.initManagerEntity(managerDTO);
         userInfoRepository.save(userInfoEntity);
         managerRepository.save(managerEntity);
     }

@@ -38,14 +38,9 @@ public class PalletService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         float height = productEntity.getHeight() + 0.15f;
         float weight = getWeight(palletType, productEntity);
-        palletEntity.setId(productId);
-        palletEntity.setPalletName(productEntity.getProductName());
-        palletEntity.setContainerId(containerId);
-        palletEntity.setPalletType(palletType);
-        palletEntity.setHeight(height);
-        palletEntity.setWeight(weight);
+        palletEntity.initPallet(productId, productEntity.getProductName(), containerId, palletType, height, weight);
         productEntity.setAssigned(true);
-        containerEntity.setWeight(containerEntity.getWeight() + weight);
+        containerEntity.addWeight(weight);
         palletRepository.save(palletEntity);
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
@@ -60,7 +55,7 @@ public class PalletService {
         productEntity.setAssigned(false);
         ContainerEntity containerEntity = containerRepository.findById(palletEntity.getContainerId())
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        containerEntity.setWeight(containerEntity.getWeight() - palletEntity.getWeight());
+        containerEntity.loseWeight(palletEntity.getWeight());
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
         palletRepository.deleteById(palletId);
@@ -69,9 +64,7 @@ public class PalletService {
     public void saveLocation(PalletDTO palletDTO) {
         PalletEntity palletEntity = palletRepository.findById(palletDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        palletEntity.setX(palletDTO.getX());
-        palletEntity.setY(palletDTO.getY());
-        palletEntity.setZ(palletDTO.getZ());
+        palletEntity.savePalletLocation(palletDTO.getX(), palletDTO.getY(), palletDTO.getZ());
         palletRepository.save(palletEntity);
     }
 

@@ -5,11 +5,11 @@ import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "product_table")
 public class ProductEntity extends BaseEntity{
     @Id
@@ -50,18 +50,24 @@ public class ProductEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ApprovalStatus approvalStatus = ApprovalStatus.STATUS_WAITING;
 
+    @Setter
     @Column(nullable = false)
-    private boolean assigned = false;
+    private boolean assigned;
 
-    public static ProductEntity toProductEntity(ProductDTO productDTO){
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setProductName(productDTO.getProductName());
-        productEntity.setQuantity(productDTO.getQuantity());
-        productEntity.setHeight(productDTO.getHeight());
-        productEntity.setWeight(productDTO.getWeight());
-        productEntity.setDeadline(productDTO.getDeadline());
-        productEntity.setFirstAddress(productDTO.getFirstAddress());
-        productEntity.setFinalAddress(productDTO.getFinalAddress());
-        return productEntity;
+    public void initProductEntity(String username, ProductDTO productDTO){
+        this.memberId = username;
+        this.productName = productDTO.getProductName();
+        this.quantity = productDTO.getQuantity();
+        this.height = productDTO.getHeight();
+        this.weight = productDTO.getWeight();
+        this.deadline = productDTO.getDeadline();
+        this.firstAddress = productDTO.getFirstAddress();
+        this.finalAddress = productDTO.getFinalAddress();
+        this.assigned = false;
+    }
+
+    public void setApprovalStatus(ApprovalStatus approvalStatus, String managerId) {
+        this.approvalStatus = approvalStatus;
+        this.managerId = managerId;
     }
 }

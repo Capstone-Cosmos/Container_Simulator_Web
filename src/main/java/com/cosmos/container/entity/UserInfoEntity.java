@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "User_table")
 public class UserInfoEntity extends BaseEntity {
 
@@ -28,12 +27,15 @@ public class UserInfoEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static UserInfoEntity toUserInfoEntity(String userName, String password, String email, Role role) {
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        userInfoEntity.username = userName;
-        userInfoEntity.password = password;
-        userInfoEntity.email = email;
-        userInfoEntity.role = role;
-        return userInfoEntity;
+    public void initUserInfoEntity(String userName, String password, String email, Role role) {
+        this.username = userName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
+    public void initJWT(String username, Role role){
+        this.username = username;
+        this.role = role;
     }
 }

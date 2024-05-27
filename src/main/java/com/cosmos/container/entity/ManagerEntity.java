@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
 @Entity
 @Table(name = "manager_table")
@@ -23,12 +22,10 @@ public class ManagerEntity extends BaseEntity {
     @Column(nullable = false)
     private String managerPosition;
 
-    public static ManagerEntity toMemberEntity(ManagerDTO managerDTO){
-        ManagerEntity managerEntity = new ManagerEntity();
-        managerEntity.setId(managerDTO.getId());
-        managerEntity.setManagerName(managerDTO.getManagerName());
-        managerEntity.setManagerDepart(managerDTO.getManagerDepart());
-        managerEntity.setManagerPosition(managerDTO.getManagerPosition());
-        return managerEntity;
+    public void initManagerEntity(ManagerDTO managerDTO){
+        this.id = managerDTO.getId();
+        this.managerName = managerDTO.getManagerName();
+        this.managerDepart = managerDTO.getManagerDepart();
+        this.managerPosition = managerDTO.getManagerPosition();
     }
 }

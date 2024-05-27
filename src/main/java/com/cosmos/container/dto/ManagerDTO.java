@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class ManagerDTO {
     private String id;
     private String password;
@@ -16,12 +15,4 @@ public class ManagerDTO {
     private String managerName;
     private String managerDepart;
     private String managerPosition;
-
-    public static ManagerDTO toManagerDTO(ManagerEntity managerEntity) {
-        ManagerDTO managerDTO = new ManagerDTO();
-        managerDTO.setManagerName(managerEntity.getManagerName());
-        managerDTO.setManagerDepart(managerEntity.getManagerDepart());
-        managerDTO.setManagerPosition(managerEntity.getManagerPosition());
-        return managerDTO;
-    }
 }

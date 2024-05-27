@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface RefreshRepository extends JpaRepository<RefreshEntity, Long> {
-
     Boolean existsByRefresh(String refresh);
 
     @Transactional
