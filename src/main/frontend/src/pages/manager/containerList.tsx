@@ -72,7 +72,7 @@ export default function ContainerList() {
       {
         accessorKey: "deadline",
         header: () => "마감일",
-        cell: ({ row }) => <div>{customTime(row)}</div>,
+        // cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "startingPoint",
@@ -100,22 +100,22 @@ export default function ContainerList() {
   //   return `${year}-${month}-${day} ${hours}:${minutes}`;
   // };
 // 날짜 객체 생성
-const customTime = (row: any) => {
-  const oriDate = new Date(row.original.deadline);
+// const customTime = (row: any) => {
+//   const oriDate = new Date(row.original.deadline);
 
-  // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
-  const dateString = oriDate.toString();
-  const dateArray = dateString.split("GMT");
-  const formattedDate = (
-    <span>
-      {dateArray[0]}
-      <br />
-      GMT{dateArray[1]}
-    </span>
-  );
+//   // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
+//   const dateString = oriDate.toString();
+//   const dateArray = dateString.split("");
+//   const formattedDate = (
+//     <span>
+//       {dateArray[0]}
+//       <br />
+//       {dateArray[1]}
+//     </span>
+//   );
 
-  return formattedDate;
-};
+//   return formattedDate;
+// };
 
   const [data, _setData] = React.useState<Person[]>(defaultData);
 
@@ -157,7 +157,7 @@ const customTime = (row: any) => {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
-  
+
 
   const deleteContainer = async (rowId: string) => {
     console.log(rowId);
