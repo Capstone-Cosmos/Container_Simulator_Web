@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "pallet_table")
 public class PalletEntity extends BaseEntity {
 
@@ -40,16 +39,18 @@ public class PalletEntity extends BaseEntity {
     @Column
     private float z;
 
-    public static PalletEntity toPalletEntity(PalletDTO palletDTO){
-        PalletEntity palletEntity = new PalletEntity();
-        palletEntity.setId(palletDTO.getId());
-        palletEntity.setContainerId(palletDTO.getContainerId());
-        palletEntity.setPalletType(palletDTO.getPalletType());
-        palletEntity.setHeight(palletDTO.getHeight());
-        palletEntity.setWeight(palletDTO.getWeight());
-        palletEntity.setX(palletDTO.getX());
-        palletEntity.setY(palletDTO.getY());
-        palletEntity.setZ(palletDTO.getZ());
-        return palletEntity;
+    public void initPallet(Long id, String palletName, Long containerId, PalletType palletType, float height, float weight){
+        this.id = id;
+        this.palletName = palletName;
+        this.containerId = containerId;
+        this.palletType = palletType;
+        this.height = height;
+        this.weight = weight;
+    }
+
+    public void savePalletLocation(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 }

@@ -17,8 +17,8 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public void saveProduct(ProductDTO productDTO, String username) {
-        ProductEntity productEntity = ProductEntity.toProductEntity(productDTO);
-        productEntity.setMemberId(username);
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.initProductEntity(username, productDTO);
         productRepository.save(productEntity);
     }
 
@@ -41,24 +41,21 @@ public class ProductService {
     public void acceptProduct(long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setApprovalStatus(ApprovalStatus.STATUS_ACCEPT);
-        productEntity.setManagerId(username);
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_ACCEPT, username);
         productRepository.save(productEntity);
     }
 
     public void rejectProduct(long id, String username) {
         ProductEntity productEntity = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        productEntity.setApprovalStatus(ApprovalStatus.STATUS_REJECT);
-        productEntity.setManagerId(username);
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_REJECT, username);
         productRepository.save(productEntity);
     }
 
     public void cancelProduct(long id) {
         ProductEntity productEntity =  productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 상품입니다"));
-        productEntity.setApprovalStatus(ApprovalStatus.STATUS_WAITING);
-        productEntity.setManagerId(null);
+        productEntity.setApprovalStatus(ApprovalStatus.STATUS_WAITING, null);
         productRepository.save(productEntity);
     }
 

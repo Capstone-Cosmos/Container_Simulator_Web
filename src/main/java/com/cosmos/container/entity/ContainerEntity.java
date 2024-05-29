@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "container_table")
 public class ContainerEntity extends BaseEntity {
@@ -25,7 +24,7 @@ public class ContainerEntity extends BaseEntity {
     private String containerName;
 
     @Column(nullable = false)
-    private float weight = 0;
+    private float weight;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -40,16 +39,22 @@ public class ContainerEntity extends BaseEntity {
     @Column(nullable = false)
     private String destination;
 
-    public static ContainerEntity toContainerEntity(ContainerDTO containerDTO, String username) {
-        ContainerEntity containerEntity = new ContainerEntity();
-        containerEntity.setId(containerDTO.getId());
-        containerEntity.setManagerId(username);
-        containerEntity.setContainerName(containerDTO.getContainerName());
-        containerEntity.setWeight(containerDTO.getWeight());
-        containerEntity.setContainerType(containerDTO.getContainerType());
-        containerEntity.setDeadline(containerDTO.getDeadline());
-        containerEntity.setStartingPoint(containerDTO.getStartingPoint());
-        containerEntity.setDestination(containerDTO.getDestination());
-        return containerEntity;
+    public void initContainer(ContainerDTO containerDTO, String username) {
+        this.id = containerDTO.getId();
+        this.managerId = username;
+        this.containerName = containerDTO.getContainerName();
+        this.weight = 0;
+        this.containerType = ContainerType.valueOf(containerDTO.getContainerType());
+        this.deadline = containerDTO.getDeadline();
+        this.startingPoint = containerDTO.getStartingPoint();
+        this.destination = containerDTO.getDestination();
+    }
+
+    public void addWeight(float weight) {
+        this.weight += weight;
+    }
+
+    public void loseWeight(float weight) {
+        this.weight -= weight;
     }
 }
