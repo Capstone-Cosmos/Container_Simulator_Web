@@ -4,6 +4,9 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import ContainerList from "./containerList";
+import styled from "styled-components";
+import tw from "tailwind-styled-components";
+import Button from "../../components/button";
 
 export default function ContainerUpload() {
   const navigate = useNavigate();
@@ -13,17 +16,25 @@ export default function ContainerUpload() {
   const [deadline, setDeadline] = useInput("2024-06-12T19:30:00");
   const [startingPoint, setStartingPoint] = useInput("");
   const [destination, setDestination] = useInput("");
-
-  const clickType = useCallback(async (e: any) => {
-    if (e.target.name === "20FT DRY") {
-      setContainerType("CONTAINER_TYPE_20FT_DRY");
-    } else if (e.target.name === "40FT DRY") {
-      console.log("40FT DRY");
-      setContainerType("CONTAINER_TYPE_40FT_DRY");
-    } else if (e.target.name === "40FT HQ") {
-      setContainerType("CONTAINER_TYPE_40FT_HQ");
-    }
+  const [clicked, setClicked] = useState("");
+  const changeTag = useCallback(async (e: any) => {
+    setClicked(e);
+    console.log(e);
+    setContainerType(e);
   }, []);
+  const buttonsNameList = ["20FT DRY", "40FT DRY", "40FT HQ"];
+
+  // const clickType = useCallback(async (e: any) => {
+  //   if (e.target.name === "20FT DRY") {
+  //     console.log(e);
+  //     setContainerType("CONTAINER_TYPE_20FT_DRY");
+  //   } else if (e.target.name === "40FT DRY") {
+  //     console.log("40FT DRY");
+  //     setContainerType("CONTAINER_TYPE_40FT_DRY");
+  //   } else if (e.target.name === "40FT HQ") {
+  //     setContainerType("CONTAINER_TYPE_40FT_HQ");
+  //   }
+  // }, []);
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -74,6 +85,7 @@ export default function ContainerUpload() {
         >
           품목리스트
         </Link>
+
         <Link
           to={"/new/containerList"}
           className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
@@ -105,15 +117,33 @@ export default function ContainerUpload() {
       </div>
 
       {/*컨테이너 종류*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px] font-semibold text-xl text-[#325558] ">
-        <button
-          onClick={clickType}
-          className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
-          name="20FT DRY"
-        >
-          20FT DRY
-        </button>
-        <button
+      <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px] font-semibold text-xl text-[#325558] flex ">
+        ​​​​​​<div className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] ">
+        <Button
+          name={buttonsNameList[0]}
+          onClick={() => changeTag(buttonsNameList[0])}
+          clicked={clicked === buttonsNameList[0]}
+        />
+        </div>
+
+        <div className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px]">
+        <Button
+          name={buttonsNameList[1]}
+          onClick={() => changeTag(buttonsNameList[1])}
+          clicked={clicked === buttonsNameList[1]}
+        />
+        </div>
+        <div className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] ">
+        <Button
+          name={buttonsNameList[2]}
+          onClick={() => changeTag(buttonsNameList[2])}
+          clicked={clicked === buttonsNameList[2]}
+          
+        />
+        </div>
+        
+        
+        {/* <button
           onClick={clickType}
           className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
           name="40FT DRY"
@@ -126,8 +156,7 @@ export default function ContainerUpload() {
           name="40FT HQ"
         >
           40FT HQ
-        </button>
-
+        </button> */}
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           컨테이너 종류
         </div>
