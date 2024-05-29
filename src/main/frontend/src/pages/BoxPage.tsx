@@ -109,10 +109,6 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
     setBoxList(newList);
   };
 
-  // useEffect(() => { // 처음 rendering 시 실행
-  //   getBoxList();
-  // }, []);
-
 
   // 바뀐 position이 담긴 배열을 가져오기
   const onSave = () => {
@@ -154,7 +150,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
   }
 
   return (
-      <main className="flex min-h-screen flex-col items-center justify-between ">
+      <main className="flex flex-col items-center justify-between min-h-screen ">
         <div style={{ width: "55.3vw", height: "44vh" }}>
           <button onClick={onSave}>저장</button>
           {/* <div className='bg-white'>

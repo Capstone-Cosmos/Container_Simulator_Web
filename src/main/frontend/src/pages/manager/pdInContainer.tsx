@@ -286,11 +286,11 @@ export default function PdinContainer() {
       },
       {
         accessorKey: "weight",
-        header: () => "무게",
+        header: () => "무게(kg)",
       },
       {
         accessorKey: "quantity",
-        header: () => "개수",
+        header: () => "수량(개)",
       },
       {
         accessorKey: "deadline",
@@ -312,7 +312,7 @@ export default function PdinContainer() {
       },
       {
         accessorKey: "weight",
-        header: () => "무게",
+        header: () => "무게(kg)",
       },
       {
         accessorKey: "palletType",

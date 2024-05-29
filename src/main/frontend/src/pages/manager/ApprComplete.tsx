@@ -82,7 +82,7 @@ export default function ApprComplete() {
       },
       {
         accessorKey: "quantity",
-        header: () => "수량",
+        header: () => "수량(개)",
       },
     ],
     []

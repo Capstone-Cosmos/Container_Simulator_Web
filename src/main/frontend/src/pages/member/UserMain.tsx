@@ -118,7 +118,7 @@ export default function UserMain() {
       },
       {
         accessorKey: "quantity",
-        header: () => "수량",
+        header: () => "수량(개)",
       },
       {
         accessorKey: "orderTime",
@@ -218,7 +218,10 @@ export default function UserMain() {
     state: {
       rowSelection,
     },
-    enableRowSelection: true, //enable row selection for all rows
+    enableRowSelection: row => row.original.approvalStatus !== '승인',
+
+
+//enable row selection for all rows
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),

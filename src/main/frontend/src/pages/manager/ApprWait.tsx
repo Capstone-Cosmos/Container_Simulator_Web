@@ -82,7 +82,7 @@ export default function ApprWait() {
       },
       {
         accessorKey: "quantity",
-        header: () => "수량",
+        header: () => "수량(개)",
       },
     ],
     []
