@@ -75,10 +75,12 @@ export default function ApprComplete() {
       {
         accessorKey: "orderTime",
         header: () => "주문시간",
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "deadline",
         header: () => "마감날짜",
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "quantity",
@@ -90,29 +92,46 @@ export default function ApprComplete() {
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products/decide");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products/decide");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products/decide");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products/decide");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
+
+  const customTime = (row: any) => {
+    const oriDate = new Date(row.original.deadline);
+
+    // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
+    const dateString = oriDate.toString();
+    const dateArray = dateString.split("GMT");
+    const formattedDate = (
+      <span>
+        {dateArray[0]}
+        <br />
+        GMT{dateArray[1]}
+      </span>
+    );
+
+    return formattedDate;
+  };
 
   const table = useReactTable({
     data,

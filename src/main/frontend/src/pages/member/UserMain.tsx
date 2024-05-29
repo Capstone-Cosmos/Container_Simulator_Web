@@ -79,7 +79,6 @@ const defaultData: Person[] = [
 
 export default function UserMain() {
   const [rowSelection, setRowSelection] = React.useState({});
-  
 
   const columns = React.useMemo<ColumnDef<Person>[]>(
     () => [
@@ -127,7 +126,7 @@ export default function UserMain() {
       },
       {
         accessorKey: "firstAddress",
-        header: () => "처음배송지",
+        header: () => "1차배송지",
       },
       {
         accessorKey: "finalAddress",
@@ -148,25 +147,29 @@ export default function UserMain() {
 
   const approvalCss = (row: any) => {
     if (row.original.approvalStatus === "승인대기") {
-      return <div className="text-gre">승인대기</div>;
+      return <div className="text-[17px] text-gre">승인대기</div>;
     } else if (row.original.approvalStatus === "승인") {
-      return <div className="text-appr">승인</div>;
+      return <div className="text-appr text-[17px]">승인</div>;
     } else if (row.original.approvalStatus === "반려") {
-      return <div className="text-reg">반려</div>;
+      return <div className="text-reg text-[17px]">반려</div>;
     }
   };
 
   const customTime = (row: any) => {
-    const oriDate = new Date(row.original.orderTime);
+    const oriDate = new Date(row.original.deadline);
 
-    const year = oriDate.getFullYear();
-    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
-    const day = String(oriDate.getDate()).padStart(2, "0");
-    const hours = String(oriDate.getHours()).padStart(2, "0");
-    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
-    const seconds = String(oriDate.getSeconds()).padStart(2, "0");
+    // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
+    const dateString = oriDate.toString();
+    const dateArray = dateString.split("GMT");
+    const formattedDate = (
+      <span>
+        {dateArray[0]}
+        <br />
+        GMT{dateArray[1]}
+      </span>
+    );
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return formattedDate;
   };
 
   const resetSelection = () => {
@@ -192,25 +195,25 @@ export default function UserMain() {
   };
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/products");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/products");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -218,10 +221,9 @@ export default function UserMain() {
     state: {
       rowSelection,
     },
-    enableRowSelection: row => row.original.approvalStatus !== '승인',
+    enableRowSelection: (row) => row.original.approvalStatus !== "승인",
 
-
-//enable row selection for all rows
+    //enable row selection for all rows
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),

@@ -72,6 +72,7 @@ export default function ContainerList() {
       {
         accessorKey: "deadline",
         header: () => "마감일",
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "startingPoint",
@@ -85,31 +86,62 @@ export default function ContainerList() {
     []
   );
 
+  
+  // const customTime = (row: any) => {
+  //   const oriDate = new Date(row.original.deadline);
+  // //   console.log(oriDate);
+  // //   const year = oriDate.getFullYear();
+  // //   const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+  // //   const day = String(oriDate.getDate()).padStart(2, "0");
+  // //   const hours = String(oriDate.getHours()).padStart(2, "0");
+  // //   const minutes = String(oriDate.getMinutes()).padStart(2, "0");
+    
+
+  //   return `${year}-${month}-${day} ${hours}:${minutes}`;
+  // };
+// 날짜 객체 생성
+const customTime = (row: any) => {
+  const oriDate = new Date(row.original.deadline);
+
+  // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
+  const dateString = oriDate.toString();
+  const dateArray = dateString.split("GMT");
+  const formattedDate = (
+    <span>
+      {dateArray[0]}
+      <br />
+      GMT{dateArray[1]}
+    </span>
+  );
+
+  return formattedDate;
+};
+
   const [data, _setData] = React.useState<Person[]>(defaultData);
 
   // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,

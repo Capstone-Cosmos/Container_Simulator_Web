@@ -326,41 +326,41 @@ export default function PdinContainer() {
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(()=>[]);
-  const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
+    React.useState<Person[]>(unloadingDefaultData);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
   const [refeach, _setfetch] = useState(false);
 
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
-  useEffect(() => {
-    (async () => {
-      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-      const unloadList = unloadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setUnloading(unloadList);
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-      const loadList = loadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setLoading(loadList);
-      loadingBoxList()
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const unloadList = unloadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setUnloading(unloadList);
+  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+  //     const loadList = loadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setLoading(loadList);
+  //     loadingBoxList()
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-      const unloadList = unloadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setUnloading(unloadList);
-      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-      const loadList = loadResponse.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setLoading(loadList);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
+  //     const unloadList = unloadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setUnloading(unloadList);
+  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+  //     const loadList = loadResponse.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setLoading(loadList);
+  //   })();
+  // }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
@@ -526,7 +526,7 @@ export default function PdinContainer() {
                         </th>
                       );
                     })}
-                    <th className="font-sans">취소</th>
+                    <th className="font-sans text-[16px]">취소</th>
                   </tr>
                 ))}
               </thead>
@@ -548,7 +548,7 @@ export default function PdinContainer() {
                         {/* 승인완료 */}
                         <button
                           onClick={() => unLoading(row.id)}
-                          className="p-2 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg "
+                          className="p-2 px-4 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
                         >
                           취소
                         </button>
