@@ -16,10 +16,13 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public void saveProduct(ProductDTO productDTO, String username) {
+    public boolean saveProduct(ProductDTO productDTO, String username) {
+        if(productDTO.getHeight() > 2.565f)
+            return false;
         ProductEntity productEntity = new ProductEntity();
         productEntity.initProductEntity(username, productDTO);
         productRepository.save(productEntity);
+        return true;
     }
 
     public List<ProductDTO> getProducts(String username) {
