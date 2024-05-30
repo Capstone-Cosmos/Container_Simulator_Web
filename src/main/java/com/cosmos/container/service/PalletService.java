@@ -1,5 +1,6 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.ContainerType;
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.PalletDTO;
 import com.cosmos.container.entity.ContainerEntity;
@@ -30,21 +31,23 @@ public class PalletService {
         return palletDTOS;
     }
 
-    public PalletDTO addPallet(Long productId, Long containerId, PalletType palletType) {
+    public boolean addPallet(Long productId, Long containerId, PalletType palletType) {
         PalletEntity palletEntity = new PalletEntity();
         ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        float height = productEntity.getHeight() + 0.15f;
         float weight = getWeight(palletType, productEntity);
+        if(!validatePallet(containerEntity, weight))
+            return false;
+        float height = productEntity.getHeight() + 0.15f;
         palletEntity.initPallet(productId, productEntity.getProductName(), containerId, palletType, height, weight);
         productEntity.setAssigned(true);
         containerEntity.addWeight(weight);
         palletRepository.save(palletEntity);
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
-        return PalletDTO.toPalletDTO(palletEntity);
+        return true;
     }
 
     public void cancelPallet(Long palletId) {
@@ -86,5 +89,15 @@ public class PalletService {
             weight = productEntity.getWeight() + 27.5f;
         }
         return weight;
+    }
+
+    private boolean validatePallet(ContainerEntity containerEntity, float weight) {
+        if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_20FT_DRY){
+            return (containerEntity.getWeight() + weight <= 21700);
+        } else if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_40FT_DRY){
+            return (containerEntity.getWeight() + weight <= 26740);
+        } else{
+            return (containerEntity.getWeight() + weight <= 26580);
+        }
     }
 }

@@ -24,8 +24,9 @@ public class PalletController {
     public ResponseEntity<?> addPallet(@RequestParam("productId") Long productId,
                                        @RequestParam("containerId") Long containerId,
                                        @RequestParam("palletType") PalletType palletType){
-        PalletDTO palletDTO = palletService.addPallet(productId, containerId, palletType);
-        return ResponseEntity.status(HttpStatus.CREATED).body(palletDTO);
+        if(palletService.addPallet(productId, containerId, palletType))
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @DeleteMapping("/{pallet-id}")
