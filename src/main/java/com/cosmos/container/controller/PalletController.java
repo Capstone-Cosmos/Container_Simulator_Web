@@ -2,10 +2,13 @@ package com.cosmos.container.controller;
 
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.PalletDTO;
+import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.service.PalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,6 +21,11 @@ public class PalletController {
     @GetMapping("/{container-id}")
     public List<PalletDTO> getPallets(@PathVariable("container-id") Long containerId){
         return palletService.getPallets(containerId);
+    }
+
+    @GetMapping("/{container-id}/valid")
+    public List<ProductDTO> getValidProducts(@PathVariable("container-id") Long containerId, @AuthenticationPrincipal UserDetails userDetails){
+        return palletService.getValidProducts(containerId, userDetails.getUsername());
     }
 
     @PostMapping()
