@@ -11,9 +11,16 @@
   input:focus {
     @apply ring-cb outline-none ring-1;
   }
+
+  table {
+    @apply border-collapse border border-gray-200;
+  }
+
+  th,
+  td {
+    @apply border border-gray-300 px-4 py-2;
+  }
 }
-
-
 
 body {
   margin: 0;
