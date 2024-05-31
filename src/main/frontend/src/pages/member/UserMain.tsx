@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import {
   Column,
   ColumnDef,
+  PaginationState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -32,6 +33,506 @@ interface Person {
 }
 
 const defaultData: Person[] = [
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 2,
+    memberId: "test1",
+    productName: "백산수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "반려",
+  },
+  {
+    id: 1,
+    memberId: "test1",
+    productName: "삼다수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
+
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 3,
+    memberId: "test1",
+    productName: "아리수",
+    quantity: 200,
+    height: 30,
+    weight: 30,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "파주",
+    finalAddress: "논산",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
   {
     id: 2,
     memberId: "test1",
@@ -180,6 +681,7 @@ export default function UserMain() {
   const [data, _setData] = React.useState<Person[]>(defaultData);
   const [refeach, _setfetch] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Person | null>(null);
+
   const handleRowClick = (row: Person) => {
     setSelectedRow(row);
     // 모달 열기 등의 작업을 수행할 수 있습니다.
@@ -306,7 +808,7 @@ export default function UserMain() {
         </div>
         {/* 표 */}
         <div className="h-2" />
-        <div className="overflow-hidden rounded-lg h-[800px] bg-white">
+        <div className="h-[920px] overflow-auto bg-white rounded-lg flex flex-col justify-between">
           <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -352,7 +854,71 @@ export default function UserMain() {
               })}
             </tbody>
             <tfoot></tfoot>
+            
           </table>
+          <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
+              <button
+                className="p-1 border rounded"
+                onClick={() => table.setPageIndex(0)}
+                disabled={!table.getCanPreviousPage()}
+              >
+                {"<<"}
+              </button>
+              <button
+                className="p-1 border rounded"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                {"<"}
+              </button>
+              <button
+                className="p-1 border rounded"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                {">"}
+              </button>
+              <button
+                className="p-1 border rounded"
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!table.getCanNextPage()}
+              >
+                {">>"}
+              </button>
+              <span className="flex items-center gap-1">
+                <div>Page</div>
+                <strong>
+                  {table.getState().pagination.pageIndex + 1} of{" "}
+                  {table.getPageCount()}
+                </strong>
+              </span>
+              <span className="flex items-center gap-1">
+                | Go to page:
+                <input
+                  type="number"
+                  defaultValue={table.getState().pagination.pageIndex + 1}
+                  onChange={(e) => {
+                    const page = e.target.value
+                      ? Number(e.target.value) - 1
+                      : 0;
+                    table.setPageIndex(page);
+                  }}
+                  className="w-16 p-1 border rounded"
+                />
+              </span>
+              <select
+                value={table.getState().pagination.pageSize}
+                onChange={(e) => {
+                  table.setPageSize(Number(e.target.value));
+                }}
+              >
+                {[10, 20, 30, 40, 50].map((pageSize) => (
+                  <option key={pageSize} value={pageSize}>
+                    Show {pageSize}
+                  </option>
+                ))}
+              </select>
+            </div>
         </div>
       </div>
     </div>

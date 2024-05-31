@@ -45,6 +45,93 @@ const defaultData: Person[] = [
     startingPoint: "소레포구항",
     destination: "LA",
   },
+  {
+    id: 3,
+    containerName: "didi적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },{
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },
+  {
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },{
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },{
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },
 ];
 
 export default function ContainerList() {
@@ -219,7 +306,7 @@ export default function ContainerList() {
         </div>
 
         <div className="h-2" />
-        <div className="h-[800px] bg-white overflow-hidden rounded-lg">
+        <div className="h-[900px] bg-white overflow-auto rounded-lg flex flex-col justify-between">
           <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -285,6 +372,67 @@ export default function ContainerList() {
             </tbody>
             <tfoot></tfoot>
           </table>
+          <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<<"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+            >
+              {">>"}
+            </button>
+            <span className="flex items-center gap-1">
+              <div>Page</div>
+              <strong>
+                {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </strong>
+            </span>
+            <span className="flex items-center gap-1">
+              | Go to page:
+              <input
+                type="number"
+                defaultValue={table.getState().pagination.pageIndex + 1}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  table.setPageIndex(page);
+                }}
+                className="w-16 p-1 border rounded"
+              />
+            </span>
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </div>

@@ -56,6 +56,132 @@ const defaultData: Person[] = [
     deliveryStatus: null,
     approvalStatus: "승인",
   },
+  {
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },{
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },{
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },{
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },{
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    deadline: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },
 ];
 
 export default function ApprComplete() {
@@ -201,7 +327,7 @@ export default function ApprComplete() {
         </div>
 
         <div className="h-2" />
-        <div className="h-[800px] bg-white rounded-lg overflow-hidden ">
+        <div className="h-[900px] bg-white rounded-lg overflow-auto flex flex-col justify-between">
           <table className="min-w-full overflow-x-auto font-sans bg-white table-lg ">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -258,6 +384,68 @@ export default function ApprComplete() {
             </tbody>
             <tfoot></tfoot>
           </table>
+
+          <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<<"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </button>
+            <button
+              className="p-1 border rounded"
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+            >
+              {">>"}
+            </button>
+            <span className="flex items-center gap-1">
+              <div>Page</div>
+              <strong>
+                {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </strong>
+            </span>
+            <span className="flex items-center gap-1">
+              | Go to page:
+              <input
+                type="number"
+                defaultValue={table.getState().pagination.pageIndex + 1}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  table.setPageIndex(page);
+                }}
+                className="w-16 p-1 border rounded"
+              />
+            </span>
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </div>
