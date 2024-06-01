@@ -20,8 +20,9 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<?> saveProduct(@RequestBody ProductDTO productDTO, @AuthenticationPrincipal UserDetails userDetails){
-        productService.saveProduct(productDTO, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
+        if(productService.saveProduct(productDTO, userDetails.getUsername()))
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping()

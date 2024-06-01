@@ -1,7 +1,10 @@
 package com.cosmos.container.service;
 
+import com.cosmos.container.constant.ApprovalStatus;
+import com.cosmos.container.constant.ContainerType;
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.PalletDTO;
+import com.cosmos.container.dto.ProductDTO;
 import com.cosmos.container.entity.ContainerEntity;
 import com.cosmos.container.entity.PalletEntity;
 import com.cosmos.container.entity.ProductEntity;
@@ -30,21 +33,23 @@ public class PalletService {
         return palletDTOS;
     }
 
-    public PalletDTO addPallet(Long productId, Long containerId, PalletType palletType) {
+    public boolean addPallet(Long productId, Long containerId, PalletType palletType) {
         PalletEntity palletEntity = new PalletEntity();
         ProductEntity productEntity = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        float height = productEntity.getHeight() + 0.15f;
         float weight = getWeight(palletType, productEntity);
+        if(!validatePallet(containerEntity, weight))
+            return false;
+        float height = productEntity.getHeight() + 0.15f;
         palletEntity.initPallet(productId, productEntity.getProductName(), containerId, palletType, height, weight);
         productEntity.setAssigned(true);
         containerEntity.addWeight(weight);
         palletRepository.save(palletEntity);
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
-        return PalletDTO.toPalletDTO(palletEntity);
+        return true;
     }
 
     public void cancelPallet(Long palletId) {
@@ -54,7 +59,7 @@ public class PalletService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         productEntity.setAssigned(false);
         ContainerEntity containerEntity = containerRepository.findById(palletEntity.getContainerId())
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 컨테이너입니다"));
         containerEntity.loseWeight(palletEntity.getWeight());
         productRepository.save(productEntity);
         containerRepository.save(containerEntity);
@@ -66,6 +71,13 @@ public class PalletService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         palletEntity.savePalletLocation(palletDTO.getX(), palletDTO.getY(), palletDTO.getZ());
         palletRepository.save(palletEntity);
+    }
+
+    public List<ProductDTO> getValidProducts(Long containerId, String username) {
+        ContainerEntity containerEntity = containerRepository.findById(containerId)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
+        List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndAssigned(ApprovalStatus.STATUS_ACCEPT, username, false);
+        return getValidProduct(containerEntity, productEntities);
     }
 
     private float getWeight(PalletType palletType, ProductEntity productEntity) {
@@ -86,5 +98,24 @@ public class PalletService {
             weight = productEntity.getWeight() + 27.5f;
         }
         return weight;
+    }
+
+    private boolean validatePallet(ContainerEntity containerEntity, float weight) {
+        if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_20FT_DRY){
+            return (containerEntity.getWeight() + weight <= 21700);
+        } else if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_40FT_DRY){
+            return (containerEntity.getWeight() + weight <= 26740);
+        } else{
+            return (containerEntity.getWeight() + weight <= 26580);
+        }
+    }
+
+    private List<ProductDTO> getValidProduct(ContainerEntity containerEntity, List<ProductEntity> productEntities){
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for(ProductEntity productEntity : productEntities) {
+            if(validatePallet(containerEntity, productEntity.getWeight() + 27.5f))
+                productDTOS.add(ProductDTO.toProductDTO(productEntity));
+        }
+        return productDTOS;
     }
 }
