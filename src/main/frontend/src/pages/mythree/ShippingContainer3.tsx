@@ -29,10 +29,10 @@ export default function ShippingContainer(props:any) {
           </mesh>
       </RigidBody> */}
 
-    <group {...props} position={[0,-0.7,-5]}dispose={null} scale={0.011}>
+    
+      <group {...props} position={[0,-0.5,-10]}dispose={null} scale={[0.02*ratio,0.02*ratio,0.04*ratio]}>
     <RigidBody type={rigidbody? "fixed" : "dynamic"} colliders="trimesh" >
       <group>
-
     <mesh
         castShadow
         receiveShadow
@@ -40,7 +40,6 @@ export default function ShippingContainer(props:any) {
         material={materials.rubber_Mat}>
         <meshStandardMaterial transparent opacity={opacity} wireframe={wireframe} color={containerColor}/>
       </mesh>
-      
       
       <mesh
         castShadow
@@ -193,8 +192,10 @@ export default function ShippingContainer(props:any) {
       </group>
       </RigidBody>
       </group>
+
       </group>
   )
 }
 
 useGLTF.preload('/container20fo.gltf')
+

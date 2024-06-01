@@ -22,7 +22,7 @@ export default function ContainerUpload() {
     console.log(e);
     setContainerType(e);
   }, []);
-  const buttonsNameList = ["20FT DRY", "40FT DRY", "40FT HQ"];
+  const buttonsNameList = ["CONTAINER_TYPE_20FT_DRY", "CONTAINER_TYPE_40FT_DRY", "CONTAINER_TYPE_40FT_HQ"];
 
   // const clickType = useCallback(async (e: any) => {
   //   if (e.target.name === "20FT DRY") {

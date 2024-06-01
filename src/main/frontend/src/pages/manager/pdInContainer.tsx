@@ -256,17 +256,18 @@ const loadingDefaultData: Loading[] = [
 export default function PdinContainer() {
   const childRef:any = useRef(null);
 
+  // 이 부분 수정 아래 부분 함수 3개 복붙
   // BoxPage의 handleSubmit을 받아와서 PalletModal에 전달
-  const addToBoxList = (palletId:any) => { // 박스 추가
-    childRef.current?.handleSubmit(palletId);
+  const addToBoxList = (palletId:any, palletType:any, height:any) => { // 박스 추가
+    childRef.current?.handleSubmit(palletId, palletType, height);
   }
 
   const deleteAtBoxList = (palletId:any) => { // 박스 삭제
     childRef.current?.handleDelete(palletId);
   }
 
-  const loadingBoxList = () => { // 박스 삭제
-    childRef.current?.getBoxList();
+  const loadingBoxList = (containerType:any) => { // 박스 삭제
+    childRef.current?.getBoxList(containerType);
   }
 
 
@@ -326,41 +327,43 @@ export default function PdinContainer() {
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(unloadingDefaultData);
-  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
+    React.useState<Person[]>(()=>[]);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [refeach, _setfetch] = useState(false);
 
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     loadingBoxList()
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      const containerType:any = await CreateAxiosInstance().get(`/containers/${urlContainerId}`);
+      console.log("containerType: " + containerType.data);
+      loadingBoxList(containerType.data)
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get("/products/decide");
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+    })();
+  }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
@@ -418,7 +421,6 @@ export default function PdinContainer() {
     <div className="items-center h-full font-sans bg-slate-100">
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
-        <button onClick={deleteAtBoxList}>삭제</button>
         <Link
           to={"/manager/apprwait"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
@@ -486,7 +488,7 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} addToBoxList={addToBoxList} reverseRefeach={reverseRefeach}/>
+                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} productHeight={unloadingData[parseInt(row.id)].height} addToBoxList={addToBoxList} reverseRefeach={reverseRefeach}/>
                         </td>
                       </tr>
                     );
