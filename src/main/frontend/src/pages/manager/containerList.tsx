@@ -15,7 +15,6 @@ import {
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link, Outlet } from "react-router-dom";
 
-
 interface Person {
   id: number;
   containerName: string;
@@ -31,7 +30,7 @@ const defaultData: Person[] = [
     id: 3,
     containerName: "바나나적재칸",
     weight: 300,
-    containerType: "20FT DRY",
+    containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
@@ -40,7 +39,7 @@ const defaultData: Person[] = [
     id: 67,
     containerName: "소고기적재칸",
     weight: 500,
-    containerType: "40FT DRY",
+    containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
@@ -49,7 +48,7 @@ const defaultData: Person[] = [
     id: 3,
     containerName: "didi적재칸",
     weight: 300,
-    containerType: "20FT DRY",
+    containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
@@ -58,24 +57,7 @@ const defaultData: Person[] = [
     id: 67,
     containerName: "소고기적재칸",
     weight: 500,
-    containerType: "40FT DRY",
-    deadline: new Date("2024-04-21T18:00:00"),
-    startingPoint: "소레포구항",
-    destination: "LA",
-  },{
-    id: 3,
-    containerName: "바나나적재칸",
-    weight: 300,
-    containerType: "20FT DRY",
-    deadline: new Date("2024-04-21T18:00:00"),
-    startingPoint: "대구항",
-    destination: "샌프란시스코",
-  },
-  {
-    id: 67,
-    containerName: "소고기적재칸",
-    weight: 500,
-    containerType: "40FT DRY",
+    containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
@@ -84,7 +66,7 @@ const defaultData: Person[] = [
     id: 3,
     containerName: "바나나적재칸",
     weight: 300,
-    containerType: "20FT DRY",
+    containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
@@ -93,15 +75,16 @@ const defaultData: Person[] = [
     id: 67,
     containerName: "소고기적재칸",
     weight: 500,
-    containerType: "40FT DRY",
+    containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
-  },{
+  },
+  {
     id: 3,
     containerName: "바나나적재칸",
     weight: 300,
-    containerType: "20FT DRY",
+    containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
@@ -110,15 +93,16 @@ const defaultData: Person[] = [
     id: 67,
     containerName: "소고기적재칸",
     weight: 500,
-    containerType: "40FT DRY",
+    containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
-  },{
+  },
+  {
     id: 3,
     containerName: "바나나적재칸",
     weight: 300,
-    containerType: "20FT DRY",
+    containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
     destination: "샌프란시스코",
@@ -127,7 +111,34 @@ const defaultData: Person[] = [
     id: 67,
     containerName: "소고기적재칸",
     weight: 500,
-    containerType: "40FT DRY",
+    containerType: "40FT_DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },
+  {
+    id: 3,
+    containerName: "바나나적재칸",
+    weight: 300,
+    containerType: "20FT_DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "대구항",
+    destination: "샌프란시스코",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT_DRY",
+    deadline: new Date("2024-04-21T18:00:00"),
+    startingPoint: "소레포구항",
+    destination: "LA",
+  },
+  {
+    id: 67,
+    containerName: "소고기적재칸",
+    weight: 500,
+    containerType: "40FT_HQ",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
     destination: "LA",
@@ -151,6 +162,7 @@ export default function ContainerList() {
       {
         accessorKey: "weight",
         header: () => "적재현황(kg)",
+        cell: ({ row }) => <div>{calMaxWeight(row)}</div>,
       },
       {
         accessorKey: "containerType",
@@ -172,8 +184,18 @@ export default function ContainerList() {
     ],
     []
   );
+  const calMaxWeight = (row: any) => {
+    const containerType = row.original.containerType;
+    const curWeight = row.original.weight;
+    if (containerType === "20FT_DRY") {
+      return <div>{curWeight}<br />/21700</div>;
+    } else if (containerType === "40FT_DRY") {
+      return <div>{curWeight}/26740</div>;
+    } else if (containerType === "40FT_HQ") {
+      return <div>{curWeight}/26580</div>;
+    }
+  };
 
-  
   // const customTime = (row: any) => {
   //   const oriDate = new Date(row.original.deadline);
   // //   console.log(oriDate);
@@ -182,53 +204,52 @@ export default function ContainerList() {
   // //   const day = String(oriDate.getDate()).padStart(2, "0");
   // //   const hours = String(oriDate.getHours()).padStart(2, "0");
   // //   const minutes = String(oriDate.getMinutes()).padStart(2, "0");
-    
 
   //   return `${year}-${month}-${day} ${hours}:${minutes}`;
   // };
-// 날짜 객체 생성
-// const customTime = (row: any) => {
-//   const oriDate = new Date(row.original.deadline);
+  // 날짜 객체 생성
+  // const customTime = (row: any) => {
+  //   const oriDate = new Date(row.original.deadline);
 
-//   // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
-//   const dateString = oriDate.toString();
-//   const dateArray = dateString.split("");
-//   const formattedDate = (
-//     <span>
-//       {dateArray[0]}
-//       <br />
-//       {dateArray[1]}
-//     </span>
-//   );
+  //   // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
+  //   const dateString = oriDate.toString();
+  //   const dateArray = dateString.split("");
+  //   const formattedDate = (
+  //     <span>
+  //       {dateArray[0]}
+  //       <br />
+  //       {dateArray[1]}
+  //     </span>
+  //   );
 
-//   return formattedDate;
-// };
+  //   return formattedDate;
+  // };
 
-  const [data, _setData] = React.useState<Person[]>(()=>[]);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
 
   // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -244,7 +265,6 @@ export default function ContainerList() {
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
   });
-
 
   const deleteContainer = async (rowId: string) => {
     console.log(rowId);
@@ -356,13 +376,16 @@ export default function ContainerList() {
                       {/* 승인완료 */}
                       <Link
                         to={`./${data[parseInt(row.id)].id}`}
-                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre px-4"
+                        className="p-2 px-4 text-xl font-bold text-center bg-white border-2 rounded-lg text-gre hover:bg-gre hover:text-white border-gre"
                       >
                         관리
                       </Link>
                     </td>
                     <td>
-                      <button onClick={() => deleteContainer(row.id)} className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-4">
+                      <button
+                        onClick={() => deleteContainer(row.id)}
+                        className="p-2 px-4 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
+                      >
                         삭제
                       </button>
                     </td>
