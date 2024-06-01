@@ -655,21 +655,21 @@ export default function UserMain() {
 
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
+    console.log(oriDate);
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
 
-    // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
-    const dateString = oriDate.toString();
-    const dateArray = dateString.split("GMT");
-    const formattedDate = (
-      <span>
-        {dateArray[0]}
+    return (
+      <div>
+        {`${year}-${month}-${day} ${hours}:${minutes}`}
         <br />
-        GMT{dateArray[1]}
-      </span>
+        {`GMT+0900(한국 표준시)`}
+      </div>
     );
-
-    return formattedDate;
   };
-
   const resetSelection = () => {
     table.toggleAllRowsSelected(false);
   };

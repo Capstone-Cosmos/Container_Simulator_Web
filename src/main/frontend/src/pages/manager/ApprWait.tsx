@@ -483,19 +483,20 @@ export default function ApprWait() {
   );
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
+    console.log(oriDate);
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
 
-    // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
-    const dateString = oriDate.toString();
-    const dateArray = dateString.split("GMT");
-    const formattedDate = (
-      <span>
-        {dateArray[0]}
+    return (
+      <div>
+        {`${year}-${month}-${day} ${hours}:${minutes}`}
         <br />
-        GMT{dateArray[1]}
-      </span>
+        {`GMT+0900(한국 표준시)`}
+      </div>
     );
-
-    return formattedDate;
   };
 
   // const [data, _setData] = React.useState(() => [...defaultData]);
@@ -654,14 +655,14 @@ export default function ApprWait() {
                     <td className="flex items-center justify-center gap-12">
                       <button
                         onClick={() => approve(row.id)}
-                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg px-4 text-appr hover:bg-appr hover:text-white border-appr"
+                        className="p-2 px-4 text-xl font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
                       >
                         승인
                       </button>
                       {/* 승인완료 */}
                       <button
                         onClick={() => reject(row.id)}
-                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-4"
+                        className="p-2 px-4 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
                       >
                         반려
                       </button>

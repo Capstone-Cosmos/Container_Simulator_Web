@@ -171,7 +171,7 @@ export default function ContainerList() {
       {
         accessorKey: "deadline",
         header: () => "마감일",
-        // cell: ({ row }) => <div>{customTime(row)}</div>,
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
         accessorKey: "startingPoint",
@@ -188,7 +188,13 @@ export default function ContainerList() {
     const containerType = row.original.containerType;
     const curWeight = row.original.weight;
     if (containerType === "20FT_DRY") {
-      return <div>{curWeight}<br />/21700</div>;
+      return (
+        <div>
+          {curWeight}
+          <br />
+          /21700
+        </div>
+      );
     } else if (containerType === "40FT_DRY") {
       return <div>{curWeight}/26740</div>;
     } else if (containerType === "40FT_HQ") {
@@ -196,17 +202,23 @@ export default function ContainerList() {
     }
   };
 
-  // const customTime = (row: any) => {
-  //   const oriDate = new Date(row.original.deadline);
-  // //   console.log(oriDate);
-  // //   const year = oriDate.getFullYear();
-  // //   const month = String(oriDate.getMonth() + 1).padStart(2, "0");
-  // //   const day = String(oriDate.getDate()).padStart(2, "0");
-  // //   const hours = String(oriDate.getHours()).padStart(2, "0");
-  // //   const minutes = String(oriDate.getMinutes()).padStart(2, "0");
+  const customTime = (row: any) => {
+    const oriDate = new Date(row.original.deadline);
+    console.log(oriDate);
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
 
-  //   return `${year}-${month}-${day} ${hours}:${minutes}`;
-  // };
+    return (
+      <div>
+        {`${year}-${month}-${day} ${hours}:${minutes}`}
+        <br />
+        {`GMT+0900(한국 표준시)`}
+      </div>
+    );
+  };
   // 날짜 객체 생성
   // const customTime = (row: any) => {
   //   const oriDate = new Date(row.original.deadline);

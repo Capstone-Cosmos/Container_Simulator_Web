@@ -244,19 +244,20 @@ export default function ApprComplete() {
 
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
+    console.log(oriDate);
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
 
-    // 날짜를 문자열로 변환하고 'GMT' 부분 앞에서 줄바꿈
-    const dateString = oriDate.toString();
-    const dateArray = dateString.split("GMT");
-    const formattedDate = (
-      <span>
-        {dateArray[0]}
+    return (
+      <div>
+        {`${year}-${month}-${day} ${hours}:${minutes}`}
         <br />
-        GMT{dateArray[1]}
-      </span>
+        {`GMT+0900(한국 표준시)`}
+      </div>
     );
-
-    return formattedDate;
   };
 
   const table = useReactTable({
@@ -373,7 +374,7 @@ export default function ApprComplete() {
                       {/* 승인완료 */}
                       <button
                         onClick={() => cancel(row.id)}
-                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-4"
+                        className="p-2 px-4 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
                       >
                         취소
                       </button>
