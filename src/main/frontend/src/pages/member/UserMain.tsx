@@ -1,21 +1,18 @@
-import React, { HTMLAttributes, HTMLProps, useEffect, useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { HTMLProps, useState } from "react";
 
 import {
   Column,
   ColumnDef,
-  PaginationState,
+  Table,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  Row,
-  Table,
-  useReactTable,
+  useReactTable
 } from "@tanstack/react-table";
 
-import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import { Link } from "react-router-dom";
+import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 
 interface Person {
   id: number;

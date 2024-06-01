@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import useInput from "../../useInput";
-import { useCallback, useState } from "react";
-import axios from "axios";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
+import useInput from "../../useInput";
 
 export default function UploadPd() {
   const navigate = useNavigate();

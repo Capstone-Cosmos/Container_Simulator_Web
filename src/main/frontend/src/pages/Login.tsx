@@ -9,10 +9,11 @@ export default function Login() {
   const navigate = useNavigate();
   const [memberId, onChangeMemberId] = useInput("");
   const [memberPassword, onChangememberPassword] = useInput("");
+  const [failLogin, setFailLogin] = useState(false);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-
+    
     try {
       //아이디와 비번 서버에 보내기
       const response = await axios.post("/login", null, {
@@ -29,6 +30,8 @@ export default function Login() {
         } else {
           navigate("/manager/apprWait");
         }
+      } else {
+        setFailLogin(true);
       }
       //받은 토큰을 로컬 스토리지에 저장
     } catch (error) {
@@ -85,7 +88,12 @@ export default function Login() {
             회원가입
           </Link>
         </div>
-
+        {failLogin && (
+          <div className="absolute -translate-x-1/2 left-1/2 top-[433px] w-[550px] h-[65px] flex justify-center text-reg">
+            아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.
+            <br/>입력하신 내용을 다시 확인해주세요.
+          </div>
+        )}
         {/*로그인버튼*/}
         <button
           type="submit"
