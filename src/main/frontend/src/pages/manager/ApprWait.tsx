@@ -592,7 +592,7 @@ export default function ApprWait() {
       </div>
       {/* 승인대기 */}
       <div className="container items-center px-16 pt-5">
-        <div className="flex items-center gap-12 p-2">
+        <div className="flex items-center gap-4 pb-2">
           <Link
             to="/manager/apprWait"
             className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
@@ -609,8 +609,8 @@ export default function ApprWait() {
         </div>
 
         <div className="h-2" />
-        <div className="h-[900px] bg-white rounded-lg overflow-auto flex flex-col justify-between">
-          <table className="min-w-full overflow-x-auto font-sans bg-white rounded-lg table-lg ">
+        <div className="h-[765px] bg-white rounded-lg overflow-auto flex flex-col justify-between mb-8">
+          <table className="min-w-full overflow-x-auto font-sans bg-white rounded-lg table-sm ">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -654,14 +654,14 @@ export default function ApprWait() {
                     <td className="flex items-center justify-center gap-12">
                       <button
                         onClick={() => approve(row.id)}
-                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg px-14 text-appr hover:bg-appr hover:text-white border-appr"
+                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg px-4 text-appr hover:bg-appr hover:text-white border-appr"
                       >
                         승인
                       </button>
                       {/* 승인완료 */}
                       <button
                         onClick={() => reject(row.id)}
-                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
+                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-4"
                       >
                         반려
                       </button>
@@ -674,28 +674,28 @@ export default function ApprWait() {
           </table>
           <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               {"<<"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {"<"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {">"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

@@ -12,9 +12,9 @@
     @apply ring-cb outline-none ring-1;
   }
 
-  table {
-    @apply border-collapse border border-gray-200;
-  }
+  /*table {*/
+  /*  @apply border-collapse border border-gray-200;*/
+  /*}*/
 
   th,
   td {

@@ -58,7 +58,7 @@ export default function UploadPd() {
   };
 
   return (
-    <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
+    <div className="relative h-[1400px] bg-[#f1f3f5] overflow-hidden">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
           to={"/user/usermain"}
@@ -75,13 +75,13 @@ export default function UploadPd() {
       </div>
 
       {/*가운데 틀*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1536px] bg-[#f8f9fa] rounded-[4px]"></div>
+      <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[1230px] bg-[#f8f9fa] rounded-[4px]"></div>
       <div className="absolute -translate-x-1/2 left-1/2 top-[120px] leading-[170%] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap w-[740px] bg-cb h-11 items-center flex justify-center">
         <span className="text-[30px] text-white">상품등록</span>
       </div>
 
       {/*상품명*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[296px] w-[550px] h-[133px]">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[220px] w-[550px] h-[133px]">
         <input
           type="text"
           id="productName"
@@ -97,7 +97,7 @@ export default function UploadPd() {
       </div>
 
       {/*수량*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px]">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[359px] w-[550px] h-[133px]">
         <input
           type="number"
           id="quantity"
@@ -110,7 +110,7 @@ export default function UploadPd() {
         </div>
       </div>
       {/*높이*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[642px] w-[550px] h-[133px]">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[498px] w-[550px] h-[133px]">
         <input
           type="text"
           id="height"
@@ -124,7 +124,7 @@ export default function UploadPd() {
       </div>
 
       {/*무게*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[815px] w-[550px] h-[133px] flex">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[637px] w-[550px] h-[133px] flex">
         <input
           type="text"
           id="weight"
@@ -138,7 +138,7 @@ export default function UploadPd() {
       </div>
 
       {/*출고마감시간*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[954px] w-[549px] h-[133px] flex">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[776px] w-[549px] h-[133px] flex">
         <div className="absolute left-0 right-[93.81%] top-0 bottom-[86.24%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           출고마감시간
         </div>
@@ -155,7 +155,7 @@ export default function UploadPd() {
       </div>
 
       {/*1차배송지*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[1093px] w-[549px] h-[104px] flex">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[915px] w-[549px] h-[104px] flex">
         <div className="absolute left-0 right-[90.89%] top-0 bottom-[75%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           1차배송지
         </div>
@@ -171,7 +171,7 @@ export default function UploadPd() {
       </div>
 
       {/*최종배송지*/}
-      <div className="absolute -translate-x-1/2 left-1/2 top-[1232px] w-[549px] h-[104px] flex">
+      <div className="absolute -translate-x-1/2 left-1/2 top-[1054px] w-[549px] h-[104px] flex">
         <div className="absolute left-0 right-[90.89%] top-0 bottom-[75%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           최종배송지
         </div>
@@ -187,7 +187,7 @@ export default function UploadPd() {
       </div>
 
       {/*하단 등록 버튼*/}
-      <div className="absolute flex justify-center -translate-x-1/2 left-1/2 top-[1416px] gap-4">
+      <div className="absolute flex justify-center -translate-x-1/2 left-1/2 top-[1215px] gap-4">
         <button
           onClick={goBack}
           className="w-[220px] h-[65px] font-['Noto_Sans_KR'] bg-white font-bold text-xl text-cb border-2 border-cb rounded-md hover:bg-cb hover:text-white"

@@ -310,7 +310,7 @@ export default function ApprComplete() {
       </div>
       {/* 승인대기 */}
       <div className="container px-16 pt-5 ">
-        <div className="flex gap-12 p-2">
+        <div className="flex gap-4 pb-2">
           <Link
             to="/manager/apprWait"
             className="w-2/12 p-3 text-xl font-thin text-center text-gray-400 bg-white border-2 border-gray-400 rounded-lg hover:bg-cb hover:text-white hover:border-cb"
@@ -327,8 +327,8 @@ export default function ApprComplete() {
         </div>
 
         <div className="h-2" />
-        <div className="h-[900px] bg-white rounded-lg overflow-auto flex flex-col justify-between">
-          <table className="min-w-full overflow-x-auto font-sans bg-white table-lg ">
+        <div className="h-[765px] bg-white rounded-lg overflow-auto flex flex-col justify-between mb-8">
+          <table className="min-w-full overflow-x-auto font-sans bg-white table-sm ">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -373,7 +373,7 @@ export default function ApprComplete() {
                       {/* 승인완료 */}
                       <button
                         onClick={() => cancel(row.id)}
-                        className="p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-14"
+                        className="p-2 text-xl font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg px-4"
                       >
                         취소
                       </button>
@@ -387,28 +387,28 @@ export default function ApprComplete() {
 
           <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               {"<<"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {"<"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {">"}
             </button>
             <button
-              className="p-1 border rounded"
+              className="p-1"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

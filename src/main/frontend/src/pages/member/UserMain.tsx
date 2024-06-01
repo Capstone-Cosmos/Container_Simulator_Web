@@ -805,8 +805,8 @@ export default function UserMain() {
         </div>
         {/* 표 */}
         <div className="h-2" />
-        <div className="h-[920px] overflow-auto bg-white rounded-lg flex flex-col justify-between">
-          <table className="min-w-full overflow-x-auto font-sans bg-white table-lg">
+        <div className="h-[675px] overflow-auto bg-white rounded-lg flex flex-col justify-between">
+          <table className="min-w-full overflow-x-auto font-sans bg-white table-sm">
             <thead className="bg-[#74B5DD] text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -855,28 +855,28 @@ export default function UserMain() {
           </table>
           <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
               <button
-                className="p-1 border rounded"
+                className="p-1"
                 onClick={() => table.setPageIndex(0)}
                 disabled={!table.getCanPreviousPage()}
               >
                 {"<<"}
               </button>
               <button
-                className="p-1 border rounded"
+                className="p-1"
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
               >
                 {"<"}
               </button>
               <button
-                className="p-1 border rounded"
+                className="p-1"
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
               >
                 {">"}
               </button>
               <button
-                className="p-1 border rounded"
+                className="p-1"
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
               >

@@ -504,7 +504,7 @@ export default function PdinContainer() {
           <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-gre">
             컨테이너에 적재된 품목
           </div>
-          <div className="w-full h-[700px] bg-white">
+          <div className="w-full h-[715px] bg-white">
             <table className="w-full font-sans bg-white table-sm">
               <thead className="text-white bg-gre">
                 {loadingTable.getHeaderGroups().map((headerGroup) => (
