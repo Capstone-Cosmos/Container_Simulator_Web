@@ -5,7 +5,7 @@ import { useControls } from 'leva'
 
 import { RigidBody, useFixedJoint } from '@react-three/rapier'
 
-export default function ShippingContainer(props:any) {
+export default function ShippingContainer2(props:any) {
   //const { nodes, materials }:any = useGLTF('/container20fo.gltf')
   //const { nodes, materials }:any = useGLTF('/ContainerFinal.gltf')
   const { nodes, materials }:any = useGLTF('/container20fo.gltf')
@@ -22,17 +22,10 @@ export default function ShippingContainer(props:any) {
   const ratio = 0.55
   return (
     <group>
-      {/* <RigidBody type={rigidbody? "fixed" : "dynamic"} colliders="trimesh" >
-      <mesh castShadow receiveShadow rotation={[0,0,0]} position={[1.27, 1, -2]}>
-            <boxGeometry args={[0.1, 2.6, 10]} />
-            <meshStandardMaterial transparent opacity={0} color="black" />
-          </mesh>
-      </RigidBody> */}
-
-    <group {...props} position={[0,-0.7,-5]}dispose={null} scale={0.011}>
+      
+      <group {...props} position={[0,-0.5,-10]}dispose={null} scale={[0.02*ratio,0.02*1.13*ratio,0.04*ratio]}>
     <RigidBody type={rigidbody? "fixed" : "dynamic"} colliders="trimesh" >
       <group>
-
     <mesh
         castShadow
         receiveShadow
@@ -40,7 +33,6 @@ export default function ShippingContainer(props:any) {
         material={materials.rubber_Mat}>
         <meshStandardMaterial transparent opacity={opacity} wireframe={wireframe} color={containerColor}/>
       </mesh>
-      
       
       <mesh
         castShadow

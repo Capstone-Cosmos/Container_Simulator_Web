@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
-export default function PalletModal({ urlContainerId, productId, addToBoxList, reverseRefeach }: any) {
+export default function PalletModal({ urlContainerId, productId, productHeight, addToBoxList, reverseRefeach }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [palletType, setPalletType] = useState("");
   const openModal = () => {
@@ -24,12 +24,9 @@ export default function PalletModal({ urlContainerId, productId, addToBoxList, r
     },
   };
 
-  console.log("containerId: " + urlContainerId + " productId: " + productId);
   const addPallet = async (e: any) => {
-    console.log("a");
-    console.log(e);
-
-
+    //이 부분 수정 -> 높이 받아올 필요 있음
+    //이 부분 수정 -> 2번째인자. 임시로 palletType을 정함 원래는 e
     try {
       const response = await CreateAxiosInstance().post("/pallets", null, {
         params: {
@@ -38,13 +35,12 @@ export default function PalletModal({ urlContainerId, productId, addToBoxList, r
           palletType: e,
         },
       });
-      addToBoxList(productId)
+      addToBoxList(productId, e, productHeight);
     } catch (error) {
       console.log(error, "error");
     }
     closeModal();
-    reverseRefeach()
-    // window.location.reload();
+    reverseRefeach();
   };
 
   return (
