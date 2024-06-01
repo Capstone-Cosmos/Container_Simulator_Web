@@ -25,9 +25,9 @@ export default function Login() {
       if (response.status === 200) {
         localStorage.setItem("accessToken", response.headers.access);
         if (response.headers.navigate === "member") {
-          navigate("/new/usermain");
+          navigate("/user/usermain");
         } else {
-          navigate("/new/apprWait");
+          navigate("/manager/apprWait");
         }
       }
       //받은 토큰을 로컬 스토리지에 저장

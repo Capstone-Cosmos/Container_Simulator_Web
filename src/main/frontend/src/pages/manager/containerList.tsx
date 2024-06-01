@@ -272,13 +272,13 @@ export default function ContainerList() {
     <div className="flex flex-col items-center justify-center h-full mx-auto font-sans bg-slate-100">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/apprwait"}
+          to={"/manager/apprwait"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           품목리스트
         </Link>
         <Link
-          to={"/new/containerList"}
+          to={"/manager/containerList"}
           className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
           컨테이너리스트
@@ -298,7 +298,7 @@ export default function ContainerList() {
           </div>
 
           <Link
-            to="/new/containerUpload"
+            to="/manager/containerUpload"
             className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
           >
             컨테이너 등록

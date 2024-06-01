@@ -751,13 +751,13 @@ export default function UserMain() {
       {/* 주문내역, 상품등록하기 네이게이션바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/usermain"}
+          to={"/user/usermain"}
           className="text-xl text-cb w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           주문내역
         </Link>
         <Link
-          to={"/new/uploadpd"}
+          to={"/user/uploadpd"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           상품등록하기
@@ -777,7 +777,7 @@ export default function UserMain() {
           </div>
 
           <Link
-            to="/new/uploadpd"
+            to="/user/uploadpd"
             className="w-2/12 p-3 text-xl text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb "
           >
             상품등록

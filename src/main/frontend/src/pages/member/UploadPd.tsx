@@ -30,7 +30,7 @@ export default function UploadPd() {
       alert("모든 정보를 입력해주세요.");
       return;
     } else {
-      navigate("/new/usermain");
+      navigate("/user/usermain");
       CreateAxiosInstance()
         .post("/products", {
           productName,
@@ -63,13 +63,13 @@ export default function UploadPd() {
     <div className="relative h-[1680px] bg-[#f1f3f5] overflow-hidden">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/usermain"}
+          to={"/user/usermain"}
           className="text-xl font-thin text-gray-600 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           주문내역
         </Link>
         <Link
-          to={"/new/usermain"}
+          to={"/user/usermain"}
           className="text-xl text-cb w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           상품등록하기

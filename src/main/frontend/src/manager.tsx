@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Navigator from './components/navigator';
+import ManagerNavi from "./components/managerNavi";
 
-function New() {
+function Manager() {
     return (
         <div className="h-full bg-slate-100">
-            <Navigator />
+            <ManagerNavi />
             <Outlet />
         </div>
     );
 }
 
-export default New;
+export default Manager;

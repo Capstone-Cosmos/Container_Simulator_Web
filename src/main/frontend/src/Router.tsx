@@ -6,7 +6,7 @@ import ManagerSingIn from "./pages/manager/ManagerSignIn";
 import App from "./App";
 import ErrorComponent from "./components/ErrorComponent";
 import ChoosePosition from "./pages/ChoosePosition";
-import New from "./New";
+import New from "./user";
 
 import UploadPd from "./pages/member/UploadPd";
 import UserMain from "./pages/member/UserMain";
@@ -15,6 +15,8 @@ import ApprComplete from "./pages/manager/ApprComplete";
 import ContainerList from "./pages/manager/containerList";
 import ContainerUpload from './pages/manager/containerUpload';
 import PdinContainer from "./pages/manager/pdInContainer";
+import User from "./user";
+import Manager from "./manager";
 
 
 
@@ -44,8 +46,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/new",
-    element: <New />,
+    path: "/user",
+    element: <User />,
     children : [
       {
         path: "usermain",
@@ -55,6 +57,12 @@ const router = createBrowserRouter([
         path: "uploadpd",
         element: <UploadPd />,
       },
+    ]
+  }, 
+  {
+    path: '/manager',
+    element: <Manager />,
+    children : [
       {
         path: "apprWait",
         element: <ApprWait />,
@@ -77,7 +85,7 @@ const router = createBrowserRouter([
       },
       
     ]
-  }, 
+  }
 ]);
 
 export default router;

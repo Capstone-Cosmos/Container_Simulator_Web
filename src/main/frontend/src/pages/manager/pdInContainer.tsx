@@ -420,13 +420,13 @@ export default function PdinContainer() {
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <button onClick={deleteAtBoxList}>삭제</button>
         <Link
-          to={"/new/apprwait"}
+          to={"/manager/apprwait"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           품목리스트
         </Link>
         <Link
-          to={"/new/containerList"}
+          to={"/manager/containerList"}
           className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
           컨테이너리스트

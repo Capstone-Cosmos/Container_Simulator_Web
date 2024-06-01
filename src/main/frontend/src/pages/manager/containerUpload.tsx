@@ -49,7 +49,7 @@ export default function ContainerUpload() {
       alert("모든 정보를 입력해주세요.");
       return;
     } else {
-      navigate("/new/containerList");
+      navigate("/manager/containerList");
       CreateAxiosInstance()
         .post("/containers", {
           containerName,
@@ -73,21 +73,21 @@ export default function ContainerUpload() {
   };
 
   const goBack = () => {
-    navigate("/new/containerList");
+    navigate("/manager/containerList");
   };
 
   return (
     <div className="relative h-[1300px] bg-[#f1f3f5] overflow-hidden">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/apprwait"}
+          to={"/manager/apprwait"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           품목리스트
         </Link>
 
         <Link
-          to={"/new/containerList"}
+          to={"/manager/containerList"}
           className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
           컨테이너리스트

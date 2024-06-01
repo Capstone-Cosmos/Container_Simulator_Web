@@ -296,13 +296,13 @@ export default function ApprComplete() {
       {/* 메뉴바 */}
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">
         <Link
-          to={"/new/apprwait"}
+          to={"/manager/apprwait"}
           className="text-xl w-44 text-cb btn btn-ghost hover:bg-cb hover:text-white"
         >
           품목리스트
         </Link>
         <Link
-          to={"/new/containerList"}
+          to={"/manager/containerList"}
           className="text-xl font-thin text-gray-400 w-44 btn btn-ghost hover:bg-cb hover:text-white"
         >
           컨테이너리스트
@@ -312,14 +312,14 @@ export default function ApprComplete() {
       <div className="container px-16 pt-5 ">
         <div className="flex gap-12 p-2">
           <Link
-            to="/new/apprWait"
+            to="/manager/apprWait"
             className="w-2/12 p-3 text-xl font-thin text-center text-gray-400 bg-white border-2 border-gray-400 rounded-lg hover:bg-cb hover:text-white hover:border-cb"
           >
             승인대기리스트
           </Link>
           {/* 승인완료 */}
           <Link
-            to="/new/apprComplete"
+            to="/manager/apprComplete"
             className="w-2/12 p-3 text-xl font-bold text-center bg-white border-2 rounded-lg text-cb hover:bg-cb hover:text-white border-cb"
           >
             승인완료리스트
