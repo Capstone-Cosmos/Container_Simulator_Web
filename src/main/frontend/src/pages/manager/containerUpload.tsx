@@ -17,12 +17,23 @@ export default function ContainerUpload() {
   const [startingPoint, setStartingPoint] = useInput("");
   const [destination, setDestination] = useInput("");
   const [clicked, setClicked] = useState("");
+
   const changeTag = useCallback(async (e: any) => {
     setClicked(e);
-    console.log(e);
-    setContainerType(e);
+    if(e === "20FT DRY"){
+      setContainerType("CONTAINER_TYPE_20FT_DRY");
+    } else if(e === '40FT DRY'){
+      setContainerType("CONTAINER_TYPE_40FT_DRY");
+    } else if(e === '40FT HQ'){
+      setContainerType("CONTAINER_TYPE_40FT_HQ");
+    }
   }, []);
-  const buttonsNameList = ["CONTAINER_TYPE_20FT_DRY", "CONTAINER_TYPE_40FT_DRY", "CONTAINER_TYPE_40FT_HQ"];
+
+  const buttonsNameList = [
+    "20FT DRY",
+    "40FT DRY",
+    "40FT HQ",
+  ];
 
   // const clickType = useCallback(async (e: any) => {
   //   if (e.target.name === "20FT DRY") {
@@ -118,45 +129,28 @@ export default function ContainerUpload() {
 
       {/*컨테이너 종류*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[469px] w-[550px] h-[133px] font-semibold text-xl text-[#325558] flex ">
-        ​​​​​​<div className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] ">
-        <Button
-          name={buttonsNameList[0]}
-          onClick={() => changeTag(buttonsNameList[0])}
-          clicked={clicked === buttonsNameList[0]}
-        />
+        ​​​​​​
+        <div className="absolute left-0 right-2/3 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] ">
+          <Button
+            name={buttonsNameList[0]}
+            onClick={() => changeTag(buttonsNameList[0])}
+            clicked={clicked === buttonsNameList[0]}
+          />
         </div>
-
         <div className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px]">
-        <Button
-          name={buttonsNameList[1]}
-          onClick={() => changeTag(buttonsNameList[1])}
-          clicked={clicked === buttonsNameList[1]}
-        />
+          <Button
+            name={buttonsNameList[1]}
+            onClick={() => changeTag(buttonsNameList[1])}
+            clicked={clicked === buttonsNameList[1]}
+          />
         </div>
         <div className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] ">
-        <Button
-          name={buttonsNameList[2]}
-          onClick={() => changeTag(buttonsNameList[2])}
-          clicked={clicked === buttonsNameList[2]}
-          
-        />
+          <Button
+            name={buttonsNameList[2]}
+            onClick={() => changeTag(buttonsNameList[2])}
+            clicked={clicked === buttonsNameList[2]}
+          />
         </div>
-        
-        
-        {/* <button
-          onClick={clickType}
-          className="absolute left-1/3 right-1/3 top-[25.56%] bottom-[25.56%] bg-[rgb(241,243,245)] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white"
-          name="40FT DRY"
-        >
-          40FT DRY
-        </button>
-        <button
-          onClick={clickType}
-          className="absolute left-2/3 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] hover:bg-cb focus:bg-cb hover:text-white focus:text-white checked:text-white"
-          name="40FT HQ"
-        >
-          40FT HQ
-        </button> */}
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           컨테이너 종류
         </div>

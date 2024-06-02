@@ -128,17 +128,19 @@ export default function UploadPd() {
       </div>
       {/*높이*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[498px] w-[550px] h-[133px]">
-        <form>
-          <input
-            type="number"
-            id="height"
-            name="height"
-            max="10"
-            value={height}
-            onChange={limitHeight}
-            className={!높이에러문구 ? "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]" : "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] focus:ring-reg"}
-          />
-        </form>
+        <input
+          type="number"
+          id="height"
+          name="height"
+          max="10"
+          value={height}
+          onChange={limitHeight}
+          className={
+            !높이에러문구
+              ? "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
+              : "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] focus:ring-reg"
+          }
+        ></input>
         <div className="absolute left-0 right-[81.09%] top-[105px] bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-reg whitespace-nowrap">
           {높이에러문구}
         </div>
