@@ -11,6 +11,8 @@ module.exports = {
         'appr':"#3563E9",
         'reg':"#D7260D",
         'gre':"#008736",
+        'yel':"#FFFF00",
+        'org':"#FFB53F",
       },
       maxHeight: {
         '1/2': '50%',

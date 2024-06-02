@@ -38,7 +38,7 @@ const defaultData: Person[] = [
   {
     id: 67,
     containerName: "소고기적재칸",
-    weight: 20000,
+    weight: 10000,
     containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
@@ -47,7 +47,7 @@ const defaultData: Person[] = [
   {
     id: 3,
     containerName: "didi적재칸",
-    weight: 300,
+    weight: 21000,
     containerType: "20FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "대구항",
@@ -128,7 +128,7 @@ const defaultData: Person[] = [
   {
     id: 67,
     containerName: "소고기적재칸",
-    weight: 500,
+    weight: 10000,
     containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
@@ -137,7 +137,7 @@ const defaultData: Person[] = [
   {
     id: 67,
     containerName: "소고기적재칸",
-    weight: 500,
+    weight: 25000,
     containerType: "40FT_HQ",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
@@ -167,6 +167,7 @@ export default function ContainerList() {
       {
         accessorKey: "containerType",
         header: () => "컨테이너 종류",
+        cell: ({ row }) => <div>{containerColor(row)}</div>,
       },
       {
         accessorKey: "deadline",
@@ -184,36 +185,64 @@ export default function ContainerList() {
     ],
     []
   );
+  const 현적재비율에따른글씨색변화 = (실제적재량: any, 현적재량비율: any) => {
+    let 글씨색: string = "";
+    if (현적재량비율 <= 0.3) {
+      return <div className="text-gre">{실제적재량}</div>;
+    } else if (현적재량비율 > 0.3 && 현적재량비율 < 0.8) {
+      return <div className="text-org">{실제적재량}</div>;
+    } else if (현적재량비율 >= 0.8) {
+      return <div className="text-reg">{실제적재량}</div>;
+    }
+  };
+
   const calMaxWeight = (row: any) => {
     const containerType = row.original.containerType;
     const curWeight = row.original.weight;
+    let 최대적재량: number = 1;
+    let 현적재량비율: number = 0;
     if (containerType === "20FT_DRY") {
+      최대적재량 = 21700;
+      현적재량비율 = curWeight / 최대적재량;
       return (
         <div>
-          {curWeight}
+          {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
           <br />
           <span className="text-xs"> (21700)</span>
         </div>
       );
     } else if (containerType === "40FT_DRY") {
-     return (
+      최대적재량 = 26740;
+      현적재량비율 = curWeight / 최대적재량;
+      return (
         <div>
-          {curWeight}
+          {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
           <br />
           <span className="text-xs"> (26740)</span>
         </div>
       );
     } else if (containerType === "40FT_HQ") {
+      최대적재량 = 26580;
+      현적재량비율 = curWeight / 최대적재량;
       return (
         <div>
-          {curWeight}
+          {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
           <br />
           <span className="text-xs"> (26580)</span>
         </div>
       );
     }
   };
-
+  const containerColor = (row: any) => {
+    const containerType = row.original.containerType;
+    if (containerType === "20FT_DRY") {
+      return <div className="text-[#aba2e3]">{containerType} </div>;
+    } else if (containerType === "40FT_DRY") {
+      return <div className="text-[#443e6b]">{containerType} </div>;
+    } else if (containerType === "40FT_HQ") {
+      return <div className="text-[#6A5ACD]">{containerType} </div>;
+    }
+  };
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
     console.log(oriDate);
@@ -232,9 +261,9 @@ export default function ContainerList() {
     );
   };
 
-  // const [data, _setData] = React.useState<Person[]>(defaultData);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
