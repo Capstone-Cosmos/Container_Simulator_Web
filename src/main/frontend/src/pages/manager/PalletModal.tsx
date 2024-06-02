@@ -46,11 +46,10 @@ export default function PalletModal({ urlContainerId, productId, productHeight, 
   return (
       <div>
         <button
-            className="p-2 px-4 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
+            className="p-1 px-3 text-base font-bold text-center bg-white border-2 rounded-lg text-appr hover:bg-appr hover:text-white border-appr"
             onClick={openModal}
         >
-          {" "}
-          등록{" "}
+          등록
         </button>
 
         <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>

@@ -550,7 +550,7 @@ export default function PdinContainer() {
                         {/* 승인완료 */}
                         <button
                           onClick={() => unLoading(row.id)}
-                          className="p-2 px-4 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
+                          className="p-1 px-3 text-base font-bold text-center bg-white border-2 rounded-lg text-reg hover:bg-reg hover:text-white border-reg"
                         >
                           취소
                         </button>
