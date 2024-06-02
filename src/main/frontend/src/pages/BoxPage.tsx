@@ -215,8 +215,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
   return (
       <main className="flex flex-col items-center justify-between min-h-screen ">
-        <div style={{ width: "55.3vw", height: "44vh" }}>
-          <button onClick={onSave}>저장</button>
+        <div style={{width: "55.3vw", height: "40.5vh"}}>
           {/* 밑줄 익제 세팅 코드 */}
           {/* <button onClick={onLoad}>불러오기</button> */}
           {/* <div className='bg-white'>
@@ -252,21 +251,21 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
 
           <Canvas
-              camera={{position: [10, 10, 10],zoom: 2.5}}
+              camera={{position: [10, 10, 10], zoom: 2.5}}
 
               shadows>
-            <ambientLight intensity={Math.PI / 2} />
-            <spotLight position={[30, 30, 40]} angle={0.5} penumbra={1} decay={0} intensity={Math.PI}  />
+            <ambientLight intensity={Math.PI / 2}/>
+            <spotLight position={[30, 30, 40]} angle={0.5} penumbra={1} decay={0} intensity={Math.PI}/>
 
             {/* 이 부분 수정 */}
             <BoxList containerType={containerType} boxList={boxList} handlerBoxList={handlerBoxList}/>
 
             <gridHelper args={[50, 50]} position={[0, globalVar.get_dy, 0]}/>
-            <axesHelper args={[0]} />
+            <axesHelper args={[0]}/>
             <GizmoHelper alignment="bottom-right" margin={[100, 100]}>
-              <GizmoViewport labelColor="white" axisHeadScale={1} />
+              <GizmoViewport labelColor="white" axisHeadScale={1}/>
             </GizmoHelper>
-            <OrbitControls makeDefault />
+            <OrbitControls makeDefault/>
           </Canvas>
         </div>
       </main>
