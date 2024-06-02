@@ -215,7 +215,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
   return (
       <main className="flex flex-col items-center justify-between min-h-screen ">
-        <div style={{width: "55.3vw", height: "40.5vh"}}>
+        <div style={{width: "55vw", height: "40.65vh"}}>
           {/* 밑줄 익제 세팅 코드 */}
           {/* <button onClick={onLoad}>불러오기</button> */}
           {/* <div className='bg-white'>
@@ -260,9 +260,9 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
             {/* 이 부분 수정 */}
             <BoxList containerType={containerType} boxList={boxList} handlerBoxList={handlerBoxList}/>
 
-            <gridHelper args={[50, 50]} position={[0, globalVar.get_dy, 0]}/>
+            <gridHelper args={[35, 35]} position={[0, globalVar.get_dy, 0]}/>
             <axesHelper args={[0]}/>
-            <GizmoHelper alignment="bottom-right" margin={[100, 100]}>
+            <GizmoHelper alignment="bottom-right" margin={[70, 70]}>
               <GizmoViewport labelColor="white" axisHeadScale={1}/>
             </GizmoHelper>
             <OrbitControls makeDefault/>
