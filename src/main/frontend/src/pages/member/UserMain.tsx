@@ -763,7 +763,7 @@ export default function UserMain() {
       {/* 서치사&표 */}
       <div className="container p-2 mx-auto sm:p-4">
         {/* 서치바 등록취소 버튼 */}
-        <div className="flex items-center justify-center gap-3 p-5">
+        <div className="flex items-center justify-center gap-3 pb-2">
           <div className="w-9/12">
             <tr className="w-full" key={selectedHeaderGroup.id}>
               <Filter
@@ -935,7 +935,7 @@ function Filter({
         type="text"
         value={(column.getFilterValue() ?? "") as string}
         onChange={(e) => column.setFilterValue(e.target.value)}
-        className="w-full rounded"
+        className="w-full rounded focus:ring-0"
         placeholder={`Search...`}
       />
       <svg

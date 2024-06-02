@@ -1,18 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { CreateAxiosInstance } from "../../shared/axios/createAxiosInstance";
 import useInput from "../../useInput";
+import { useState } from "react";
 
 export default function UploadPd() {
   const navigate = useNavigate();
   // 상품명 / 수량 / 높이 / 무게 / 출고마감시간 / 1차배송지 / 최종배송지
   const [productName, setpdName] = useInput("");
   const [quantity, setquantity] = useInput("");
-  const [height, setHeight] = useInput("");
+  const [height, setHeight] = useState<number | string>(0);
   const [weight, setweight] = useInput("");
   const [deadline, setDealine] = useInput("2024-06-12T19:30");
   const [firstAddress, setfirstDest] = useInput("");
   const [finalAddress, setfinalAddress] = useInput("");
-
+  const [높이에러문구, 높이에러문구변경] = useState("");
   const onSubmit = (e: any) => {
     e.preventDefault();
     console.log("submit");
@@ -50,6 +51,22 @@ export default function UploadPd() {
           console.log(error);
         })
         .finally(() => {});
+    }
+  };
+
+  const limitHeight = (e: any) => {
+    let inputHeight = parseFloat(e.target.value);
+    if (inputHeight <= 0) {
+      inputHeight = 0;
+      setHeight(inputHeight);
+      높이에러문구변경("0보다 큰 값을 입력하세요.");
+    } else if (inputHeight > 2.5) {
+      inputHeight = 2.5;
+      setHeight(inputHeight);
+      높이에러문구변경("2.5보다 큰 값을 입력해서 2.5변경되었습니다.");
+    } else {
+      높이에러문구변경("");
+      setHeight(inputHeight);
     }
   };
 
@@ -111,13 +128,20 @@ export default function UploadPd() {
       </div>
       {/*높이*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[498px] w-[550px] h-[133px]">
-        <input
-          type="text"
-          id="height"
-          name="height"
-          onChange={setHeight}
-          className="absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]"
-        ></input>
+        <form>
+          <input
+            type="number"
+            id="height"
+            name="height"
+            max="10"
+            value={height}
+            onChange={limitHeight}
+            className={!높이에러문구 ? "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px]" : "absolute left-0 right-0 top-[25.56%] bottom-[25.56%] bg-[#f1f3f5] rounded-[4px] focus:ring-reg"}
+          />
+        </form>
+        <div className="absolute left-0 right-[81.09%] top-[105px] bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-reg whitespace-nowrap">
+          {높이에러문구}
+        </div>
         <div className="absolute left-0 right-[81.09%] top-0 bottom-[80.45%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
           높이(m)
         </div>

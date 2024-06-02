@@ -487,7 +487,7 @@ function Filter({
         type="string"
         value={(column.getFilterValue() ?? "") as number}
         onChange={(e) => column.setFilterValue(e.target.value)}
-        className="w-full rounded"
+        className="w-full rounded focus:ring-0"
         placeholder={`Search...`}
       />
       <svg
