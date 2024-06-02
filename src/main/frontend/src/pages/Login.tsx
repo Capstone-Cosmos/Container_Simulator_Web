@@ -25,6 +25,7 @@ export default function Login() {
       //위 post에 대한 응답으로 토큰 수령
       if (response.status === 200) {
         localStorage.setItem("accessToken", response.headers.access);
+        localStorage.setItem('idName', memberId);
         if (response.headers.navigate === "member") {
           navigate("/user/usermain");
         } else {
