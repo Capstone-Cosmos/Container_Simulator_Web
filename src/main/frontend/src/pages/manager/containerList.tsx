@@ -38,7 +38,7 @@ const defaultData: Person[] = [
   {
     id: 67,
     containerName: "소고기적재칸",
-    weight: 500,
+    weight: 20000,
     containerType: "40FT_DRY",
     deadline: new Date("2024-04-21T18:00:00"),
     startingPoint: "소레포구항",
@@ -192,13 +192,25 @@ export default function ContainerList() {
         <div>
           {curWeight}
           <br />
-          /21700
+          <span className="text-xs"> (21700)</span>
         </div>
       );
     } else if (containerType === "40FT_DRY") {
-      return <div>{curWeight}/26740</div>;
+     return (
+        <div>
+          {curWeight}
+          <br />
+          <span className="text-xs"> (26740)</span>
+        </div>
+      );
     } else if (containerType === "40FT_HQ") {
-      return <div>{curWeight}/26580</div>;
+      return (
+        <div>
+          {curWeight}
+          <br />
+          <span className="text-xs"> (26580)</span>
+        </div>
+      );
     }
   };
 
@@ -220,31 +232,31 @@ export default function ContainerList() {
     );
   };
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
 
   // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      const response = await CreateAxiosInstance().get("/containers");
-      const list = response.data.map((list: Person) => ({
-        ...list,
-      }));
-      _setData(list);
-    })();
-  }, [refeach]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await CreateAxiosInstance().get("/containers");
+  //     const list = response.data.map((list: Person) => ({
+  //       ...list,
+  //     }));
+  //     _setData(list);
+  //   })();
+  // }, [refeach]);
 
   const table = useReactTable({
     data,
