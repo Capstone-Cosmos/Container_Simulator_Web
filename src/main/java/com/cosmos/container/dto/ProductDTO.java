@@ -17,10 +17,9 @@ public class ProductDTO {
     private int quantity;
     private float height;
     private float weight;
-    private LocalDateTime deadline;
+    private LocalDateTime releaseDate;
     private String firstAddress;
     private String finalAddress;
-    private LocalDateTime orderTime;
     private String deliveryStatus;
     private String approvalStatus;
     private PalletType palletType;
@@ -32,11 +31,10 @@ public class ProductDTO {
         productDTO.setQuantity(productEntity.getQuantity());
         productDTO.setHeight(productEntity.getHeight());
         productDTO.setWeight(productEntity.getWeight());
-        productDTO.setDeadline(productEntity.getDeadline());
+        productDTO.setReleaseDate(productEntity.getReleaseDate());
         productDTO.setFirstAddress(productEntity.getFirstAddress());
         productDTO.setFinalAddress(productEntity.getFinalAddress());
-        productDTO.setOrderTime(productEntity.getCreateTime());
-        productDTO.setDeliveryStatus(productEntity.getDeliveryStatus());
+        productDTO.setDeliveryStatus(productEntity.getDeliveryStatus().getStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus().getStatus());
         return productDTO;
     }
