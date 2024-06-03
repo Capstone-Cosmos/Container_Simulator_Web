@@ -23,7 +23,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
   // 이 부분 수정
   const convertPalletType = (palletType:any) => {
-    console.log(palletType);
+    
     if (palletType == "11A형" || palletType == "PALLET_TYPE_11A"){
       return [1.1,1.1];
     }
@@ -48,7 +48,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
     const defaultPosition = [0,0,0];
     // 이 부분 수정 추가버튼 누르면 팔렛트 타입 해당 사이즈 할당
     const newSize:any = convertPalletType(palletType)
-    console.log(newSize)
+  
     state.length = newSize[0]
     state.width = newSize[1]
     // 이 부분 수정
@@ -69,7 +69,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
   }
 
   const OnCreate = (palletId:any, position:any,length:any,width:any,height:any,boxColor:any) => {
-    console.log("onCreate 실행")
+  
 
     const newBox = {
       id: palletId,
@@ -84,7 +84,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
   }
 
   const onRemove = (targetId: any) => {
-    console.log(`${targetId}가 삭제되었습니다.`)
+   
     // 원래있던 일기data.id와 삭제버튼을 누른id의 값이 같으면,
     // 그 값은 제외하고 새로운 배열을 만들어서 newDiaryList에 저장
     const newBoxList = boxList.filter((boxList: { id: any }) => {
@@ -147,8 +147,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
       }
       newList.push(newBox)
     })
-    // console.log(newList)
-
+   
     // 이 부분 밑줄 주석 제거
     setBoxList(newList);
     // 이 부분 수정
@@ -157,7 +156,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
   const [test1, setTest1]:any = useState([])
   // 바뀐 position이 담긴 배열을 가져오기
   const onSave = () => {
-    console.log(newPositionList)
+  
     const newList:any = []
     newPositionList.map((it:any) => {
       const idIndex = boxList.findIndex(((element: { id: any })=>element.id==it.id))
@@ -165,11 +164,10 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
         newList.push(newPositionList[idIndex])
       } // 존재x -> 생성
     })
-    console.log("----------newPositionList----------")
-    console.log(newPositionList)
 
-    console.log("----------newList----------")
-    console.log(newList)
+
+
+
     // 이 부분 수정 합칠때 삭제
     newPositionList.map((it:any) => {
           // 이 부분 수정 주석 처리 삭제
@@ -205,8 +203,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
   // boxList를 onSave에서 가져온 데이터로 갱신
   // const onLoad = () =>{
-  //   console.log("------test1------")
-  //   console.log(test1)
+
   //   //OnCreate(palletId, defaultPosition, Number(state.length), Number(state.width), Number(height), state.boxColor);
 
   //   setBoxList([...test1])

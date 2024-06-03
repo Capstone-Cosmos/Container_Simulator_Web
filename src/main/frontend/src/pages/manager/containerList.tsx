@@ -242,7 +242,7 @@ export default function ContainerList() {
   };
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
-    console.log(oriDate);
+    
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
     const day = String(oriDate.getDate()).padStart(2, "0");
@@ -258,31 +258,31 @@ export default function ContainerList() {
     );
   };
 
-  const [data, _setData] = React.useState<Person[]>(defaultData);
+  // const [data, _setData] = React.useState<Person[]>(defaultData);
 
-  // const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/containers");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/containers");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/containers");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/containers");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -300,9 +300,9 @@ export default function ContainerList() {
   });
 
   const deleteContainer = async (rowId: string) => {
-    console.log(rowId);
+    
     const idSelect = data[parseInt(rowId)].id;
-    console.log(idSelect);
+    
     const response = await CreateAxiosInstance().delete("/containers", {
       params: { id: idSelect },
     });
@@ -316,11 +316,11 @@ export default function ContainerList() {
   const deleteIdList = deleteIndex
     .map((id) => data[id])
     .map((dataIndex) => dataIndex.id);
-  console.log(deleteIdList);
+ 
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-  console.log(selectedHeaderGroup.headers[5]);
+
   return (
     <div className="flex flex-col items-center justify-center h-full mx-auto font-sans bg-slate-100">
       <div className="pl-5 border-t-2 shadow-sm navbar bg-base-100">

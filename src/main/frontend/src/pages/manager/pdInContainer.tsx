@@ -1,4 +1,10 @@
-import React, {HTMLAttributes, HTMLProps, useEffect, useRef, useState} from "react";
+import React, {
+  HTMLAttributes,
+  HTMLProps,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import ReactDOM from "react-dom/client";
 
 import {
@@ -184,7 +190,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -195,7 +202,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -206,7 +214,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -217,7 +226,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -228,7 +238,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -239,7 +250,8 @@ const loadingDefaultData: Loading[] = [
     x: 3.14,
     y: 6.23,
     z: 18.13,
-  },{
+  },
+  {
     id: 7,
     containerId: 2,
     palletName: "고구마",
@@ -254,44 +266,46 @@ const loadingDefaultData: Loading[] = [
 ];
 
 export default function PdinContainer() {
-  const childRef:any = useRef(null);
+  const childRef: any = useRef(null);
 
   // 이 부분 수정 아래 부분 함수 3개 복붙
   // BoxPage의 handleSubmit을 받아와서 PalletModal에 전달
-  const addToBoxList = (palletId:any, palletType:any, height:any) => { // 박스 추가
+  const addToBoxList = (palletId: any, palletType: any, height: any) => {
+    // 박스 추가
     childRef.current?.handleSubmit(palletId, palletType, height);
-  }
+  };
 
-  const deleteAtBoxList = (palletId:any) => { // 박스 삭제
+  const deleteAtBoxList = (palletId: any) => {
+    // 박스 삭제
     childRef.current?.handleDelete(palletId);
-  }
+  };
 
-  const loadingBoxList = (containerType:any) => { // 박스 삭제
+  const loadingBoxList = (containerType: any) => {
+    // 박스 삭제
     childRef.current?.getBoxList(containerType);
-  }
-
+  };
 
   const [rowSelection, setRowSelection] = React.useState({});
-  const {urlContainerId} = useParams();
-  console.log(urlContainerId);
+  const { urlContainerId } = useParams();
+
   const unloadingColumns = React.useMemo<ColumnDef<Person>[]>(
     () => [
       {
-        id: 'index',
+        id: "index",
         header: () => "번호",
-        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
+        cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
       },
       {
         accessorKey: "productName",
         header: () => "제품명",
       },
       {
-        accessorKey: "height",
-        header: () => "높이(m)",
+        accessorKey: "weight",
+        header: () => "무게(kg)",
       },
       {
-        accessorKey: "quantity",
-        header: () => "수량(개)",
+        accessorKey: "height",
+        header: () => "높이(m)",
       },
       {
         accessorKey: "deadline",
@@ -303,25 +317,21 @@ export default function PdinContainer() {
   );
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
-    console.log(oriDate);
+  
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
     const day = String(oriDate.getDate()).padStart(2, "0");
     const hours = String(oriDate.getHours()).padStart(2, "0");
     const minutes = String(oriDate.getMinutes()).padStart(2, "0");
 
-    return (
-      <div>
-        {`${year}-${month}-${day} ${hours}:${minutes}`}
-      </div>
-    );
+    return <div>{`${year}-${month}-${day} ${hours}:${minutes}`}</div>;
   };
   const loadingColumns = React.useMemo<ColumnDef<Loading>[]>(
     () => [
       {
         id: "index",
         header: () => "번호",
-        cell: ({row}) => <div>{parseInt(row.id) + 1}</div>
+        cell: ({ row }) => <div>{parseInt(row.id) + 1}</div>,
       },
       {
         accessorKey: "palletName",
@@ -332,57 +342,60 @@ export default function PdinContainer() {
         header: () => "무게(kg)",
       },
       {
+        accessorKey: "height",
+        header: () => "높이(m)",
+      },
+      {
         accessorKey: "palletType",
         header: () => "팔레트 종류",
       },
-     
-
     ],
     []
   );
-  // const [data, _setData] = React.useState(() => [...loadingData]);
+  const [data, _setData] = React.useState(() => [...loadingData]);
 
-  // const [unloadingData, _setUnloading] =
-  //   React.useState<Person[]>(()=>[]);
-  // const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(unloadingDefaultData);
-  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
+    React.useState<Person[]>(()=>[]);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
+  // const [unloadingData, _setUnloading] =
+  //   React.useState<Person[]>(unloadingDefaultData);
+  // const [loadingData, _setLoading] =
+  //   React.useState<Loading[]>(loadingDefaultData);
   const [refeach, _setfetch] = useState(false);
 
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //     const containerType:any = await CreateAxiosInstance().get(`/containers/${urlContainerId}`);
-  //     console.log("containerType: " + containerType.data);
-  //     loadingBoxList(containerType.data)
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+      const containerType:any = await CreateAxiosInstance().get(`/containers/${urlContainerId}`);
+     
+      loadingBoxList(containerType.data)
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
-  //     const unloadList = unloadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setUnloading(unloadList);
-  //     const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
-  //     const loadList = loadResponse.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setLoading(loadList);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const unloadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}/valid`);
+      const unloadList = unloadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setUnloading(unloadList);
+      const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      const loadList = loadResponse.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setLoading(loadList);
+    })();
+  }, [refeach]);
 
   const unloadingTable = useReactTable({
     data: unloadingData,
@@ -415,26 +428,26 @@ export default function PdinContainer() {
   });
 
   const loading = async (rowId: string) => {
-    console.log(rowId);
+  
     const idSelect = loadingData[parseInt(rowId)].id;
-    console.log(idSelect);
+
   };
   const unLoading = async (rowId: string) => {
-    console.log(rowId);
+
     const idSelect = loadingData[parseInt(rowId)].id;
-    console.log(idSelect);
-    const response = await CreateAxiosInstance().delete(`pallets/${idSelect}`, { params :{id: idSelect,}
+
+    const response = await CreateAxiosInstance().delete(`pallets/${idSelect}`, {
+      params: { id: idSelect },
     });
     if (response.status === 204) {
       _setfetch((refeach) => !refeach);
-      deleteAtBoxList(idSelect)
+      deleteAtBoxList(idSelect);
     }
-
   };
 
   const reverseRefeach = () => {
     _setfetch((refeach) => !refeach);
-  }
+  };
 
   return (
     <div className="items-center h-full font-sans bg-slate-100">
@@ -457,7 +470,9 @@ export default function PdinContainer() {
       <div className="flex flex-row items-center justify-center gap-4 px-16 pt-5 pb-6">
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
-          <div className="w-full bg-gray-200 h-[400px]"><BoxPage loadingData={loadingData} ref={childRef}/></div>
+          <div className="w-full bg-gray-200 h-[400px]">
+            <BoxPage loadingData={loadingData} ref={childRef} />
+          </div>
           {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
             <div className="flex items-center justify-center w-full p-1 text-2xl text-white bg-cb">
@@ -507,7 +522,15 @@ export default function PdinContainer() {
                         })}
                         <td className="flex items-center justify-center gap-12">
                           {/* 승인완료 */}
-                          <PalletModal urlContainerId={urlContainerId} productId={unloadingData[parseInt(row.id)].id} productHeight={unloadingData[parseInt(row.id)].height} addToBoxList={addToBoxList} reverseRefeach={reverseRefeach}/>
+                          <PalletModal
+                            urlContainerId={urlContainerId}
+                            productId={unloadingData[parseInt(row.id)].id}
+                            productHeight={
+                              unloadingData[parseInt(row.id)].height
+                            }
+                            addToBoxList={addToBoxList}
+                            reverseRefeach={reverseRefeach}
+                          />
                         </td>
                       </tr>
                     );

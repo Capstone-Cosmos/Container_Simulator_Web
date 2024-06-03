@@ -13,7 +13,7 @@ export default function Login() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    
+
     try {
       //아이디와 비번 서버에 보내기
       const response = await axios.post("/login", null, {
@@ -25,7 +25,7 @@ export default function Login() {
       //위 post에 대한 응답으로 토큰 수령
       if (response.status === 200) {
         localStorage.setItem("accessToken", response.headers.access);
-        localStorage.setItem('idName', memberId);
+        localStorage.setItem("idName", memberId);
         if (response.headers.navigate === "member") {
           navigate("/user/usermain");
         } else {
@@ -34,7 +34,6 @@ export default function Login() {
       }
       //받은 토큰을 로컬 스토리지에 저장
     } catch (error) {
-      console.log(error, "error");
       setFailLogin(true);
     }
   };
@@ -91,7 +90,8 @@ export default function Login() {
         {failLogin && (
           <div className="absolute -translate-x-1/2 left-1/2 top-[433px] w-[550px] h-[65px] flex justify-start text-reg">
             아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.
-            <br/>입력하신 내용을 다시 확인해주세요.
+            <br />
+            입력하신 내용을 다시 확인해주세요.
           </div>
         )}
         {/*로그인버튼*/}

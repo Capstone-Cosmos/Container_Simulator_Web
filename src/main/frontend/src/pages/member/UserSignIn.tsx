@@ -99,7 +99,7 @@ export default function UserSignIn() {
       const res = await axios.get("/ids", {
         params: { id: id },
       });
-      console.log(res.data);
+  
       if (!res.data) {
         setIdError("사용 가능한 아이디입니다.");
         setIsIdCheck(true);
@@ -176,7 +176,7 @@ export default function UserSignIn() {
           // 성공시
           console.log("axios.post 성공!");
           console.log(response);
-          alert("성공");
+          
           navigate("/");
         })
         .catch((error) => {

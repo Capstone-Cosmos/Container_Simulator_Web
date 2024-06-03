@@ -37,10 +37,10 @@ export default function ContainerUpload() {
 
   // const clickType = useCallback(async (e: any) => {
   //   if (e.target.name === "20FT DRY") {
-  //     console.log(e);
+
   //     setContainerType("CONTAINER_TYPE_20FT_DRY");
   //   } else if (e.target.name === "40FT DRY") {
-  //     console.log("40FT DRY");
+
   //     setContainerType("CONTAINER_TYPE_40FT_DRY");
   //   } else if (e.target.name === "40FT HQ") {
   //     setContainerType("CONTAINER_TYPE_40FT_HQ");
@@ -49,7 +49,7 @@ export default function ContainerUpload() {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submit");
+   
     if (
       containerName === "" ||
       containerType === "" ||
@@ -71,13 +71,11 @@ export default function ContainerUpload() {
         })
         .then((response) => {
           // 성공시
-          console.log("axios.post 성공!");
-          console.log(response);
+          
         })
         .catch((error) => {
           // 실패시
-          console.log("axios.post 실패! 이유는?");
-          console.log(error);
+         
         })
         .finally(() => {});
     }

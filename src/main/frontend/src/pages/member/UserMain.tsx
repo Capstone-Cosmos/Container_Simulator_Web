@@ -655,7 +655,7 @@ export default function UserMain() {
 
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
-    console.log(oriDate);
+
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
     const day = String(oriDate.getDate()).padStart(2, "0");
@@ -673,9 +673,9 @@ export default function UserMain() {
   const resetSelection = () => {
     table.toggleAllRowsSelected(false);
   };
-  const [data, _setData] = React.useState(() => [...defaultData]);
+  // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  // const [data, _setData] = React.useState<Person[]>(() => []);
+  const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Person | null>(null);
 
@@ -738,11 +738,11 @@ export default function UserMain() {
   const deleteIdList = deleteIndex
     .map((id) => data[id])
     .map((dataIndex) => dataIndex.id);
-  // console.log(deleteIdList);
+  
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
-  // console.log(selectedHeaderGroup.headers[2]);
+
   return (
     <div className="h-full font-sans bg-slate-100">
       {/* 주문내역, 상품등록하기 네이게이션바 */}
@@ -793,7 +793,7 @@ export default function UserMain() {
                   //     "/products"
                   // );
                   // _setData(newData);
-                  // console.log("Debugging1");
+        
                   resetSelection();
                   _setfetch((refeach) => !refeach);
                 }

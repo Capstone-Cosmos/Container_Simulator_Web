@@ -16,7 +16,7 @@ export default function UploadPd() {
   const [높이에러문구, 높이에러문구변경] = useState("");
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submit");
+   
     if (
       productName === "" ||
       quantity === "" ||
@@ -43,7 +43,7 @@ export default function UploadPd() {
         .then((response) => {
           // 성공시
           console.log("axios.post 성공!");
-          console.log(response);
+        
         })
         .catch((error) => {
           // 실패시

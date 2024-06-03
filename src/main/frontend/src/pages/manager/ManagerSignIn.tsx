@@ -109,8 +109,7 @@ export default function ManagerSingIn() {
       }
       return;
     } catch (err) {
-      console.log("axios.get 실패! 이유는? ");
-      console.log(err);
+   
       return false;
     }
   };
@@ -130,8 +129,7 @@ export default function ManagerSingIn() {
       }
       return;
     } catch (err) {
-      console.log("axios.get 실패! 이유는? ");
-      console.log(err);
+     
       return false;
     }
   };

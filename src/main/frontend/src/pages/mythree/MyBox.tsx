@@ -43,7 +43,7 @@ function MyBox( { id, position, length, width, height, boxColor}:any) {
         [0, 0, 0],
         [0, 0, 0, 1]
     ])
-    // console.log("firstPosition: " + position)
+   
 
     return (
         <group>
@@ -59,10 +59,10 @@ function MyBox( { id, position, length, width, height, boxColor}:any) {
                 onDragEnd={() => {
                     matrix.setPosition(vec.copy(obj.current?.translation()));
                     const vector = vec.copy(obj.current?.translation());
-                    console.log(vector)
-                    console.log("position[1]: " + position[1])
+               
+               
                     const newPosition = [vector.x + position[0], vector.y + position[1], vector.z + position[2]]
-                    console.log("newPosition: " + newPosition);
+                
                     //setMyPosition([vector.x + position[0], vector.y + position[1] + height/2+dy , vector.z + position[2]]);
                     updateBoxPosition(id,newPosition);
                 }}
@@ -79,8 +79,7 @@ function MyBox( { id, position, length, width, height, boxColor}:any) {
                         setTarget(!target);
                         e.stopPropagation();
                         setTargetBoxId(id);
-                        //console.log(id);
-                        //console.log(obj.current)
+                    
                     }}
                 >
                     <boxGeometry args={[length, height, width]} />

@@ -483,7 +483,7 @@ export default function ApprWait() {
   );
   const customTime = (row: any) => {
     const oriDate = new Date(row.original.deadline);
-    console.log(oriDate);
+    
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
     const day = String(oriDate.getDate()).padStart(2, "0");
@@ -499,9 +499,9 @@ export default function ApprWait() {
     );
   };
 
-  const [data, _setData] = React.useState(() => [...defaultData]);
+  // const [data, _setData] = React.useState(() => [...defaultData]);
 
-  // const [data, _setData] = React.useState<Person[]>(()=>[]);
+  const [data, _setData] = React.useState<Person[]>(()=>[]);
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
@@ -541,9 +541,9 @@ export default function ApprWait() {
   });
 
   const approve = async (rowId: string) => {
-    console.log(rowId);
+    
     const idSelect = data[parseInt(rowId)].id;
-    console.log(idSelect);
+    
     const response = await CreateAxiosInstance().patch(
       "/products/accept",
       null,
@@ -558,9 +558,9 @@ export default function ApprWait() {
     }
   };
   const reject = async (rowId: string) => {
-    console.log(rowId);
+  
     const idSelect = data[parseInt(rowId)].id;
-    console.log(idSelect);
+ 
     const response = await CreateAxiosInstance().patch(
       "/products/reject",
       null,
