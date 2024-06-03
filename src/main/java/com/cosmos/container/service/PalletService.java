@@ -2,6 +2,7 @@ package com.cosmos.container.service;
 
 import com.cosmos.container.constant.ApprovalStatus;
 import com.cosmos.container.constant.ContainerType;
+import com.cosmos.container.constant.DeliveryStatus;
 import com.cosmos.container.constant.PalletType;
 import com.cosmos.container.dto.PalletDTO;
 import com.cosmos.container.dto.ProductDTO;
@@ -45,6 +46,7 @@ public class PalletService {
             return false;
         float height = productEntity.getHeight() + 0.15f;
         palletEntity.initPallet(productId, productEntity.getProductName(), containerId, palletType, height, weight);
+        productEntity.setDeliveryStatus(DeliveryStatus.STATUS_READY);
         productEntity.setAssigned(true);
         containerEntity.addWeight(weight);
         palletRepository.save(palletEntity);
@@ -80,7 +82,7 @@ public class PalletService {
         List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndAssigned(ApprovalStatus.STATUS_ACCEPT, username, false);
         List<ProductDTO> productDTOS = getValidProduct(containerEntity, productEntities);
         LocalDateTime baseDate = containerEntity.getDeadline();
-        productDTOS.removeIf(productDTO -> productDTO.getDeadline().isAfter(baseDate));
+        productDTOS.removeIf(productDTO -> productDTO.getReleaseDate().isAfter(baseDate));
         return productDTOS;
     }
 

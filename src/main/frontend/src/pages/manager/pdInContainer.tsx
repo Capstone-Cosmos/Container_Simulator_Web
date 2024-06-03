@@ -352,8 +352,8 @@ export default function PdinContainer() {
     ],
     []
   );
-  const [data, _setData] = React.useState(() => [...loadingData]);
-
+  // const [data, _setData] = React.useState(() => [...loadingData]);
+  //
   const [unloadingData, _setUnloading] =
     React.useState<Person[]>(()=>[]);
   const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);

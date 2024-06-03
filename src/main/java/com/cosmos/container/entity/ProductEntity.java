@@ -1,6 +1,7 @@
 package com.cosmos.container.entity;
 
 import com.cosmos.container.constant.ApprovalStatus;
+import com.cosmos.container.constant.DeliveryStatus;
 import com.cosmos.container.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class ProductEntity extends BaseEntity{
     private float weight;
 
     @Column(nullable = false)
-    private LocalDateTime deadline;
+    private LocalDateTime releaseDate;
 
     @Column(nullable = false)
     private String firstAddress;
@@ -44,7 +45,7 @@ public class ProductEntity extends BaseEntity{
     private String finalAddress;
 
     @Column
-    private String deliveryStatus;
+    private DeliveryStatus deliveryStatus;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -60,7 +61,7 @@ public class ProductEntity extends BaseEntity{
         this.quantity = productDTO.getQuantity();
         this.height = productDTO.getHeight();
         this.weight = productDTO.getWeight();
-        this.deadline = productDTO.getDeadline();
+        this.releaseDate = productDTO.getReleaseDate();
         this.firstAddress = productDTO.getFirstAddress();
         this.finalAddress = productDTO.getFinalAddress();
         this.assigned = false;
@@ -69,5 +70,9 @@ public class ProductEntity extends BaseEntity{
     public void setApprovalStatus(ApprovalStatus approvalStatus, String managerId) {
         this.approvalStatus = approvalStatus;
         this.managerId = managerId;
+    }
+
+    public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 }
