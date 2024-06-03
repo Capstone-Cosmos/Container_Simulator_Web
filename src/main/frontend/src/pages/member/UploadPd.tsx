@@ -166,7 +166,7 @@ export default function UploadPd() {
       {/*출고마감시간*/}
       <div className="absolute -translate-x-1/2 left-1/2 top-[776px] w-[549px] h-[133px] flex">
         <div className="absolute left-0 right-[93.81%] top-0 bottom-[86.24%] text-[18px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap">
-          출고마감시간
+          상품출고일
         </div>
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input

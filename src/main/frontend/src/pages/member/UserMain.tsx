@@ -21,11 +21,10 @@ interface Person {
   quantity: number;
   height: number;
   weight: number;
-  deadline: Date;
+  releaseDate: Date;
   firstAddress: string;
   finalAddress: string;
-  orderTime: Date;
-  deliveryStatus: null;
+  deliveryStatus: string;
   approvalStatus: string;
 }
 
@@ -37,11 +36,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -51,11 +49,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -66,11 +63,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -80,11 +76,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -94,11 +89,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -109,11 +103,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -123,11 +116,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -137,11 +129,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -152,11 +143,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -166,11 +156,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -180,11 +169,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -195,11 +183,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -209,11 +196,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -223,11 +209,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -238,11 +223,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -252,11 +236,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -266,11 +249,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -281,11 +263,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -295,11 +276,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -309,11 +289,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -323,11 +302,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -338,11 +316,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -352,11 +329,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -366,11 +342,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -380,11 +355,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -395,11 +369,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -409,11 +382,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -423,11 +395,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -437,11 +408,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -452,11 +422,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -466,11 +435,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -480,11 +448,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -494,11 +461,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -509,11 +475,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -523,11 +488,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
   {
@@ -537,11 +501,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "반려",
   },
   {
@@ -551,11 +514,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인",
   },
 
@@ -566,11 +528,10 @@ const defaultData: Person[] = [
     quantity: 200,
     height: 30,
     weight: 30,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "파주",
     finalAddress: "논산",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
+    deliveryStatus: "null",
     approvalStatus: "승인대기",
   },
 ];
@@ -618,8 +579,8 @@ export default function UserMain() {
         header: () => "수량(개)",
       },
       {
-        accessorKey: "orderTime",
-        header: () => "주문시간",
+        accessorKey: "releaseDate",
+        header: () => "상품출고일",
         cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
@@ -631,13 +592,13 @@ export default function UserMain() {
         header: () => "최종배송지",
       },
       {
-        accessorKey: "deliveryStatus",
-        header: () => "배송현황",
-      },
-      {
         accessorKey: "approvalStatus",
         header: () => "승인현황",
         cell: ({ row }) => <div>{approvalCss(row)}</div>,
+      },
+      {
+        accessorKey: "deliveryStatus",
+        header: () => "배송현황",
       },
     ],
     []
@@ -654,8 +615,7 @@ export default function UserMain() {
   };
 
   const customTime = (row: any) => {
-    const oriDate = new Date(row.original.deadline);
-
+    const oriDate = new Date(row.original.releaseDate);
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
     const day = String(oriDate.getDate()).padStart(2, "0");
@@ -694,25 +654,25 @@ export default function UserMain() {
   };
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, [refeach]);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, [refeach]);
 
   const table = useReactTable({
     data,
@@ -738,7 +698,7 @@ export default function UserMain() {
   const deleteIdList = deleteIndex
     .map((id) => data[id])
     .map((dataIndex) => dataIndex.id);
-  
+
   // 인덱스는 0부터 시작하므로 id에서 1을 빼줍니다.
 
   const selectedHeaderGroup = table.getHeaderGroups()[0];
@@ -793,7 +753,7 @@ export default function UserMain() {
                   //     "/products"
                   // );
                   // _setData(newData);
-        
+
                   resetSelection();
                   _setfetch((refeach) => !refeach);
                 }
@@ -893,20 +853,18 @@ export default function UserMain() {
               </div>
               <div className="pr-4">
                 <select
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value));
-                }}
-                
-              >
-                {[10, 20, 30, 40, 50].map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </select>
+                  value={table.getState().pagination.pageSize}
+                  onChange={(e) => {
+                    table.setPageSize(Number(e.target.value));
+                  }}
+                >
+                  {[10, 20, 30, 40, 50].map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
               </div>
-              
             </div>
 
             {/* 페이지 내용 몇개 보여주는지 */}
@@ -931,7 +889,7 @@ function Filter({
         value={(column.getFilterValue() ?? "") as string}
         onChange={(e) => column.setFilterValue(e.target.value)}
         className="w-full rounded focus:ring-0"
-        placeholder={`Search...`}
+        placeholder={`상품명 검색`}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
