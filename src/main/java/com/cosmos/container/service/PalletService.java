@@ -14,6 +14,7 @@ import com.cosmos.container.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,10 @@ public class PalletService {
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         List<ProductEntity> productEntities = productRepository.findByApprovalStatusAndManagerIdAndAssigned(ApprovalStatus.STATUS_ACCEPT, username, false);
-        return getValidProduct(containerEntity, productEntities);
+        List<ProductDTO> productDTOS = getValidProduct(containerEntity, productEntities);
+        LocalDateTime baseDate = containerEntity.getDeadline();
+        productDTOS.removeIf(productDTO -> productDTO.getDeadline().isAfter(baseDate));
+        return productDTOS;
     }
 
     private float getWeight(PalletType palletType, ProductEntity productEntity) {
