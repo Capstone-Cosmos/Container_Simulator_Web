@@ -56,7 +56,6 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
 
     OnCreate(palletId, defaultPosition, Number(state.length), Number(state.width), Number(height), state.boxColor);
 
-    alert('추가 완료!')
     setState({
       length: 1,
       width: 1,
