@@ -286,8 +286,8 @@ export default function PdinContainer() {
         header: () => "제품명",
       },
       {
-        accessorKey: "weight",
-        header: () => "무게(kg)",
+        accessorKey: "height",
+        header: () => "높이(m)",
       },
       {
         accessorKey: "quantity",
@@ -296,10 +296,26 @@ export default function PdinContainer() {
       {
         accessorKey: "deadline",
         header: () => "마감날짜",
+        cell: ({ row }) => <div>{customTime(row)}</div>,
       },
     ],
     []
   );
+  const customTime = (row: any) => {
+    const oriDate = new Date(row.original.deadline);
+    console.log(oriDate);
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
+
+    return (
+      <div>
+        {`${year}-${month}-${day} ${hours}:${minutes}`}
+      </div>
+    );
+  };
   const loadingColumns = React.useMemo<ColumnDef<Loading>[]>(
     () => [
       {
@@ -326,9 +342,12 @@ export default function PdinContainer() {
   );
   // const [data, _setData] = React.useState(() => [...loadingData]);
 
+  // const [unloadingData, _setUnloading] =
+  //   React.useState<Person[]>(()=>[]);
+  // const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
   const [unloadingData, _setUnloading] =
-    React.useState<Person[]>(()=>[]);
-  const [loadingData, _setLoading] = React.useState<Loading[]>(()=>[]);
+    React.useState<Person[]>(unloadingDefaultData);
+  const [loadingData, _setLoading] = React.useState<Loading[]>(loadingDefaultData);
   const [refeach, _setfetch] = useState(false);
 
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할

@@ -673,9 +673,9 @@ export default function UserMain() {
   const resetSelection = () => {
     table.toggleAllRowsSelected(false);
   };
-  // const [data, _setData] = React.useState(() => [...defaultData]);
+  const [data, _setData] = React.useState(() => [...defaultData]);
 
-  const [data, _setData] = React.useState<Person[]>(() => []);
+  // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Person | null>(null);
 
@@ -854,7 +854,7 @@ export default function UserMain() {
           </table>
           <div className="flex items-center justify-end flex-shrink-0 gap-5 pb-3">
             {/* 페이지쪽수 */}
-            <div className="flex justify-between w-3/5">
+            <div className="flex justify-between w-[54%]">
               <div className="flex gap-2">
                 <button
                   className="p-1"

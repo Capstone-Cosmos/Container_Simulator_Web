@@ -207,8 +207,7 @@ export default function ContainerList() {
       return (
         <div>
           {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
-          <br />
-          <span className="text-xs"> (21700)</span>
+          <div className="text-xs"> (21700)</div>
         </div>
       );
     } else if (containerType === "40FT_DRY") {
@@ -217,7 +216,6 @@ export default function ContainerList() {
       return (
         <div>
           {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
-          <br />
           <span className="text-xs"> (26740)</span>
         </div>
       );
@@ -227,7 +225,6 @@ export default function ContainerList() {
       return (
         <div>
           {현적재비율에따른글씨색변화(curWeight, 현적재량비율)}
-          <br />
           <span className="text-xs"> (26580)</span>
         </div>
       );
@@ -261,7 +258,7 @@ export default function ContainerList() {
     );
   };
 
-  const [data, _setData] = React.useState<Person[]>(()=>[]);
+  const [data, _setData] = React.useState<Person[]>(defaultData);
 
   // const [data, _setData] = React.useState<Person[]>(() => []);
   const [refeach, _setfetch] = useState(false);
@@ -431,66 +428,62 @@ export default function ContainerList() {
             </tbody>
             <tfoot></tfoot>
           </table>
-          <div className="flex items-center justify-center flex-shrink-0 gap-5 pb-3">
-            <button
-              className="p-1"
-              onClick={() => table.setPageIndex(0)}
-              disabled={!table.getCanPreviousPage()}
-            >
-              {"<<"}
-            </button>
-            <button
-              className="p-1"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              {"<"}
-            </button>
-            <button
-              className="p-1"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              {">"}
-            </button>
-            <button
-              className="p-1"
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
-            >
-              {">>"}
-            </button>
-            <span className="flex items-center gap-1">
-              <div>Page</div>
-              <strong>
-                {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </strong>
-            </span>
-            <span className="flex items-center gap-1">
-              | Go to page:
-              <input
-                type="number"
-                defaultValue={table.getState().pagination.pageIndex + 1}
-                onChange={(e) => {
-                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                  table.setPageIndex(page);
-                }}
-                className="w-16 p-1 border rounded"
-              />
-            </span>
-            <select
-              value={table.getState().pagination.pageSize}
-              onChange={(e) => {
-                table.setPageSize(Number(e.target.value));
-              }}
-            >
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  Show {pageSize}
-                </option>
-              ))}
-            </select>
+          <div className="flex items-center justify-end flex-shrink-0 gap-5 pb-3">
+            {/* 페이지쪽수 */}
+            <div className="flex justify-between w-[54%]">
+              <div className="flex gap-2">
+                <button
+                  className="p-1"
+                  onClick={() => table.setPageIndex(0)}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  {"<<"}
+                </button>
+                <button
+                  className="p-1"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  {"<"}
+                </button>
+                <span className="flex items-center gap-1">
+                  <strong>
+                    {table.getState().pagination.pageIndex + 1} /{" "}
+                    {table.getPageCount()}
+                  </strong>
+                </span>
+                <button
+                  className="p-1"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  {">"}
+                </button>
+                <button
+                  className="p-1"
+                  onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                  disabled={!table.getCanNextPage()}
+                >
+                  {">>"}
+                </button>
+              </div>
+              <div className="pr-4">
+                <select
+                  value={table.getState().pagination.pageSize}
+                  onChange={(e) => {
+                    table.setPageSize(Number(e.target.value));
+                  }}
+                >
+                  {[10, 20, 30, 40, 50].map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* 페이지 내용 몇개 보여주는지 */}
           </div>
         </div>
       </div>

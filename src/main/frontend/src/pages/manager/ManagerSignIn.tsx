@@ -173,15 +173,12 @@ export default function ManagerSingIn() {
         })
         .then((response) => {
           // 성공시
-          console.log("axios.post 성공!");
-          console.log(response);
-          alert("성공");
+          
           navigate("/");
         })
         .catch((error) => {
           // 실패시
-          console.log("axios.post 실패! 이유는?");
-          console.log(error);
+          
         })
         .finally(() => {});
     }
