@@ -505,25 +505,25 @@ export default function ApprWait() {
   const [refeach, _setfetch] = useState(false);
   //처음에 백엔드와 데이터 통신하거나 데이터 수정됐을 때 다시 불러오는 역할
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await CreateAxiosInstance().get("/products/wait");
-  //     const list = response.data.map((list: Person) => ({
-  //       ...list,
-  //     }));
-  //     _setData(list);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await CreateAxiosInstance().get("/products/wait");
+      const list = response.data.map((list: Person) => ({
+        ...list,
+      }));
+      _setData(list);
+    })();
+  }, []);
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       const response = await CreateAxiosInstance().get("/products/wait");
-  //       const list = response.data.map((list: Person) => ({
-  //         ...list,
-  //       }));
-  //       _setData(list);
-  //     })();
-  //   }, [refeach]);
+    useEffect(() => {
+      (async () => {
+        const response = await CreateAxiosInstance().get("/products/wait");
+        const list = response.data.map((list: Person) => ({
+          ...list,
+        }));
+        _setData(list);
+      })();
+    }, [refeach]);
 
   const table = useReactTable({
     data,

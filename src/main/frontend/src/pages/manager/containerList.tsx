@@ -505,7 +505,7 @@ function Filter({
         value={(column.getFilterValue() ?? "") as number}
         onChange={(e) => column.setFilterValue(e.target.value)}
         className="w-full rounded focus:ring-0"
-        placeholder={`Search...`}
+        placeholder={`컨테이너명 검색`}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
