@@ -39,18 +39,18 @@ export default function Login() {
   };
 
   return (
-    <div className="relative h-screen bg-[#f1f3f5] overflow-hidden">
+    <div className="relative h-[800px] bg-[#f1f3f5] overflow-hidden">
       <form onSubmit={onSubmit}>
         {/*틀*/}
-        <div className="absolute -translate-x-1/2 left-1/2 top-[120px] w-[740px] h-[576px] bg-[#f8f9fa] rounded-[4px]"></div>
+        <div className="absolute -translate-x-1/2 left-1/2 top-[100px] w-[740px] h-[576px] bg-[#f8f9fa] rounded-[4px]"></div>
 
         {/*로그인 로고*/}
-        <div className="absolute -translate-x-1/2 left-1/2 top-[174px] text-[34px] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap">
+        <div className="absolute -translate-x-1/2 left-1/2 top-[154px] text-[42.5px] font-['Noto_Sans_KR'] font-bold text-[#212529] text-center whitespace-nowrap">
           Cosmos 로그인
         </div>
 
         {/*아이디*/}
-        <div className="absolute -translate-x-1/2 left-1/2 top-[276px] w-[550px] h-[65px] flex">
+        <div className="absolute -translate-x-1/2 left-1/2 top-[256px] w-[550px] h-[65px] flex">
           <input
             type="text"
             id="memberId"
@@ -63,7 +63,7 @@ export default function Login() {
         </div>
 
         {/*비밀번호*/}
-        <div className="absolute -translate-x-1/2 left-1/2 top-[357px] w-[550px] h-[65px] flex">
+        <div className="absolute -translate-x-1/2 left-1/2 top-[337px] w-[550px] h-[65px] flex">
           <input
             type="password"
             id="memberPassword"
@@ -76,7 +76,7 @@ export default function Login() {
         </div>
 
         {/*하단부*/}
-        <div className="absolute -translate-x-1/2 left-1/2 top-[614px] flex flex-row items-center justify-start gap-[20px]">
+        <div className="absolute -translate-x-1/2 left-1/2 top-[594px] flex flex-row items-center justify-start gap-[20px]">
           <div className="text-[16px] font-['Noto_Sans_KR'] font-medium text-[#868e96] whitespace-nowrap hover">
             아직 회원이 아니신가요?
           </div>
@@ -88,7 +88,7 @@ export default function Login() {
           </Link>
         </div>
         {failLogin && (
-          <div className="absolute -translate-x-1/2 left-1/2 top-[433px] w-[550px] h-[65px] flex justify-start text-reg">
+          <div className="absolute -translate-x-1/2 left-1/2 top-[413px] w-[550px] h-[65px] flex justify-start text-reg">
             아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.
             <br />
             입력하신 내용을 다시 확인해주세요.
@@ -97,7 +97,7 @@ export default function Login() {
         {/*로그인버튼*/}
         <button
           type="submit"
-          className="absolute -translate-x-1/2 left-1/2 top-[493px] w-[550px] h-[65px] flex"
+          className="absolute -translate-x-1/2 left-1/2 top-[473px] w-[550px] h-[65px] flex"
         >
           <div className="absolute left-0 top-0 w-[550px] h-[65px] bg-[#74b5dd] rounded-[4px]"></div>
           <div className="absolute left-[250px] top-[20px] text-[18px] font-['Noto_Sans_KR'] font-bold text-[#f8f9fa] whitespace-nowrap">

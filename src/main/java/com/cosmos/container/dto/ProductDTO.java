@@ -22,6 +22,7 @@ public class ProductDTO {
     private String finalAddress;
     private String deliveryStatus;
     private String approvalStatus;
+    private LocalDateTime orderTime;
     private PalletType palletType;
 
     public static ProductDTO toProductDTO(ProductEntity productEntity) {
@@ -36,6 +37,7 @@ public class ProductDTO {
         productDTO.setFinalAddress(productEntity.getFinalAddress());
         productDTO.setDeliveryStatus(productEntity.getDeliveryStatus().getStatus());
         productDTO.setApprovalStatus(productEntity.getApprovalStatus().getStatus());
+        productDTO.setOrderTime(productEntity.getCreateTime());
         return productDTO;
     }
 }

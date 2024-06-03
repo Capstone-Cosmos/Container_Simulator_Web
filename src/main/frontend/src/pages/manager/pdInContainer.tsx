@@ -29,7 +29,7 @@ interface Person {
   quantity: number;
   height: number;
   weight: number;
-  deadline: Date;
+  releaseDate: Date;
   firstAddress: string;
   finalAddress: string;
   orderTime: Date;
@@ -43,7 +43,7 @@ interface Loading {
   weight: number;
   palletType: string;
   height: number;
-  deadline: Date;
+  releaseDate: Date;
   x: number;
   y: number;
   z: number;
@@ -55,7 +55,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -68,7 +68,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -81,7 +81,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -94,7 +94,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -107,7 +107,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -120,7 +120,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -133,7 +133,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -146,7 +146,7 @@ const unloadingDefaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -162,7 +162,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -174,7 +174,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -186,7 +186,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -198,7 +198,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -210,7 +210,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -222,7 +222,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -234,7 +234,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -246,7 +246,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -258,7 +258,7 @@ const loadingDefaultData: Loading[] = [
     weight: 83.0,
     palletType: "PALLET_TYPE_11A",
     height: 5.15,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     x: 3.14,
     y: 6.23,
     z: 18.13,
@@ -308,15 +308,15 @@ export default function PdinContainer() {
         header: () => "높이(m)",
       },
       {
-        accessorKey: "deadline",
-        header: () => "마감날짜",
+        accessorKey: "releaseDate",
+        header: () => "출고시간",
         cell: ({ row }) => <div>{customTime(row)}</div>,
       },
     ],
     []
   );
   const customTime = (row: any) => {
-    const oriDate = new Date(row.original.deadline);
+    const oriDate = new Date(row.original.releaseDate);
   
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");

@@ -21,7 +21,7 @@ interface Person {
   quantity: number;
   height: number;
   weight: number;
-  deadline: Date;
+  releaseDate: Date;
   firstAddress: string;
   finalAddress: string;
   orderTime: Date;
@@ -36,7 +36,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -49,7 +49,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -62,7 +62,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -75,32 +75,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
-    approvalStatus: "승인",
-  },{
-    id: 5,
-    productName: "키위주스",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
-    firstAddress: "부산항",
-    finalAddress: "대구시청",
-    orderTime: new Date("2024-04-21T18:00:00"),
-    deliveryStatus: null,
-    approvalStatus: "승인대기",
-  },
-  {
-    id: 4,
-    productName: "수박",
-    quantity: 500,
-    height: 5.0,
-    weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -112,7 +87,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -125,7 +100,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -137,7 +112,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -150,7 +125,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -162,7 +137,7 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -175,7 +150,32 @@ const defaultData: Person[] = [
     quantity: 500,
     height: 5.0,
     weight: 43.0,
-    deadline: new Date("2024-04-21T18:00:00"),
+    releaseDate: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인",
+  },{
+    id: 5,
+    productName: "키위주스",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    releaseDate: new Date("2024-04-21T18:00:00"),
+    firstAddress: "부산항",
+    finalAddress: "대구시청",
+    orderTime: new Date("2024-04-21T18:00:00"),
+    deliveryStatus: null,
+    approvalStatus: "승인대기",
+  },
+  {
+    id: 4,
+    productName: "수박",
+    quantity: 500,
+    height: 5.0,
+    weight: 43.0,
+    releaseDate: new Date("2024-04-21T18:00:00"),
     firstAddress: "부산항",
     finalAddress: "대구시청",
     orderTime: new Date("2024-04-21T18:00:00"),
@@ -204,9 +204,9 @@ export default function ApprComplete() {
         cell: ({ row }) => <div>{customTime(row)}</div>,
       },
       {
-        accessorKey: "deadline",
-        header: () => "마감날짜",
-        cell: ({ row }) => <div>{customTime(row)}</div>,
+        accessorKey: "releaseDate",
+        header: () => "출고시간",
+        cell: ({ row }) => <div>{customTime2(row)}</div>,
       },
       {
         accessorKey: "quantity",
@@ -243,7 +243,7 @@ export default function ApprComplete() {
   }, [refeach]);
 
   const customTime = (row: any) => {
-    const oriDate = new Date(row.original.deadline);
+    const oriDate = new Date(row.original.orderTime);
     
     const year = oriDate.getFullYear();
     const month = String(oriDate.getMonth() + 1).padStart(2, "0");
@@ -257,6 +257,24 @@ export default function ApprComplete() {
         <br />
         {`GMT+0900(한국 표준시)`}
       </div>
+    );
+  };
+
+  const customTime2 = (row: any) => {
+    const oriDate = new Date(row.original.releaseDate);
+
+    const year = oriDate.getFullYear();
+    const month = String(oriDate.getMonth() + 1).padStart(2, "0");
+    const day = String(oriDate.getDate()).padStart(2, "0");
+    const hours = String(oriDate.getHours()).padStart(2, "0");
+    const minutes = String(oriDate.getMinutes()).padStart(2, "0");
+
+    return (
+        <div>
+          {`${year}-${month}-${day} ${hours}:${minutes}`}
+          <br />
+          {`GMT+0900(한국 표준시)`}
+        </div>
     );
   };
 

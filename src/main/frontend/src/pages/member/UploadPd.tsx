@@ -10,7 +10,7 @@ export default function UploadPd() {
   const [quantity, setquantity] = useInput("");
   const [height, setHeight] = useState<number | string>(0);
   const [weight, setweight] = useInput("");
-  const [deadline, setDealine] = useInput("2024-06-12T19:30");
+  const [releaseDate, setDealine] = useInput("2024-06-12T19:30");
   const [firstAddress, setfirstDest] = useInput("");
   const [finalAddress, setfinalAddress] = useInput("");
   const [높이에러문구, 높이에러문구변경] = useState("");
@@ -22,7 +22,7 @@ export default function UploadPd() {
       quantity === "" ||
       height === "" ||
       weight === "" ||
-      deadline === "" ||
+      releaseDate === "" ||
       firstAddress === "" ||
       finalAddress === ""
     ) {
@@ -36,7 +36,7 @@ export default function UploadPd() {
           quantity,
           height,
           weight,
-          deadline,
+          releaseDate,
           firstAddress,
           finalAddress,
         })
@@ -171,9 +171,9 @@ export default function UploadPd() {
         <div className="absolute left-0 top-[39px] w-[549px] h-[65px] flex">
           <input
             type="datetime-local"
-            id="deadline"
-            name="deadline"
-            value={deadline}
+            id="releaseDate"
+            name="releaseDate"
+            value={releaseDate}
             onChange={setDealine}
             className="absolute left-0 right-0 top-0 bottom-0 bg-[#f1f3f5] rounded-[4px]"
           ></input>

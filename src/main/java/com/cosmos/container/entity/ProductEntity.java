@@ -64,6 +64,7 @@ public class ProductEntity extends BaseEntity{
         this.releaseDate = productDTO.getReleaseDate();
         this.firstAddress = productDTO.getFirstAddress();
         this.finalAddress = productDTO.getFinalAddress();
+        this.deliveryStatus = DeliveryStatus.STATUS_NULL;
         this.assigned = false;
     }
 
