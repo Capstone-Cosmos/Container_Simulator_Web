@@ -72,7 +72,7 @@ public class PalletService {
     public void saveLocation(PalletDTO palletDTO) {
         PalletEntity palletEntity = palletRepository.findById(palletDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        palletEntity.savePalletLocation(palletDTO.getX(), palletDTO.getY(), palletDTO.getZ());
+        palletEntity.savePalletLocation(palletDTO.getX(), (float)(palletEntity.getHeight()/2 - 0.5), palletDTO.getZ());
         palletRepository.save(palletEntity);
     }
 
