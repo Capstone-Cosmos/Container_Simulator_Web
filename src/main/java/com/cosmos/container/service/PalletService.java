@@ -130,57 +130,19 @@ public class PalletService {
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 컨테이너입니다"));
         double base_left = -1.2, base_right = 1.2;
-        double base_1, base_2;
-        if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_20FT_DRY){
-            base_1 = -8.6;
-            base_2 = -8.6;
-        } else{
-            base_1 = -15.2;
-            base_2 = -15.2;
-        }
+        double base_1 = containerEntity.getContainerType().getBaseZ();
+        double base_2 = containerEntity.getContainerType().getBaseZ();
         for(int i = 0; i < palletEntities.size(); i++){
             PalletEntity palletEntity = palletEntities.get(i);
             palletEntity.setY((float)(palletEntity.getHeight()/2 - 0.5));
-            if(palletEntity.getPalletType() == PalletType.PALLET_TYPE_11A || palletEntity.getPalletType() == PalletType.PALLET_TYPE_11B){
-                if(i%2 == 0){
-                    palletEntity.setX((float)(base_left+0.55));
-                    palletEntity.setZ((float)(base_1+0.55));
-                    base_1 += 1.1;
-                } else{
-                    palletEntity.setX((float)(base_right-0.55));
-                    palletEntity.setZ((float)(base_2+0.55));
-                    base_2 += 1.1;
-                }
-            } else if(palletEntity.getPalletType() == PalletType.PALLET_TYPE_12A){
-                if(i%2 == 0){
-                    palletEntity.setX((float)(base_left+0.5));
-                    palletEntity.setZ((float)(base_1+0.6));
-                    base_1 += 1.2;
-                } else{
-                    palletEntity.setX((float)(base_right-0.5));
-                    palletEntity.setZ((float)(base_2+0.6));
-                    base_2 += 1.2;
-                }
-            } else if(palletEntity.getPalletType() == PalletType.PALLET_TYPE_13B){
-                if(i%2 == 0){
-                    palletEntity.setX((float)(base_left+0.55));
-                    palletEntity.setZ((float)(base_1+0.65));
-                    base_1 += 1.3;
-                } else{
-                    palletEntity.setX((float)(base_right-0.55));
-                    palletEntity.setZ((float)(base_2+0.65));
-                    base_2 += 1.3;
-                }
+            if(i%2 == 0){
+                palletEntity.setX((float)(base_left + palletEntity.getPalletType().getLength()/2));
+                palletEntity.setZ((float)(base_1 + palletEntity.getPalletType().getWidth()/2));
+                base_1 += palletEntity.getPalletType().getWidth();
             } else{
-                if(i%2 == 0){
-                    palletEntity.setX((float)(base_left+0.565));
-                    palletEntity.setZ((float)(base_1+0.73));
-                    base_1 += 1.46;
-                } else{
-                    palletEntity.setX((float)(base_right-0.565));
-                    palletEntity.setZ((float)(base_2+0.73));
-                    base_2 += 1.46;
-                }
+                palletEntity.setX((float)(base_right - palletEntity.getPalletType().getLength()/2));
+                palletEntity.setZ((float)(base_2 + palletEntity.getPalletType().getWidth()/2));
+                base_2 += palletEntity.getPalletType().getWidth();
             }
             palletRepository.save(palletEntity);
         }
