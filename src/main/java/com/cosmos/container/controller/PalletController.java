@@ -48,4 +48,11 @@ public class PalletController {
         palletService.saveLocation(palletDTO);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @PatchMapping("/{container-id}/shipping")
+    public ResponseEntity<?> shipPallets(@PathVariable("container-id") Long containerId){
+        palletService.shipPallets(containerId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }

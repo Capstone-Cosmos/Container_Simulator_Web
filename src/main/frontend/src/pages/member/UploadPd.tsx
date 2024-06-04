@@ -41,9 +41,6 @@ export default function UploadPd() {
           finalAddress,
         })
         .then((response) => {
-          // 성공시
-          console.log("axios.post 성공!");
-        
         })
         .catch((error) => {
           // 실패시

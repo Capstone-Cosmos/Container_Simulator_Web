@@ -11,8 +11,9 @@ export default function ShippingContainer2(props:any) {
 
   const { nodes, materials }:any = useGLTF('/container20fo.gltf')
   const containerColor = '#757575'
-  const { wireframe, visible, opacity } = useControls({ wireframe: false, visible: true, opacity:{value: 0.4, min: 0, max: 1 }, 저장: button((get) => {
+  const { wireframe, visible, opacity } = useControls({  저장: button((get) => {
       newPositionList.map((it:any) => {
+        // 이 부분 수정 주석 처리 삭제
         CreateAxiosInstance()
             .patch('/pallets', {
               id:it.id,
@@ -27,7 +28,9 @@ export default function ShippingContainer2(props:any) {
 
             })
             .finally(() => {});})
-    })})
+    }),wireframe: false, visible: true, opacity:{value: 0.4, min: 0, max: 1 }
+
+  })
   const obj:any = useRef()
   const pointer:any = useRef()
   const existingToContainer = -8

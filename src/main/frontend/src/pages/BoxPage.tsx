@@ -7,6 +7,8 @@ import BoxList from './mythree/BoxList'
 import globalVar from './mythree/globalVar'
 import { newPositionList} from './mythree/MyBox'
 import {CreateAxiosInstance} from "../shared/axios/createAxiosInstance";
+import {stackingList} from "./mythree/ShippingContainer";
+import {button, useControls} from "leva";
 
 function getRandomboxColor(){
   return '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -14,12 +16,38 @@ function getRandomboxColor(){
 
 // BoxPage BoxList 는 전체 복붙하고 pdinContainer palletModal은 부분
 // 이 부분 수정
-const BoxPage = forwardRef(({loadingData}:any, ref) => {
+const BoxPage = forwardRef(({loadingData, urlContainerId}:any, ref) => {
   useImperativeHandle(ref, () => ({
     handleSubmit,
     handleDelete,
     getBoxList
   }));
+
+  const {dd}:any = useControls({
+    적재: button(async(get) => {
+      await CreateAxiosInstance().patch(`/pallets/${urlContainerId}/shipping`);
+      // const loadResponse = await CreateAxiosInstance().get(`/pallets/${urlContainerId}`);
+      // const newList:any = []
+      //
+      // loadResponse.data.map((it:any) =>{
+      //   const newSize:any = convertPalletType(it.palletType)
+      //   const newBox = {
+      //     id: it.id,
+      //     position: [it.x, it.y, it.z],
+      //     length: newSize[0],
+      //     width: newSize[1],
+      //     height: it.height,
+      //     boxColor: getRandomboxColor(),
+      //   }
+      //   newList.push(newBox)
+      // })
+      // // 이 부분 밑줄 주석 제거
+      // setBoxList(newList);
+      window.location.reload()
+      // 이 부분 수정
+      //setContainerType(containerType);
+    })
+  })
 
   // 이 부분 수정
   const convertPalletType = (palletType:any) => {
@@ -37,7 +65,7 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
       return [1.1,1.3];
     }
     else if (palletType == "15A형" || palletType == "PALLET_TYPE_15A"){
-      return [1.1,1.4];
+      return [1.13,1.46];
     }
   }
 
@@ -164,10 +192,6 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
         newList.push(newPositionList[idIndex])
       } // 존재x -> 생성
     })
-
-
-
-
     // 이 부분 수정 합칠때 삭제
     newPositionList.map((it:any) => {
           // 이 부분 수정 주석 처리 삭제
@@ -254,7 +278,8 @@ const BoxPage = forwardRef(({loadingData}:any, ref) => {
             <spotLight position={[30, 30, 40]} angle={0.5} penumbra={1} decay={0} intensity={Math.PI}/>
 
             {/* 이 부분 수정 */}
-            <BoxList containerType={containerType} boxList={boxList} handlerBoxList={handlerBoxList}/>
+            <BoxList urlContainerId={urlContainerId} containerType={containerType} boxList={boxList}
+                     handlerBoxList={handlerBoxList}/>
 
             <gridHelper args={[35, 35]} position={[0, globalVar.get_dy, 0]}/>
             <axesHelper args={[0]}/>

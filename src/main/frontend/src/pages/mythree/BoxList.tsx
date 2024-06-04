@@ -1,24 +1,23 @@
 import { Physics, RigidBody } from '@react-three/rapier'
-import ShippingContainer from './ShippingContainer'
+import {ShippingContainer} from './ShippingContainer'
 import ShippingContainer2 from './ShippingContainer2'
 import ShippingContainer3 from './ShippingContainer3'
 import {MyBox} from './MyBox'
 import globalVar from './globalVar'
 
-export default function BoxList({containerType, boxList, handlerBoxList}:any){
+export default function BoxList({urlContainerId, containerType, boxList, handlerBoxList}:any){
 
     // 이 부분 수정
     function Container(containerType:any) {
         const containerValue = containerType.containerType;
         if (containerValue == "CONTAINER_TYPE_20FT_DRY") {
-
-            return <ShippingContainer dy={globalVar.get_dy}/>;
+            return <ShippingContainer urlContainerId={urlContainerId} dy={globalVar.get_dy}/>;
         }
         else if (containerValue == "CONTAINER_TYPE_40FT_DRY") {
-            return <ShippingContainer2 dy={globalVar.get_dy}/>;
+            return <ShippingContainer2 urlContainerId={urlContainerId} dy={globalVar.get_dy}/>;
         }
         else if (containerValue == "CONTAINER_TYPE_40FT_HQ") {
-            return <ShippingContainer3 dy={globalVar.get_dy}/>;
+            return <ShippingContainer3 urlContainerId={urlContainerId} dy={globalVar.get_dy}/>;
         } else
             return null;
     }

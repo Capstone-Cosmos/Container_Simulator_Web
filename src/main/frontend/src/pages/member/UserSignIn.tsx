@@ -173,10 +173,6 @@ export default function UserSignIn() {
           companyPresident,
         })
         .then((response) => {
-          // 성공시
-          console.log("axios.post 성공!");
-          console.log(response);
-          
           navigate("/");
         })
         .catch((error) => {

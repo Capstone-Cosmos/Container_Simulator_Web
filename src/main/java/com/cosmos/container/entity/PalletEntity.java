@@ -8,6 +8,7 @@ import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "pallet_table")
 public class PalletEntity extends BaseEntity {
 

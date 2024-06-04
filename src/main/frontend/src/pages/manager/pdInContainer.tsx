@@ -470,7 +470,7 @@ export default function PdinContainer() {
         {/* 시뮬레이션 ui */}
         <div className="flex flex-col gap-4 min-w-[60%]">
           <div className="w-full bg-gray-200 h-[400px]">
-            <BoxPage loadingData={loadingData} ref={childRef} />
+            <BoxPage urlContainerId={urlContainerId} loadingData={loadingData} ref={childRef} />
           </div>
           {/* [하늘색 테이블]컨테이너 들어가기 전 데이터 */}
           <div className="min-w-full overflow-auto max-h-[500px] max-w-1/2 rounded-md table-sm">
