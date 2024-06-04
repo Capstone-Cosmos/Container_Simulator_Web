@@ -41,7 +41,7 @@ public class PalletService {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
         ContainerEntity containerEntity = containerRepository.findById(containerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않는 상품입니다"));
-        float weight = getWeight(palletType, productEntity);
+        float weight = productEntity.getWeight() + palletType.getWeight();
         if(!validatePallet(containerEntity, weight))
             return false;
         float height = productEntity.getHeight() + 0.15f;
@@ -86,34 +86,8 @@ public class PalletService {
         return productDTOS;
     }
 
-    private float getWeight(PalletType palletType, ProductEntity productEntity) {
-        float weight;
-        if(palletType == PalletType.PALLET_TYPE_11A){
-            weight = productEntity.getWeight() + 19.5f;
-        }
-        else if(palletType == PalletType.PALLET_TYPE_12A){
-            weight = productEntity.getWeight() + 19.0f;
-        }
-        else if(palletType == PalletType.PALLET_TYPE_11B){
-            weight = productEntity.getWeight() + 26.2f;
-        }
-        else if(palletType == PalletType.PALLET_TYPE_13B){
-            weight = productEntity.getWeight() + 25.0f;
-        }
-        else{
-            weight = productEntity.getWeight() + 27.5f;
-        }
-        return weight;
-    }
-
     private boolean validatePallet(ContainerEntity containerEntity, float weight) {
-        if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_20FT_DRY){
-            return (containerEntity.getWeight() + weight <= 21700);
-        } else if(containerEntity.getContainerType() == ContainerType.CONTAINER_TYPE_40FT_DRY){
-            return (containerEntity.getWeight() + weight <= 26740);
-        } else{
-            return (containerEntity.getWeight() + weight <= 26580);
-        }
+        return containerEntity.getWeight() + weight <= containerEntity.getContainerType().getMaxWeight();
     }
 
     private List<ProductDTO> getValidProduct(ContainerEntity containerEntity, List<ProductEntity> productEntities){
