@@ -91,7 +91,7 @@
 - **소속**: 한양대학교 ERICA 캠퍼스
 
 ## 🖼️ 참고 이미지
-![Cosmos 포스터](./Container_Simulator_Web/CapStone_Cosmos.pdf)
+📄 [CapStone_Cosmos.pdf 바로 보기](https://github.com/Capstone-Cosmos/Container_Simulator_Web/blob/main/CapStone_Cosmos.pdf)
 
 ## 📮 문의
 
