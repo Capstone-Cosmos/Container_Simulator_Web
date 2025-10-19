@@ -91,7 +91,7 @@
 - **소속**: 한양대학교 ERICA 캠퍼스
 
 ## 🖼️ 참고 이미지
-![포스터](./docs/CapStone_Cosmos.pdf)
+![포스터](./docs/CapStone_Cosmos.png)
 
 ## 📮 문의
 
