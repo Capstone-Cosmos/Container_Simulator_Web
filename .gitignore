@@ -35,3 +35,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### macOS ###
+.DS_Store
+
+### Node ###
+node_modules/
+
+### React build output ###
+# build.gradle의 copyReactBuildFiles가 src/main/frontend/build를 여기로 복사한다.
+# 생성물이므로 커밋하지 않는다.
+/src/main/resources/static/
